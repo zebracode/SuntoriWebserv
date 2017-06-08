@@ -17,7 +17,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config([
         $locationProvider.html5Mode(true).hashPrefix('!');
 
         $mdThemingProvider.theme('default')
-            .primaryPalette('green')
+            .primaryPalette('light-green')
             .accentPalette('red');
 
         // Register the user `avatar` icons
@@ -28,7 +28,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).config([
             .icon('google_plus', './assets/svg/google_plus.svg' , 512)
             .icon('hangouts'   , './assets/svg/hangouts.svg'    , 512)
             .icon('twitter'    , './assets/svg/twitter.svg'     , 512)
-            .icon('phone'      , './assets/svg/phone.svg'       , 512);
+            .icon('phone'      , './assets/svg/phone.svg'       , 512)
+            .icon('logo'      , './assets/svg/logo-suntori.svg'       , 512);
     }
 ]);
 

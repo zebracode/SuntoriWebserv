@@ -1,0 +1,48 @@
+<div flex layout="row" data-ng-controller="HomeController as ul">
+
+    <!-- Container #3 Left -->
+    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+                class="md-whiteframe-z2" data-ng-show="authentication.user">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">ยินดีต้อนรับ</span>
+                    <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <div>
+                        <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
+                    </div>
+                </md-card-title-media>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+                <div>
+                    <md-button class="md-icon-button md-primary" aria-label="Settings">
+                        <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+                        <md-icon md-svg-icon="menu"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button md-accent" aria-label="Favorite">
+                        <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+                        <md-icon md-svg-icon="menu"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="More">
+                        <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+                        <md-icon md-svg-icon="menu"></md-icon>
+                    </md-button>
+                </div>
+                <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
+            </md-card-actions>
+        </md-card>
+        <md-card-actions layout="column" layout-align="start">
+            <md-button data-ui-sref="home">หน้าหลัก</md-button>
+            <md-button data-ui-sref="recipient">รายชื่อผู้รับ</md-button>
+            <md-button data-ui-sref="send">รายชื่อผู้ส่ง</md-button>
+        </md-card-actions>
+    </md-sidenav>
+
+    <!-- Container #4 Right -->
+    <div>
+        <h1>รายชื่อผู้รับ</h1>
+    </div>
+
+</div>

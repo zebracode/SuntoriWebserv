@@ -13,6 +13,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
         url: '/',
         templateUrl: 'modules/core/views/home.client.view.html'
       })
+      .state('recipient', {
+              url: '/recipient',
+              templateUrl: 'modules/core/views/recipient.client.view.html'
+            })
+      .state('send', {
+                    url: '/send',
+                    templateUrl: 'modules/core/views/send.client.view.html'
+                  })
       .state('not-found', {
         url: '/not-found',
         templateUrl: 'modules/core/views/404.client.view.html'
