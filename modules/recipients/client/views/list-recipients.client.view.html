@@ -1,0 +1,189 @@
+<div flex layout="row" data-ng-controller="RecipientsController as ul" data-ng-init="find()">
+  <!-- Container #3 Left -->
+  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+              class="md-whiteframe-z2" data-ng-show="authentication.user">
+    <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">ยินดีต้อนรับ</span>
+          <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div>
+            <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
+          </div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <div>
+          <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+            <md-icon md-svg-icon="menu"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+            <md-icon md-svg-icon="menu"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="More" data-ui-sref="settings.password">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+            <md-icon md-svg-icon="menu"></md-icon>
+          </md-button>
+        </div>
+        <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
+      </md-card-actions>
+    </md-card>
+    <md-card-actions layout="column" layout-align="start">
+      <md-button data-ui-sref="home">หน้าหลัก</md-button>
+      <md-button data-ui-sref="recipient.list">รายชื่อผู้รับ</md-button>
+      <md-button data-ui-sref="sends.list">รายชื่อผู้ส่ง</md-button>
+    </md-card-actions>
+  </md-sidenav>
+
+  <!-- Container #4 Right -->
+  <md-content flex id="content" data-ng-show="authentication.user">
+    <md-button class="share" md-no-ink ng-click="ul.share($event)"
+               aria-label="Share">
+      <md-icon md-svg-icon="share" ></md-icon>
+    </md-button>
+
+    <div class="page-header">
+      <h1>ข้อมูลผู้รับ</h1>
+    </div>
+    <div class="list-group">
+      <a data-ng-repeat="recipient in recipients" data-ui-sref="recipients.view({recipientId: recipient._id})" class="list-group-item">
+        <small class="list-group-item-text">
+          Posted on
+          <span data-ng-bind="recipient.created | date:'mediumDate'"></span>
+          by
+          <span data-ng-bind="recipient.user.displayName"></span>
+        </small>
+        <h4 class="list-group-item-heading" data-ng-bind="recipient.title"></h4>
+        <p class="list-group-item-text" data-ng-bind="recipient.content"></p>
+      </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
+      No recipients yet, why don't you <a data-ui-sref="recipients.create">create one</a>?
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>รายชื่อผู้ส่ง<small>เพิ่มรายชื่อผู้ส่งได้ที่นี่!!</small></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <div class="text-center mtop20">
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg">เพิ่มรายชื่อผู้ส่ง</button>
+              <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">เพิ่มข้อมูลผู้ส่ง</h4>
+                    </div>
+                    <div class="modal-body">
+                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ชื่อ-นามสกุล <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">เบอร์โทร <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">ที่อยู่</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea class="form-control" rows="3"></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">รหัสไปรษณีย์</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                          </div>
+                        </div>
+                      </form>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+          <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+              <thead>
+              <tr class="headings">
+                <th>
+                  <input type="checkbox" id="check-all" class="flat">
+                </th>
+                <th class="column-title">วันที่ </th>
+                <th class="column-title">ชื่อ-นามสกุล </th>
+                <th class="column-title">เบอร์โทรศัพท์ </th>
+                <th class="column-title">ที่อยู่ </th>
+                <th class="column-title">จังหวัด </th>
+                <th class="column-title">รหัสไปรษณีย์ </th>
+                <th class="column-title no-link last"><span class="nobr">แก้ไข</span>
+                </th>
+                <th class="bulk-actions" colspan="7">
+                  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                </th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr class="even pointer">
+                <td class="a-center ">
+                  <input type="checkbox" class="flat" name="table_records">
+                </td>
+                <td class=" ">1เมย16</td>
+                <td class=" ">เพชรฤทธิ์ ศรีวงศ์ </td>
+                <td class=" ">0882684474 <i class="success fa fa-long-arrow-up"></i></td>
+                <td class=" ">16 ซอยลาดพร้าว56 วังทองหลาง</td>
+                <td class="a-right a-right ">กรุงเทพ</td>
+                <td class=" last"><a href="#">10310</a>
+                </td>
+                <td>
+                  <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> แก้ไข </a>
+                  <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> ลบ </a>
+                </td>
+              </tr>
+              <tr class="odd pointer">
+                <td class="a-center ">
+                  <input type="checkbox" class="flat" name="table_records">
+                </td>
+                <td class=" ">1เมย16</td>
+                <td class=" ">เพชรฤทธิ์ ศรีวงศ์ </td>
+                <td class=" ">0882684474 <i class="success fa fa-long-arrow-up"></i></td>
+                <td class=" ">16 ซอยลาดพร้าว56 วังทองหลาง</td>
+                <td class="a-right a-right ">กรุงเทพ</td>
+                <td class=" last"><a href="#">10310</a>
+                </td>
+                <td>
+                  <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> แก้ไข </a>
+                  <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> ลบ </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </md-content>
+</div>
