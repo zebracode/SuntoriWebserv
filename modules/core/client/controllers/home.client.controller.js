@@ -87,7 +87,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 $log.debug( clickedItem.name + ' clicked!');
             });
 
-
         }
 
         var self = this;

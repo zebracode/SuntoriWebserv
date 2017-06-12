@@ -31,15 +31,15 @@
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
       <div>
-        <md-button class="md-icon-button md-primary" aria-label="Settings">
+        <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
           <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
           <md-icon md-svg-icon="menu"></md-icon>
         </md-button>
-        <md-button class="md-icon-button md-accent" aria-label="Favorite">
+        <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
           <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
           <md-icon md-svg-icon="menu"></md-icon>
         </md-button>
-        <md-button class="md-icon-button" aria-label="More">
+        <md-button class="md-icon-button" aria-label="More" data-ui-sref="settings.password">
           <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
           <md-icon md-svg-icon="menu"></md-icon>
         </md-button>
@@ -49,8 +49,8 @@
   </md-card>
   <md-card-actions layout="column" layout-align="start">
     <md-button data-ui-sref="home">หน้าหลัก</md-button>
-    <md-button data-ui-sref="recipient">รายชื่อผู้รับ</md-button>
-    <md-button data-ui-sref="send">รายชื่อผู้ส่ง</md-button>
+    <md-button data-ui-sref="recipients.list">รายชื่อผู้รับ</md-button>
+    <md-button data-ui-sref="sends.list">รายชื่อผู้ส่ง</md-button>
   </md-card-actions>
 </md-sidenav>
 

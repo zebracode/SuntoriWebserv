@@ -12,7 +12,8 @@
     "angular-ui-utils": "bower",
     "angular-ui-router": "~0.2",
     "angular-file-upload": "1.1.5",
-    "angular-material": "^1.1.4"
+    "angular-material": "^1.1.4",
+    "gentelella": "^1.4.0"
   },
   "resolutions": {
     "angular": "~1.3"

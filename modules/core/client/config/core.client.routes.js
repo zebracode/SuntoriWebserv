@@ -9,6 +9,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
     // Home state routing
     $stateProvider
+      .state('core', {
+        url: '/core',
+        templateUrl: 'modules/core/client/views/create.client.view.html',
+        controller: 'CreateController',
+        controllerAs: 'vm'
+      })
       .state('home', {
         url: '/',
         templateUrl: 'modules/core/views/home.client.view.html'
@@ -21,6 +27,10 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                     url: '/send',
                     templateUrl: 'modules/core/views/send.client.view.html'
                   })
+      .state('create', {
+                    url: '/create',
+                    templateUrl: 'modules/core/views/create.client.view.html'
+                        })
       .state('not-found', {
         url: '/not-found',
         templateUrl: 'modules/core/views/404.client.view.html'
