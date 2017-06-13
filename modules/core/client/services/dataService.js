@@ -37,11 +37,6 @@ angular.module('core').service('usersService', ['$q',
             name: 'ประวัติการใช้งาน',
             avatar: 'svg-5',
             content: 'Webtwo ipsum dolor sit amet, eskobo chumby doostang bebo. Bubbli greplin stypi prezi mzinga heroku wakoopa, shopify airbnb dogster dopplr gooru jumo, reddit plickers edmodo stypi zillow etsy.'
-        },
-        {
-            name: 'ออกจากระบบ',
-            avatar: 'svg-6',
-            content: 'Lebowski ipsum yeah? What do you think happens when you get rad? You turn in your library card? Get a new drivers license? Stop being awesome? Dolor sit amet, consectetur adipiscing elit praesent ac magna justo pellentesque ac lectus. You dont go out and make a living dressed like that in the middle of a weekday. Quis elit blandit fringilla a ut turpis praesent felis ligula, malesuada suscipit malesuada.'
         }
     ];
 

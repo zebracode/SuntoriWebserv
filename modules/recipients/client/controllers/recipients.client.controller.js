@@ -1,4 +1,4 @@
-'use strict';
+    'use strict';
 
 // Recipients controller
 angular.module('recipients').controller('RecipientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Recipients',
@@ -9,8 +9,11 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
     $scope.create = function () {
       // Create new Recipient object
       var recipient = new Recipients({
-        title: this.title,
-        content: this.content
+        name: this.name,
+        tel: this.tel,
+        address: this.address,
+        country: this.country,
+        postcode: this.postcode
       });
 
       // Redirect after save
@@ -18,8 +21,11 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
         $location.path('recipients/' + response._id);
 
         // Clear form fields
-        $scope.title = '';
-        $scope.content = '';
+        $scope.name = '';
+        $scope.tel = '';
+        $scope.address = '';
+        $scope.country = '';
+        $scope.postcode = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

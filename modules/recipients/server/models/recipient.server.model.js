@@ -26,7 +26,7 @@ var RecipientSchema = new Schema({
     trim: true,
     required: 'Title cannot be blank'
   },
-  add: {
+  address: {
     type: String,
     default: '',
     trim: true,

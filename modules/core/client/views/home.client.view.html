@@ -46,12 +46,12 @@
       </div>
       <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
     </md-card-actions>
+    <div class="list-group">
+      <a class="list-group-item" data-ui-sref="home">หน้าหลัก</a>
+      <a class="list-group-item" data-ui-sref="recipients.list">รายชื่อผู้รับ</a>
+      <a class="list-group-item" data-ui-sref="sends.list">รายชื่อผู้ส่ง</a>
+    </div>
   </md-card>
-  <md-card-actions layout="column" layout-align="start">
-    <md-button data-ui-sref="home">หน้าหลัก</md-button>
-    <md-button data-ui-sref="recipients.list">รายชื่อผู้รับ</md-button>
-    <md-button data-ui-sref="sends.list">รายชื่อผู้ส่ง</md-button>
-  </md-card-actions>
 </md-sidenav>
 
 
@@ -71,10 +71,10 @@
     <h2>{{ul.selected.name}}</h2>
     <p>{{ul.selected.content}}</p>
 
-    <md-button class="share" md-no-ink ng-click="ul.share($event)"
-               aria-label="Share">
-      <md-icon md-svg-icon="share" ></md-icon>
-    </md-button>
+    <!--<md-button class="share" md-no-ink ng-click="ul.share($event)"-->
+               <!--aria-label="Share">-->
+      <!--<md-icon md-svg-icon="share" ></md-icon>-->
+    <!--</md-button>-->
 
   </md-content>
 

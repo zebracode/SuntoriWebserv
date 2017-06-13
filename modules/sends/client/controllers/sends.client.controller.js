@@ -12,8 +12,11 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
     $scope.create = function () {
       // Create new Send object
       var send = new Sends({
-        title: this.title,
-        content: this.content
+        name: this.name,
+        tel: this.tel,
+        address: this.address,
+        country: this.country,
+        postcode: this.postcode
       });
 
       // Redirect after save
@@ -21,8 +24,11 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
         $location.path('sends/' + response._id);
 
         // Clear form fields
-        $scope.title = '';
-        $scope.content = '';
+        $scope.name = '';
+        $scope.tel = '';
+        $scope.address = '';
+        $scope.country = '';
+        $scope.postcode = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

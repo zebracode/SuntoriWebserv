@@ -6,15 +6,33 @@
     <form name="recipientForm" class="form-horizontal" data-ng-submit="create()" novalidate>
       <fieldset>
         <div class="form-group">
-          <label class="control-label" for="title">Title</label>
+          <label class="control-label" for="name">Name</label>
           <div class="controls">
-            <input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title">
+            <input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="name">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="content">Content</label>
+          <label class="control-label" for="tel">tel</label>
           <div class="controls">
-            <textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+            <input name="tel" data-ng-model="tel" id="tel" class="form-control" cols="30" rows="10" placeholder="tel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="address">address</label>
+          <div class="controls">
+            <input name="address" data-ng-model="address" id="address" class="form-control" cols="30" rows="10" placeholder="address">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="country">country</label>
+          <div class="controls">
+            <input name="country" data-ng-model="country" id="country" class="form-control" cols="30" rows="10" placeholder="country">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="postcode">postcode</label>
+          <div class="controls">
+            <input name="postcode" data-ng-model="postcode" id="postcode" class="form-control" cols="30" rows="10" placeholder="postcode">
           </div>
         </div>
         <div class="form-group">
