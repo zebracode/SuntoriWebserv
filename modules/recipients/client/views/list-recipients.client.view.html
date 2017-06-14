@@ -33,7 +33,9 @@
       </md-card-actions>
       <div class="list-group">
         <a class="list-group-item" data-ui-sref="home">หน้าหลัก</a>
-        <a class="list-group-item" data-ui-sref="recipient.list">รายชื่อผู้รับ</a>
+        <a class="list-group-item" data-ui-sref="mains.list">ประวัตการใช้งาน</a>
+        <a class="list-group-item" data-ui-sref="mains.create">เพิ่มรายการ</a>
+        <a class="list-group-item" data-ui-sref="recipients.list">รายชื่อผู้รับ</a>
         <a class="list-group-item" data-ui-sref="sends.list">รายชื่อผู้ส่ง</a>
       </div>
     </md-card>
@@ -58,10 +60,19 @@
         <!--<p class="list-group-item-text" data-ng-bind="recipient.tel"></p>-->
       <!--</a>-->
     <!--</div>-->
+
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
           <h2>รายชื่อผู้รับ<small>เพิ่มรายชื่อผู้รับได้ที่นี่!!</small></h2>
+          <div class="col-lg-4">
+            <div class="input-group">
+              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+            </div><!-- /input-group -->
+          </div>
           <ul class="nav navbar-right panel_toolbox">
             <div class="text-center mtop20">
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="recipients.create">เพิ่มรายชื่อผู้รับ</button>
@@ -133,7 +144,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr class="even pointer" data-ng-repeat="recipient in recipients">
+              <tr class="even pointer" data-ng-repeat="recipient in recipients | filter:searchText">
                 <td ng-bind="recipient.created | date:'mediumDate'"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.name"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.tel"></td>

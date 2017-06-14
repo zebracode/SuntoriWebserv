@@ -29,7 +29,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config([
             .icon('hangouts'   , './assets/svg/hangouts.svg'    , 512)
             .icon('twitter'    , './assets/svg/twitter.svg'     , 512)
             .icon('phone'      , './assets/svg/phone.svg'       , 512)
-            .icon('logo'      , './assets/svg/logo-suntori.svg'       , 512);
+            .icon('logo'      , './assets/svg/logo1.svg'       , 512);
     }
 ]);
 
