@@ -29,7 +29,11 @@ angular.module(ApplicationConfiguration.applicationModuleName).config([
             .icon('hangouts'   , './assets/svg/hangouts.svg'    , 512)
             .icon('twitter'    , './assets/svg/twitter.svg'     , 512)
             .icon('phone'      , './assets/svg/phone.svg'       , 512)
-            .icon('logo'      , './assets/svg/logo1.svg'       , 512);
+            .icon('logo'      , './assets/svg/logo1.svg'       , 512)
+            .icon('picture'      , './assets/svg/picture.svg'       , 512)
+            .icon('pencil'      , './assets/svg/pencil.svg'       , 512)
+            .icon('key'      , './assets/svg/key.svg'       , 512);
+
     }
 ]);
 

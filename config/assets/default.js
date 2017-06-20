@@ -7,10 +7,10 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/angular-material/angular-material.css',
+        'public/lib/angular-bootstrap/ui-bootstrap-csp.css',
         'public/lib/gentelella/build/css/custom.css',
-        'public/lib/gentelella/vendors/font-awesome/css/font-awesome.min.css',
-        'public/lib/gentelella/vendors/nprogress/nprogress.css',
-        'public/lib/gentelella/vendors/iCheck/skins/flat/green.css'
+        'public/lib/gentelella/vendors/font-awesome/css/font-awesome.css',
+        'public/lib/gentelella/vendors/nprogress/nprogress.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -18,13 +18,14 @@ module.exports = {
         'public/lib/angular-animate/angular-animate.js',
         'public/lib/angular-material/angular-material.js',
         'public/lib/angular-resource/angular-resource.js',
-        'public/lib/angular-bootstrap/ui-bootstrap.js',
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
+        'public/lib/angular-bootstrap/ui-bootstrap.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/gentelella/build/js/custom.js',
-        'public/lib/gentelella/vendors/jquery/dist/jquery.js'
+        'public/lib/gentelella/vendors/jquery/dist/jquery.js',
+        'public/lib/gentelella/vendors/nprogress/nprogress.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

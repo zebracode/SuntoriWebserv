@@ -18,15 +18,15 @@
         <div>
           <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
             <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
-            <md-icon md-svg-icon="menu"></md-icon>
+            <md-icon md-svg-icon="pencil"></md-icon>
           </md-button>
           <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
             <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
-            <md-icon md-svg-icon="menu"></md-icon>
+            <md-icon md-svg-icon="picture"></md-icon>
           </md-button>
-          <md-button class="md-icon-button" aria-label="More" data-ui-sref="settings.password">
+          <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
             <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
-            <md-icon md-svg-icon="menu"></md-icon>
+            <md-icon md-svg-icon="key"></md-icon>
           </md-button>
         </div>
         <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
@@ -152,8 +152,8 @@
                 <td class="list-group-item-heading" ng-bind="recipient.country"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.postcode"></td>
                 <td>
-                  <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> แก้ไข </a>
-                  <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> ลบ </a>
+                  <a href="#" class="btn btn-info btn-xs" data-ui-sref="recipients.edit({recipientId: recipient._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
+                  <a href="#" class="btn btn-danger btn-xs" data-ng-click="remove(recipient);"><i class="fa fa-trash-o"></i> ลบ </a>
                 </td>
               </tr>
               </tbody>

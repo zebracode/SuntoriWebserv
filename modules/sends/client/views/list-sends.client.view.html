@@ -1,4 +1,4 @@
-<div flex layout="row" data-ng-controller="SendsController as ul" data-ng-init="find()">
+<div flex layout="row" ng-controller="SendsController" data-ng-init="find()">
   <!-- Container #3 Left -->
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
               class="md-whiteframe-z2" data-ng-show="authentication.user">
@@ -18,59 +18,44 @@
         <div>
           <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
             <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
-            <md-icon md-svg-icon="menu"></md-icon>
+            <md-icon md-svg-icon="pencil"></md-icon>
           </md-button>
           <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
             <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
-            <md-icon md-svg-icon="menu"></md-icon>
+            <md-icon md-svg-icon="picture"></md-icon>
           </md-button>
-          <md-button class="md-icon-button" aria-label="More" data-ui-sref="settings.password">
+          <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
             <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
-            <md-icon md-svg-icon="menu"></md-icon>
+            <md-icon md-svg-icon="key"></md-icon>
           </md-button>
         </div>
         <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
       </md-card-actions>
       <div class="list-group">
-        <a class="list-group-item" data-ui-sref="home">หน้าหลัก</a>
-        <a class="list-group-item" data-ui-sref="mains.list">ประวัตการใช้งาน</a>
-        <a class="list-group-item" data-ui-sref="mains.create">เพิ่มรายการ</a>
-        <a class="list-group-item" data-ui-sref="recipients.list">รายชื่อผู้รับ</a>
-        <a class="list-group-item" data-ui-sref="sends.list">รายชื่อผู้ส่ง</a>
+        <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
+        <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัตการใช้งาน</a>
+        <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
+        <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
+        <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
+
       </div>
     </md-card>
   </md-sidenav>
 
   <!-- Container #4 Right -->
   <md-content flex id="content" data-ng-show="authentication.user">
-    <!--<md-button class="share" md-no-ink ng-click="ul.share($event)"-->
-               <!--aria-label="Share">-->
-      <!--<md-icon md-svg-icon="share" ></md-icon>-->
-    <!--</md-button>-->
-
-    <!--<div class="page-header">-->
-      <!--<h1>ข้อมูลผู้ส่ง</h1>-->
-    <!--</div>-->
-    <!--<div class="list-group">-->
-      <!--<a data-ng-repeat="send in sends" data-ui-sref="sends.view({sendId: send._id})" class="list-group-item">-->
-        <!--<small class="list-group-item-text">-->
-          <!--Posted on-->
-          <!--<span data-ng-bind="send.created | date:'mediumDate'"></span>-->
-          <!--by-->
-          <!--<span data-ng-bind="send.user.displayName"></span>-->
-        <!--</small>-->
-        <!--<h4 class="list-group-item-heading" data-ng-bind="send.title"></h4>-->
-        <!--<p class="list-group-item-text" data-ng-bind="send.content"></p>-->
-      <!--</a>-->
-    <!--</div>-->
-    <!--<div class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">-->
-      <!--No sends yet, why don't you <a data-ui-sref="sends.create">create one</a>?-->
-    <!--</div>-->
-
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
           <h2>รายชื่อผู้ส่ง<small>เพิ่มรายชื่อผู้ส่งได้ที่นี่!!</small></h2>
+          <div class="col-lg-4">
+            <div class="input-group">
+              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+            </div><!-- /input-group -->
+          </div>
           <ul class="nav navbar-right panel_toolbox">
             <div class="text-center mtop20">
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>
@@ -123,47 +108,55 @@
           <div class="clearfix"></div>
         </div>
 
-        <div class="x_content">
-          <div class="table-responsive">
-            <table class="table table-striped jambo_table bulk_action">
-              <thead>
-              <tr class="headings">
-                <th class="column-title">วันที่ </th>
-                <th class="column-title">ชื่อ-นามสกุล </th>
-                <th class="column-title">เบอร์โทรศัพท์ </th>
-                <th class="column-title">ที่อยู่ </th>
-                <th class="column-title">จังหวัด </th>
-                <th class="column-title">รหัสไปรษณีย์ </th>
-                <th class="column-title no-link last"><span class="nobr">แก้ไข</span>
-                </th>
-                <th class="bulk-actions" colspan="7">
-                  <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                </th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr class="even pointer" data-ng-repeat="send in sends">
-                <td ng-bind="send.created | date:'mediumDate'"></td>
-                <td class="list-group-item-heading" ng-bind="send.name"></td>
-                <td class="list-group-item-heading" ng-bind="send.tel"></td>
-                <td class="list-group-item-heading" ng-bind="send.address"></td>
-                <td class="list-group-item-heading" ng-bind="send.country"></td>
-                <td class="list-group-item-heading" ng-bind="send.postcode"></td>
-                <td>
-                  <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> แก้ไข </a>
-                  <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> ลบ </a>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-            </table>
+        <div class="col-md-4 col-sm-4 col-xs-12 profile_details" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
+          <div class="well profile_view">
+            <div class="col-sm-12">
+              <div class="left col-xs-12">
+                <ul class="list-unstyled">
+                  <h2><li><i class="fa fa-user"></i>&nbsp;<span ng-bind="send.name"></span></li></h2>
+                  <li><i class="fa fa-key fa-fw"></i>&nbsp;<span ng-bind="send.name"></span></li> <br />
+                  <li><i class="fa fa-building"></i> ที่อยู่:&nbsp;<span ng-bind="send.address"></span></li>
+                  <li>จังหวัด:&nbsp;<span ng-bind="send.country"></span></li>
+                  <li>ไปรษณีย์:&nbsp;<span ng-bind="send.postcode"></span></li>
+                  <li><i class="fa fa-phone"></i> โทร:&nbsp;<span ng-bind="send.tel"></span> </li>
+                  <li><i class="fa fa-calendar"></i> วันที่:&nbsp;<span ng-bind="send.created | date:'mediumDate'"></span></li>
+                </ul>
+              </div>
+              <!--<div class="right col-xs-5 text-center">-->
+                <!--<img src="images/img.jpg" alt="" class="img-circle img-responsive">-->
+              <!--</div>-->
+            </div>
+            <div class="col-xs-12 bottom text-center">
+              <div class="col-xs-12 col-sm-6 emphasis">
+                <!--<p class="ratings">-->
+                  <!--<a>4.0</a>-->
+                  <!--<a href="#"><span class="fa fa-star"></span></a>-->
+                  <!--<a href="#"><span class="fa fa-star"></span></a>-->
+                  <!--<a href="#"><span class="fa fa-star"></span></a>-->
+                  <!--<a href="#"><span class="fa fa-star"></span></a>-->
+                  <!--<a href="#"><span class="fa fa-star-o"></span></a>-->
+                <!--</p>-->
+              </div>
+              <div class="col-xs-12 col-sm-6 emphasis">
+                <!--<button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">-->
+                <!--</i> <i class="fa fa-comments-o"></i> </button>-->
+                <!--<button type="button" class="btn btn-primary btn-xs">-->
+                  <!--<i class="fa fa-user"> </i> View Profile-->
+                <!--</button>-->
+                <a class="btn btn-info btn-xs" data-ui-sref="sends.edit({sendId: send._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
+                <a class="btn btn-danger btn-xs" data-ng-click="remove(send);"><i class="fa fa-trash-o"></i> ลบ </a>
+              </div>
+            </div>
           </div>
+        </div>
 
-
+        <div class="x_content">
+          <div class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">
+            No recipients yet, why don't you <a data-ui-sref="sends.create">create one</a>?
+          </div>
         </div>
       </div>
     </div>
-
   </md-content>
 </div>
 

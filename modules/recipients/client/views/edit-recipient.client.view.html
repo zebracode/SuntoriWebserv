@@ -6,16 +6,32 @@
     <form name="recipientForm" class="form-horizontal" data-ng-submit="update()" novalidate>
       <fieldset>
         <div class="form-group">
-          <label class="control-label" for="title">Title</label>
+          <label class="control-label" for="name">name</label>
           <div class="controls">
-            <input name="title" type="text" data-ng-model="recipient.title" id="title" class="form-control" placeholder="Title" required>
+            <input name="name" type="text" data-ng-model="recipient.name" id="name" class="form-control" placeholder="name" required>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="content">Content</label>
+          <label class="control-label" for="tel">tel</label>
           <div class="controls">
-            <textarea name="content" data-ng-model="recipient.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+            <input name="tel" data-ng-model="recipient.tel" id="tel" class="form-control" placeholder="tel">
           </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="address">address</label>
+          <div class="controls">
+            <input name="address" data-ng-model="recipient.address" id="address" class="form-control" placeholder="address">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="country">country</label>
+          <div class="controls">
+            <input name="country" data-ng-model="recipient.country" id="country" class="form-control" placeholder="country">          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="postcode">postcode</label>
+          <div class="controls">
+            <input name="postcode" data-ng-model="recipient.postcode" id="postcode" class="form-control" placeholder="postcode">           </div>
         </div>
         <div class="form-group">
           <input type="submit" value="Update" class="btn btn-default">

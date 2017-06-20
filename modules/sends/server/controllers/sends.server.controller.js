@@ -39,8 +39,11 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
   var send = req.send;
 
-  send.title = req.body.title;
-  send.content = req.body.content;
+  send.name = req.body.name;
+  send.tel = req.body.tel;
+  send.address = req.body.address;
+  send.country = req.body.country;
+  send.postcode = req.body.postcode;
 
   send.save(function (err) {
     if (err) {

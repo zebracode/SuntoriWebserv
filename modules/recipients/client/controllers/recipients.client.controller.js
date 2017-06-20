@@ -18,7 +18,7 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
 
       // Redirect after save
       recipient.$save(function (response) {
-        $location.path('recipients/' + response._id);
+        $location.path('recipients');
 
         // Clear form fields
         $scope.name = '';
@@ -53,7 +53,7 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
       var recipient = $scope.recipient;
 
       recipient.$update(function () {
-        $location.path('recipients/' + recipient._id);
+        $location.path('recipients');
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

@@ -1,12 +1,11 @@
 'use strict';
 
 // Sends controller
-angular.module('sends').controller('SendsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sends',
+angular.module('sends').controller('SendsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sends', '$log',
 
-  function ($scope, $stateParams, $location, Authentication, Sends) {
+  function ($scope, $stateParams, $location, Authentication, Sends, $log) {
+
     $scope.authentication = Authentication;
-
-
 
     // Create new Send
     $scope.create = function () {
@@ -21,7 +20,7 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
 
       // Redirect after save
       send.$save(function (response) {
-        $location.path('sends/' + response._id);
+        $location.path('sends');
 
         // Clear form fields
         $scope.name = '';
@@ -56,7 +55,7 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
       var send = $scope.send;
 
       send.$update(function () {
-        $location.path('sends/' + send._id);
+        $location.path('sends');
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });

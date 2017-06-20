@@ -33,15 +33,15 @@
       <div>
         <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
           <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
-          <md-icon md-svg-icon="menu"></md-icon>
+          <md-icon md-svg-icon="pencil"></md-icon>
         </md-button>
         <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
           <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
-          <md-icon md-svg-icon="menu"></md-icon>
+          <md-icon md-svg-icon="picture"></md-icon>
         </md-button>
-        <md-button class="md-icon-button" aria-label="More" data-ui-sref="settings.password">
+        <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
           <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
-          <md-icon md-svg-icon="menu"></md-icon>
+          <md-icon md-svg-icon="key"></md-icon>
         </md-button>
       </div>
       <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
@@ -69,7 +69,7 @@
       </md-item>
     </md-list>
     <!-- User details sample -->
-    <md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>
+    <!--<md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
     <h2>{{ul.selected.name}}</h2>
     <p>{{ul.selected.content}}</p>
 
