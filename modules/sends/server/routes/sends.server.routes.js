@@ -10,8 +10,7 @@ module.exports = function (app) {
   // Sends collection routes
   app.route('/api/sends').all(sendsPolicy.isAllowed)
     .get(sends.list)
-    .post(sends.create)
-    .delete(sends.delete);
+    .post(sends.create);
 
   // Single send routes
   app.route('/api/sends/:sendId').all(sendsPolicy.isAllowed)

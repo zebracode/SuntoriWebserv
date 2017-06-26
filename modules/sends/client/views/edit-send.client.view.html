@@ -1,8 +1,8 @@
 <section data-ng-controller="SendsController" data-ng-init="findOne()">
-  <div class="page-header">
+  <div class="modal-header">
     <h1>Edit Send</h1>
   </div>
-  <div class="col-md-12">
+  <div class="modal-body">
     <form name="sendForm" class="form-horizontal" data-ng-submit="update()" novalidate>
       <fieldset>
         <div class="form-group">
@@ -35,7 +35,7 @@
             <input name="postcode" type="text" data-ng-model="send.postcode" id="postcode" class="form-control" placeholder="postcode" required>
           </div>
         </div>
-        <div class="form-group">
+        <div class="modal-footer">
           <input type="submit" value="Update" class="btn btn-default">
         </div>
         <div data-ng-show="error" class="text-danger">

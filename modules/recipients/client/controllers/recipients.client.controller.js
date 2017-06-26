@@ -72,3 +72,52 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
     };
   }
 ]);
+
+// PopupCreateController
+angular.module('recipients').controller('PopupReController', ['$scope', '$stateParams', '$location', 'Authentication', 'Recipients','$log', '$uibModal', '$uibModalStack',
+
+  function ($scope, $stateParams, $location, Authentication, Recipients, $log, $uibModal, $uibModalStack) {
+
+    $scope.authentication = Authentication;
+
+// Popup Create Send
+    $scope.animationsEnabled = true;
+
+    $scope.CreateOpen = function (size) {
+
+      var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'modules/recipients/views/create-recipient.client.view.html',
+        controller: 'PopupReController',
+        size: size,
+        resolve: {
+          recipient: function () {
+            return $scope.recipient;
+          }
+        }
+      });
+
+    modalInstance.result.then(function (recipient) {
+          $scope.recipient = recipient;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+      };
+
+    $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+      };
+
+    $scope.ok = function (response) {
+                $uibModalStack.dismissAll($scope.create);
+                setTimeout(function() {
+                      // Do something after 1 seconds
+                      location.reload();//reload page
+                }, 1000);
+            };
+
+        $scope.cancel = function () {
+            $uibModalStack.dismissAll();
+          };
+      }
+]);

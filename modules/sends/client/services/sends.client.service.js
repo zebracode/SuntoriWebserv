@@ -8,7 +8,14 @@ angular.module('sends').factory('Sends', ['$resource',
     }, {
       update: {
         method: 'PUT'
-      }
+      },
+       query: {
+         method: 'GET',
+         isArray: true
+       },
+       get: {
+         method: 'GET'
+       }
     });
   }
 ]);
