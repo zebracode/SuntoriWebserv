@@ -1,4 +1,4 @@
-<div flex layout="row" data-ng-controller="RecipientsController as ul" data-ng-init="find()">
+<div flex layout="row" data-ng-controller="RecipientsController" data-ng-init="find()">
   <!-- Container #3 Left -->
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
               class="md-whiteframe-z2" data-ng-show="authentication.user">
@@ -159,15 +159,11 @@
               </tbody>
             </table>
           </div>
-
-          <div class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
-            No recipients yet, why don't you <a data-ui-sref="recipients.create">create one</a>?
-          </div>
-
-
         </div>
       </div>
+      <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
+        <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
+      </div>
     </div>
-
   </md-content>
 </div>
