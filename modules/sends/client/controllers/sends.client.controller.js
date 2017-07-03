@@ -82,7 +82,6 @@ angular.module('sends').controller('PopupController', ['$scope', '$stateParams',
 
     $scope.authentication = Authentication;
 
-// Popup Create Send
     $scope.animationsEnabled = true;
 
     $scope.CreateOpen = function (size) {
