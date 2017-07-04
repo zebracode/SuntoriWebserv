@@ -136,17 +136,12 @@
             </div>
           </div>
         </div>
-        <div class="x_content">
-          <div class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">
-            No recipients yet, why don't you  <a data-ui-sref="sends.create">create one</a>?
-          </div>
-        </div>
       </div>
     </div>
-    <div ng-controller="PaginationCtrl">
-      <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages"></uib-pagination>
-    </div>
   </md-content>
+  <div ng-controller="PopupController" class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">
+    <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้ส่ง</button>
+  </div>
 </div>
 </div>
 
