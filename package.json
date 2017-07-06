@@ -1,7 +1,7 @@
 {
   "name": "suntoriwebserv",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
-  "version": "0.0.2",
+  "version": "0.4.0",
   "private": false,
   "author": "ZebraCode Co.,Ltd.",
   "license": "MIT",
