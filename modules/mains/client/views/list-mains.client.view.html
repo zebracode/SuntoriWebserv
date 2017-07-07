@@ -1,23 +1,3 @@
-<!--<section data-ng-controller="MainsController" data-ng-init="find()">-->
-  <!--<div class="page-header">-->
-    <!--<h1>Mains</h1>-->
-  <!--</div>-->
-  <!--<div class="list-group">-->
-    <!--<a data-ng-repeat="main in mains" data-ui-sref="mains.view({mainId: main._id})" class="list-group-item">-->
-      <!--<small class="list-group-item-text">-->
-        <!--Posted on-->
-        <!--<span data-ng-bind="main.created | date:'mediumDate'"></span>-->
-        <!--by-->
-        <!--<span data-ng-bind="main.user.displayName"></span>-->
-      <!--</small>-->
-      <!--<h4 class="list-group-item-heading" data-ng-bind="main.title"></h4>-->
-      <!--<p class="list-group-item-text" data-ng-bind="main.content"></p>-->
-    <!--</a>-->
-  <!--</div>-->
-  <!--<div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">-->
-    <!--No mains yet, why don't you <a data-ui-sref="mains.create">create one</a>?-->
-  <!--</div>-->
-<!--</section>-->
 <div flex layout="row" data-ng-controller="MainsController" data-ng-init="find()">
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
             class="md-whiteframe-z2" data-ng-show="authentication.user">
@@ -191,5 +171,5 @@
       </div>
     </div>
   </div>
-</md-content>
+</md-content></div>
 </div>

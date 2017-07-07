@@ -119,8 +119,7 @@ var MainSchema = new Schema({
   barcode: {
         type: String,
         default: '',
-        trim: true,
-        required: 'กรุณากรอกบาร์โค๊ด'
+        trim: true
       },
   user: {
       type: Schema.ObjectId,

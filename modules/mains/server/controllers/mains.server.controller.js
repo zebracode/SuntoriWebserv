@@ -14,22 +14,6 @@ var path = require('path'),
 exports.create = function (req, res) {
   var main = new Main(req.body);
   main.user = req.user;
-  main.s_name = req.s_name;
-  main.s_tel = req.s_tel;
-  main.s_address = req.s_address;
-  main.s_country = req.s_country;
-  main.s_postcode = req.s_postcode;
-  main.r_name = req.r_name;
-  main.r_tel = req.r_tel;
-  main.r_address = req.r_address;
-  main.r_country = req.r_country;
-  main.r_postcode = req.r_postcode;
-  main.order = req.order;
-  main.invoice = req.invoice;
-  main.price = req.price;
-  main.weight = req.weight;
-  main.detail = req.detail;
-  main.barcode = req.barcode;
 
   main.save(function (err) {
     if (err) {
