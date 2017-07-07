@@ -1,4 +1,4 @@
-<div flex layout="row" data-ng-controller="HomeController">
+<div flex layout="row" data-ng-controller="HomeController" data-ng-init="find()">
 
   <!-- Container #3 Left -->
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
@@ -44,66 +44,104 @@
 
   <!-- Container #4 Right -->
   <md-content flex id="content" data-ng-show="authentication.user">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="x_panel">
-          <!--Graph Title <div id="mainb" style="height:350px;"></div> -->
-          <div class="row top_tiles">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-university"></i></div>
-                <div class="count">179</div>
-                <h3>เงินคงเหลือ</h3>
-                <p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>
-              </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
+          <div class="col-lg-4">
+            <div class="input-group">
+              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+          </div>
+          <ul class="nav navbar-right panel_toolbox">
+            <div class="text-center mtop20">
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการจัดส่งสินค้า</button>
             </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-graduation-cap"></i></div>
-                <div class="count">179</div>
-                <h3>ส่งสำเร็จ</h3>
-                <p>จำนวนรายการส่งสำเร็จ</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-paper-plane"></i></div>
-                <div class="count">179</div>
-                <h3>กำลังจัดส่ง</h3>
-                <p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-fire-extinguisher"></i></div>
-                <div class="count">179</div>
-                <h3>ส่งไม่สำเร็จ</h3>
-                <p>จำนวนรายการที่ส่งไม่สำเร็จ</p>
+          </ul>
+          <div class="col-md-12">
+            <div class="x_panel">
+              <!--<div id="mainb" style="height:350px;"></div>-->
+              <div class="row top_tiles">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-university"></i></div>
+                    <div class="count">179</div>
+                    <h3>เงินคงเหลือ</h3>
+                    <p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>
+                  </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-graduation-cap"></i></div>
+                    <div class="count">179</div>
+                    <h3>ส่งสำเร็จ</h3>
+                    <p>จำนวนรายการส่งสำเร็จ</p>
+                  </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-paper-plane"></i></div>
+                    <div class="count">179</div>
+                    <h3>กำลังจัดส่ง</h3>
+                    <p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>
+                  </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                  <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-fire-extinguisher"></i></div>
+                    <div class="count">179</div>
+                    <h3>ส่งไม่สำเร็จ</h3>
+                    <p>จำนวนรายการที่ส่งไม่สำเร็จ</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/KfT0AsZPI9c" frameborder="0" allowfullscreen></iframe>
+          <div class="clearfix"></div>
+          <div class="x_content">
+            <br />
+            <div class="table-responsive">
+              <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                <tr class="headings">
+                  <th class="column-title"></th>
+                  <th class="column-title">วันที่ </th>
+                  <th class="column-title">EN</th>
+                  <th class="column-title">ผู้รับ </th>
+                  <th class="column-title">เบอร์โทร </th>
+                  <th class="column-title">นน.(กรัม) </th>
+                  <th class="column-title">ค่าส่ง </th>
+                  <th class="column-title">สถานะจัดส่ง </th>
+                  <th class="column-title">ชำระเงิน</th>
+                  <th class="bulk-actions" colspan="7">
+                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
+                  <td><input type="checkbox"></td>
+                  <td ng-bind="main.created | date:'mediumDate'"></td>
+                  <td class="list-group-item-heading" ng-bind="main.barcode"></td>
+                  <td class="list-group-item-heading" ng-bind="main.r_name"></td>
+                  <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
+                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
+                  <td class="list-group-item-heading" ng-bind="main.price"></td>
+                  <td class="list-group-item-heading" ng-bind="main.order"></td>
+                  <td>
+                    <a class="btn btn-warning btn-xs"><i class="fa fa-trash-o"></i> ปริ้น </a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-      <!--<md-list>-->
-      <!--<md-item ng-repeat="it in ul.users">-->
-        <!--<md-button ng-click="ul.selectUser(it)"-->
-                   <!--ng-class="{'selected' : it === ul.selected }">-->
-          <!--<md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>-->
-          <!--{{it.name}}-->
-        <!--</md-button>-->
-      <!--</md-item>-->
-    <!--</md-list>-->
-    <!-- User details sample -->
-    <!--<md-icon md-svg-icon="{{ul.selected.avatar}}" class="avatar"></md-icon>-->
-    <!--<h2>{{ul.selected.name}}</h2>-->
-    <!--<p>{{ul.selected.content}}</p>-->
-    <!--<md-button class="share" md-no-ink ng-click="ul.share($event)"-->
-               <!--aria-label="Share">-->
-      <!--<md-icon md-svg-icon="share" ></md-icon>-->
-    <!--</md-button>-->
-
   </md-content>
+
 
 </div>

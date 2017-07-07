@@ -10,11 +10,15 @@
 'use strict';
 
 angular.module('core').controller('HomeController', ['$scope', 'Authentication',
-'usersService', '$mdSidenav', '$mdBottomSheet', '$log',
-    function($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log) {
+'usersService', '$mdSidenav', '$mdBottomSheet', '$log', 'Mains',
+    function($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, Mains) {
         // This provides Authentication context.
         $scope.authentication = Authentication;
 
+        // Find a list of Mains
+        $scope.find = function () {
+          $scope.mains = Mains.query();
+        };
 
         /**
          * Main Controller for the Angular Material Starter App
