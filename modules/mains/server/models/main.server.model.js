@@ -107,8 +107,7 @@ var MainSchema = new Schema({
   weight: {
         type: String,
         default: '',
-        trim: true,
-        required: 'กรุณากรอกน้ำหนักสินค้า'
+        trim: true
       },
   detail: {
         type: String,

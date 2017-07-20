@@ -24,13 +24,17 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
               templateUrl: 'modules/core/views/recipient.client.view.html'
             })
       .state('send', {
-                    url: '/send',
-                    templateUrl: 'modules/core/views/send.client.view.html'
-                  })
+              url: '/send',
+              templateUrl: 'modules/core/views/send.client.view.html'
+            })
       .state('create', {
-                    url: '/create',
-                    templateUrl: 'modules/core/views/create.client.view.html'
-                        })
+              url: '/create',
+              templateUrl: 'modules/core/views/create.client.view.html'
+            })
+      .state('user', {
+              url: '/admin',
+              templateUrl: 'modules/users/views/admin/list-users.client.view.html'
+            })
       .state('not-found', {
         url: '/not-found',
         templateUrl: 'modules/core/views/404.client.view.html'

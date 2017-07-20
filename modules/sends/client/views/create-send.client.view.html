@@ -1,55 +1,63 @@
 <section data-ng-controller="SendsController">
-  <div class="modal-header">
-    <h1>เพิ่มรายชื่อผู้ส่ง</h1>
-  </div>
   <div class="modal-body">
-    <form name="recipientForm" class="form-horizontal" data-ng-submit="create()" novalidate>
-      <fieldset>
-        <div class="row">
-          <div class="col-sm-6 text-center">
-            <i class="glyphicon glyphicon-user "></i>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label class="control-label" for="name">Name</label>
-              <div class="controls">
-                <input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="name">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="tel">tel</label>
-              <div class="controls">
-                <input name="tel" type="text" data-ng-model="tel" id="tel" class="form-control" placeholder="tel">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="address">address</label>
-              <div class="controls">
-                <input name="address" type="text" data-ng-model="address" id="address" class="form-control" placeholder="address">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="country">country</label>
-              <div class="controls">
-                <input name="country" type="text" data-ng-model="country" id="country" class="form-control" placeholder="country">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="postcode">postcode</label>
-              <div class="controls">
-                <input name="postcode" type="text" data-ng-model="postcode" id="postcode" class="form-control" placeholder="postcode">
-              </div>
-            </div>
-          </div>
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>รายชื่อผู้ส่ง</h2>
+          <div class="clearfix"></div>
         </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" type="submit" ng-click="ok()">Ok</button>
-          <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
+          <h3 class="text-center">เพิ่มข้อมูลผู้ส่ง</h3>
+          <form name="sendForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+              <alert type="danger" data-ng-show="error" class="text-center text-danger">
+                <span data-ng-bind="error"></span>
+              </alert>
+              <div class="form-group">
+                <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-user"></i>
+          </span>
+                  <input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="ชื่อ-นามสกุล">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-earphone"></i>
+          </span>
+                  <input name="tel" type="text" data-ng-model="tel" id="tel" class="form-control" placeholder="เบอร์โทร">
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-home"></i>
+          </span>
+                  <input name="address" type="text" data-ng-model="address" id="address" class="form-control" placeholder="ที่อยู่">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-road"></i>
+          </span>
+                  <input name="country" type="text" data-ng-model="country" id="country" class="form-control" placeholder="จังหวัด">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-inbox"></i>
+          </span>
+                  <input name="postcode" type="text" data-ng-model="postcode" id="postcode" class="form-control" placeholder="รหัสไปรษณีย์">
+                </div>
+              </div>
+              <div class="text-center form-group">
+                <button class="btn btn-primary" type="submit" ng-click="ok()">ตกลง</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">ยกเลิก</button>
+              </div>
+            </fieldset>
+          </form>
         </div>
-        <div data-ng-show="error" class="text-danger">
-          <strong data-ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
+      </div>
   </div>
 </section>

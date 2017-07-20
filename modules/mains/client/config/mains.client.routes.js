@@ -25,6 +25,10 @@ angular.module('mains').config(['$stateProvider',
         url: '/:mainId',
         templateUrl: 'modules/mains/views/view-main.client.view.html'
       })
+      .state('mains.dropoff', {
+        url: '/dropoff',
+        templateUrl: 'modules/mains/views/dropoff-mains.client.view.html'
+            })
       .state('mains.edit', {
         url: '/:mainId/edit',
         templateUrl: 'modules/mains/views/edit-main.client.view.html'

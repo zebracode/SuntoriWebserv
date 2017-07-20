@@ -129,8 +129,8 @@
               <div class="col-xs-12 col-sm-6 emphasis">
               </div>
               <div class="col-xs-12 col-sm-6 emphasis">
-                <a ng-controller="PopupEditController" class="btn btn-info btn-xs" data-ng-click="EditOpen('lg', update)"><i class="fa fa-pencil"></i> แก้ไข </a>
-                <a class="btn btn-danger btn-xs" data-ng-click="remove(send);"><i class="fa fa-trash-o"></i> ลบ </a>
+                <a class="btn btn-info btn-xs" data-ui-sref="sends.edit({sendId: send._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
+                <a class="btn btn-danger btn-xs" data-ng-click="remove(send);"><i class="fa fa-trash-o"></i> ลบ</a>
               </div>
             </div>
           </div>
@@ -139,6 +139,15 @@
           </div>
         </div>
       </div>
+      <ul class="pagination">
+        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class="disabled "><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class="disabled "><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class="disabled "><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class="disabled "><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&laquo;</span></a></li>
+      </ul>
     </div>
   </md-content>
 </div>

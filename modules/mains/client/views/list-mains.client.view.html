@@ -112,7 +112,7 @@
               <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
               <td class="list-group-item-heading" ng-bind="main.weight"></td>
               <td class="list-group-item-heading" ng-bind="main.price"></td>
-              <td class="list-group-item-heading" ng-bind="main.order"></td>
+              <td><a class="btn btn-warning btn-xs"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a></td>
               <td>
                 <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
                 <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
@@ -159,8 +159,8 @@
                   </table>
                 </div>
                 <div class="row">
-                  <div class="col-md-2"></div>
-                  <button type="button" class="btn btn-info">คำนวนค่าส่ง</button>
+                  <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-7">
+                  <button type="button" class="btn btn-info">คำนวนเงิน</button>
                   <button type="button" class="btn btn-primary">เติมเงิน</button>
                   <button type="submit" class="btn btn-success">ชำระเงิน</button>
                 </div>
@@ -171,5 +171,6 @@
       </div>
     </div>
   </div>
-</md-content></div>
+</md-content>
+</div>
 </div>

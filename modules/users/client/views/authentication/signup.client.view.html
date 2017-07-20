@@ -1,5 +1,5 @@
 <div data-ng-controller="AuthenticationController">
-  <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2 login-form-bg">
+  <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4 login-form-bg">
     <h3 class="text-center">SignUp</h3>
     <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
       <fieldset>
@@ -52,8 +52,10 @@
           </div>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-success btn-lg btn-block">Sign up</button>
-          <a data-ui-sref="authentication.signin" class="show-signup">Sign in</a>
+          <button type="submit" class="btn btn-success btn-lg btn-block">สมัครสมาชิก</button> <br />
+          <div class="text-center forgot-password">
+            <a data-ui-sref="authentication.signin">เข้าสู่ระบบ</a>
+          </div>
         </div>
       </fieldset>
     </form>
