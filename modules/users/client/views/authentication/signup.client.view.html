@@ -52,7 +52,14 @@
           </div>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-success btn-lg btn-block">สมัครสมาชิก</button> <br />
+          <button type="submit" class="btn btn-success btn-lg btn-block">สมัครสมาชิก</button><br />
+          <button class="loginBtn loginBtn--facebook" ng-click="callOauthProvider('/api/auth/facebook')">
+            Login with Facebook
+          </button>
+
+          <button class="loginBtn loginBtn--google" ng-click="callOauthProvider('/api/auth/google')">
+            Login with Google
+          </button>
           <div class="text-center forgot-password">
             <a data-ui-sref="authentication.signin">เข้าสู่ระบบ</a>
           </div>

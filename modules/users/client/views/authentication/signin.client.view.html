@@ -27,6 +27,15 @@
           <div class="text-center form-group">
             <button type="submit" class="btn btn-success btn-lg btn-block">เข้าสู่ระบบ</button>
           </div>
+        <div class="text-center form-group">
+          <button class="loginBtn loginBtn--facebook" ng-click="callOauthProvider('/api/auth/facebook')">
+            Login with Facebook
+          </button>
+
+          <button class="loginBtn loginBtn--google" ng-click="callOauthProvider('/api/auth/google')">
+            Login with Google
+          </button>
+        </div>
         <div class="text-center forgot-password">
           <a data-ui-sref="password.forgot">ลืมรหัสผ่าน</a>
           <a data-ui-sref="authentication.signup">สมัครสมาชิก</a>

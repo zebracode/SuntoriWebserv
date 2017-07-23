@@ -107,7 +107,7 @@
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                 <tr class="headings">
-                  <th class="column-title"></th>
+                  <th class="column-title">ที่</th>
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">EN</th>
                   <th class="column-title">ผู้รับ </th>
@@ -123,7 +123,7 @@
                 </thead>
                 <tbody>
                 <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
-                  <td><input type="checkbox"></td>
+                  <td>{{ $index + 1 }}</td>
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
@@ -132,11 +132,32 @@
                   <td class="list-group-item-heading" ng-bind="main.price"></td>
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> ชำระเงินแล้ว </a></td>
                   <td>
-                    <a class="btn btn-warning btn-xs"><i class="fa fa-trash-o"></i> ปริ้น </a>
+                    <a class="btn btn-warning btn-xs"><i class="fa fa-print"></i> ปริ้นใบติดกล่อง </a>
                   </td>
                 </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="text-center form-group">
+              <nav aria-label="Page navigation">
+                <ul class="pagination">
+                  <li>
+                    <a href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="active"><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li>
+                    <a href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>

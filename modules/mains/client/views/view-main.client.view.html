@@ -1,22 +1,24 @@
 <section data-ng-controller="MainsController" data-ng-init="findOne()">
-  <div class="page-header">
-    <h1 data-ng-bind="main.title"></h1>
-  </div>
-  <div class="pull-right" data-ng-show="authentication.user._id == main.user._id">
-    <a class="btn btn-primary" data-ui-sref="mains.edit({mainId: main._id})">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-    <a class="btn btn-primary" data-ng-click="remove();">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <small>
-    <em class="text-muted">
-      Post
-      <span data-ng-bind="main.created | date:'mediumDate'"></span>
-      by
-      <span data-ng-bind="main.user.displayName"></span>
-    </em>
-  </small>
-  <p class="lead" data-ng-bind="main.content"></p>
+  <!--<div class="page-header">-->
+    <!--<h1 data-ng-bind="main.title"></h1>-->
+  <!--</div>-->
+  <!--<div class="pull-right" data-ng-show="authentication.user._id == main.user._id">-->
+    <!--<a class="btn btn-primary" data-ui-sref="mains.edit({mainId: main._id})">-->
+      <!--<i class="glyphicon glyphicon-edit"></i>-->
+    <!--</a>-->
+    <!--<a class="btn btn-primary" data-ng-click="remove();">-->
+      <!--<i class="glyphicon glyphicon-trash"></i>-->
+    <!--</a>-->
+  <!--</div>-->
+  <!--<small>-->
+    <!--<em class="text-muted">-->
+      <!--Post-->
+      <!--<span data-ng-bind="main.created | date:'mediumDate'"></span>-->
+      <!--by-->
+      <!--<span data-ng-bind="main.user.displayName"></span>-->
+    <!--</em>-->
+  <!--</small>-->
+  <!--<p class="lead" data-ng-bind="main.content"></p>-->
+
+  <iframe src="https://www.google.com/maps/d/u/0/embed?mid=11kIWJ2PCRZ7wyAyKiq8LKL8Q7po" width="640" height="480"></iframe>
 </section>

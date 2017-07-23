@@ -130,6 +130,7 @@
             <table class="table table-striped jambo_table bulk_action">
               <thead>
               <tr class="headings">
+                <th class="column-title">ที่ </th>
                 <th class="column-title">วันที่ </th>
                 <th class="column-title">ชื่อ-นามสกุล </th>
                 <th class="column-title">เบอร์โทรศัพท์ </th>
@@ -145,6 +146,7 @@
               </thead>
               <tbody>
               <tr class="even pointer" data-ng-repeat="recipient in recipients | filter:searchText" data-ng-show="authentication.user._id == recipient.user._id">
+                <td>{{ $index + 1 }}</td>
                 <td ng-bind="recipient.created | date:'mediumDate'"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.name"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.tel"></td>
@@ -163,6 +165,27 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="text-center form-group">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+              <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </md-content>
