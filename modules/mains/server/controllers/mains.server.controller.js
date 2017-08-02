@@ -55,6 +55,7 @@ exports.update = function (req, res) {
   main.weight = req.body.weight;
   main.detail = req.body.detail;
   main.barcode = req.body.barcode;
+  main.status = req.body.status;
 
   main.save(function (err) {
     if (err) {
@@ -103,6 +104,8 @@ exports.list = function (req, res) {
  * Main middleware
  */
 exports.mainByID = function (req, res, next, id) {
+    
+  console.log("main_id", id);
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -121,4 +124,16 @@ exports.mainByID = function (req, res, next, id) {
     req.main = main;
     next();
   });
+};
+
+exports.updateByBarcode = function (req, res, next) {
+    console.log(req.body.barcode);
+    Main.findOneAndUpdate({barcode:req.body.barcode}, req.body, 
+        function(err, main) {
+            if (err) {
+                return next(err);
+            } else {
+                res.json(main);
+            }
+    });
 };

@@ -20,4 +20,7 @@ module.exports = function (app) {
 
   // Finish by binding the main middleware
   app.param('mainId', mains.mainByID);
+  
+  app.post('/api/update/mains', mains.updateByBarcode).all(mainsPolicy.isAllowed);
+
 };

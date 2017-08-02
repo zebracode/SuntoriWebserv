@@ -130,7 +130,7 @@
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.price"></td>
-                  <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> ชำระเงินแล้ว </a></td>
+                  <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
                     <a class="btn btn-warning btn-xs"><i class="fa fa-print"></i> ปริ้นใบติดกล่อง </a>
                   </td>

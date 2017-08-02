@@ -22,10 +22,7 @@ module.exports = {
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/angular-file-upload/angular-file-upload.js',
-        'public/lib/gentelella/build/js/custom.js',
-        'public/lib/gentelella/vendors/jquery/dist/jquery.js',
-        'public/lib/gentelella/vendors/nprogress/nprogress.js'
+        'public/lib/angular-file-upload/angular-file-upload.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

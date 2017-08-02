@@ -123,6 +123,11 @@ var MainSchema = new Schema({
   user: {
       type: Schema.ObjectId,
       ref: 'User'
+    },
+  status: {
+      type: String,
+      default: '',
+      trim: true
     }
 });
 

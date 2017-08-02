@@ -52,6 +52,7 @@
     "morgan": "^1.6.1",
     "multer": "0.1.8",
     "ng-gentelella": "^0.2.6",
+    "node-fetch": "^1.7.1",
     "node-pre-gyp": "0.6.4",
     "nodemailer": "^1.4.0",
     "passport": "~0.2.2",
