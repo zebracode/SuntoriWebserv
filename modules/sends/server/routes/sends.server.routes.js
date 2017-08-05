@@ -20,4 +20,7 @@ module.exports = function (app) {
 
   // Finish by binding the send middleware
   app.param('sendId', sends.sendByID);
+  
+  app.route('/api/send/findByName')
+    .get(sends.findByName);
 };

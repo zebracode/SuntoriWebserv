@@ -111,3 +111,13 @@ exports.recipientByID = function (req, res, next, id) {
     next();
   });
 };
+
+exports.findByName = function(req, res, next) {
+    Recipient.find({name: {'$regex': '.*' + req.query.searchText + '.*'}}, function(err, recipients){
+        if (err) {
+            return next(err);
+        } else {
+            res.json(recipients);
+        }
+    });
+};

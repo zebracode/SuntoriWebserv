@@ -136,7 +136,6 @@ angular.module('sends').controller('PopupEditController', ['$scope', '$statePara
             username: $routeParams.username
         }).$promise.then(function (response) {
             $scope.messages = response;
-            console.log($scope.messages);
         });
 
     };

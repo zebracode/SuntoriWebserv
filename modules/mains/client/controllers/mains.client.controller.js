@@ -1,8 +1,8 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains',
-  function ($scope, $stateParams, $location, Authentication, Mains) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http',
+  function ($scope, $stateParams, $location, Authentication, Mains, $http) {
     $scope.authentication = Authentication;
 
     // Create new Main
@@ -223,7 +223,43 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       $scope.reset = function() {
           $scope.options = {เลือกขนาดกล่อง};
       }
-
+      
+      $scope.getSenderName = function(searchText) {
+          return $http
+            .get('/api/send/findByName?searchText=' + searchText)
+            .then(function(response) {
+              return response.data;
+            });
+      };
+      
+      $scope.setSenderData = function() {
+        if ($scope.selectedSender) {
+            $scope.s_name = $scope.selectedSender.name;
+            $scope.s_tel = $scope.selectedSender.tel;
+            $scope.s_address = $scope.selectedSender.address;
+            $scope.s_country = $scope.selectedSender.country;
+            $scope.s_postcode = $scope.selectedSender.postcode;
+        }
+      };
+      
+      $scope.getRecipients = function(search) {
+          return $http
+            .get('/api/recipient/findByName?searchText=' + search)
+            .then(function(response) {
+              return response.data;
+            });
+      };
+      
+      $scope.setRecipientData = function() {
+        if ($scope.selectedRecipient) {
+            $scope.r_name = $scope.selectedRecipient.name;
+            $scope.r_tel = $scope.selectedRecipient.tel;
+            $scope.r_address = $scope.selectedRecipient.address;
+            $scope.r_country = $scope.selectedRecipient.country;
+            $scope.r_postcode = $scope.selectedRecipient.postcode;
+        }
+      };
+      
   }
 ]);
 

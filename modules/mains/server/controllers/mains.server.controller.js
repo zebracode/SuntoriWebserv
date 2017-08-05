@@ -104,8 +104,6 @@ exports.list = function (req, res) {
  * Main middleware
  */
 exports.mainByID = function (req, res, next, id) {
-    
-  console.log("main_id", id);
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -127,7 +125,6 @@ exports.mainByID = function (req, res, next, id) {
 };
 
 exports.updateByBarcode = function (req, res, next) {
-    console.log(req.body.barcode);
     Main.findOneAndUpdate({barcode:req.body.barcode}, req.body, 
         function(err, main) {
             if (err) {

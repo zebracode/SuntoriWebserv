@@ -111,3 +111,14 @@ exports.sendByID = function (req, res, next, id) {
     next();
   });
 };
+
+
+exports.findByName = function(req, res, next) {    
+    Send.find({name: { "$regex": req.query.searchText, "$options": "i" }}, function(err, sends){
+        if (err) {
+            return next(err);
+        } else {
+            res.json(sends);
+        }
+    });
+};

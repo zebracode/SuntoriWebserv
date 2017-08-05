@@ -20,4 +20,7 @@ module.exports = function (app) {
 
   // Finish by binding the recipient middleware
   app.param('recipientId', recipients.recipientByID);
+  
+  app.route('/api/recipient/findByName')
+    .get(recipients.findByName);
 };
