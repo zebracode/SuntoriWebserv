@@ -110,7 +110,7 @@
               <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
               <td class="list-group-item-heading" ng-bind="main.weight"></td>
               <td class="list-group-item-heading" ng-bind="main.price"></td>
-              <td><a class="btn btn-warning btn-xs"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a></td>
+              <td><a class="btn btn-warning btn-xs {{disabled}}" ng-click="disabled='disabled'; addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a></td>
               <td>
                 <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
                 <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
@@ -150,7 +150,7 @@
                     <h2>ยอดค่าใช้จ่าย</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <div layout="row">
-                        <h2 class="text-default">เงินคงเหลือ 250 บาท</h2>
+                        <h2 class="text-default">เงินคงเหลือ {{balanceAmount}} บาท</h2>
                       </div>
                     </ul>
                     <div class="clearfix"></div>
@@ -160,7 +160,7 @@
                       <div class="tile-stats">
                         <div class="icon"><i class="fa fa-money"></i>
                         </div>
-                        <div class="count">179
+                        <div class="count">{{ totalPrice }}
                           <span>บาท</span>
                         </div>
 
@@ -169,9 +169,9 @@
                       </div>
                     </div>
                     <div class="text-center form-group">
-                      <button type="button" class="btn btn-warning">คำนวนเงิน</button>
+                      <button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>
                       <button type="button" class="btn btn-primary">เติมเงิน</button>
-                      <button type="submit" class="btn btn-success">ชำระเงิน</button>
+                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}">ชำระเงิน</button>
                     </div>
                   </div>
                 </div>

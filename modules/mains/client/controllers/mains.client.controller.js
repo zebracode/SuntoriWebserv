@@ -4,7 +4,8 @@
 angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http',
   function ($scope, $stateParams, $location, Authentication, Mains, $http) {
     $scope.authentication = Authentication;
-
+    $scope.totalPrice = 0;
+    $scope.balanceAmount =  250;
     // Create new Main
     $scope.create = function () {
       // Create new Main object
@@ -260,6 +261,15 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         }
       };
       
+      //Calculate Total Price
+      $scope.calTotalPrice = function(){
+        return 600;
+      };
+      
+      $scope.addPrice = function(price){
+          $scope.totalPrice = Number($scope.totalPrice) | 0;
+          $scope.totalPrice = $scope.totalPrice + Number(price);
+      };
   }
 ]);
 

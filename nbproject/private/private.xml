@@ -2,6 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/client/controllers/mains.client.controller.js</file>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/client/filters/isdisable.mains.client.filter.js</file>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/client/views/list-mains.client.view.html</file>
+        </group>
     </open-files>
 </project-private>
