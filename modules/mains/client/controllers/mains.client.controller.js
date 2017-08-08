@@ -25,7 +25,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         price: this.price,
         weight: this.weight,
         detail: this.detail,
-        barcode: this.barcode
+        barcode: this.barcode,
+        s_idNumber: this.s_idNumber
       });
 
       // Redirect after save
