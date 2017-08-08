@@ -1,45 +1,45 @@
  <div flex layout="row" data-ng-controller="MainsController" data-ng-init="findOne()">
-  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
-              class="md-whiteframe-z2" data-ng-show="authentication.user">
-    <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">ยินดีต้อนรับ</span>
-          <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div>
-            <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
-          </div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <div>
-          <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
-            <md-icon md-svg-icon="pencil"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
-            <md-icon md-svg-icon="picture"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
-            <md-icon md-svg-icon="key"></md-icon>
-          </md-button>
-        </div>
-        <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
-      </md-card-actions>
-      <div class="list-group">
-        <a class="list-group-item" data-ui-sref="home">หน้าหลัก</a>
-        <a class="list-group-item" data-ui-sref="mains.list">ประวัตการใช้งาน</a>
-        <a class="list-group-item" data-ui-sref="mains.create">เพิ่มรายการ</a>
-        <a class="list-group-item" data-ui-sref="recipients.list">รายชื่อผู้รับ</a>
-        <a class="list-group-item" data-ui-sref="sends.list">รายชื่อผู้ส่ง</a>
-      </div>
-    </md-card>
-  </md-sidenav>
-  <md-content flex id="content" data-ng-show="authentication.user">
+   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+               class="md-whiteframe-z2" data-ng-show="authentication.user">
+     <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+       <md-card-title>
+         <md-card-title-text>
+           <span class="md-headline">ยินดีต้อนรับ</span>
+           <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
+         </md-card-title-text>
+         <md-card-title-media>
+           <div>
+             <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
+           </div>
+         </md-card-title-media>
+       </md-card-title>
+       <md-card-actions layout="row" layout-align="end center">
+         <div>
+           <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
+             <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+             <md-icon md-svg-icon="pencil"></md-icon>
+           </md-button>
+           <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
+             <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+             <md-icon md-svg-icon="picture"></md-icon>
+           </md-button>
+           <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
+             <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+             <md-icon md-svg-icon="key"></md-icon>
+           </md-button>
+         </div>
+         <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
+       </md-card-actions>
+       <div class="list-group">
+         <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
+         <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
+         <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
+         <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
+         <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
+       </div>
+     </md-card>
+   </md-sidenav>
+   <md-content flex id="content" data-ng-show="authentication.user">
     <div class="row">
       <div class="col-md-12">
         <div class="x_panel">

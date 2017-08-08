@@ -6,20 +6,24 @@
           <h1>เปลี่ยนข้อมูลประจำตัว</h1>
         </div>
         <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
+          <label for="firstName">ชื่อ</label>
+          <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="ชื่อ">
         </div>
         <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
+          <label for="lastName">นามสกุล</label>
+          <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="นามสกุล">
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
+          <label for="email">อีเมลล์</label>
+          <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="อีเมลล์">
         </div>
         <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
+          <label for="username">ชื่อผู้ใช้บริการ</label>
+          <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="ชื่อผู้ใช้บริการ">
+        </div>
+        <div class="form-group">
+          <label for="username">เลขบัตรประชาชน</label>
+          <input type="text" id="idNumber" name="idNumber" class="form-control" data-ng-model="user.idNumber" placeholder="เลขบัตรประชาชน">
         </div>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-lg btn-primary">Save Profile</button>
@@ -34,106 +38,3 @@
     </form>
   </div>
 </section>
-
-<div flex layout="row" data-ng-controller="EditProfileController" data-ng-init="findOne()">
-  <!-- Container Left -->
-  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
-              class="md-whiteframe-z2" data-ng-show="authentication.user">
-    <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">ยินดีต้อนรับ</span>
-          <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div>
-            <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
-          </div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <div>
-          <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
-            <md-icon md-svg-icon="pencil"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
-            <md-icon md-svg-icon="picture"></md-icon>
-          </md-button>
-          <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
-            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
-            <md-icon md-svg-icon="key"></md-icon>
-          </md-button>
-        </div>
-        <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
-      </md-card-actions>
-      <div class="list-group">
-        <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
-        <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
-        <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
-        <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
-        <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
-      </div>
-    </md-card>
-  </md-sidenav>
-  <!-- Container Right -->
-  <md-content flex id="content" data-ng-show="authentication.user">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>รายชื่อผู้ส่ง</h2>
-            <div class="clearfix"></div>
-          </div>
-          <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
-            <h3 class="text-center">แก้ไขข้อมูลผู้ส่ง</h3>
-            <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
-              <fieldset>
-                <alert type="danger" data-ng-show="error" class="text-center text-danger">
-                  <span data-ng-bind="error"></span>
-                </alert>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-user"></i>
-          </span>
-                    <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-user"></i>
-          </span>
-                    <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-earphone"></i>
-          </span>
-                    <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-home"></i>
-          </span>
-                    <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
-                  </div>
-                </div>
-                <div class="text-center form-group">
-                  <input type="submit" value="Update" class="btn btn-default">
-                  <button data-ui-sref="sends.list" class="btn btn-warning" type="button">Cancel</button>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </md-content>
-</div>

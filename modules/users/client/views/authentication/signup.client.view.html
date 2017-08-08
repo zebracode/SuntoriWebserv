@@ -1,6 +1,6 @@
 <div data-ng-controller="AuthenticationController">
   <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4 login-form-bg">
-    <h3 class="text-center">SignUp</h3>
+    <h3 class="text-center">สมัครสมาชิก</h3>
     <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
       <fieldset>
         <alert type="danger" data-ng-show="error" class="text-center text-danger">
@@ -12,7 +12,7 @@
               <i class="glyphicon glyphicon-star"></i>
             </span>
             <input type="text" required id="firstName" name="firstName" class="form-control"
-                   data-ng-model="credentials.firstName" placeholder="First Name">
+                   data-ng-model="credentials.firstName" placeholder="ชื่อ">
           </div>
         </div>
         <div class="form-group">
@@ -21,7 +21,7 @@
               <i class="glyphicon glyphicon-star-empty"></i>
             </span>
             <input type="text" id="lastName" name="lastName" class="form-control"
-                   data-ng-model="credentials.lastName" placeholder="Last Name">
+                   data-ng-model="credentials.lastName" placeholder="นามสกุล">
           </div>
         </div>
         <div class="form-group">
@@ -30,7 +30,7 @@
               <i class="glyphicon glyphicon-envelope"></i>
             </span>
             <input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email"
-                   placeholder="Email">
+                   placeholder="อีเมลล์">
           </div>
         </div>
         <div class="form-group">
@@ -39,7 +39,7 @@
               <i class="glyphicon glyphicon-user"></i>
             </span>
             <input type="text" id="username" name="username" class="form-control"
-                   data-ng-model="credentials.username" placeholder="Username">
+                   data-ng-model="credentials.username" placeholder="ชื่อผู้ใช้">
           </div>
         </div>
         <div class="form-group">
@@ -48,7 +48,7 @@
               <i class="glyphicon glyphicon-asterisk"></i>
             </span>
             <input type="password" id="password" name="password" class="form-control"
-                   data-ng-model="credentials.password" placeholder="Password">
+                   data-ng-model="credentials.password" placeholder="รหัสผ่าน">
           </div>
         </div>
         <div class="text-center form-group">

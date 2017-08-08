@@ -44,6 +44,12 @@ var SendSchema = new Schema({
       trim: true,
       required: 'Title cannot be blank'
     },
+  idNumber: {
+      type: String,
+      default: '',
+      trim: true,
+      required: 'Title cannot be blank'
+    },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

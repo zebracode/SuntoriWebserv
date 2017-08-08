@@ -67,7 +67,7 @@
           <h2>รายชื่อผู้รับ<small>เพิ่มรายชื่อผู้รับได้ที่นี่!!</small></h2>
           <div class="col-lg-4">
             <div class="input-group">
-              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+              <input class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
               <span class="input-group-btn">
         <button class="btn btn-default" type="button">Go!</button>
       </span>

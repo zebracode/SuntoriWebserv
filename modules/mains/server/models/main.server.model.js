@@ -56,6 +56,12 @@ var MainSchema = new Schema({
       trim: true,
       required: 'กรุณากรอกรหัสไปรษณีย์ ผู้ส่ง'
     },
+  s_idNumber: {
+        type: String,
+        default: '',
+        trim: true,
+        required: 'กรุณากรอกเลขบัตรปรชาชน ผู้ส่ง'
+      },
   r_name: {
     type: String,
     default: '',

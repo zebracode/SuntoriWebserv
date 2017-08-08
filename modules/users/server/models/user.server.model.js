@@ -37,13 +37,13 @@ var UserSchema = new Schema({
     type: String,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+    validate: [validateLocalStrategyProperty, 'กรุณากรอกชื่อ']
   },
   lastName: {
     type: String,
     trim: true,
     default: '',
-    validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+    validate: [validateLocalStrategyProperty, 'กรุณากรอกนามสกุล']
   },
   displayName: {
     type: String,
@@ -54,18 +54,23 @@ var UserSchema = new Schema({
     trim: true,
     unique: true,
     default: '',
-    validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
+    validate: [validateLocalStrategyEmail, 'กรุณากรอกอีเมลล์']
   },
   username: {
     type: String,
     unique: 'Username already exists',
-    required: 'Please fill in a username',
+    required: 'กรุณากรอก UserName',
     trim: true
   },
   password: {
     type: String,
     default: '',
-    validate: [validateLocalStrategyPassword, 'Password should be longer']
+    validate: [validateLocalStrategyPassword, 'กรุณากรอก Password']
+  },
+  idNumber: {
+    type: String,
+    trim: true,
+    default: ''
   },
   salt: {
     type: String

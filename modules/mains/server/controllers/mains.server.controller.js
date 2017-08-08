@@ -44,6 +44,7 @@ exports.update = function (req, res) {
   main.s_address = req.body.s_address;
   main.s_country = req.body.s_country;
   main.s_postcode = req.body.s_postcode;
+  main.s_idNumber = req.body.s_idNumber;
   main.r_name = req.body.r_name;
   main.r_tel = req.body.r_tel;
   main.r_address = req.body.r_address;
