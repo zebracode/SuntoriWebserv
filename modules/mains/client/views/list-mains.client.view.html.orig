@@ -1,0 +1,254 @@
+<div data-ui-view flex layout="row" data-ng-controller="MainsController" data-ng-init="find()">
+  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+            class="md-whiteframe-z2" data-ng-show="authentication.user">
+  <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">ยินดีต้อนรับ</span>
+        <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
+      </md-card-title-text>
+      <md-card-title-media>
+        <div>
+          <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
+        </div>
+      </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <div>
+        <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
+          <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+          <md-icon md-svg-icon="pencil"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
+          <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+          <md-icon md-svg-icon="picture"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
+          <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+          <md-icon md-svg-icon="key"></md-icon>
+        </md-button>
+      </div>
+      <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
+    </md-card-actions>
+    <div class="list-group">
+      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
+      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
+      <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
+      <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
+      <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
+    </div>
+  </md-card>
+</md-sidenav>
+  <md-content flex id="content" data-ng-show="authentication.user">
+  <!--<md-button class="share" md-no-ink ng-click="ul.share($event)"-->
+  <!--aria-label="Share">-->
+  <!--<md-icon md-svg-icon="share" ></md-icon>-->
+  <!--</md-button>-->
+
+  <!--<div class="page-header">-->
+  <!--<h1>ข้อมูลผู้ส่ง</h1>-->
+  <!--</div>-->
+  <!--<div class="list-group">-->
+  <!--<a data-ng-repeat="send in sends" data-ui-sref="sends.view({sendId: send._id})" class="list-group-item">-->
+  <!--<small class="list-group-item-text">-->
+  <!--Posted on-->
+  <!--<span data-ng-bind="send.created | date:'mediumDate'"></span>-->
+  <!--by-->
+  <!--<span data-ng-bind="send.user.displayName"></span>-->
+  <!--</small>-->
+  <!--<h4 class="list-group-item-heading" data-ng-bind="send.title"></h4>-->
+  <!--<p class="list-group-item-text" data-ng-bind="send.content"></p>-->
+  <!--</a>-->
+  <!--</div>-->
+  <!--<div class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">-->
+  <!--No sends yet, why don't you <a data-ui-sref="sends.create">create one</a>?-->
+  <!--</div>-->
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
+          <div class="col-lg-4">
+            <div class="input-group">
+              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+          </div>
+<<<<<<< HEAD
+        </ul>
+
+        <div class="clearfix"></div>
+      <div class="x_content">
+        <br />
+        <div class="table-responsive">
+          <table class="table table-striped jambo_table bulk_action">
+            <thead>
+            <tr class="headings">
+              <th class="column-title"> ที่ </th>
+              <th class="column-title">วันที่ </th>
+              <th class="column-title">ผู้รับ </th>
+              <th class="column-title">เบอร์โทร </th>
+              <th class="column-title">นน.(กรัม) </th>
+              <th class="column-title">ค่าส่ง </th>
+              <th class="column-title">สถานะจัดส่ง </th>
+              <th class="column-title">ชำระเงิน</th>
+              <th class="bulk-actions" colspan="7">
+                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
+              <td>{{ $index + 1 }}</td>
+              <td ng-bind="main.created | date:'mediumDate'"></td>
+              <td class="list-group-item-heading" ng-bind="main.r_name"></td>
+              <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
+              <td class="list-group-item-heading" ng-bind="main.weight"></td>
+              <td class="list-group-item-heading" ng-bind="main.price"></td>
+              <td><a class="btn btn-warning btn-xs {{disabled}}" ng-click="disabled='disabled'; addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a></td>
+              <td>
+                <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
+                <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+=======
+          <ul class="nav navbar-right panel_toolbox">
+            <div class="text-center mtop20">
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการจัดส่งสินค้า</button>
+            </div>
+          </ul>
+>>>>>>> origin/zebracode
+
+          <div class="clearfix"></div>
+          <div class="x_content">
+            <br />
+            <div class="table-responsive">
+              <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                <tr class="headings">
+                  <th class="column-title"> ที่ </th>
+                  <th class="column-title">วันที่ </th>
+                  <th class="column-title">ผู้รับ </th>
+                  <th class="column-title">เบอร์โทร </th>
+                  <th class="column-title">นน.(กรัม) </th>
+                  <th class="column-title">ค่าส่ง </th>
+                  <th class="column-title">สถานะจัดส่ง </th>
+                  <th class="column-title">ชำระเงิน</th>
+                  <th class="bulk-actions" colspan="7">
+                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
+                  <td>{{ $index + 1 }}</td>
+                  <td ng-bind="main.created | date:'mediumDate'"></td>
+                  <td class="list-group-item-heading" ng-bind="main.r_name"></td>
+                  <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
+                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
+                  <td class="list-group-item-heading" ng-bind="main.price"></td>
+                  <td><a class="btn btn-warning btn-xs"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a></td>
+                  <td>
+                    <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
+                    <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+              <div class="x_content">
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                  <div class="col-xs-6">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2>สถานที่จัดส่งพัสดุ</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <div layout="row">
+                            <h2 data-ui-sref="mains.edit({mainId: main._id})">Dropoff</h2>
+                          </div>
+                        </ul>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                        <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <div class="tile-stats">
+                            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=11kIWJ2PCRZ7wyAyKiq8LKL8Q7po" width="425" height="140"></iframe>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+<<<<<<< HEAD
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-xs-6">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>ยอดค่าใช้จ่าย</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <div layout="row">
+                        <h2 class="text-default">เงินคงเหลือ {{balanceAmount}} บาท</h2>
+=======
+                  <!-- /.col -->
+                  <div class="col-xs-6">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2>ยอดค่าใช้จ่าย</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <div layout="row">
+                            <h2 class="text-default">เงินคงเหลือ 250 บาท</h2>
+                          </div>
+                        </ul>
+                        <div class="clearfix"></div>
+>>>>>>> origin/zebracode
+                      </div>
+                      <div class="x_content">
+                        <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <div class="tile-stats">
+                            <div class="icon"><i class="fa fa-money"></i>
+                            </div>
+                            <div class="count">179
+                              <span>บาท</span>
+                            </div>
+
+                            <h3>ยอดเงินที่ต้องชำระ</h3>
+                            <p>เพิ่มรายการได้อย่างต่อเนื่อง และคลิกชำระเงินเพื่อชำระเงินพร้อมกันทุกรายการ.</p>
+                          </div>
+                        </div>
+<<<<<<< HEAD
+                        <div class="count">{{ totalPrice }}
+                          <span>บาท</span>
+=======
+                        <div class="text-center form-group">
+                          <button type="button" class="btn btn-warning">คำนวนเงิน</button>
+                          <button type="button" class="btn btn-primary">เติมเงิน</button>
+                          <button type="submit" class="btn btn-success">ชำระเงิน</button>
+>>>>>>> origin/zebracode
+                        </div>
+                      </div>
+                    </div>
+<<<<<<< HEAD
+                    <div class="text-center form-group">
+                      <button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>
+                      <button type="button" class="btn btn-primary">เติมเงิน</button>
+                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}">ชำระเงิน</button>
+                    </div>
+=======
+>>>>>>> origin/zebracode
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </md-content>
+</div>
