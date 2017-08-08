@@ -44,6 +44,7 @@ exports.update = function (req, res) {
   send.address = req.body.address;
   send.country = req.body.country;
   send.postcode = req.body.postcode;
+  send.idNumber = req.body.idNumber;
 
   send.save(function (err) {
     if (err) {
