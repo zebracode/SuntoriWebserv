@@ -271,6 +271,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $scope.totalPrice = Number($scope.totalPrice) | 0;
           $scope.totalPrice = $scope.totalPrice + Number(price);
       };
+      
+       $scope.minusPrice = function(price){
+          $scope.totalPrice = Number($scope.totalPrice) | 0;
+          $scope.totalPrice = $scope.totalPrice - Number(price);
+      };
   }
 ]);
 
