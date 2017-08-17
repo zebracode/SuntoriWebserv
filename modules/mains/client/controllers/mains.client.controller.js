@@ -85,7 +85,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.query();
+      $scope.mains = Mains.query(function (data) {
+          var firstTotalPrice = 0;
+          for (var i=0; i<data.length; i++){
+              console.log("data", data[i].price);
+              firstTotalPrice += parseInt(data[i].price);
+          }
+          $scope.firstTotalPrice = firstTotalPrice;
+      });
     };
 
     // Find existing Main
@@ -268,6 +275,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       };
       
       $scope.addPrice = function(price){
+          $scope.firstTotalPrice = 0;
           $scope.totalPrice = Number($scope.totalPrice) | 0;
           $scope.totalPrice = $scope.totalPrice + Number(price);
       };
