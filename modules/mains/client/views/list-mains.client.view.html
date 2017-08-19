@@ -89,7 +89,7 @@
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                 <tr class="headings">
-                  <th class="column-title"> ที่ </th>
+                  <th class="column-title"> ที่</th>
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">ผู้รับ </th>
                   <th class="column-title">เบอร์โทร </th>
@@ -111,8 +111,8 @@
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.price"></td>
                   <td ng-init="disabled=true;">
-                    <a ng-show="disabled" class="btn btn-warning btn-xs" ng-click="disabled=false; addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
-                    <a ng-show="!disabled" class="btn btn-success btn-xs" ng-click="disabled=true; minusPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                    <a ng-show="disabled" class="btn btn-success btn-xs" ng-click="disabled=false; minusPrice(main.price); "><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
                   </td>
                   <td>
                     <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
@@ -163,7 +163,7 @@
                           <div class="tile-stats">
                             <div class="icon"><i class="fa fa-money"></i>
                             </div>
-                        <div class="count">{{ totalPrice + firstTotalPrice}}
+                        <div class="count">{{ totalPrice }}
                               <span>บาท</span>
                             </div>
 

@@ -91,7 +91,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
               console.log("data", data[i].price);
               firstTotalPrice += parseInt(data[i].price);
           }
-          $scope.firstTotalPrice = firstTotalPrice;
+          $scope.totalPrice = firstTotalPrice;
       });
     };
 
@@ -280,10 +280,20 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $scope.totalPrice = $scope.totalPrice + Number(price);
       };
       
-       $scope.minusPrice = function(price){
+      $scope.minusPrice = function(price){
           $scope.totalPrice = Number($scope.totalPrice) | 0;
           $scope.totalPrice = $scope.totalPrice - Number(price);
       };
+      
+        // Generate barcode
+        $scope.genBarcode = function () {
+            return $http
+                    .get('/lastNumber')
+                    .then(function (response) {
+                        console.log("lastnumber", response.data.number);
+                        return response.data.number;
+                    });
+        };
   }
 ]);
 
