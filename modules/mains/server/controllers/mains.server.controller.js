@@ -135,3 +135,15 @@ exports.updateByBarcode = function (req, res, next) {
             }
     });
 };
+
+exports.setBarcode = function(req, res, next) {
+    Main.findOneAndUpdate({invoice:req.body.invoice}, req.body,
+        function(err, main){
+            if(err) {
+                return next(err);
+            } else {
+                return res.json(main);
+            }
+        }
+    );
+};

@@ -88,7 +88,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       $scope.mains = Mains.query(function (data) {
           var firstTotalPrice = 0;
           for (var i=0; i<data.length; i++){
-              console.log("data", data[i].price);
               firstTotalPrice += parseInt(data[i].price);
           }
           $scope.totalPrice = firstTotalPrice;
@@ -284,16 +283,107 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $scope.totalPrice = Number($scope.totalPrice) | 0;
           $scope.totalPrice = $scope.totalPrice - Number(price);
       };
+    
       
-        // Generate barcode
-        $scope.genBarcode = function () {
-            return $http
-                    .get('/lastNumber')
-                    .then(function (response) {
-                        console.log("lastnumber", response.data.number);
-                        return response.data.number;
-                    });
+    $scope.setBarcode = function(selectedInvoices) {
+        selectedInvoices.sort();
+        for(var i=0; i<selectedInvoices.length; i++){
+            setBarcode(selectedInvoices[i], i);
+        }
+        
+        
+        var inc = selectedInvoices.length;
+        
+        $http.get("/lastNumber").then(function (response) {
+            var req = {
+            method: 'PUT',
+            url: '/lastNumber',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            data: {
+                number : parseInt(response.data.number) + inc + ""
+            }
         };
+
+        $http(req).then(function (response) {
+            console.log("updateLastNumber: ", response);     
+        });
+            
+        });
+        
+    };
+    
+    function setBarcode(selectedInvoice, inc) {
+        var prefix = "EY";
+        var suffix = "TH";
+        var number = "";
+        var weight = "";
+        var barcode = "";
+        var checkDigit = "";
+
+        $http.get("/lastNumber").then(function (response) {
+            number = parseInt(response.data.number) + inc + "";
+            weight = response.data.weight;
+            checkDigit = getCheckDigit(number, weight);
+            barcode = prefix + number + checkDigit + suffix;  
+            
+            var req = {
+                    method: 'POST',
+                    url: '/api/update/barcode',
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    data: {
+                        invoice : selectedInvoice,
+                        barcode : barcode
+                    }
+                };
+
+            $http(req).then(function (response) {
+                console.log("updateBarcode: ", response);
+            });
+        });
+
+        function getCheckDigit(number, weight) {
+
+            var sum = 0;
+            var mod = 0;
+            var checkDigit = "";
+            for(var i=0; i<number.length; i++) {
+                sum += parseInt(number.charAt(i)) * parseInt(weight.charAt(i));
+            }
+
+            mod = sum % 11;
+
+            if(mod === 0){
+                checkDigit = "5";
+            } else if (mod === 1) {
+                checkDigit = "0";    
+            } else {
+                checkDigit = (11 - mod) + "";
+            }
+
+            return checkDigit;
+        }
+    };
+    
+    $scope.selectedInvoices = [];
+    $scope.addSelectInvoice = function (invoiceNo) {
+        $scope.selectedInvoices.push(invoiceNo);
+        //console.log("invoices: ", $scope.selectedInvoices);
+    };
+
+    $scope.removeSelectInvoice = function (invoiceNo) {
+        for (var i=0; i < $scope.selectedInvoices.length; i++) {
+            if ($scope.selectedInvoices[i] === invoiceNo) {
+                $scope.selectedInvoices.splice(i, 1);
+                break;
+            }
+        }
+        
+        //console.log("invoices: ", $scope.selectedInvoices);
+    };
   }
 ]);
 

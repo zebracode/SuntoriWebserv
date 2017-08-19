@@ -104,15 +104,15 @@
                 </thead>
                 <tbody>
                 <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
-                  <td>{{ $index + 1 }}</td>
+                  <td ng-init="addSelectInvoice(main.invoice);">{{ $index + 1 }}</td>
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.price"></td>
                   <td ng-init="disabled=true;">
-                    <a ng-show="disabled" class="btn btn-success btn-xs" ng-click="disabled=false; minusPrice(main.price); "><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
-                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                    <a ng-show="disabled" class="btn btn-success btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.price); "><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
                   </td>
                   <td>
                     <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
@@ -174,7 +174,7 @@
                         <div class="text-center form-group">
                       <button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>
                           <button type="button" class="btn btn-primary">เติมเงิน</button>
-                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}">ชำระเงิน</button>
+                          <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" ng-click="setBarcode(selectedInvoices);">ชำระเงิน</button>
                         </div>
                       </div>
                     </div>

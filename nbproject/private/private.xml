@@ -5,9 +5,10 @@
         <group>
             <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/client/controllers/mains.client.controller.js</file>
             <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/server/models/main.server.model.js</file>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/thailandpost/server/models/lastnumber.server.model.js</file>
             <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/server/controllers/mains.server.controller.js</file>
             <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/client/views/list-mains.client.view.html</file>
-            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/thailandpost/server/routes/thailandpost.server.routes.js</file>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/mains/server/routes/mains.server.routes.js</file>
         </group>
     </open-files>
 </project-private>
