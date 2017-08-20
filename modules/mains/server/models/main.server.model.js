@@ -125,6 +125,11 @@ var MainSchema = new Schema({
         default: '',
         trim: true
       },
+  total: {
+          type: String,
+          default: '',
+          trim: true
+        },
   user: {
       type: Schema.ObjectId,
       ref: 'User'

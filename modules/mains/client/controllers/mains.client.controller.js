@@ -88,7 +88,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       $scope.mains = Mains.query(function (data) {
           var firstTotalPrice = 0;
           for (var i=0; i<data.length; i++){
+
               firstTotalPrice += parseInt(data[i].price);
+              console.log("price: ", data[i]);
           }
           $scope.totalPrice = firstTotalPrice;
       });
@@ -324,6 +326,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         var checkDigit = "";
 
         $http.get("/lastNumber").then(function (response) {
+            console.log("getLastNumber: ", response.data);
             number = parseInt(response.data.number) + inc + "";
             weight = response.data.weight;
             checkDigit = getCheckDigit(number, weight);
@@ -388,3 +391,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
   }
 ]);
 
+$scope.setTotal = function (totalPrice) {
+    console.log("price: ");
+    console.log("price: ", totalPrice);
+};
