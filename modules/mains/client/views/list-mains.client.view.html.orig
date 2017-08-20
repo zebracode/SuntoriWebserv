@@ -76,52 +76,11 @@
               </span>
             </div><!-- /input-group -->
           </div>
-<<<<<<< HEAD
-        </ul>
-
-        <div class="clearfix"></div>
-      <div class="x_content">
-        <br />
-        <div class="table-responsive">
-          <table class="table table-striped jambo_table bulk_action">
-            <thead>
-            <tr class="headings">
-              <th class="column-title"> ที่ </th>
-              <th class="column-title">วันที่ </th>
-              <th class="column-title">ผู้รับ </th>
-              <th class="column-title">เบอร์โทร </th>
-              <th class="column-title">นน.(กรัม) </th>
-              <th class="column-title">ค่าส่ง </th>
-              <th class="column-title">สถานะจัดส่ง </th>
-              <th class="column-title">ชำระเงิน</th>
-              <th class="bulk-actions" colspan="7">
-                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
-              <td>{{ $index + 1 }}</td>
-              <td ng-bind="main.created | date:'mediumDate'"></td>
-              <td class="list-group-item-heading" ng-bind="main.r_name"></td>
-              <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
-              <td class="list-group-item-heading" ng-bind="main.weight"></td>
-              <td class="list-group-item-heading" ng-bind="main.price"></td>
-              <td><a class="btn btn-warning btn-xs {{disabled}}" ng-click="disabled='disabled'; addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a></td>
-              <td>
-                <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
-                <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-=======
           <ul class="nav navbar-right panel_toolbox">
             <div class="text-center mtop20">
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการจัดส่งสินค้า</button>
             </div>
           </ul>
->>>>>>> origin/zebracode
 
           <div class="clearfix"></div>
           <div class="x_content">
@@ -130,7 +89,7 @@
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                 <tr class="headings">
-                  <th class="column-title"> ที่ </th>
+                  <th class="column-title"> ที่</th>
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">ผู้รับ </th>
                   <th class="column-title">เบอร์โทร </th>
@@ -145,13 +104,16 @@
                 </thead>
                 <tbody>
                 <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
-                  <td>{{ $index + 1 }}</td>
+                  <td ng-init="addSelectInvoice(main.invoice);">{{ $index + 1 }}</td>
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.price"></td>
-                  <td><a class="btn btn-warning btn-xs"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a></td>
+                  <td ng-init="disabled=true;">
+                    <a ng-show="disabled" class="btn btn-success btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.price); "><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                  </td>
                   <td>
                     <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
                     <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
@@ -184,18 +146,6 @@
                       </div>
                     </div>
                   </div>
-<<<<<<< HEAD
-                </div>
-              </div>
-              <!-- /.col -->
-              <div class="col-xs-6">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>ยอดค่าใช้จ่าย</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <div layout="row">
-                        <h2 class="text-default">เงินคงเหลือ {{balanceAmount}} บาท</h2>
-=======
                   <!-- /.col -->
                   <div class="col-xs-6">
                     <div class="x_panel">
@@ -203,18 +153,17 @@
                         <h2>ยอดค่าใช้จ่าย</h2>
                         <ul class="nav navbar-right panel_toolbox">
                           <div layout="row">
-                            <h2 class="text-default">เงินคงเหลือ 250 บาท</h2>
+                        <h2 class="text-default">เงินคงเหลือ {{balanceAmount}} บาท</h2>
                           </div>
                         </ul>
                         <div class="clearfix"></div>
->>>>>>> origin/zebracode
                       </div>
                       <div class="x_content">
                         <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
                           <div class="tile-stats">
                             <div class="icon"><i class="fa fa-money"></i>
                             </div>
-                            <div class="count">179
+                        <div class="count">{{ totalPrice }}
                               <span>บาท</span>
                             </div>
 
@@ -222,26 +171,17 @@
                             <p>เพิ่มรายการได้อย่างต่อเนื่อง และคลิกชำระเงินเพื่อชำระเงินพร้อมกันทุกรายการ.</p>
                           </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="count">{{ totalPrice }}
-                          <span>บาท</span>
-=======
                         <div class="text-center form-group">
-                          <button type="button" class="btn btn-warning">คำนวนเงิน</button>
+                      <!--<button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>-->
                           <button type="button" class="btn btn-primary">เติมเงิน</button>
-                          <button type="submit" class="btn btn-success">ชำระเงิน</button>
->>>>>>> origin/zebracode
+<<<<<<< HEAD
+                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" data-ui-sref="home">ชำระเงิน</button>
+=======
+                          <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" ng-click="setBarcode(selectedInvoices);">ชำระเงิน</button>
+>>>>>>> origin/thailandpost_api
                         </div>
                       </div>
                     </div>
-<<<<<<< HEAD
-                    <div class="text-center form-group">
-                      <button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>
-                      <button type="button" class="btn btn-primary">เติมเงิน</button>
-                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}">ชำระเงิน</button>
-                    </div>
-=======
->>>>>>> origin/zebracode
                   </div>
                 </div>
               </div>
