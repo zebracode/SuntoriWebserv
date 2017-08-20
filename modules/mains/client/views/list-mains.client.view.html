@@ -169,9 +169,9 @@
                           </div>
                         </div>
                         <div class="text-center form-group">
-                      <button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>
+                      <!--<button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>-->
                           <button type="button" class="btn btn-primary">เติมเงิน</button>
-                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}">ชำระเงิน</button>
+                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" data-ui-sref="home">ชำระเงิน</button>
                         </div>
                       </div>
                     </div>

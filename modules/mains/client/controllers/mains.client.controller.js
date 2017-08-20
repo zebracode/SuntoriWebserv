@@ -241,6 +241,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.s_address = $scope.selectedSender.address;
             $scope.s_country = $scope.selectedSender.country;
             $scope.s_postcode = $scope.selectedSender.postcode;
+            $scope.s_idNumber = $scope.selectedSender.idNumber;
         }
       };
       

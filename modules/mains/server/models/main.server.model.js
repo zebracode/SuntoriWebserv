@@ -101,8 +101,7 @@ var MainSchema = new Schema({
   invoice: {
         type: String,
         default: '',
-        trim: true,
-        required: 'กรุณากรอก Invioce No.'
+        trim: true
     },
   price: {
         type: String,

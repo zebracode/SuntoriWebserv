@@ -15,7 +15,8 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
         tel: this.tel,
         address: this.address,
         country: this.country,
-        postcode: this.postcode
+        postcode: this.postcode,
+        idNumber: this.idNumber
       });
 
       // Redirect after save
@@ -28,6 +29,7 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
         $scope.address = '';
         $scope.country = '';
         $scope.postcode = '';
+        $scope.idNumber = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
