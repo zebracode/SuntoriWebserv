@@ -8,6 +8,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.balanceAmount =  250;
     // Create new Main
     $scope.create = function () {
+            
       // Create new Main object
       var main = new Mains({
         s_name: this.s_name,
@@ -26,7 +27,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         weight: this.weight,
         detail: this.detail,
         barcode: this.barcode,
-        s_idNumber: this.s_idNumber
+        s_idNumber: this.s_idNumber,
+        total: this.selectedOption.price
       });
 
       // Redirect after save
@@ -89,7 +91,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           var firstTotalPrice = 0;
           for (var i=0; i<data.length; i++){
 
-              firstTotalPrice += parseInt(data[i].price);
+              firstTotalPrice += parseInt(data[i].total);
               console.log("price: ", data[i]);
           }
           $scope.totalPrice = firstTotalPrice;
@@ -271,20 +273,15 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         }
       };
       
-      //Calculate Total Price
-      $scope.calTotalPrice = function(){
-        return 600;
-      };
-      
-      $scope.addPrice = function(price){
+      $scope.addPrice = function(total){
           $scope.firstTotalPrice = 0;
           $scope.totalPrice = Number($scope.totalPrice) | 0;
-          $scope.totalPrice = $scope.totalPrice + Number(price);
+          $scope.totalPrice = $scope.totalPrice + Number(total);
       };
       
-      $scope.minusPrice = function(price){
+      $scope.minusPrice = function(total){
           $scope.totalPrice = Number($scope.totalPrice) | 0;
-          $scope.totalPrice = $scope.totalPrice - Number(price);
+          $scope.totalPrice = $scope.totalPrice - Number(total);
       };
     
       
@@ -390,8 +387,3 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     };
   }
 ]);
-
-$scope.setTotal = function (totalPrice) {
-    console.log("price: ");
-    console.log("price: ", totalPrice);
-};
