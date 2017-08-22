@@ -5,7 +5,7 @@
           <h2>รายชื่อผู้ส่ง</h2>
           <div class="clearfix"></div>
         </div>
-        <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
+        <div class="col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-12 login-form-bg">
           <h3 class="text-center">เพิ่มข้อมูลผู้ส่ง</h3>
           <form name="sendForm" class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
@@ -21,11 +21,12 @@
                 </div>
               </div>
               <div class="form-group">
-                <div class="input-group input-group-lg">
+                  <div class="input-group input-group-lg">
           <span class="input-group-addon" id="basic-addon1">
             <i class="glyphicon glyphicon-earphone"></i>
           </span>
-                  <input name="tel" type="text" data-ng-model="tel" id="tel" class="form-control" placeholder="เบอร์โทร">
+                      <input name="tel" type="text" data-ng-model="tel" id="tel" class="form-control" placeholder="เบอร์โทร">
+                  </div>
               </div>
               <div class="form-group">
                 <div class="input-group input-group-lg">
@@ -51,15 +52,14 @@
                       <input name="postcode" type="text" data-ng-model="postcode" id="postcode" class="form-control" placeholder="รหัสไปรษณีย์">
                   </div>
               </div>
-                  <div class="form-group">
-                      <div class="input-group input-group-lg">
+                <div class="form-group">
+                    <div class="input-group input-group-lg">
                       <span class="input-group-addon" id="basic-addon1">
                         <i class="glyphicon glyphicon-inbox"></i>
                       </span>
                           <input name="idNumber" type="text" data-ng-model="idNumber" id="idNumber" class="form-control" placeholder="เลขบัตรประชาชน">
                       </div>
-                  </div>
-
+                </div>
               <div class="text-center form-group">
                 <button class="btn btn-primary" type="submit" ng-click="ok()">ตกลง</button>
                 <button class="btn btn-warning" type="button" ng-click="cancel()">ยกเลิก</button>
