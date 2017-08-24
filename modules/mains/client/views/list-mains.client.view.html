@@ -111,8 +111,8 @@
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.price"></td>
                   <td ng-init="disabled=true;">
-                    <a ng-show="disabled" class="btn btn-success btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.price); "><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
-                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                    <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.price); "><i class="fa fa-money"></i> คลิกยกเลิก </a>
+                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.price);"><i class="fa fa-money"></i> คลิกชำระเงิน </a>
                   </td>
                   <td>
                     <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
