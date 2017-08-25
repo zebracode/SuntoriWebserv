@@ -1,8 +1,8 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog', 
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog) {
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
     $scope.balanceAmount =  250;
@@ -87,12 +87,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.query(function (data) {
+      $scope.mains = Mains.query(function (mains) {
           var firstTotalPrice = 0;
-          for (var i=0; i<data.length; i++){
-
-              firstTotalPrice += parseInt(data[i].total);
-              console.log("price: ", data[i]);
+          for (var i=0; i<mains.length; i++){
+              if ($scope.authentication.user._id !== mains[i].user._id) {
+                continue;
+              }
+              firstTotalPrice += parseInt(mains[i].total);
           }
           $scope.totalPrice = firstTotalPrice;
       });
@@ -283,37 +284,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $scope.totalPrice = Number($scope.totalPrice) | 0;
           $scope.totalPrice = $scope.totalPrice - Number(total);
       };
-    
-      
-    $scope.setBarcode = function(selectedInvoices) {
-        selectedInvoices.sort();
-        for(var i=0; i<selectedInvoices.length; i++){
-            setBarcode(selectedInvoices[i], i);
-        }
         
-        
-        var inc = selectedInvoices.length;
-        
-        $http.get("/lastNumber").then(function (response) {
-            var req = {
-            method: 'PUT',
-            url: '/lastNumber',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            data: {
-                number : parseInt(response.data.number) + inc + ""
-            }
-        };
-
-        $http(req).then(function (response) {
-            console.log("updateLastNumber: ", response);     
-        });
-            
-        });
-        
-    };
-    
     function setBarcode(selectedInvoice, inc) {
         var prefix = "EY";
         var suffix = "TH";
@@ -385,5 +356,53 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         
         //console.log("invoices: ", $scope.selectedInvoices);
     };
+    
+        
+    $scope.showConfirm = function (ev, selectedInvoices) {
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+        .title('ยืนยันการชำระเงิน')
+        .textContent('กรุณายืนยันการชำระเงิน')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('ยืนยัน')
+        .cancel('ยกเลิก');
+
+      $mdDialog.show(confirm).then(function () {
+        $scope.status = 'Confirm';
+        
+        // Create order api of thailand post
+        selectedInvoices.sort();
+        for(var i=0; i<selectedInvoices.length; i++){
+            setBarcode(selectedInvoices[i], i);
+        }
+        
+        
+        var inc = selectedInvoices.length;
+        
+        $http.get("/lastNumber").then(function (response) {
+            var req = {
+            method: 'PUT',
+            url: '/lastNumber',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            data: {
+                number : parseInt(response.data.number) + inc + ""
+            }
+        };
+
+        $http(req).then(function (response) {
+            console.log("updateLastNumber: ", response);     
+        });
+            
+        });
+        
+      }, function () {
+        $scope.status = 'Cancel';
+      });
+    };
   }
 ]);
+
+

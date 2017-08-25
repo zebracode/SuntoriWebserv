@@ -175,7 +175,7 @@
                         </div>
                         <div class="text-center form-group">
                           <button type="button" class="btn btn-primary">เติมเงิน</button>
-                          <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" ng-click="setBarcode(selectedInvoices);">ชำระเงิน</button>
+                          <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" ng-click="showConfirm($event, selectedInvoices);">ชำระเงิน</button>
                         </div>
                       </div>
                     </div>
