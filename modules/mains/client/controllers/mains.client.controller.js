@@ -96,6 +96,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
               firstTotalPrice += parseInt(mains[i].total);
           }
           $scope.totalPrice = firstTotalPrice;
+          setDisbled($scope.balanceAmount - $scope.totalPrice);
       });
     };
 
@@ -278,11 +279,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $scope.firstTotalPrice = 0;
           $scope.totalPrice = Number($scope.totalPrice) | 0;
           $scope.totalPrice = $scope.totalPrice + Number(total);
+          setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
       
       $scope.minusPrice = function(total){
           $scope.totalPrice = Number($scope.totalPrice) | 0;
           $scope.totalPrice = $scope.totalPrice - Number(total);
+          setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
         
     function setBarcode(selectedInvoice, inc) {
@@ -402,6 +405,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.status = 'Cancel';
       });
     };
+    
+    
+    function setDisbled(amount) {
+      $scope.disabled = false;
+      if (amount < 0) {
+        $scope.disabled = true;
+      }
+    }
   }
 ]);
 
