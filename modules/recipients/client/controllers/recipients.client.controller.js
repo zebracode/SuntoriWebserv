@@ -12,6 +12,7 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
         name: this.name,
         tel: this.tel,
         address: this.address,
+        ampher: this.ampher,
         country: this.country,
         postcode: this.postcode
       });
@@ -24,6 +25,7 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
         $scope.name = '';
         $scope.tel = '';
         $scope.address = '';
+        $scope.ampher = '';
         $scope.country = '';
         $scope.postcode = '';
       }, function (errorResponse) {

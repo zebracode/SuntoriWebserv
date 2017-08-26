@@ -32,6 +32,12 @@ var RecipientSchema = new Schema({
     trim: true,
     required: 'Title cannot be blank'
   },
+  ampher: {
+      type: String,
+      default: '',
+      trim: true,
+      required: 'Title cannot be blank'
+    },
   country: {
       type: String,
       default: '',
