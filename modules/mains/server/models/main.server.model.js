@@ -92,6 +92,10 @@ var MainSchema = new Schema({
       trim: true,
       required: 'กรุณากรอกรหัสไปรณณีย์ ผู้รับ'
     },
+  r_ampher: {
+    type: String
+  },
+  
   order: {
         type: String,
         default: '',

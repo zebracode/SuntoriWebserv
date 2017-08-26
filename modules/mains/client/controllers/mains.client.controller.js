@@ -23,6 +23,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         r_address: this.r_address,
         r_country: this.r_country,
         r_postcode: this.r_postcode,
+        r_ampher: this.r_ampher,
         order: this.order,
         invoice: this.invoice,
         price: this.price,
@@ -275,6 +276,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.r_address = $scope.selectedRecipient.address;
             $scope.r_country = $scope.selectedRecipient.country;
             $scope.r_postcode = $scope.selectedRecipient.postcode;
+            $scope.r_ampher = $scope.selectedRecipient.ampher;
         }
       };
       
