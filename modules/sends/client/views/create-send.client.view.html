@@ -1,72 +1,141 @@
-<section data-ng-controller="SendsController">
-  <div class="modal-body">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>รายชื่อผู้ส่ง</h2>
-          <div class="clearfix"></div>
+<div flex layout="row" data-ng-controller="SendsController as ul" data-ng-init="findOne()">
+    <!-- Container Left -->
+    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+                class="md-whiteframe-z2" data-ng-show="authentication.user">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">ยินดีต้อนรับ</span>
+                    <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <div>
+                        <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
+                    </div>
+                </md-card-title-media>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+                <div>
+                    <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
+                        <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+                        <md-icon md-svg-icon="pencil"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
+                        <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+                        <md-icon md-svg-icon="picture"></md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
+                        <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+                        <md-icon md-svg-icon="key"></md-icon>
+                    </md-button>
+                </div>
+                <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
+            </md-card-actions>
+            <div class="list-group">
+                <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
+                <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
+                <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
+                <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
+                <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
+            </div>
+        </md-card>
+    </md-sidenav>
+    <!-- Container Right -->
+    <md-content flex id="content" data-ng-show="authentication.user">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>รายชื่อผู้ส่ง</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                <tr class="headings">
+                                    <th class="text-center">เพิ่มรายชื่อผู้ส่ง</th>
+                                </tr>
+                                </thead>
+                            </table>
+                            <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
+                                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้ส่ง</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
+
+                        <form name="sendForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+                            <fieldset>
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>ชื่อ-นามสกุล</label>
+                                        <input ng-model="name">
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>เบอร์โทรศัพท์</label>
+                                        <input ng-model="tel">
+                                    </md-input-container>
+                                </div>
+
+                                <md-input-container class="md-block">
+                                    <label>ที่อยู่</label>
+                                    <input ng-model="address">
+                                </md-input-container>
+
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>จังหวัด</label>
+                                    <md-select ng-model="country">
+                                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                            {{state.abbrev}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>รหัสไปรษณีย์</label>
+                                        <input name="postcode" ng-model="postcode" placeholder="12345"
+                                               required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+                                        <div ng-messages="userForm.postcode.$error" role="alert" multiple>
+                                            <div ng-message="required" class="my-message">กรุณาใส่รหัสไปรษณีย์</div>
+                                            <div ng-message="pattern" class="my-message">รหัสไปรษณีย์ไม่ถูกต้อง
+                                            </div>
+                                            <div ng-message="md-maxlength" class="my-message">
+                                                กรอกรหัสไปรษณีย์ 5 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่กำหนด
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>เลขบัตรประชาชน</label>
+                                        <input name="idNumber" ng-model="idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
+                                               required ng-pattern="/^[0-9]{13}$/" md-maxlength="13">
+
+                                        <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                            <div ng-message="required" class="my-message">กรุณาใส่เลขบัตรประชาชน</div>
+                                            <div ng-message="pattern" class="my-message">เลขบัตรประชาชนไม่ถูกต้อง
+                                            </div>
+                                            <div ng-message="md-maxlength" class="my-message">
+                                                กรอกเลขบัตรประชาชน 13 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่ถูกต้อง
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="text-center form-group">
+                                    <button class="btn btn-primary" type="submit" ng-click="ok()">ตกลง</button>
+                                    <button class="btn btn-warning" type="button" data-ui-sref="sends.list">ยกเลิก</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-12 login-form-bg">
-          <h3 class="text-center">เพิ่มข้อมูลผู้ส่ง</h3>
-          <form name="sendForm" class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-              <alert type="danger" data-ng-show="error" class="text-center text-danger">
-                <span data-ng-bind="error"></span>
-              </alert>
-              <div class="form-group">
-                <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-user"></i>
-          </span>
-                  <input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="ชื่อ-นามสกุล">
-                </div>
-              </div>
-              <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-earphone"></i>
-          </span>
-                      <input name="tel" type="text" data-ng-model="tel" id="tel" class="form-control" placeholder="เบอร์โทร">
-                  </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-home"></i>
-          </span>
-                  <input name="address" type="text" data-ng-model="address" id="address" class="form-control" placeholder="ที่อยู่">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-road"></i>
-          </span>
-                  <input name="country" type="text" data-ng-model="country" id="country" class="form-control" placeholder="จังหวัด">
-                </div>
-              </div>
-              <div class="form-group">
-                  <div class="input-group input-group-lg">
-                      <span class="input-group-addon" id="basic-addon1">
-                        <i class="glyphicon glyphicon-inbox"></i>
-                      </span>
-                      <input name="postcode" type="text" data-ng-model="postcode" id="postcode" class="form-control" placeholder="รหัสไปรษณีย์">
-                  </div>
-              </div>
-                <div class="form-group">
-                    <div class="input-group input-group-lg">
-                      <span class="input-group-addon" id="basic-addon1">
-                        <i class="glyphicon glyphicon-inbox"></i>
-                      </span>
-                          <input name="idNumber" type="text" data-ng-model="idNumber" id="idNumber" class="form-control" placeholder="เลขบัตรประชาชน">
-                      </div>
-                </div>
-              <div class="text-center form-group">
-                <button class="btn btn-primary" type="submit" ng-click="ok()">ตกลง</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">ยกเลิก</button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-  </div>
-</section>
+    </md-content>
+</div>
+
+
+

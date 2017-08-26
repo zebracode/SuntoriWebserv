@@ -55,64 +55,35 @@
       </span>
             </div><!-- /input-group -->
           </div>
+
           <ul class="nav navbar-right panel_toolbox">
-            <div class="text-center mtop20" ng-controller="PopupController">
-              <button type="button" class="btn btn-mg btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">เพิ่มรายชื่อผู้ส่ง</button>
+            <div class="text-center mtop20">
+              <button type="button" class="btn btn-mg btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
-              <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">เพิ่มข้อมูลผู้ส่ง</h4>
-                    </div>
-                    <div class="modal-body">
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ชื่อ-นามสกุล <span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">เบอร์โทร <span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">ที่อยู่</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea class="form-control" rows="3"></textarea>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">รหัสไปรษณีย์</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                          </div>
-                        </div>
-                      </form>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            </div>
           </ul>
           <div class="clearfix"></div>
         </div>
-
+        <div class="x_content">
+          <div class="table-responsive">
+            <table class="table table-striped jambo_table bulk_action">
+              <thead>
+              <tr class="headings">
+                <th class="text-center">รายชื่อผู้ส่ง</th>
+              </tr>
+              </thead>
+            </table>
+            <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
+            </div>
+          </div>
+        </div>
         <div class="col-md-4 col-sm-4 col-xs-12 profile_details" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
           <div class="well profile_view">
             <div class="col-sm-12">
               <div class="left col-xs-12">
                 <ul class="list-unstyled">
+                  <h2><li><i class="fa fa-info"></i>&nbsp;<span class="md-headline"></span>รหัส {{$index+1}} </li></h2>
                   <h2><li><i class="fa fa-user"></i>&nbsp;<span class="md-headline" ng-bind="send.name"></span></li></h2>
                   <li><i class="fa fa-key fa-fw"></i>&nbsp;<span class="md-subhead" ng-bind="send.idNumber"></span></li> <br />
                   <li><i class="fa fa-building"></i> ที่อยู่:&nbsp;<span ng-bind="send.address"></span></li>
@@ -148,7 +119,7 @@
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li class="active"><a href="#">11</a></li>
+            <li class="active"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
