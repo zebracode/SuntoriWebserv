@@ -1,6 +1,8 @@
 angular.module('core').filter('updateStatus',['$http', '$location', function($http, $location) {
     return function(barcode) {
-        
+        if (barcode.length < 1) {
+          return "";
+        }
         $http.get("/getOrderStatus?barcode=" + barcode)
         .then(function(response) {
             var status = response.data;

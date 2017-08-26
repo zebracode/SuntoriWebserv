@@ -12,14 +12,20 @@ angular.module('mains').factory('Mains', ['$resource',
       getMain : {
         method: 'GET',
         isArray: true
-      }      
+      },
+      getCores : {
+        method: 'GET',
+        isArray: true
+      }
     });
     
     resource.retrieveMain = function(user) {
-      return this.getMain({
+      return this.getMain(
+        {
          user: user,
          status: 'ยังไม่ได้ชำระเงิน'
-       });
+        }
+      );
     };
     
     return resource;

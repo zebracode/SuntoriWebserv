@@ -90,8 +90,18 @@ exports.delete = function (req, res) {
  * List of Mains
  */
 exports.list = function (req, res) {
-  console.log("status", req.query.status);
-  Main.find({user: req.user, status: req.query.status}).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+  if (typeof req.query.status === "undefined"){
+    Main.find().sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(mains);
+      }
+    });
+  } else {
+    Main.find({user: req.user, status: req.query.status}).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -100,6 +110,9 @@ exports.list = function (req, res) {
       res.json(mains);
     }
   });
+  }
+  console.log("status", req.query.status);
+  
 };
 
 /**

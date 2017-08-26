@@ -91,17 +91,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.retrieveMain(Authentication.user,function (mains) {
-          var firstTotalPrice = 0;
-          for (var i=0; i<mains.length; i++){
-              if ($scope.authentication.user._id !== mains[i].user._id) {
-                continue;
-              }
-              firstTotalPrice += parseInt(mains[i].total);
-              $scope.selectedMains.push(mains[i]);
-          }
-          $scope.totalPrice = firstTotalPrice;
-          setDisbled($scope.balanceAmount - $scope.totalPrice);
+      $scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
+        var firstTotalPrice = 0;
+        for (var i=0; i<result.length; i++){
+            firstTotalPrice += parseInt(result[i].total);
+            $scope.selectedMains.push(result[i]);
+        }
+      $scope.totalPrice = firstTotalPrice;
+      setDisbled($scope.balanceAmount - $scope.totalPrice);
       });
     };
 
@@ -404,7 +401,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           };
 
           $http(req).then(function (response) {
-              console.log("updateLastNumber: ", response);     
+            $scope.find();   
           });
         });        
       }, function () {

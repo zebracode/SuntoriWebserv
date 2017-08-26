@@ -17,7 +17,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         // Find a list of Mains
         $scope.find = function () {
-            $scope.mains = Mains.query();          
+            $scope.mains = Mains.query();
+            console.log("mains", $scope.mains);
         };    
      
 
