@@ -90,7 +90,8 @@ exports.delete = function (req, res) {
  * List of Mains
  */
 exports.list = function (req, res) {
-  Main.find().sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+  console.log("status", req.query.status);
+  Main.find({user: req.user, status: req.query.status}).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
