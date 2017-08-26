@@ -31,7 +31,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         detail: this.detail,
         barcode: this.barcode,
         s_idNumber: this.s_idNumber,
-        total: this.selectedOption.price
+        total: this.selectedOption.price,
+        status: "ยังไม่ได้ชำระเงิน"
       });
 
       // Redirect after save
@@ -90,7 +91,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.query(function (mains) {
+      $scope.mains = Mains.retrieveMain(Authentication.user,function (mains) {
           var firstTotalPrice = 0;
           for (var i=0; i<mains.length; i++){
               if ($scope.authentication.user._id !== mains[i].user._id) {
@@ -316,10 +317,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                     },
                     data: {
                         invoice : selectedMain.invoice,
-                        barcode : barcode
+                        barcode : barcode,
+                        status : "ชำระเงินแล้ว"
                     }
                 };
-
+            
             $http(req).then(function (response) {
                 console.log("updateBarcode: ", response);
                 createOrder(selectedMain, barcode);
@@ -436,6 +438,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     
     function createOrder(selectedMain, barcode){
         ThailandPost.createOrder(selectedMain, barcode);
+    };
+    
+    $scope.retrieveMain = function(){
+      var result = Mains.retrieveMain(Authentication.user);
+      console.log("Result: ", result);
     };
   }
 ]);

@@ -104,7 +104,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
+                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status === 'ยังไม่ได้ชำระเงิน'">
                   <td ng-init="addSelectInvoice(main.invoice);">{{ $index + 1 }}</td>
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
@@ -176,6 +176,7 @@
                         <div class="text-center form-group">
                           <button type="button" class="btn btn-primary">เติมเงิน</button>
                           <button type="submit" class="btn btn-success" ng-disabled="disabled" ng-click="showConfirm($event, selectedMains);">ชำระเงิน</button>
+                          <button type="button" class="btn btn-primary" ng-click="retrieveMain();">Test</button>
                         </div>
                       </div>
                     </div>
