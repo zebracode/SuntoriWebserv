@@ -1,11 +1,13 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog', 
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', 
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost) {
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
-    $scope.balanceAmount =  250;
+    $scope.balanceAmount =  1000;
+    $scope.thailandPost = new ThailandPost();
+    $scope.selectedMains = [];
     // Create new Main
     $scope.create = function () {
             
@@ -94,6 +96,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                 continue;
               }
               firstTotalPrice += parseInt(mains[i].total);
+              $scope.selectedMains.push(mains[i]);
           }
           $scope.totalPrice = firstTotalPrice;
           setDisbled($scope.balanceAmount - $scope.totalPrice);
@@ -288,7 +291,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
         
-    function setBarcode(selectedInvoice, inc) {
+    function setBarcode(selectedMain, inc) {
         var prefix = "EY";
         var suffix = "TH";
         var number = "";
@@ -310,13 +313,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                         'Content-Type' : 'application/json'
                     },
                     data: {
-                        invoice : selectedInvoice,
+                        invoice : selectedMain.invoice,
                         barcode : barcode
                     }
                 };
 
             $http(req).then(function (response) {
                 console.log("updateBarcode: ", response);
+                createOrder(selectedMain, barcode);
             });
         });
 
@@ -361,7 +365,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     };
     
         
-    $scope.showConfirm = function (ev, selectedInvoices) {
+    $scope.showConfirm = function (ev, selectedMains) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
         .title('ยืนยันการชำระเงิน')
@@ -375,16 +379,16 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.status = 'Confirm';
         
         // Create order api of thailand post
-        selectedInvoices.sort();
-        for(var i=0; i<selectedInvoices.length; i++){
-            setBarcode(selectedInvoices[i], i);
+        selectedMains.sort();
+        for(var i=0; i<selectedMains.length; i++){
+            setBarcode(selectedMains[i], i);
         }
         
         
-        var inc = selectedInvoices.length;
+        var inc = selectedMains.length;
         
         $http.get("/lastNumber").then(function (response) {
-            var req = {
+          var req = {
             method: 'PUT',
             url: '/lastNumber',
             headers: {
@@ -393,14 +397,12 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             data: {
                 number : parseInt(response.data.number) + inc + ""
             }
-        };
+          };
 
-        $http(req).then(function (response) {
-            console.log("updateLastNumber: ", response);     
-        });
-            
-        });
-        
+          $http(req).then(function (response) {
+              console.log("updateLastNumber: ", response);     
+          });
+        });        
       }, function () {
         $scope.status = 'Cancel';
       });
@@ -413,6 +415,26 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.disabled = true;
       }
     }
+    
+    $scope.addSelectMain = function(main){
+      $scope.selectedMains.push(main);
+      console.log("add main: ", $scope.selectedMains);
+    };
+    
+    $scope.removeSelectMain = function(main){
+      for (var i = 0; i < $scope.selectedMains.length; i++) {
+        if ($scope.selectedMains[i].invoice === main.invoice) {
+          $scope.selectedMains.splice(i, 1);
+          break;
+        }
+      }
+      console.log("remove main: ", $scope.selectedMains);
+      
+    };
+    
+    function createOrder(selectedMain, barcode){
+        ThailandPost.createOrder(selectedMain, barcode);
+    };
   }
 ]);
 
