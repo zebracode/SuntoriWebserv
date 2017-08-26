@@ -73,9 +73,6 @@
               </tr>
               </thead>
             </table>
-            <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
-              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
-            </div>
           </div>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12 profile_details" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
@@ -105,7 +102,7 @@
               </div>
             </div>
           </div>
-          <div ng-controller="PopupController" class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">
+          <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">
             <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้ส่ง</button>
           </div>
         </div>

@@ -51,65 +51,63 @@
           </div>
           <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
             <h3 class="text-center">แก้ไขข้อมูลผู้รับ</h3>
-            <form name="recipientForm" class="form-horizontal" data-ng-submit="update()" novalidate>
-              <fieldset>
-                <alert type="danger" data-ng-show="error" class="text-center text-danger">
-                  <span data-ng-bind="error"></span>
-                </alert>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-user"></i>
-          </span>
-                    <input name="name" type="text" data-ng-model="recipient.name" id="name" class="form-control" placeholder="name" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-earphone"></i>
-          </span>
-                    <input name="tel" data-ng-model="recipient.tel" id="tel" class="form-control" placeholder="tel">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-home"></i>
-          </span>
-                    <input name="address" data-ng-model="recipient.address" id="address" class="form-control" placeholder="address">
-                  </div>
-                </div>
-                  <div class="form-group">
-                      <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-home"></i>
-          </span>
-                          <input name="ampher" data-ng-model="recipient.ampher" id="ampher" class="form-control" placeholder="ampher">
+              <form name="recipientForm" class="form-horizontal" data-ng-submit="update()" novalidate>
+                  <fieldset>
+                      <div layout-gt-sm="row">
+                          <md-input-container class="md-block" flex-gt-sm>
+                              <label>ชื่อ-นามสกุล</label>
+                              <input ng-model="recipient.name">
+                          </md-input-container>
+
+                          <md-input-container class="md-block" flex-gt-sm>
+                              <label>เบอร์โทรศัพท์</label>
+                              <input ng-model="recipient.tel">
+                          </md-input-container>
                       </div>
-                  </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-road"></i>
-          </span>
-                    <input name="country" data-ng-model="recipient.country" id="country" class="form-control" placeholder="country">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="basic-addon1">
-            <i class="glyphicon glyphicon-inbox"></i>
-          </span>
-                    <input name="postcode" data-ng-model="recipient.postcode" id="postcode" class="form-control" placeholder="postcode">
-                  </div>
-                </div>
-                <div class="text-center form-group">
-                  <input type="submit" value="Update" class="btn btn-default">
-                  <button data-ui-sref="recipients.list" class="btn btn-warning" type="button">Cancel</button>
-                </div>
-              </fieldset>
-            </form>
+
+                      <md-input-container class="md-block">
+                          <label>ที่อยู่</label>
+                          <input ng-model="recipient.address">
+                      </md-input-container>
+
+                      <div layout-gt-sm="row">
+                          <md-input-container class="md-block">
+                              <label>อำเภอ</label>
+                              <input ng-model="recipient.ampher">
+                          </md-input-container>
+
+                          <md-input-container class="md-block" flex-gt-sm>
+                              <label>จังหวัด</label>
+                              <md-select ng-model="recipient.country">
+                                  <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                      {{state.abbrev}}
+                                  </md-option>
+                              </md-select>
+                          </md-input-container>
+                      </div>
+
+                      <div layout-gt-sm="row">
+                          <md-input-container class="md-block" flex-gt-sm>
+                              <label>รหัสไปรษณีย์</label>
+                              <input name="postcode" ng-model="recipient.postcode" placeholder="12345"
+                                     required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+
+                              <div ng-messages="userForm.postcode.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณาใส่รหัสไปรษณีย์</div>
+                                  <div ng-message="pattern" class="my-message">รหัสไปรษณีย์ไม่ถูกต้อง
+                                  </div>
+                                  <div ng-message="md-maxlength" class="my-message">
+                                      กรอกรหัสไปรษณีย์ 5 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่กำหนด
+                                  </div>
+                              </div>
+                          </md-input-container>
+                      </div>
+                      <div class="text-center form-group">
+                          <button class="btn btn-primary" type="submit" ng-click="ok()">ตกลง</button>
+                          <button class="btn btn-warning" type="button" data-ui-sref="recipients.list">ยกเลิก</button>
+                      </div>
+                  </fieldset>
+              </form>
           </div>
         </div>
       </div>
