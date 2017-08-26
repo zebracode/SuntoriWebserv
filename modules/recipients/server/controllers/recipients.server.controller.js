@@ -42,6 +42,7 @@ exports.update = function (req, res) {
   recipient.name = req.body.name;
   recipient.tel = req.body.tel;
   recipient.address = req.body.address;
+  recipient.ampher = req.body.ampher;
   recipient.country = req.body.country;
   recipient.postcode = req.body.postcode;
 

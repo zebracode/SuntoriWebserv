@@ -57,7 +57,8 @@
           </div>
           <ul class="nav navbar-right panel_toolbox">
             <div class="text-center mtop20" ng-controller="PopupController">
-              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">เพิ่มรายชื่อผู้ส่ง</button>
+              <button type="button" class="btn btn-mg btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">เพิ่มรายชื่อผู้ส่ง</button>
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
               <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                   <div class="modal-content">
@@ -126,8 +127,7 @@
               <!--</div>-->
             </div>
             <div class="col-xs-12 bottom text-center">
-              <div class="col-xs-12 col-sm-6 emphasis">
-              </div>
+              <div class="col-xs-12 col-sm-6 emphasis"></div>
               <div class="col-xs-12 col-sm-6 emphasis">
                 <a class="btn btn-info btn-xs" data-ui-sref="sends.edit({sendId: send._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
                 <a class="btn btn-danger btn-xs" data-ng-click="remove(send);"><i class="fa fa-trash-o"></i> ลบ</a>
@@ -148,7 +148,7 @@
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li class="active"><a href="#">1</a></li>
+            <li class="active"><a href="#">11</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
