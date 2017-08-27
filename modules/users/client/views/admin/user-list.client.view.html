@@ -77,7 +77,7 @@
             <div class="col-lg-4">
 
               <div class="input-group">
-                <input class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+                <input class="form-control col-md-4" type="text" ng-model="searchText" placeholder="Search">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button">Go!</button>
               </span>
@@ -140,16 +140,21 @@
                     <th class="column-title">อีเมลล์ </th>
                     <th class="column-title">เบอร์โทร </th>
                     <th class="column-title">เลขบัตรประชาชน</th>
+                    <th class="column-title">เติมเงิน</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="user in pagedItems" data-ui-sref="admin.user({userId: user._id})" class="list-group-item">
+                  <tr class="even pointer" data-ng-repeat="user in pagedItems | filter:searchText"  class="list-group-item">
                     <td>{{ $index + 1 }}</td>
                     <td ng-bind="user.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
                     <td class="list-group-item-heading" ng-bind="user.email"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
                     <td class="list-group-item-heading" ng-bind="user.idNumber"></td>
+                    <td>
+                      <a class="btn btn-info btn-xs" ng-click="showConfirm($event, selectedMains);"><i class="fa fa-pencil"></i> เติมเงิน </a>
+                      <a class="btn btn-primary btn-xs" data-ui-sref="admin.user({userId: user._id})"><i class="fa fa-pencil"></i> ข้อมูล </a>
+                    </td>
                   </tr>
                   </tbody>
                 </table>
