@@ -23,6 +23,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         r_address: this.r_address,
         r_country: this.r_country,
         r_postcode: this.r_postcode,
+        r_ampher: this.r_ampher,
         order: this.order,
         invoice: this.invoice,
         price: this.price,
@@ -30,7 +31,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         detail: this.detail,
         barcode: this.barcode,
         s_idNumber: this.s_idNumber,
-        total: this.selectedOption.price
+        total: this.selectedOption.price,
+        status: "ยังไม่ได้ชำระเงิน"
       });
 
       // Redirect after save
@@ -89,17 +91,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.query(function (mains) {
-          var firstTotalPrice = 0;
-          for (var i=0; i<mains.length; i++){
-              if ($scope.authentication.user._id !== mains[i].user._id) {
-                continue;
-              }
-              firstTotalPrice += parseInt(mains[i].total);
-              $scope.selectedMains.push(mains[i]);
-          }
-          $scope.totalPrice = firstTotalPrice;
-          setDisbled($scope.balanceAmount - $scope.totalPrice);
+      $scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
+        var firstTotalPrice = 0;
+        for (var i=0; i<result.length; i++){
+            firstTotalPrice += parseInt(result[i].total);
+            $scope.selectedMains.push(result[i]);
+        }
+      $scope.totalPrice = firstTotalPrice;
+      setDisbled($scope.balanceAmount - $scope.totalPrice);
       });
     };
 
@@ -275,6 +274,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.r_address = $scope.selectedRecipient.address;
             $scope.r_country = $scope.selectedRecipient.country;
             $scope.r_postcode = $scope.selectedRecipient.postcode;
+            $scope.r_ampher = $scope.selectedRecipient.ampher;
         }
       };
       
@@ -314,10 +314,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                     },
                     data: {
                         invoice : selectedMain.invoice,
-                        barcode : barcode
+                        barcode : barcode,
+                        status : "ชำระเงินแล้ว"
                     }
                 };
-
+            
             $http(req).then(function (response) {
                 console.log("updateBarcode: ", response);
                 createOrder(selectedMain, barcode);
@@ -400,7 +401,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           };
 
           $http(req).then(function (response) {
-              console.log("updateLastNumber: ", response);     
+            $scope.find();   
           });
         });        
       }, function () {
@@ -434,6 +435,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     
     function createOrder(selectedMain, barcode){
         ThailandPost.createOrder(selectedMain, barcode);
+    };
+    
+    $scope.retrieveMain = function(){
+      var result = Mains.retrieveMain(Authentication.user);
+      console.log("Result: ", result);
     };
   }
 ]);

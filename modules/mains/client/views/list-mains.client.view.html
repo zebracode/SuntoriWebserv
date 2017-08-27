@@ -104,7 +104,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
+                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status === 'ยังไม่ได้ชำระเงิน'">
                   <td ng-init="addSelectInvoice(main.invoice);">{{ $index + 1 }}</td>
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
@@ -118,7 +118,7 @@
                   </td>
                   <td>
                     <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
-                    <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
+                    <a class="btn btn-danger btn-xs" data-ng-click="remove(main); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-trash-o"></i> ลบ </a>
                   </td>
                 </tr>
                 </tbody>
