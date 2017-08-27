@@ -1,13 +1,16 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', 
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost) {
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
-    $scope.balanceAmount =  250;
+    $scope.balanceAmount =  1000;
+    $scope.thailandPost = new ThailandPost();
+    $scope.selectedMains = [];
     // Create new Main
     $scope.create = function () {
+            
       // Create new Main object
       var main = new Mains({
         s_name: this.s_name,
@@ -26,7 +29,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         weight: this.weight,
         detail: this.detail,
         barcode: this.barcode,
-        s_idNumber: this.s_idNumber
+        s_idNumber: this.s_idNumber,
+        total: this.selectedOption.price
       });
 
       // Redirect after save
@@ -85,14 +89,17 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.query(function (data) {
+      $scope.mains = Mains.query(function (mains) {
           var firstTotalPrice = 0;
-          for (var i=0; i<data.length; i++){
-
-              firstTotalPrice += parseInt(data[i].price);
-              console.log("price: ", data[i]);
+          for (var i=0; i<mains.length; i++){
+              if ($scope.authentication.user._id !== mains[i].user._id) {
+                continue;
+              }
+              firstTotalPrice += parseInt(mains[i].total);
+              $scope.selectedMains.push(mains[i]);
           }
           $scope.totalPrice = firstTotalPrice;
+          setDisbled($scope.balanceAmount - $scope.totalPrice);
       });
     };
 
@@ -271,53 +278,20 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         }
       };
       
-      //Calculate Total Price
-      $scope.calTotalPrice = function(){
-        return 600;
-      };
-      
-      $scope.addPrice = function(price){
+      $scope.addPrice = function(total){
           $scope.firstTotalPrice = 0;
           $scope.totalPrice = Number($scope.totalPrice) | 0;
-          $scope.totalPrice = $scope.totalPrice + Number(price);
+          $scope.totalPrice = $scope.totalPrice + Number(total);
+          setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
       
-      $scope.minusPrice = function(price){
+      $scope.minusPrice = function(total){
           $scope.totalPrice = Number($scope.totalPrice) | 0;
-          $scope.totalPrice = $scope.totalPrice - Number(price);
+          $scope.totalPrice = $scope.totalPrice - Number(total);
+          setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
-    
-      
-    $scope.setBarcode = function(selectedInvoices) {
-        selectedInvoices.sort();
-        for(var i=0; i<selectedInvoices.length; i++){
-            setBarcode(selectedInvoices[i], i);
-        }
         
-        
-        var inc = selectedInvoices.length;
-        
-        $http.get("/lastNumber").then(function (response) {
-            var req = {
-            method: 'PUT',
-            url: '/lastNumber',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            data: {
-                number : parseInt(response.data.number) + inc + ""
-            }
-        };
-
-        $http(req).then(function (response) {
-            console.log("updateLastNumber: ", response);     
-        });
-            
-        });
-        
-    };
-    
-    function setBarcode(selectedInvoice, inc) {
+    function setBarcode(selectedMain, inc) {
         var prefix = "EY";
         var suffix = "TH";
         var number = "";
@@ -339,13 +313,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                         'Content-Type' : 'application/json'
                     },
                     data: {
-                        invoice : selectedInvoice,
+                        invoice : selectedMain.invoice,
                         barcode : barcode
                     }
                 };
 
             $http(req).then(function (response) {
                 console.log("updateBarcode: ", response);
+                createOrder(selectedMain, barcode);
             });
         });
 
@@ -388,10 +363,79 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         
         //console.log("invoices: ", $scope.selectedInvoices);
     };
+    
+        
+    $scope.showConfirm = function (ev, selectedMains) {
+      // Appending dialog to document.body to cover sidenav in docs app
+      var confirm = $mdDialog.confirm()
+        .title('ยืนยันการชำระเงิน')
+        .textContent('กรุณายืนยันการชำระเงิน')
+        .ariaLabel('Lucky day')
+        .targetEvent(ev)
+        .ok('ยืนยัน')
+        .cancel('ยกเลิก');
+
+      $mdDialog.show(confirm).then(function () {
+        $scope.status = 'Confirm';
+        
+        // Create order api of thailand post
+        selectedMains.sort();
+        for(var i=0; i<selectedMains.length; i++){
+            setBarcode(selectedMains[i], i);
+        }
+        
+        
+        var inc = selectedMains.length;
+        
+        $http.get("/lastNumber").then(function (response) {
+          var req = {
+            method: 'PUT',
+            url: '/lastNumber',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            data: {
+                number : parseInt(response.data.number) + inc + ""
+            }
+          };
+
+          $http(req).then(function (response) {
+              console.log("updateLastNumber: ", response);     
+          });
+        });        
+      }, function () {
+        $scope.status = 'Cancel';
+      });
+    };
+    
+    
+    function setDisbled(amount) {
+      $scope.disabled = false;
+      if (amount < 0) {
+        $scope.disabled = true;
+      }
+    }
+    
+    $scope.addSelectMain = function(main){
+      $scope.selectedMains.push(main);
+      console.log("add main: ", $scope.selectedMains);
+    };
+    
+    $scope.removeSelectMain = function(main){
+      for (var i = 0; i < $scope.selectedMains.length; i++) {
+        if ($scope.selectedMains[i].invoice === main.invoice) {
+          $scope.selectedMains.splice(i, 1);
+          break;
+        }
+      }
+      console.log("remove main: ", $scope.selectedMains);
+      
+    };
+    
+    function createOrder(selectedMain, barcode){
+        ThailandPost.createOrder(selectedMain, barcode);
+    };
   }
 ]);
 
-$scope.setTotal = function (totalPrice) {
-    console.log("price: ");
-    console.log("price: ", totalPrice);
-};
+
