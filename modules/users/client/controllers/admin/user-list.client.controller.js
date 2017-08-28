@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin',
-  function ($scope, $filter, Admin) {
+angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin', '$mdDialog',
+  function ($scope, $filter, Admin, $mdDialog) {
     Admin.query(function (data) {
       $scope.users = data;
       $scope.buildPager();
@@ -27,5 +27,24 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     $scope.pageChanged = function () {
       $scope.figureOutItemsToDisplay();
     };
+
+    $scope.showTopUpPromt = function(event) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.prompt()
+          .title('เติมเงิน')
+          .textContent('ระบุจำนวนเงินที่ต้องการเติม')
+          .placeholder('จำนวนเงิน')
+          .ariaLabel('')
+          .initialValue('')
+          .targetEvent(event)
+          .ok('ตกลง')
+          .cancel('ยกเลิก');
+
+          $mdDialog.show(confirm).then(function(result) {
+            $scope.status = 'You decided to name your dog ' + result + '.';
+          }, function() {
+            $scope.status = 'You didn\'t name your dog.';
+          });
+        }
   }
 ]);
