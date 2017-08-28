@@ -33,8 +33,8 @@
       <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
     </md-card-actions>
     <div class="list-group">
-      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
-      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
+      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายการจัดส่ง</a>
+      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
       <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
       <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
       <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
@@ -62,45 +62,48 @@
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
             </div>
           </ul>
-          <div class="col-md-12">
-            <div class="x_panel">
-              <!--<div id="mainb" style="height:350px;"></div>-->
-              <div class="row top_tiles">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-university"></i></div>
-                    <div class="count">179</div>
-                    <h3>เงินคงเหลือ</h3>
-                    <p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>
-                  </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-graduation-cap"></i></div>
-                    <div class="count">179</div>
-                    <h3>ส่งสำเร็จ</h3>
-                    <p>จำนวนรายการส่งสำเร็จ</p>
-                  </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-paper-plane"></i></div>
-                    <div class="count">179</div>
-                    <h3>กำลังจัดส่ง</h3>
-                    <p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>
-                  </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-fire-extinguisher"></i></div>
-                    <div class="count">179</div>
-                    <h3>ส่งไม่สำเร็จ</h3>
-                    <p>จำนวนรายการที่ส่งไม่สำเร็จ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <!--&lt;!&ndash; Summary &ndash;&gt;-->
+          <!--<div class="col-md-12">-->
+            <!--<div class="x_panel">-->
+              <!--&lt;!&ndash;<div id="mainb" style="height:350px;"></div>&ndash;&gt;-->
+              <!--<div class="row top_tiles">-->
+                <!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-university"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>เงินคงเหลือ</h3>-->
+                    <!--<p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-graduation-cap"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>ส่งสำเร็จ</h3>-->
+                    <!--<p>จำนวนรายการส่งสำเร็จ</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-paper-plane"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>กำลังจัดส่ง</h3>-->
+                    <!--<p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-fire-extinguisher"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>ส่งไม่สำเร็จ</h3>-->
+                    <!--<p>จำนวนรายการที่ส่งไม่สำเร็จ</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
           <div class="clearfix"></div>
           <div class="x_content">
             <br />
@@ -108,7 +111,6 @@
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                 <tr class="headings">
-                  <th class="column-title">ที่</th>
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">EN</th>
                   <th class="column-title">ผู้รับ </th>
@@ -124,7 +126,6 @@
                 </thead>
                 <tbody>
                 <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status !== 'ยังไม่ได้ชำระเงิน'">
-                  <td>{{ $index + 1 }}</td>
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
@@ -166,6 +167,7 @@
     </div>
   </md-content>
   </div>
+  <!-- HomePage -->
   <div flex layout="column"data-ng-hide="authentication.user">
     <md-content>
       <!--Modal box-->

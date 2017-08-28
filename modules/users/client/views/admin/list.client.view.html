@@ -1,28 +1,3 @@
-<!--<section>-->
-  <!--<div class="page-header">-->
-    <!--<div class="row">-->
-      <!--<div class="col-md-2"></div>-->
-      <!--<div class="col-md-8">-->
-        <!--<div class="text-center">-->
-          <!--<h2>ข้อมูลสมาชิก<small>ตรวจสอบข้อมูลสมาชิกได้</small></h2>-->
-        <!--</div>-->
-        <!--<div class="input-group">-->
-          <!--<input class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="list-group">-->
-    <!--<a data-ng-repeat="user in pagedItems" data-ui-sref="admin.user({userId: user._id})" class="list-group-item">-->
-      <!--<h4 class="list-group-item-heading" data-ng-bind="user.username"></h4>-->
-      <!--<p class="list-group-item-text" data-ng-bind="user.email"></p>-->
-    <!--</a>-->
-  <!--</div>-->
-
-  <!--<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
-<!--</section>-->
-
-
 <div data-ng-controller="HomeController" data-ng-init="find()">
   <div flex layout="row" data-ng-show="authentication.user">
     <!-- Container #3 Left -->
@@ -70,21 +45,15 @@
         <!--User Login -->
         <div class="x_panel">
           <div class="x_title">
-            <h2>ข้อมูลสมาชิก<small>ตรวจสอบข้อมูลสมาชิกได้</small></h2>
+            <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
             <div class="col-lg-4">
-
               <div class="input-group">
-                <input class="form-control col-md-4" type="text" ng-model="searchText" placeholder="Search">
+                <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button">Go!</button>
               </span>
               </div><!-- /input-group -->
             </div>
-            <!--<ul class="nav navbar-right panel_toolbox">-->
-              <!--<div class="text-center mtop20">-->
-                <!--<button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="authentication.signup">เพิ่มสมาชิก</button>-->
-              <!--</div>-->
-            <!--</ul>-->
             <div class="col-md-12">
               <div class="x_panel">
                 <!--<div id="mainb" style="height:350px;"></div>-->
@@ -124,6 +93,7 @@
                 </div>
               </div>
             </div>
+
             <div class="clearfix"></div>
             <div class="x_content">
               <br />
@@ -131,28 +101,22 @@
                 <table class="table table-striped jambo_table bulk_action">
                   <thead>
                   <tr class="headings">
-                    <th class="column-title">#</th>
-                    <th class="column-title">วันสมัคร </th>
+                    <th class="column-title">วันที่ </th>
+                    <th class="column-title">EN</th>
                     <th class="column-title">ชื่อผู้ใช้</th>
-                    <th class="column-title">อีเมลล์ </th>
+                    <th class="column-title">ผู้รับ </th>
                     <th class="column-title">เบอร์โทร </th>
-                    <th class="column-title">เลขบัตรประชาชน</th>
-                    <th class="column-title">ยอดเงิน</th>
-                    <th class="column-title">เติมเงิน</th>
+                    <th class="column-title">สถานะจัดส่ง </th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="user in pagedItems | filter:searchText"  class="list-group-item">
-                    <td>{{ $index + 1 }}</td>
-                    <td ng-bind="user.created | date:'mediumDate'"></td>
+                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText">
+                    <td ng-bind="main.created | date:'mediumDate'"></td>
+                    <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
-                    <td class="list-group-item-heading" ng-bind="user.email"></td>
-                    <td class="list-group-item-heading" ng-bind="user.username"></td>
-                    <td class="list-group-item-heading" ng-bind="user.idNumber"></td>
-                    <td class="list-group-item-heading" ng-bind="user.idNumber"></td>
-                    <td>
-                      <a class="btn btn-info btn-xs" ng-click="showConfirm($event, selectedMains);"><i class="fa fa-pencil"></i> เติมเงิน </a>
-                    </td>
+                    <td class="list-group-item-heading" ng-bind="main.r_name"></td>
+                    <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
+                    <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   </tr>
                   </tbody>
                 </table>
@@ -185,4 +149,3 @@
     </md-content>
   </div>
 </div>
-
