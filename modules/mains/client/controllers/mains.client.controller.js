@@ -364,8 +364,42 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         
         //console.log("invoices: ", $scope.selectedInvoices);
     };
+      
     
-        
+    function setDisbled(amount) {
+      $scope.disabled = false;
+      if (amount < 0) {
+        $scope.disabled = true;
+      }
+    }
+    
+    $scope.addSelectMain = function(main){
+      $scope.selectedMains.push(main);
+      console.log("add main: ", $scope.selectedMains);
+    };
+    
+    $scope.removeSelectMain = function(main){
+      for (var i = 0; i < $scope.selectedMains.length; i++) {
+        if ($scope.selectedMains[i].invoice === main.invoice) {
+          $scope.selectedMains.splice(i, 1);
+          break;
+        }
+      }
+      console.log("remove main: ", $scope.selectedMains);
+      
+    };
+    
+    function createOrder(selectedMain, barcode){
+        ThailandPost.createOrder(selectedMain, barcode);
+    };
+    
+    $scope.retrieveMain = function(){
+      var result = Mains.retrieveMain(Authentication.user);
+      console.log("Result: ", result);
+    };
+    
+    
+    /************************** Dialog Zone ****************************/
     $scope.showConfirm = function (ev, selectedMains) {
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.confirm()
@@ -409,38 +443,24 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       });
     };
     
-    
-    function setDisbled(amount) {
-      $scope.disabled = false;
-      if (amount < 0) {
-        $scope.disabled = true;
-      }
+    $scope.showTopUpPromt = function(event) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('เติมเงิน')
+      .textContent('ระบุจำนวนเงินที่ต้องการเติม')
+      .placeholder('จำนวนเงิน')
+      .ariaLabel('')
+      .initialValue('')
+      .targetEvent(event)
+      .ok('ตกลง')
+      .cancel('ยกเลิก');
+
+      $mdDialog.show(confirm).then(function(result) {
+        $scope.status = 'You decided to name your dog ' + result + '.';
+      }, function() {
+        $scope.status = 'You didn\'t name your dog.';
+      });
     }
-    
-    $scope.addSelectMain = function(main){
-      $scope.selectedMains.push(main);
-      console.log("add main: ", $scope.selectedMains);
-    };
-    
-    $scope.removeSelectMain = function(main){
-      for (var i = 0; i < $scope.selectedMains.length; i++) {
-        if ($scope.selectedMains[i].invoice === main.invoice) {
-          $scope.selectedMains.splice(i, 1);
-          break;
-        }
-      }
-      console.log("remove main: ", $scope.selectedMains);
-      
-    };
-    
-    function createOrder(selectedMain, barcode){
-        ThailandPost.createOrder(selectedMain, barcode);
-    };
-    
-    $scope.retrieveMain = function(){
-      var result = Mains.retrieveMain(Authentication.user);
-      console.log("Result: ", result);
-    };
   }
 ]);
 
