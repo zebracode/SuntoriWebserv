@@ -403,6 +403,21 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       console.log("Result: ", result);
     };
     
+    $scope.setBalanceAmt = function(){
+        $http.get("/api/balance?userId=" + $scope.authentication.user._id)
+            .then(function(res) {
+               if (res.data !== null) {
+                   $scope.balanceAmount = res.data.balanceAmt;
+            }
+        });
+    };
+    
+    $scope.updateBalance = function (balanceAmt) {
+        var data = { userId: $scope.authentication.user._id, balanceAmt: balanceAmt};
+        $scope.balanceAmount = balanceAmt;
+        $http.put('/api/balance',data).then(function(){
+        });      
+    };
     
     /************************** Dialog Zone ****************************/
     $scope.showConfirm = function (ev, selectedMains) {
@@ -418,7 +433,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       $mdDialog.show(confirm).then(function () {
         $scope.status = 'Confirm';
         
-        // Create order api of thailand post
+        //update balance amount
+        $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
+        
         selectedMains.sort();
         for(var i=0; i<selectedMains.length; i++){
             setBarcode(selectedMains[i], i);
