@@ -142,16 +142,16 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="user in pagedItems | filter:searchText"  class="list-group-item">
+                  <tr class="even pointer" data-ng-repeat="user in pagedItems | filter:searchText"  class="list-group-item"  ng-init="setBalanceAmt($index);">
                     <td>{{ $index + 1 }}</td>
                     <td ng-bind="user.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
                     <td class="list-group-item-heading" ng-bind="user.email"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
-                    <td class="list-group-item-heading" ng-bind="user.idNumber"></td>
-                    <td class="list-group-item-heading" ng-bind="user.idNumber"></td>
+                    <td class="list-group-item-heading" ng-bind=""></td>
+                    <td class="list-group-item-heading" ng-bind="user.balanceAmt"></td>
                     <td>
-                      <a class="btn btn-info btn-xs" ng-click="showTopUpPromt($event)"><i class="fa fa-pencil"></i> เติมเงิน </a>
+                      <a class="btn btn-info btn-xs" ng-click="showTopUpPromt($event, user, $index)"><i class="fa fa-pencil"></i> เติมเงิน </a>
                     </td>
                   </tr>
                   </tbody>
