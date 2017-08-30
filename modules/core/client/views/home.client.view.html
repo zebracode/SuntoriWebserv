@@ -63,7 +63,7 @@
             </div>
           </ul>
 
-          <!--&lt;!&ndash; Summary &ndash;&gt;-->
+          <!-- Summary -->
           <!--<div class="col-md-12">-->
             <!--<div class="x_panel">-->
               <!--&lt;!&ndash;<div id="mainb" style="height:350px;"></div>&ndash;&gt;-->
@@ -71,7 +71,7 @@
                 <!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
                   <!--<div class="tile-stats">-->
                     <!--<div class="icon"><i class="fa fa-university"></i></div>-->
-                    <!--<div class="count">179</div>-->
+                    <!--<div class="count">{{balanceAmount}}</div>-->
                     <!--<h3>เงินคงเหลือ</h3>-->
                     <!--<p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>-->
                   <!--</div>-->
@@ -87,9 +87,9 @@
                 <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
                   <!--<div class="tile-stats">-->
                     <!--<div class="icon"><i class="fa fa-paper-plane"></i></div>-->
-                    <!--<div class="count">179</div>-->
-                    <!--<h3>กำลังจัดส่ง</h3>-->
-                    <!--<p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>-->
+                    <!--<div class="count" data-ng-show="authentication.user._id">{{mains.length}}</div>-->
+                    <!--<h3>จำนวนรายการ</h3>-->
+                    <!--<p>จำนวนรายการทั้งหมด</p>-->
                   <!--</div>-->
                 <!--</div>-->
                 <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
@@ -139,6 +139,11 @@
                 </tr>
                 </tbody>
               </table>
+
+              <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+              </div>
+
             </div>
             <div class="text-center form-group">
               <nav aria-label="Page navigation">

@@ -116,7 +116,12 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           price: '0'
         },
         {
-         name: 'น้ำหนัก 0 - 1 กก.',
+          name: 'น้ำหนักไม่เกิน 0.5 กก.',
+          value: '500',
+          price: '40'
+        },
+        {
+         name: 'น้ำหนัก 0.5 - 1 กก.',
           value: '500-1,000',
           price: '60'
         },

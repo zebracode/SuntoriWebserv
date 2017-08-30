@@ -98,8 +98,8 @@
               </tr>
               </tbody>
             </table>
-            <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
-              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
+            <div class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="recipients.create">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
             </div>
           </div>
         </div></div>

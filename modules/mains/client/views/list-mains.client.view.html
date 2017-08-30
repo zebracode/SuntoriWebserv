@@ -52,6 +52,7 @@
               </span>
             </div><!-- /input-group -->
           </div>
+
           <ul class="nav navbar-right panel_toolbox">
             <div class="text-center mtop20">
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
@@ -99,6 +100,10 @@
                 </tr>
                 </tbody>
               </table>
+
+              <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+              </div>
 
               <div class="x_content">
 
