@@ -1,5 +1,8 @@
 'use strict';
 
+var mongoose = require('mongoose')
+var Main = mongoose.model('Main')
+
 /**
  * Render the main application page
  */
@@ -39,4 +42,19 @@ exports.renderNotFound = function (req, res) {
       res.send('Path not found');
     }
   });
+};
+
+exports.printAwPost = function(req, res, next) {
+
+  Main.findById(req.query.mainId, function(err, main) {
+    if (err)
+      next(err);
+    else
+      console.log('main', main);
+      res.render('modules/core/server/views/awpost', {
+        title: 'AW Post Form',
+        main:main
+      });
+  });
+
 };

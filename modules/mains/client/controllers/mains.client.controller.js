@@ -462,22 +462,64 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     
     $scope.showTopUpPromt = function(event) {
     // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.prompt()
-      .title('เติมเงิน')
-      .textContent('ระบุจำนวนเงินที่ต้องการเติม')
-      .placeholder('จำนวนเงิน')
-      .ariaLabel('')
-      .initialValue('')
-      .targetEvent(event)
-      .ok('ตกลง')
-      .cancel('ยกเลิก');
+        $scope.setPaymentForm();
+        var confirm = $mdDialog.prompt()
+          .title('เติมเงิน')
+          .textContent('ระบุจำนวนเงินที่ต้องการเติม')
+          .placeholder('จำนวนเงิน')
+          .ariaLabel('')
+          .initialValue('')
+          .targetEvent(event)
+          .ok('ตกลง')
+          .cancel('ยกเลิก');
 
-      $mdDialog.show(confirm).then(function(result) {
-        $scope.status = 'You decided to name your dog ' + result + '.';
-      }, function() {
-        $scope.status = 'You didn\'t name your dog.';
-      });
-    }
+          $mdDialog.show(confirm).then(function(result) {
+            $scope.setPaymentForm(result);
+            $scope.showConfirmTopUp(event, result);
+            //$scope.payment();
+            $scope.status = 'You decided to name your dog ' + result + '.';
+          }, function() {
+            $scope.status = 'You didn\'t name your dog.';
+          });
+    };    
+    
+    $scope.showConfirmTopUp = function(event, amount) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+              .title('ยืนยันการเติมเงิน')
+              .textContent('ยอดเติมเงิน ' + amount)
+              .ariaLabel('Lucky day')
+              .targetEvent(event)
+              .ok('ตกลง')
+              .cancel('ยกเลิก');
+
+        $mdDialog.show(confirm).then(function() {
+            $scope.status = 'You decided to get rid of your debt.';
+        }, function() {
+            $scope.status = 'You decided to keep your debt.';
+        });
+    };
+    
+    $scope.setPaymentForm = function(amount){
+        // Set 2P2C request parameter
+        $http.get("/payment?amount=" + amount)
+        .then(function(response) {
+            $scope.version = response.data.version;
+            $scope.merchant_id = response.data.merchantId;
+            $scope.order_id = response.data.orderId;
+            $scope.amount = response.data.amount;
+            $scope.hash_value = response.data.hashValue;
+            console.log("version", $scope.version);
+            console.log("merchant_id", $scope.merchant_id);
+            console.log("order_id", $scope.order_id);
+            console.log("amount", $scope.amount);
+            console.log("hash_value", $scope.hash_value);
+        });
+    };
+    
+    $scope.payment = function(){
+        document.authForm.submit();        
+    };
   }
 ]);
 
