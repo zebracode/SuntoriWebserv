@@ -19,7 +19,13 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.find = function () {
             $scope.mains = Mains.query();
             console.log("mains", $scope.mains);
-        };    
+        }; 
+
+
+        $scope.printAwForm = function(main) {
+            console.log("Print AW Form");
+            //$http.get('/print/awpost');
+        }
      
 
         /**
@@ -104,4 +110,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         self.share        = share;
 
     }
+
+
 ]);

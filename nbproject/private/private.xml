@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/users/server/controllers/balance.server.controller.js</file>
-            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/users/server/controllers/users.server.controller.js</file>
-            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/users/client/filters/balance.client.filter.js</file>
-            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/users/client/controllers/admin/user-list.client.controller.js</file>
-            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/users/client/views/admin/user-list.client.view.html</file>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/config/env/development.js</file>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/config/env/production.js</file>
+            <file>file:/D:/SideProject/03_P_Gig/Job_02/SuntoriWebserv/modules/payment/server/controllers/payment.server.controller.js</file>
         </group>
     </open-files>
 </project-private>

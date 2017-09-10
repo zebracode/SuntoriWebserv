@@ -105,7 +105,9 @@ var MainSchema = new Schema({
   invoice: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        required: true, 
+        unique: true
     },
   price: {
         type: String,
