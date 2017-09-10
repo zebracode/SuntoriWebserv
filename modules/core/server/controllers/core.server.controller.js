@@ -1,7 +1,8 @@
 'use strict';
 
-var mongoose = require('mongoose')
-var Main = mongoose.model('Main')
+var mongoose = require('mongoose');
+var Main = mongoose.model('Main');
+
 
 /**
  * Render the main application page
@@ -50,7 +51,8 @@ exports.printAwPost = function(req, res, next) {
     if (err)
       next(err);
     else
-      console.log('main', main);
+      console.log('main', main);  
+
       res.render('modules/core/server/views/awpost', {
         title: 'AW Post Form',
         main:main
