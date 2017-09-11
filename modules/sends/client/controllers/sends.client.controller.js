@@ -15,6 +15,7 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
         tel: this.tel,
         address: this.address,
         country: this.country,
+        ampher: this.ampher,
         postcode: this.postcode,
         idNumber: this.idNumber
       });
@@ -28,6 +29,7 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
         $scope.tel = '';
         $scope.address = '';
         $scope.country = '';
+        $scope.ampher = '';
         $scope.postcode = '';
         $scope.idNumber = '';
       }, function (errorResponse) {

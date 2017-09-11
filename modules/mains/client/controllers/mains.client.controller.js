@@ -16,14 +16,15 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         s_name: this.s_name,
         s_tel: this.s_tel,
         s_address: this.s_address,
+        s_ampher: this.s_ampher,
         s_country: this.s_country,
         s_postcode: this.s_postcode,
         r_name: this.r_name,
         r_tel: this.r_tel,
         r_address: this.r_address,
+        r_ampher: this.r_ampher,
         r_country: this.r_country,
         r_postcode: this.r_postcode,
-        r_ampher: this.r_ampher,
         order: this.order,
         invoice: this.invoice,
         price: this.price,
@@ -43,12 +44,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 //        $scope.s_name = '';
 //        $scope.s_tel = '';
 //        $scope.s_address = '';
+//        $scope.s_ampher = '';
 //        $scope.s_country = '';
 //        $scope.s_postcode = '';
         $scope.r_name = '';
         $scope.r_tel = '';
         $scope.r_address = '';
         $scope.r_country = '';
+        $scope.r_ampher = '';
         $scope.r_postcode = '';
         $scope.order = '';
         $scope.invoice = '';
@@ -258,6 +261,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.s_name = $scope.selectedSender.name;
             $scope.s_tel = $scope.selectedSender.tel;
             $scope.s_address = $scope.selectedSender.address;
+            $scope.s_ampher = $scope.selectedSender.ampher;
             $scope.s_country = $scope.selectedSender.country;
             $scope.s_postcode = $scope.selectedSender.postcode;
             $scope.s_idNumber = $scope.selectedSender.idNumber;
@@ -277,9 +281,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.r_name = $scope.selectedRecipient.name;
             $scope.r_tel = $scope.selectedRecipient.tel;
             $scope.r_address = $scope.selectedRecipient.address;
+            $scope.r_ampher = $scope.selectedRecipient.ampher;
             $scope.r_country = $scope.selectedRecipient.country;
             $scope.r_postcode = $scope.selectedRecipient.postcode;
-            $scope.r_ampher = $scope.selectedRecipient.ampher;
         }
       };
       

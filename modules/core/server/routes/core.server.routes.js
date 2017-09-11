@@ -11,7 +11,8 @@ module.exports = function (app) {
   app.route('/:url(api|modules|lib)/*').get(core.renderNotFound);
 
   // Print AW Post Form
-  app.get('/print/awpost', core.printAwPost);
+  app.get('/print/formA5', core.printformA5);
+  app.get('/print/formA4', core.printformA4);
 
   // Define application route
   app.route('/*').get(core.renderIndex);

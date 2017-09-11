@@ -43,6 +43,7 @@ exports.update = function (req, res) {
   send.tel = req.body.tel;
   send.address = req.body.address;
   send.country = req.body.country;
+  send.ampher = req.body.ampher;
   send.postcode = req.body.postcode;
   send.idNumber = req.body.idNumber;
 

@@ -38,6 +38,12 @@ var SendSchema = new Schema({
       trim: true,
       required: 'Title cannot be blank'
     },
+  ampher: {
+        type: String,
+        default: '',
+        trim: true,
+        required: 'Title cannot be blank'
+      },
   postcode: {
       type: String,
       default: '',

@@ -84,14 +84,20 @@
                                     <input ng-model="address">
                                 </md-input-container>
 
-                                <md-input-container class="md-block" flex-gt-sm>
-                                    <label>จังหวัด</label>
-                                    <md-select ng-model="country">
-                                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                            {{state.abbrev}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
+                                <div layout-gt-sm="row">
+                                    <md-input-container class="md-block">
+                                        <label>อำเภอ</label>
+                                        <input ng-model="ampher">
+                                    </md-input-container>
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>จังหวัด</label>
+                                        <md-select ng-model="country">
+                                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                                {{state.abbrev}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
 
                                 <div layout-gt-sm="row">
                                     <md-input-container class="md-block" flex-gt-sm>

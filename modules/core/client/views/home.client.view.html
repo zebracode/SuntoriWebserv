@@ -134,7 +134,8 @@
                   <td class="list-group-item-heading" ng-bind="main.price"></td>
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
-                    <a class="btn btn-warning btn-xs" href="/print/awpost?mainId={{main._id}}" target="_self"><i class="fa fa-print"></i> ปริ้นใบติดกล่อง </a>
+                    <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>
+                    <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
                   </td>
                 </tr>
                 </tbody>
@@ -236,8 +237,8 @@
                   <div class="intro-para text-center quote">
                     <p class="big-text">รับถึงที่ ...  ส่งถึงมือ...</p>
                     <p class="small-text">ทดลองใช้ระบบ Suntori Express Web Service บันทึกข้อมูลลูกค้าของคุณ กรอกรายละเอียดที่อยู่จัดส่ง ปริ้นใบแปะหน้ากล่อง ส่งไปรษณีย์ไทยไกล้บ้านกว่า 113 สาขา ได้ทันที่ ประหยัดเวลาไม่ต้องต่อคิว</p>
-                    <a href="http://localhost:3000/authentication/signup" class="btn get-quote">สมัครสมาชิก</a>
-                    <a href="http://localhost:3000/authentication/signin" class="btn get-quote">เข้าสู่ระบบ</a>
+                    <a data-ui-sref="authentication.signup" class="btn get-quote">สมัครสมาชิก</a>
+                    <a data-ui-sref="authentication.signin" class="btn get-quote">เข้าสู่ระบบ</a>
                   </div> <br />
                 </div>
               </div>

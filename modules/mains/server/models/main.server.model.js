@@ -44,6 +44,12 @@ var MainSchema = new Schema({
     trim: true,
     required: 'กรุณากรอดที่อยู่ ผู้ส่ง'
   },
+  s_ampher: {
+        type: String,
+        default: '',
+        trim: true,
+        required: 'กรุณากรอกจังหมัด ผู้ส่ง'
+      },
   s_country: {
       type: String,
       default: '',

@@ -45,7 +45,7 @@ exports.renderNotFound = function (req, res) {
   });
 };
 
-exports.printAwPost = function(req, res, next) {
+exports.printformA5 = function(req, res, next) {
 
   Main.findById(req.query.mainId, function(err, main) {
     if (err)
@@ -53,8 +53,24 @@ exports.printAwPost = function(req, res, next) {
     else
       console.log('main', main);  
 
-      res.render('modules/core/server/views/awpost', {
-        title: 'AW Post Form',
+      res.render('modules/core/server/views/formA5', {
+        title: 'FormA5',
+        main:main
+      });
+  });
+
+};
+
+exports.printformA4 = function(req, res, next) {
+
+  Main.findById(req.query.mainId, function(err, main) {
+    if (err)
+      next(err);
+    else
+      console.log('main', main);
+
+      res.render('modules/core/server/views/formA4', {
+        title: 'formA4',
         main:main
       });
   });

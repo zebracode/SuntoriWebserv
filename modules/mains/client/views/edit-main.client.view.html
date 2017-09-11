@@ -1,4 +1,4 @@
- <div flex layout="row" data-ng-controller="MainsController" data-ng-init="findOne()">
+ <div flex layout="row" data-ng-controller="MainsController as ul" data-ng-init="findOne()">
    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
                class="md-whiteframe-z2" data-ng-show="authentication.user">
      <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
@@ -39,158 +39,163 @@
        </div>
      </md-card>
    </md-sidenav>
+
    <md-content flex id="content" data-ng-show="authentication.user">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>การใช้บริการ</h2>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
+     <div class="row">
+       <div class="col-md-12">
+         <div class="x_panel">
+           <div class="x_title">
+             <h2>การใช้บริการ</h2>
+             <div class="clearfix"></div>
+           </div>
+           <div class="x_content">
 
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <form class="form-horizontal form-label-left input_mask" data-ng-submit="update()" novalidate>
-                  <div class="x_title">
-                    <h2>รายละเอียดผู้ส่ง <small>กรุณากรอกรายละเอียดผู้รับให้ครบถ้วน</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <!--<button type="button" class="btn btn-info">เลือกผู้ส่ง</button>-->
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ-นามสกุล<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="s_name" type="text" data-ng-model="main.s_name" id="s_name" class="form-control" placeholder="กรอกชื่อ-นามสกุล">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">เบอร์โทร<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="s_tel" data-ng-model="main.s_tel" id="s_tel" class="form-control" placeholder="กรอกเบอร์โทรศัพท์">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">ที่อยู่<span class="required">*</span></label>
-                      <div class="col-md-10 col-sm-10 col-xs-12">
-                        <textarea name="s_address" type="text" data-ng-model="main.s_address" id="s_address" class="form-control" rows="1" placeholder="กรอกที่อยู่ ผู้ส่ง"></textarea>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">บัตรประชาชน<span class="required">*</span></label>
-                      <div class="col-md-10 col-sm-10 col-xs-12">
-                        <textarea name="s_idNumber" type="text" data-ng-model="main.s_idNumber" id="s_idNumber" class="form-control" rows="1" placeholder="กรอกเลขบัตรประชาชน"></textarea>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">จังหวัด<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="s_country" type="text" data-ng-model="main.s_country" id="s_country" class="form-control" placeholder="กรอกจังหวัด ผู้ส่ง">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">รหัสไปรษณีย์<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="s_postcode" type="text" data-ng-model="main.s_postcode" id="s_postcode" class="form-control" placeholder="กรอกรหัสไปรษณีย์ ผู้ส่ง">
-                      </div>
-                    </div>
-                    <br />
-                  </div>
-                  <div class="x_title">
-                    <h2>รายละเอียดผู้รับ <small>กรุณากรอกรายละเอียดผู้ส่งให้ครบถ้วน</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <!--<button type="button" class="btn btn-info">เลือกผู้รับ</button>-->
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ-นามสกุล<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="r_name" type="text" data-ng-model="main.r_name" id="r_name" class="form-control" placeholder="กรอกชื่อ-นามสกุล">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">เบอร์โทร<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="r_tel" type="text" data-ng-model="main.r_tel" id="r_tel" class="form-control" placeholder="กรอกเบอร์โทรศัพท์">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">ที่อยู่<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="r_address" type="text" data-ng-model="main.r_address" id="r_address" class="form-control" placeholder="กรอกที่อยู่ ผู้รับ">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">อำเภอ/เขต<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="r_ampher" type="text" data-ng-model="main.r_ampher" id="r_ampher" class="form-control" placeholder="กรอกอำเภอ/เขต ผู้รับ">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">จังหวัด<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="r_country" type="text" data-ng-model="main.r_country" id="r_country" class="form-control" placeholder="กรอกจังหวัด ผู้รับ">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">รหัสไปรษณีย์<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="r_postcode" type="text" data-ng-model="main.r_postcode" id="r_postcode" class="form-control" placeholder="กรอกรหัสไปรษณีย์ ผู้รับ">
-                      </div>
-                    </div>
-                    <br />
-                  </div>
-                  <div class="x_title">
-                    <h2>รายละเอียดสินค้า <small>กรุณากรอกรายละเอียดสินค้าให้ครบถ้วน</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <!--<button type="button" class="btn btn-info">เลือกผู้รับ</button>-->
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">Order No.<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="order" type="text" data-ng-model="main.order" id="order" class="form-control" placeholder="เลขที่ใบสั่งซื้อ">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">Invoice No.<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="invoice" type="text" data-ng-model="main.invoice" id="invoice" class="form-control" placeholder="เลขที่ใบแจ้งหนี้">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">ราคาสินค้า<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="price" type="text" data-ng-model="main.price" id="price" class="form-control" placeholder="จำนวนเงินที่เรียกเก็บ">
-                      </div>
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">น้ำหนักสินค้า<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                      <input name="option" type="text" data-ng-model="{{ selectedOption.value }}" id="weight" class="form-control" placeholder="น้ำหนักสินค้า {{ selectedOption.value }} (กรัม)" disabled>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-md-2 col-sm-2 col-xs-12">ส่งพัสดุ<span class="required">*</span></label>
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <input name="detail" type="text" data-ng-model="main.detail" id="detail" class="form-control" placeholder="รายละเอียดสิ่งของ">
-                      </div>
-                    </div>
-                    <div data-ng-show="error" class="text-danger">
-                      <strong data-ng-bind="error"></strong>
-                    </div>
-                    <br />
-                  </div>
-                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <input class="btn btn-success" type="submit" value="Update">
-                    <button class="btn btn-warning" type="button" data-ui-sref="mains.list">Cancel</button>
-                  </div>
-                  <div data-ng-show="error" class="text-danger">
-                    <strong data-ng-bind="error"></strong>
-                  </div>
-                </form>
-              </div>
-            </div>
+             <div class="col-md-12 col-sm-12 col-xs-12">
+               <div class="x_panel">
+                 <form class="form-horizontal form-label-left input_mask" data-ng-submit="update()" novalidate>
+                   <div class="x_title">
+                     <h2>รายละเอียดผู้ส่ง <small>กรุณากรอกรายละเอียดผู้รับให้ครบถ้วน</small></h2>
+                     <ul class="nav navbar-right panel_toolbox">
+                       <!--<button type="button" class="btn btn-info">เลือกผู้ส่ง</button>-->
+                     </ul>
+                     <div class="clearfix"></div>
+                   </div>
+                   <div class="x_content">
+                     <br />
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ-นามสกุล<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="s_name" type="text" data-ng-model="main.s_name" id="s_name" class="form-control" placeholder="กรอกชื่อ-นามสกุล">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">เบอร์โทร<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="s_tel" data-ng-model="main.s_tel" id="s_tel" class="form-control" placeholder="กรอกเบอร์โทรศัพท์">
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ที่อยู่<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="s_address" type="text" data-ng-model="main.s_address" id="s_address" class="form-control" placeholder="กรอกที่อยู่ ผู้รับ">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">อำเภอ/เขต<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="s_ampher" type="text" data-ng-model="main.s_ampher" id="s_ampher" class="form-control" placeholder="กรอกอำเภอ/เขต ผู้รับ">
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">จังหวัด<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="s_country" type="text" data-ng-model="main.s_country" id="s_country" class="form-control" placeholder="กรอกจังหวัด ผู้ส่ง">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">รหัสไปรษณีย์<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="s_postcode" type="text" data-ng-model="main.s_postcode" id="s_postcode" class="form-control" placeholder="กรอกรหัสไปรษณีย์ ผู้ส่ง">
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">บัตรประชาชน<span class="required">*</span></label>
+                       <div class="col-md-10 col-sm-10 col-xs-12">
+                         <textarea name="s_idNumber" type="text" data-ng-model="main.s_idNumber" id="s_idNumber" class="form-control" rows="1" placeholder="กรอกเลขบัตรประชาชน"></textarea>
+                       </div>
+                     </div>
+                     <br />
+                   </div>
+                   <div class="x_title">
+                     <h2>รายละเอียดผู้รับ <small>กรุณากรอกรายละเอียดผู้ส่งให้ครบถ้วน</small></h2>
+                     <ul class="nav navbar-right panel_toolbox">
+                       <!--<button type="button" class="btn btn-info">เลือกผู้รับ</button>-->
+                     </ul>
+                     <div class="clearfix"></div>
+                   </div>
+                   <div class="x_content">
+                     <br />
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ-นามสกุล<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="r_name" type="text" data-ng-model="main.r_name" id="r_name" class="form-control" placeholder="กรอกชื่อ-นามสกุล">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">เบอร์โทร<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="r_tel" type="text" data-ng-model="main.r_tel" id="r_tel" class="form-control" placeholder="กรอกเบอร์โทรศัพท์">
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ที่อยู่<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="r_address" type="text" data-ng-model="main.r_address" id="r_address" class="form-control" placeholder="กรอกที่อยู่ ผู้รับ">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">อำเภอ/เขต<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="r_ampher" type="text" data-ng-model="main.r_ampher" id="r_ampher" class="form-control" placeholder="กรอกอำเภอ/เขต ผู้รับ">
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">จังหวัด<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="r_country" type="text" data-ng-model="main.r_country" id="r_country" class="form-control" placeholder="กรอกจังหวัด ผู้รับ">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">รหัสไปรษณีย์<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="r_postcode" type="text" data-ng-model="main.r_postcode" id="r_postcode" class="form-control" placeholder="กรอกรหัสไปรษณีย์ ผู้รับ">
+                       </div>
+                     </div>
+                     <br />
+                   </div>
+                   <div class="x_title">
+                     <h2>รายละเอียดสินค้า <small>กรุณากรอกรายละเอียดสินค้าให้ครบถ้วน</small></h2>
+                     <ul class="nav navbar-right panel_toolbox">
+                       <!--<button type="button" class="btn btn-info">เลือกผู้รับ</button>-->
+                     </ul>
+                     <div class="clearfix"></div>
+                   </div>
+                   <div class="x_content">
+                     <br />
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">Order No.<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="order" type="text" data-ng-model="main.order" id="order" class="form-control" placeholder="เลขที่ใบสั่งซื้อ">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">Invoice No.<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="invoice" type="text" data-ng-model="main.invoice" id="invoice" class="form-control" placeholder="เลขที่ใบแจ้งหนี้">
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ราคาสินค้า<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="price" type="text" data-ng-model="main.price" id="price" class="form-control" placeholder="จำนวนเงินที่เรียกเก็บ">
+                       </div>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">น้ำหนักสินค้า<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="option" type="text" data-ng-model="{{ selectedOption.value }}" id="weight" class="form-control" placeholder="น้ำหนักสินค้า {{ selectedOption.value }} (กรัม)" disabled>
+                       </div>
+                     </div>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ส่งพัสดุ<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="detail" type="text" data-ng-model="main.detail" id="detail" class="form-control" placeholder="รายละเอียดสิ่งของ">
+                       </div>
+                     </div>
+                     <div data-ng-show="error" class="text-danger">
+                       <strong data-ng-bind="error"></strong>
+                     </div>
+                     <br />
+                   </div>
+                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
+                     <button class="btn btn-primary" type="reset">Reset</button>
+                     <input class="btn btn-success" type="submit" value="Update">
+                     <button class="btn btn-warning" type="button" data-ui-sref="mains.list">Cancel</button>
+                   </div>
+                   <div data-ng-show="error" class="text-danger">
+                     <strong data-ng-bind="error"></strong>
+                   </div>
+                 </form>
+               </div>
+             </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </md-content>
+           </div>
+         </div>
+       </div>
+     </div>
+   </md-content>
  </div>

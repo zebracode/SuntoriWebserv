@@ -22,10 +22,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         }; 
 
 
-        $scope.printAwForm = function(main) {
+        $scope.printformA5 = function(main) {
             console.log("Print AW Form");
             //$http.get('/print/awpost');
         }
+        $scope.printformA4 = function(main) {
+                    console.log("Print AW Form");
+                    //$http.get('/print/awpost');
+                }
      
 
         /**
