@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var DocNoSchema = new Schema({
 	prefix : {type: String, unique: true},
-	lastNumber: String
+	nextNumber: String
 });
 
 mongoose.model('DocNo', DocNoSchema);

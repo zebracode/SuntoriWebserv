@@ -1,29 +1,52 @@
 var CryptoJS = require("crypto-js");
 var DocNo = require('mongoose').model('DocNo');
 
-exports.render = function(req, res) {
+exports.request = function(req, res, next) {
     var version = "6.9";
     var merchantId = "764764000000648";
-    var orderId = "ORD00000000000000001";
-    var amount = "000000002500";
-    
-    var stringToHash  = version + merchantId + orderId + amount;
+    var paymentDescription = req.body.paymentDescription;
+    var amount = req.body.amount;
+    var defaultLang = 'th';
     var secretKey  = 'YyzifJ5hy8qj';
+    var stringToHash  = "";
+
+    // Set Order ID
+    var orderId = "";
+    var invoiceNo = "";
+    DocNo.findOne({prefix: "ORD"}, function(err, docNo){
+        if (err) {
+            next(err);
+        } else {
+            orderId = docNo.prefix + docNo.nextNumber;
+            
+            // Set Invoice Number
+            DocNo.findOne({prefix: "INV"}, function(err, docNo){
+                if (err) {
+                    next(err);
+                } else {
+                    invoiceNo = docNo.prefix + docNo.nextNumber;
+                    stringToHash = version + merchantId + paymentDescription + orderId + invoiceNo + amount + defaultLang;
+                    
+                    // Encrypt
+                    var hashValue = CryptoJS.HmacSHA1(stringToHash, secretKey).toString(CryptoJS.enc.Hex);
+
+                    var result = {
+                        version: version,
+                        merchantId: merchantId,
+                        paymentDescription: paymentDescription,
+                        orderId: orderId,
+                        invoiceNo: invoiceNo,
+                        amount: amount,
+                        defaultLang: defaultLang,
+                        hashValue: hashValue
+                    };
+                    
+                    res.json(result);
+                }
+            });
+        }
+    });
     
-    // Encrypt
-    var hashValue = CryptoJS.HmacSHA1(stringToHash, secretKey).toString(CryptoJS.enc.Hex);
-    
-    console.log(hashValue);
-    
-    var result = {
-        version: version,
-        merchantId: merchantId,
-        orderId: orderId,
-        amount: amount,
-        hashValue: hashValue
-    };
-    
-    res.json(result);
 };
 
 exports.createDocNo = function(req, res, next) {

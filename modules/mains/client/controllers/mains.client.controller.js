@@ -462,7 +462,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     
     $scope.showTopUpPromt = function(event) {
     // Appending dialog to document.body to cover sidenav in docs app
-        $scope.setPaymentForm();
         var confirm = $mdDialog.prompt()
           .title('เติมเงิน')
           .textContent('ระบุจำนวนเงินที่ต้องการเติม')
@@ -494,32 +493,54 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
               .cancel('ยกเลิก');
 
         $mdDialog.show(confirm).then(function() {
-            $scope.status = 'You decided to get rid of your debt.';
-        }, function() {
+          $scope.payment();
+          }, function() {
             $scope.status = 'You decided to keep your debt.';
         });
     };
     
+    // Set 2P2C request parameter
     $scope.setPaymentForm = function(amount){
-        // Set 2P2C request parameter
-        $http.get("/payment?amount=" + amount)
+        var formatedAmount = formatAmount(amount, 10);
+        console.log("$scope.authentication", $scope.authentication);
+        var topUpUser = $scope.authentication.user.firstName + ' ' + $scope.authentication.user.lastName;
+        var data = {
+          amount: formatedAmount,
+          paymentDescription: 'Top-up by ' + topUpUser
+        };
+
+        $http.post("/payment", data)
         .then(function(response) {
             $scope.version = response.data.version;
             $scope.merchant_id = response.data.merchantId;
+            $scope.payment_description = response.data.paymentDescription;
             $scope.order_id = response.data.orderId;
+            $scope.invoice_no = response.data.invoiceNo;
             $scope.amount = response.data.amount;
             $scope.hash_value = response.data.hashValue;
+            $scope.default_lang = response.data.defaultLang;
             console.log("version", $scope.version);
             console.log("merchant_id", $scope.merchant_id);
             console.log("order_id", $scope.order_id);
             console.log("amount", $scope.amount);
             console.log("hash_value", $scope.hash_value);
         });
+
+        function formatAmount(amount, length) {
+          var str = '' + amount;
+          while (str.length < length) {
+            str = '0' + str;
+          }
+
+          return str + '00';
+        }
     };
     
     $scope.payment = function(){
         document.authForm.submit();        
     };
+
+
   }
 ]);
 
