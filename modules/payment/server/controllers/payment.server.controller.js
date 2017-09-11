@@ -7,6 +7,8 @@ exports.request = function(req, res, next) {
     var paymentDescription = req.body.paymentDescription;
     var amount = req.body.amount;
     var defaultLang = 'th';
+    var resultUrl1 = 'http://localhost:3000/mains';
+    var resultUrl2 = 'http://localhost:3000/mains';
     var secretKey  = 'YyzifJ5hy8qj';
     var stringToHash  = "";
 
@@ -22,10 +24,10 @@ exports.request = function(req, res, next) {
             // Set Invoice Number
             DocNo.findOne({prefix: "INV"}, function(err, docNo){
                 if (err) {
-                    next(err);
+                    return next(err);
                 } else {
                     invoiceNo = docNo.prefix + docNo.nextNumber;
-                    stringToHash = version + merchantId + paymentDescription + orderId + invoiceNo + amount + defaultLang;
+                    stringToHash = version + merchantId + paymentDescription + orderId + invoiceNo + amount + resultUrl2 + resultUrl2 +defaultLang;
                     
                     // Encrypt
                     var hashValue = CryptoJS.HmacSHA1(stringToHash, secretKey).toString(CryptoJS.enc.Hex);
@@ -37,6 +39,8 @@ exports.request = function(req, res, next) {
                         orderId: orderId,
                         invoiceNo: invoiceNo,
                         amount: amount,
+                        resultUrl1: resultUrl1,
+                        resultUrl2: resultUrl2,
                         defaultLang: defaultLang,
                         hashValue: hashValue
                     };
@@ -71,7 +75,7 @@ exports.docNoByPrefix = function(req, res, next, prefix) {
         prefix: prefix
     },function(err, docNo){
         if (err) {
-            next(err);
+            return next(err);
         } else {
             req.docNo = docNo;
             next();
@@ -87,7 +91,7 @@ exports.updateDocNo = function(req, res, next) {
     DocNo.findOneAndUpdate({prefix: req.docNo.prefix}, req.body,
         function(err, docNo) {
             if (err) {
-                next(err);
+                return next(err);
             } else {
                 res.json(docNo);
             }

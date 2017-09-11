@@ -517,8 +517,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.order_id = response.data.orderId;
             $scope.invoice_no = response.data.invoiceNo;
             $scope.amount = response.data.amount;
-            $scope.hash_value = response.data.hashValue;
+            $scope.result_url_1 = response.data.resultUrl1;
+            $scope.result_url_2 = response.data.resultUrl2;
             $scope.default_lang = response.data.defaultLang;
+            $scope.hash_value = response.data.hashValue;
             console.log("version", $scope.version);
             console.log("merchant_id", $scope.merchant_id);
             console.log("order_id", $scope.order_id);

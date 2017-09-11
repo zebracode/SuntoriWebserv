@@ -14,7 +14,7 @@ module.exports = function (app) {
   app.get('/print/awpost', core.printAwPost);
 
   // Define application route
-  app.route('/*').get(core.renderIndex);
-
-
+  app.route('/*')
+  .get(core.renderIndex)
+  .post(core.renderIndex);
 };
