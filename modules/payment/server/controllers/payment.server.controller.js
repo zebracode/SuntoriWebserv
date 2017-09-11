@@ -43,6 +43,31 @@ exports.listDocNo = function(req, res, next) {
     });
 };
 
+exports.docNoByPrefix = function(req, res, next, prefix) {
+    DocNo.findOne({
+        prefix: prefix
+    },function(err, docNo){
+        if (err) {
+            next(err);
+        } else {
+            req.docNo = docNo;
+            next();
+        }
+    });
+};
+
+exports.readDocNo = function(req, res) {
+    res.json(req.docNo);
+};
+
 exports.updateDocNo = function(req, res, next) {
-    
+    DocNo.findOneAndUpdate({prefix: req.docNo.prefix}, req.body,
+        function(err, docNo) {
+            if (err) {
+                next(err);
+            } else {
+                res.json(docNo);
+            }
+        }
+    );
 };
