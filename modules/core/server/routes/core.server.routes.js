@@ -15,7 +15,7 @@ module.exports = function (app) {
   app.get('/print/formA4', core.printformA4);
 
   // Define application route
-  app.route('/*').get(core.renderIndex);
-
-
+  app.route('/*')
+  .get(core.renderIndex)
+  .post(core.renderIndex);
 };
