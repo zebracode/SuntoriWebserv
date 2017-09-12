@@ -114,7 +114,7 @@ exports.recipientByID = function (req, res, next, id) {
 };
 
 exports.findByName = function(req, res, next) {
-    Recipient.find({name: {'$regex': '.*' + req.query.searchText + '.*'}}, function(err, recipients){
+    Recipient.find({name: {'$regex': '.*' + req.query.searchText + '.*'}, user: req.query.userId}, function(err, recipients){
         if (err) {
             return next(err);
         } else {

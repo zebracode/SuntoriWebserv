@@ -9,7 +9,7 @@ var DocNo = require('mongoose').model('DocNo');
  * Render the main application page
  */
 exports.renderIndex = function (req, res, next) {
-  if (typeof req.body.amount !== 'undefined') {
+  if (typeof req.body.amount !== 'undefined' && req.body.payment_status === '000') {
     var amount = parseInt(req.body.amount.substring(0, req.body.amount.length - 2));
 
     //Update Order ID
@@ -22,8 +22,6 @@ exports.renderIndex = function (req, res, next) {
           function(err, docNo) {
               if (err) {
                   return next(err);
-              } else {
-                  console.log(docNo);
               }
           }
         );
@@ -40,8 +38,6 @@ exports.renderIndex = function (req, res, next) {
           function(err, docNo) {
               if (err) {
                   return next(err);
-              } else {
-                  console.log(docNo);
               }
           }
         );
@@ -62,17 +58,28 @@ exports.renderIndex = function (req, res, next) {
       if(err) {
         return next(err);
       } else {
-        var oldBalance = balance.balanceAmt;
-        var newBalance = amount + parseInt(balance.balanceAmt) + '';
-        Balance.findOneAndUpdate({userId: req.user._id}, {balanceAmt: newBalance},
-          function(err, balance){
-              if(err) {
-                  return next(err);
+        if (balance === null) {
+          var bl = new Balance({userId: req.user._id, balanceAmt: amount});
+          bl.save(function(err){
+              if (err) {
+                return next(err);
               } else {
-                  res.redirect('/mains');
+                res.redirect('/mains');
               }
-          }
-    );
+          });
+        } else {
+          var oldBalance = balance.balanceAmt;
+          var newBalance = amount + parseInt(oldBalance) + '';
+          Balance.findOneAndUpdate({userId: req.user._id}, {balanceAmt: newBalance},
+            function(err, balance){
+                if(err) {
+                    return next(err);
+                } else {
+                    res.redirect('/mains');
+                }
+            }
+          );
+        }
       }
     });
   } else {

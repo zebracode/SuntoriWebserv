@@ -116,7 +116,7 @@ exports.sendByID = function (req, res, next, id) {
 
 
 exports.findByName = function(req, res, next) {    
-    Send.find({name: { "$regex": req.query.searchText, "$options": "i" }}, function(err, sends){
+    Send.find({name: { "$regex": req.query.searchText, "$options": "i" }, user: req.query.userId}, function(err, sends){
         if (err) {
             return next(err);
         } else {

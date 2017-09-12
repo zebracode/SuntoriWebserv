@@ -250,7 +250,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       
       $scope.getSenderName = function(searchText) {
           return $http
-            .get('/api/send/findByName?searchText=' + searchText)
+            .get('/api/send/findByName?searchText=' + searchText + '&userId=' + $scope.authentication.user._id)
             .then(function(response) {
               return response.data;
             });
@@ -270,7 +270,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       
       $scope.getRecipients = function(search) {
           return $http
-            .get('/api/recipient/findByName?searchText=' + search)
+            .get('/api/recipient/findByName?searchText=' + search + '&userId=' + $scope.authentication.user._id)
             .then(function(response) {
               return response.data;
             });
@@ -410,9 +410,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.setBalanceAmt = function(){
         $http.get("/api/balance?userId=" + $scope.authentication.user._id)
             .then(function(res) {
-               if (res.data !== null) {
-                   $scope.balanceAmount = res.data.balanceAmt;
-            }
+              if (res.data !== null) {
+                $scope.balanceAmount = res.data.balanceAmt;
+              } else {
+                $scope.balanceAmount = '0';
+              }
         });
     };
     
