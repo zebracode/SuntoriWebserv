@@ -9,7 +9,7 @@ var DocNo = require('mongoose').model('DocNo');
  * Render the main application page
  */
 exports.renderIndex = function (req, res, next) {
-  if (typeof req.body.amount !== 'undefined') {
+  if (typeof req.body.amount !== 'undefined' && req.body.payment_status === '000') {
     var amount = parseInt(req.body.amount.substring(0, req.body.amount.length - 2));
 
     //Update Order ID
