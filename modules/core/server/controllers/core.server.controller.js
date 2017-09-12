@@ -62,17 +62,28 @@ exports.renderIndex = function (req, res, next) {
       if(err) {
         return next(err);
       } else {
-        var oldBalance = balance.balanceAmt;
-        var newBalance = amount + parseInt(balance.balanceAmt) + '';
-        Balance.findOneAndUpdate({userId: req.user._id}, {balanceAmt: newBalance},
-          function(err, balance){
-              if(err) {
+        if (balance === null) {
+          var bl = new Balance({userId: req.user._id, balanceAmt: amount});
+          bl.save(function(err){
+              if (err) {
                   return next(err);
               } else {
-                  res.redirect('/mains');
+                  console.log(bl);
               }
-          }
-    );
+          });
+        } else {
+          var oldBalance = balance.balanceAmt;
+          var newBalance = amount + parseInt(oldBalance) + '';
+          Balance.findOneAndUpdate({userId: req.user._id}, {balanceAmt: newBalance},
+            function(err, balance){
+                if(err) {
+                    return next(err);
+                } else {
+                    res.redirect('/mains');
+                }
+            }
+          );
+        }
       }
     });
   } else {

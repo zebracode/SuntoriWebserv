@@ -410,9 +410,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.setBalanceAmt = function(){
         $http.get("/api/balance?userId=" + $scope.authentication.user._id)
             .then(function(res) {
-               if (res.data !== null) {
-                   $scope.balanceAmount = res.data.balanceAmt;
-            }
+              if (res.data !== null) {
+                $scope.balanceAmount = res.data.balanceAmt;
+              } else {
+                $scope.balanceAmount = '0';
+              }
         });
     };
     
