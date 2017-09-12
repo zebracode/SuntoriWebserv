@@ -53,10 +53,10 @@
 
             <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
               
-              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+              <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 
                 <md-autocomplete
-                  placeholder ='ชื่อ-นามสกุล'
+                  placeholder ='ค้นหาผู้ส่ง'
                   md-selected-item="selectedSender" 
                   md-search-text="searchText" 
                   md-items="item in getSenderName(searchText)" 
@@ -64,11 +64,11 @@
                   md-selected-item-change='setSenderData()'>
                   <span md-highlight-text="searchText">{{item.name}}</span>
                 </md-autocomplete>
-                
-                <input name="s_name" type="hidden">
-                
-<!--                <input name="s_name" type="text" data-ng-model="s_name" id="s_name" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="ชื่อ-นามสกุล">
-                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>-->
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input name="s_name" type="text" data-ng-model="s_name" id="s_name" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล">
+                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -120,10 +120,10 @@
 
             <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+              <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 
                 <md-autocomplete 
-                  placeholder ='ชื่อ-นามสกุล'
+                  placeholder ='ค้นหาผู้รับ'
                   md-selected-item="selectedRecipient" 
                   md-search-text="search" 
                   md-items="recipient in getRecipients(search)" 
@@ -131,10 +131,12 @@
                   md-selected-item-change='setRecipientData()'>
                   <span md-highlight-text="searchText">{{recipient.name}}</span>
                 </md-autocomplete>
-                
-                <input name="r_name" type="hidden">
-<!--                <input name="r_name" type="text" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="ชื่อ-นามสกุล">
-                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>-->
+
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input name="r_name" type="text" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ชื่อ-นามสกุล">
+                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
