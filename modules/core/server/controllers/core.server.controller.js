@@ -22,8 +22,6 @@ exports.renderIndex = function (req, res, next) {
           function(err, docNo) {
               if (err) {
                   return next(err);
-              } else {
-                  console.log(docNo);
               }
           }
         );
@@ -40,8 +38,6 @@ exports.renderIndex = function (req, res, next) {
           function(err, docNo) {
               if (err) {
                   return next(err);
-              } else {
-                  console.log(docNo);
               }
           }
         );
@@ -66,9 +62,9 @@ exports.renderIndex = function (req, res, next) {
           var bl = new Balance({userId: req.user._id, balanceAmt: amount});
           bl.save(function(err){
               if (err) {
-                  return next(err);
+                return next(err);
               } else {
-                  console.log(bl);
+                res.redirect('/mains');
               }
           });
         } else {
