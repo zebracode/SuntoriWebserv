@@ -115,8 +115,9 @@
                   <th class="column-title">Tracking No.</th>
                   <th class="column-title">ผู้รับ </th>
                   <th class="column-title">เบอร์โทร </th>
-                  <!--<th class="column-title">นน.(กรัม) </th>-->
-                  <th class="column-title">COD </th>
+                  <th class="column-title">นน.(คาดว่า) </th>
+                  <th class="column-title">นน.(ปณ) </th>
+                  <th class="column-title">ค่าส่ง </th>
                   <th class="column-title">สถานะจัดส่ง </th>
                   <th class="column-title">ชำระเงิน</th>
                   <th class="bulk-actions" colspan="7">
@@ -130,8 +131,9 @@
                   <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
-                  <!--<td class="list-group-item-heading" ng-bind="main.weight"></td>-->
-                  <td class="list-group-item-heading" ng-bind="main.price"></td>
+                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
+                  <td class="list-group-item-heading" ng-bind=""></td>
+                  <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
                     <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>

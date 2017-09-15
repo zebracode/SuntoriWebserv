@@ -141,10 +141,15 @@ var MainSchema = new Schema({
         trim: true
       },
   total: {
-          type: String,
-          default: '',
-          trim: true
-        },
+        type: String,
+        default: '',
+        trim: true
+      },
+  selectedOption: {
+        type: String,
+        default: '',
+        trim: true
+      },
   user: {
       type: Schema.ObjectId,
       ref: 'User'

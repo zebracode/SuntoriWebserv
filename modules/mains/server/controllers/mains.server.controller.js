@@ -56,6 +56,7 @@ exports.update = function (req, res) {
   main.invoice = req.body.invoice;
   main.price = req.body.price;
   main.weight = req.body.weight;
+//  main.selectedOption = req.body.selectedOption;
   main.detail = req.body.detail;
   main.barcode = req.body.barcode;
   main.status = req.body.status;

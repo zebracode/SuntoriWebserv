@@ -188,6 +188,7 @@
             <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
               
               <input type="hidden" ng-model="total" value="selectedOption.price">
+              <input type="hidden" ng-model="weight" value="selectedOption.value">
               
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="order" type="text" data-ng-model="order" id="order" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Order No">
@@ -210,7 +211,7 @@
               </div>
 
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                <select class="form-control has-feedback-left" ng-model="selectedOption"
+                <select class="form-control has-feedback-left" data-ng-model="selectedOption"
                         ng-options="option.name for option in options">
                 </select>
                 <span class="fa fa-truck form-control-feedback left" aria-hidden="true"></span>

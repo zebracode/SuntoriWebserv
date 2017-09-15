@@ -30,7 +30,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         order: this.order,
         invoice: this.invoice,
         price: this.price,
-        weight: this.weight,
+        weight: this.selectedOption.value,
         detail: this.detail,
         barcode: this.barcode,
         s_idNumber: this.s_idNumber,
@@ -61,7 +61,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.weight = '';
 //        $scope.detail = '';
         $scope.barcode = '';
-//        $scope.options = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -139,7 +138,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         {
           name: '- กล่อง เบอร์ AA',
           value: '500-1,000',
-          price: '100',
           price: '60'
         },
         {

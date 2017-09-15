@@ -70,9 +70,9 @@
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">ผู้รับ </th>
                   <th class="column-title">เบอร์โทร </th>
-                  <!--<th class="column-title">นน.(กรัม) </th>-->
-                  <!--<th class="column-title">ยอดเรียกเก็บ </th>-->
+                  <th class="column-title">นน.(คาดว่า) </th>
                   <th class="column-title">COD </th>
+                  <th class="column-title">ค่าส่ง </th>
                   <th class="column-title">สถานะจัดส่ง </th>
                   <th class="column-title">ชำระเงิน</th>
                   <th class="bulk-actions" colspan="7">
@@ -86,8 +86,9 @@
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
-                  <!--<td class="list-group-item-heading" ng-bind="main.weight"></td>-->
+                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <!--<td class="list-group-item-heading" ng-bind="main.price"></td>-->
+                  <td class="list-group-item-heading" ng-bind="main.price"></td>
                   <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td ng-init="disabled=true;">
                     <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
