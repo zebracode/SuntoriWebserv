@@ -49,9 +49,11 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
     $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
       // Clear upload buttons
       $scope.cancelUpload();
+      return $scope.recipient;
 
       // Show error message
       $scope.error = response.message;
+
     };
 
     // Change user profile picture
@@ -61,6 +63,7 @@ angular.module('users').controller('ChangeProfilePictureController', ['$scope', 
 
       // Start upload
       $scope.uploader.uploadAll();
+
     };
 
     // Cancel the upload process

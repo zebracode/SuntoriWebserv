@@ -46,6 +46,7 @@ exports.update = function (req, res) {
   send.ampher = req.body.ampher;
   send.postcode = req.body.postcode;
   send.idNumber = req.body.idNumber;
+  send.product = req.body.product;
 
   send.save(function (err) {
     if (err) {

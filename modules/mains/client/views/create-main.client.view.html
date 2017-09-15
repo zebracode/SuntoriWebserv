@@ -45,7 +45,7 @@
           <div class="x_title">
             <h2>รายละเอียดผู้ส่ง <small>กรอกรายละเอียดผู้ส่ง</small></h2>
             <ul class="nav navbar-right panel_toolbox">
-              <button type="submit" class="btn btn-success" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>
+              <!--<button type="submit" class="btn btn-success" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>-->
             </ul>
             <div class="clearfix"></div>
           </div>
@@ -67,7 +67,7 @@
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input name="s_name" type="text" data-ng-model="s_name" id="s_name" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล">
+                <input name="s_name" type="text" data-ng-model="s_name" id="s_name" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล" required>
                 <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
               </div>
 
@@ -86,16 +86,16 @@
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input name="s_country" type="text" data-ng-model="s_country" type="text" class="form-control" id="inputSuccess4" placeholder="จังหวัด" disabled>
+                <input name="s_country" type="text" data-ng-model="s_country" type="text" class="form-control" id="inputSuccess4" placeholder="จังหวัด">
                 <span class="fa fa-plane form-control-feedback right" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input name="s_postcode" type="text" data-ng-model="s_postcode" type="text" class="form-control has-feedback-left" id="inputSuccess6" placeholder="รหัสไปรษณีย์" disabled>
+                <input name="s_postcode" type="text" data-ng-model="s_postcode" type="text" class="form-control has-feedback-left" id="inputSuccess6" placeholder="รหัสไปรษณีย์">
                 <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input name="s_idNumber" type="text" data-ng-model="s_idNumber" type="text" class="form-control" id="inputSuccess4" placeholder="เลขบัตรประชาชน" disabled>
+                <input name="s_idNumber" type="text" data-ng-model="s_idNumber" type="text" class="form-control" id="inputSuccess4" placeholder="เลขบัตรประชาชน">
                 <span class="fa fa-plane form-control-feedback right" aria-hidden="true"></span>
               </div>
 
@@ -112,7 +112,7 @@
           <div class="x_title">
             <h2>รายละเอียดผู้รับ <small>กรอกรายละเอียดผู้รับ</small></h2>
             <ul class="nav navbar-right panel_toolbox">
-              <button type="submit" class="btn btn-success" data-ui-sref="recipients.create">เพิ่มรายชื่อผู้รับ</button>
+              <!--<button type="submit" class="btn btn-success" data-ui-sref="recipients.create">เพิ่มรายชื่อผู้รับ</button>-->
             </ul>
             <div class="clearfix"></div>
           </div>
@@ -121,12 +121,12 @@
             <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
 
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                
-                <md-autocomplete 
+
+                <md-autocomplete
                   placeholder ='ค้นหาผู้รับ'
-                  md-selected-item="selectedRecipient" 
-                  md-search-text="search" 
-                  md-items="recipient in getRecipients(search)" 
+                  md-selected-item="selectedRecipient"
+                  md-search-text="search"
+                  md-items="recipient in getRecipients(search)"
                   md-item-text="recipient.name"
                   md-selected-item-change='setRecipientData()'>
                   <span md-highlight-text="searchText">{{recipient.name}}</span>
@@ -135,9 +135,10 @@
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input name="r_name" type="text" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ชื่อ-นามสกุล">
+                <input name="r_name" type="text" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ชื่อ-นามสกุล" required>
                 <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
               </div>
+
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="r_tel" type="r_tel" data-ng-model="r_tel" id="r_tel" type="text" class="form-control" id="inputSuccess3" placeholder="เบอร์โทร">
@@ -155,12 +156,12 @@
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-              <input name="r_country" type="text" data-ng-model="r_country" id="r_country" type="text" class="form-control" id="inputSuccess4" placeholder="จังหวัด" disabled>
+              <input name="r_country" type="text" data-ng-model="r_country" id="r_country" type="text" class="form-control" id="inputSuccess4" placeholder="จังหวัด">
               <span class="fa fa-globe form-control-feedback right" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <input name="r_postcode" type="text" data-ng-model="r_postcode" id="r_postcode" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="รหัสไปรษณีย์" disabled>
+                <input name="r_postcode" type="text" data-ng-model="r_postcode" id="r_postcode" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="รหัสไปรษณีย์">
                 <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
               </div>
 
@@ -208,20 +209,17 @@
                 <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
               </div>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+              <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 <select class="form-control has-feedback-left" ng-model="selectedOption"
                         ng-options="option.name for option in options">
                 </select>
                 <span class="fa fa-truck form-control-feedback left" aria-hidden="true"></span>
               </div>
 
-              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                <button class="btn btn-warning" type="text">น้ำหนักประมาณ {{ selectedOption.value }} กรัม</button>
-              </div>
-
               <div class="form-group">
-                <div class="col-md-2 col-sm-9 col-xs-12 col-md-offset-10">
-                  <button class="btn btn-primary" type="reset" ng-click="reset()">รีเซ็ต</button>
+                <div class="col-md-4 col-sm-9 col-xs-12 col-md-offset-0">
+                  <button class="btn btn-primary" type="text">น้ำหนักประมาณ {{ selectedOption.value }} กรัม</button>
+                  <!--<button class="btn btn-primary" type="reset" ng-click="reset()">รีเซ็ต</button>-->
                 </div>
               </div>
               <br />
@@ -241,21 +239,24 @@
                 <div class="x_content">
                   <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="tile-stats">
-                      <div class="icon"><i class="fa fa-money"></i>
-                      </div>
+                      <div class="icon"><i class="fa fa-money"></i></div>
                       <div class="count">{{ selectedOption.price }}
                         <span>บาท</span>
                       </div>
-
                       <h3>ยอดเงินที่ต้องชำระ</h3>
                       <p>เพิ่มรายการได้อย่างต่อเนื่อง และคลิกชำระเงินเพื่อชำระเงินพร้อมกันทุกรายการ.</p>
                     </div>
                   </div>
                   <div class="form-group">
-                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2">
                       <button class="btn btn-warning" type="submit">เพิ่มรายการต่อไป</button>
                       <button class="btn btn-primary" type="submit" data-ui-sref="mains.list">ขั้นตอนชำระเงิน</button>
                     </div>
+                  </div>
+                  <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                    <alert type="danger" data-ng-show="error" class="text-center text-danger">
+                      <span data-ng-bind="error"></span>
+                    </alert>
                   </div>
                 </div>
               </div>

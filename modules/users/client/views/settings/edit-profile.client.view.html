@@ -26,10 +26,11 @@
           <input type="text" id="idNumber" name="idNumber" class="form-control" data-ng-model="user.idNumber" placeholder="เลขบัตรประชาชน">
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-lg btn-primary">Save Profile</button>
+          <button type="submit" class="btn btn-lg btn-primary">บันทึกข้อมูล</button>
         </div>
         <div data-ng-show="success" class="text-center text-success">
-          <strong>Profile Saved Successfully</strong>
+          <strong>บันทึกข้อมูลสำเร็จ</strong>
+          <p data-ui-sref="home">คลิก!! เพื่อกลับสู่หน้าหลัก</p>
         </div>
         <div data-ng-show="error" class="text-center text-danger">
           <strong data-ng-bind="error"></strong>

@@ -139,6 +139,7 @@
                     <th class="column-title">เลขบัตรประชาชน</th>
                     <th class="column-title">ยอดเงิน</th>
                     <th class="column-title">เติมเงิน</th>
+                    <th class="column-title">แก้ไข</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -151,8 +152,11 @@
                     <td class="list-group-item-heading" ng-bind=""></td>
                     <td class="list-group-item-heading" ng-bind="user.balanceAmt"></td>
                     <td>
-                      <a class="btn btn-info btn-xs" ng-click="showTopUpPromt($event, user, $index)"><i class="fa fa-pencil"></i> เติมเงิน </a>
+                      <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)"><i class="fa fa-pencil"></i> เติมเงิน </a>
                     </td>
+                    <td>
+                      <a class="btn btn-danger btn-xs" data-ui-sref="admin.user-edit({userId: user._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
+
                   </tr>
                   </tbody>
                 </table>

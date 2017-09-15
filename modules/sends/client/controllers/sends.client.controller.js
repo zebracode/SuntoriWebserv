@@ -17,7 +17,8 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
         country: this.country,
         ampher: this.ampher,
         postcode: this.postcode,
-        idNumber: this.idNumber
+        idNumber: this.idNumber,
+        product: this.product
       });
 
       // Redirect after save
@@ -32,6 +33,7 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
         $scope.ampher = '';
         $scope.postcode = '';
         $scope.idNumber = '';
+        $scope.product = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -81,6 +83,11 @@ angular.module('sends').controller('SendsController', ['$scope', '$stateParams',
     $scope.states = ('กรุงเทพมหานคร กระบี่ กาญจนบุรี กาฬสินธุ์ กำแพงเพชร ขอนแก่น จันทบุรี ฉะเชิงเทรา ชลบุรี ชัยนาท ชัยภูมิ ชุมพร เชียงราย เชียงใหม่ ตรัง ตราด ตาก นครนายก นครปฐม นครพนม นครราชสีมา นครศรีธรรมราช นครสวรรค์ นนทบุรี นราธิวาส น่าน บึงกาฬ บุรีรัมย์ ปทุมธานี ประจวบคีรีขันธ์ ปราจีนบุรี ปัตตานี พระนครศรีอยุธยา พังงา พัทลุง พิจิตร พิษณุโลก เพชรบุรี เพชรบูรณ์ แพร่ พะเยา ภูเก็ต มหาสารคาม มุกดาหาร แม่ฮ่องสอน ยะลา ยโสธร ร้อยเอ็ด ระนอง ระยอง ราชบุรี ลพบุรี ลำปาง ลำพูน เลย ศรีสะเกษ สกลนคร สงขลา สตูล สมุทรปราการ สมุทรสงคราม สมุทรสาคร สระแก้ว สระบุรี สิงห์บุรี สุโขทัย สุพรรณบุรี สุราษฎร์ธานี สุรินทร์ หนองคาย หนองบัวลำภู อ่างทอง อุดรธานี อุทัยธานี อุตรดิตถ์ อุบลราชธานี อำนาจเจริญ').split(' ').map(function(state) {
             return {abbrev: state};
           });
+
+    // Product
+        $scope.products = ('เสื้อผ้าแฟชั่น เครื่องสำอางและความงาม ของเล่น ของสะสม ของที่ระลึก แม่และเด็ก ศิลปหัตถกรรม(ของทำมือ) ของใช้ ของตกแต่งบ้าน อาหารและสุขภาพ มือถือ คอมพิวเตอร์ เครื่องดนตรี อุปกรณ์สัตว์เลี้ยง หนังสือเครื่องเขียน อุปกรณ์สำนักงาน เครื่องมือช่าง ของเก่า กล้องและอุปกรณ์ อุปกรณ์กีฬา อื่นๆ').split(' ').map(function(product) {
+                return {abbrev: product};
+              });
   }
 ]);
 

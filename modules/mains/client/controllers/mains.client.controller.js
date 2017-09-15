@@ -1,13 +1,15 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', 
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost',
   function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost) {
+
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
-    $scope.balanceAmount =  1000;
+//    $scope.balanceAmount = 0;
     $scope.thailandPost = new ThailandPost();
     $scope.selectedMains = [];
+    $scope.price = 0;
     // Create new Main
     $scope.create = function () {
             
@@ -55,10 +57,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.r_postcode = '';
         $scope.order = '';
         $scope.invoice = '';
-        $scope.price = '';
+        $scope.price = 0;
         $scope.weight = '';
-        $scope.detail = '';
+//        $scope.detail = '';
         $scope.barcode = '';
+//        $scope.options = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
@@ -114,7 +117,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     $scope.options = [
         {
-          name: 'เลือกกล่อง/น้ำหนัก',
+          name: 'เลือกกล่องน้ำหนัก',
           value: '0',
           price: '0'
         },
@@ -245,8 +248,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
       $scope.selectedOption = $scope.options[0];
       $scope.reset = function() {
-          $scope.options = {เลือกขนาดกล่อง};
-      }
+          $scope.options = {เลือกกล่องน้ำหนัก}
+      };
       
       $scope.getSenderName = function(searchText) {
           return $http
@@ -265,6 +268,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.s_country = $scope.selectedSender.country;
             $scope.s_postcode = $scope.selectedSender.postcode;
             $scope.s_idNumber = $scope.selectedSender.idNumber;
+            $scope.detail = $scope.selectedSender.product;
         }
       };
       

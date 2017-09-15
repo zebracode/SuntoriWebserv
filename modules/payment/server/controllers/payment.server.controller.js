@@ -27,7 +27,8 @@ exports.request = function(req, res, next) {
                     return next(err);
                 } else {
                     invoiceNo = docNo.prefix + docNo.nextNumber;
-                    stringToHash = version + merchantId + paymentDescription + orderId + invoiceNo + amount + resultUrl2 + resultUrl2 +defaultLang;
+                    // stringToHash = version + merchantId + paymentDescription + orderId + invoiceNo + amount + resultUrl1 + resultUrl2 +defaultLang;
+					stringToHash = version + merchantId + paymentDescription + orderId + invoiceNo + amount + resultUrl1 + defaultLang;
                     
                     // Encrypt
                     var hashValue = CryptoJS.HmacSHA1(stringToHash, secretKey).toString(CryptoJS.enc.Hex);
@@ -40,7 +41,7 @@ exports.request = function(req, res, next) {
                         invoiceNo: invoiceNo,
                         amount: amount,
                         resultUrl1: resultUrl1,
-                        resultUrl2: resultUrl2,
+                        //resultUrl2: resultUrl2,
                         defaultLang: defaultLang,
                         hashValue: hashValue
                     };

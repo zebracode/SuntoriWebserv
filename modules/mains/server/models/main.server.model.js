@@ -24,7 +24,7 @@ var MainSchema = new Schema({
 //    type: String,
 //    default: '',
 //    trim: true,
-//    required: 'กรุณากรอกเ Content'
+//    required: 'กรุณากรอก Content'
 //  },
   s_name: {
     type: String,
@@ -42,19 +42,19 @@ var MainSchema = new Schema({
     type: String,
     default: '',
     trim: true,
-    required: 'กรุณากรอดที่อยู่ ผู้ส่ง'
+    required: 'กรุณากรอกที่อยู่ ผู้ส่ง'
   },
   s_ampher: {
         type: String,
         default: '',
         trim: true,
-        required: 'กรุณากรอกจังหมัด ผู้ส่ง'
+        required: 'กรุณากรอกจังหวัด ผู้ส่ง'
       },
   s_country: {
       type: String,
       default: '',
       trim: true,
-      required: 'กรุณากรอกจังหมัด ผู้ส่ง'
+      required: 'กรุณากรอกจังหวัด ผู้ส่ง'
     },
   s_postcode: {
       type: String,
@@ -66,7 +66,7 @@ var MainSchema = new Schema({
         type: String,
         default: '',
         trim: true,
-        required: 'กรุณากรอกเลขบัตรปรชาชน ผู้ส่ง'
+        required: 'กรุณากรอกเลขบัตรประชาชน ผู้ส่ง'
       },
   r_name: {
     type: String,
@@ -78,7 +78,7 @@ var MainSchema = new Schema({
     type: String,
     default: '',
     trim: true,
-    required: 'กรุณากรอดเบอร์โทรศัพท์ ผู้รับ'
+    required: 'กรุณากรอกเบอร์โทรศัพท์ ผู้รับ'
   },
   r_address: {
     type: String,
@@ -99,7 +99,10 @@ var MainSchema = new Schema({
       required: 'กรุณากรอกรหัสไปรณณีย์ ผู้รับ'
     },
   r_ampher: {
-    type: String
+    type: String,
+    default: '',
+    trim: true,
+    required: 'กรุณากรอกข้อมูลอำเภอ'
   },
   
   order: {
@@ -112,7 +115,7 @@ var MainSchema = new Schema({
         type: String,
         default: '',
         trim: true,
-        required: true, 
+        required: true,
         unique: true
     },
   price: {
@@ -130,7 +133,7 @@ var MainSchema = new Schema({
         type: String,
         default: '',
         trim: true,
-        required: 'กรุณากรอกรายละเอียดสินค้า'
+        required: 'กรุณากรอกข้อมูลให้ครบถ้วน'
       },
   barcode: {
         type: String,

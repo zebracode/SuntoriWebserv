@@ -89,6 +89,7 @@
                                         <label>อำเภอ</label>
                                         <input ng-model="ampher">
                                     </md-input-container>
+
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>จังหวัด</label>
                                         <md-select ng-model="country">
@@ -106,15 +107,26 @@
                                                required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
 
                                         <div ng-messages="userForm.postcode.$error" role="alert" multiple>
-                                            <div ng-message="required" class="my-message">กรุณาใส่รหัสไปรษณีย์</div>
+                                            <div ng-message="required" class="my-message">ไม่ได้ใส่รหัสไปรษณีย์</div>
                                             <div ng-message="pattern" class="my-message">รหัสไปรษณีย์ไม่ถูกต้อง
                                             </div>
                                             <div ng-message="md-maxlength" class="my-message">
-                                                กรอกรหัสไปรษณีย์ 5 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่กำหนด
+                                                กรอกรหัสไปรษณีย์ ไม่ครบ หรือเกิน 5 หลัก
                                             </div>
                                         </div>
                                     </md-input-container>
 
+                                    <md-input-container class="md-block" flex-gt-sm>
+                                        <label>สินค้า</label>
+                                        <md-select ng-model="product">
+                                            <md-option ng-repeat="product in products" value="{{product.abbrev}}">
+                                                {{product.abbrev}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+
+                                <div class="row">
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>เลขบัตรประชาชน</label>
                                         <input name="idNumber" ng-model="idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
