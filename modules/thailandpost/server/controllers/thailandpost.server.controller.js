@@ -7,7 +7,7 @@ exports.getOrderStatus = function(req, res) {
     .then(function(res) {
         return res.json();
     }).then(function(json) {
-        res.send(json.statusDescription);
+        res.send(json);
     });
 };
 

@@ -158,7 +158,12 @@ var MainSchema = new Schema({
       type: String,
       default: '',
       trim: true
-    }
+    },
+  tpWeight: {
+    type: String,
+    default: '',
+    trim: true
+  }
 });
 
 mongoose.model('Main', MainSchema);
