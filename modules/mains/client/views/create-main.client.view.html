@@ -1,4 +1,4 @@
-<div flex layout="row" data-ng-controller="MainsController" data-ng-init="find()">
+<div flex layout="row" data-ng-controller="MainsController" data-ng-init="find(); s_country=''; r_country=''">
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" data-ng-show="authentication.user">
     <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
       <md-card-title>
@@ -241,7 +241,7 @@
                   <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="tile-stats">
                       <div class="icon"><i class="fa fa-money"></i></div>
-                      <div class="count">{{ selectedOption.price }}
+                      <div class="count">{{ selectedOption.price | provincePrice :s_country :r_country}}
                         <span>บาท</span>
                       </div>
                       <h3>ยอดเงินที่ต้องชำระ</h3>
