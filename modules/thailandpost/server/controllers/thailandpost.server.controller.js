@@ -12,7 +12,9 @@ exports.getOrderStatus = function(req, res) {
 };
 
 exports.createOrder = function(req, res) {
-    fetch('http://suntoriexpress:suntoriexpressws@r_dservice.thailandpost.com:8080/webservice/addItem',{
+  req.body.productWeight = req.body.productWeight.substring(req.body.productWeight.lastIndexOf('-') + 1, req.body.productWeight.length).replace(/,/g, "");
+  console.log("req.body",req.body);
+  fetch('http://suntoriexpress:suntoriexpressws@r_dservice.thailandpost.com:8080/webservice/addItem',{
 	method: 'POST',
 	body:    JSON.stringify(req.body),
 	headers: {
