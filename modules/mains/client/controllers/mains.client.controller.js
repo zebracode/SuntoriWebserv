@@ -1,8 +1,8 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', "$filter",
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter) {
 
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
@@ -12,7 +12,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.price = 0;
     // Create new Main
     $scope.create = function () {
-            
+      var total = $filter("provincePrice")(this.selectedOption.price, this.s_country, this.r_country);
       // Create new Main object
       var main = new Mains({
         s_name: this.s_name,
@@ -34,7 +34,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         detail: this.detail,
         barcode: this.barcode,
         s_idNumber: this.s_idNumber,
-        total: this.selectedOption.price,
+        total: total,
         status: "ยังไม่ได้ชำระเงิน"
       });
 
@@ -554,8 +554,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.payment = function(){
         document.authForm.submit();        
     };
-
-
   }
 ]);
 
