@@ -41,10 +41,13 @@ exports.update = function (req, res) {
 
   send.name = req.body.name;
   send.tel = req.body.tel;
+  send.email = req.body.email;
   send.address = req.body.address;
   send.country = req.body.country;
+  send.ampher = req.body.ampher;
   send.postcode = req.body.postcode;
   send.idNumber = req.body.idNumber;
+  send.product = req.body.product;
 
   send.save(function (err) {
     if (err) {
@@ -115,7 +118,7 @@ exports.sendByID = function (req, res, next, id) {
 
 
 exports.findByName = function(req, res, next) {    
-    Send.find({name: { "$regex": req.query.searchText, "$options": "i" }}, function(err, sends){
+    Send.find({name: { "$regex": req.query.searchText, "$options": "i" }, user: req.query.userId}, function(err, sends){
         if (err) {
             return next(err);
         } else {

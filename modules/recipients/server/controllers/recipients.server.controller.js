@@ -41,9 +41,12 @@ exports.update = function (req, res) {
 
   recipient.name = req.body.name;
   recipient.tel = req.body.tel;
+  recipient.email = req.body.email;
   recipient.address = req.body.address;
+  recipient.ampher = req.body.ampher;
   recipient.country = req.body.country;
   recipient.postcode = req.body.postcode;
+  recipient.comment = req.body.comment;
 
   recipient.save(function (err) {
     if (err) {
@@ -113,7 +116,7 @@ exports.recipientByID = function (req, res, next, id) {
 };
 
 exports.findByName = function(req, res, next) {
-    Recipient.find({name: {'$regex': '.*' + req.query.searchText + '.*'}}, function(err, recipients){
+    Recipient.find({name: {'$regex': '.*' + req.query.searchText + '.*'}, user: req.query.userId}, function(err, recipients){
         if (err) {
             return next(err);
         } else {

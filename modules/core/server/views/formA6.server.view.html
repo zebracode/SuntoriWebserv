@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>SuntoriForm A6</title>
+
+	<!-- Normalize or reset CSS with your favorite library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+
+	<!-- Load paper.css for happy printing -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.2.3/paper.css">
+
+	<!-- Set page size here: A5, A4 or A3 -->
+	<!-- Set also "landscape" if you need -->
+	<style>@page { size: A4 }</style>
+	<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+</head>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+<body class="A4">
+<style type="text/css">
+#div1 {
+    float:left;
+    width:272px;
+    height:265px;
+    border:solid 0px red;
+    text-align:left;
+}
+#div2 {
+    float:left;
+    width:140px;
+    height:265px;
+    border:solid 0px green;
+    text-align:center;
+}
+</style>
+<!-- Each sheet element should have the class "sheet" -->
+<!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+<section class="sheet padding-10mm">
+
+	<!-- Write HTML just like a web page -->
+	<div style="background-image:url(/assets/img/formA6.png); position:absolute; left:30px; top:30px; width:420px; height:265px;" title="">
+		<div id='div1'>
+			<div style="margin-left:1em">
+				<div style="margin-top:35px">
+					<h5>{{main.s_name}}</h5>
+				</div>
+				<div style="margin-top:-20px">
+					<h6>{{main.s_address}}</h6>
+				</div>
+				<div style="margin-top: -20px">
+					<h6>{{main.s_ampher}}</h6>
+				</div>
+				<div style="margin-top:-20px">
+					<h6>{{main.s_country}}</h6>
+				</div>
+				<br><br>
+				<div style="margin-left:6em">
+					<h4 style="margin-top:-60px">{{main.s_postcode}}</h4>
+				</div>
+			</div>
+			<div style="margin-left:7em">
+				<div style="margin-top:20px">
+					<h5>{{main.r_name}} ({{main.r_tel}})</h5>
+				</div>
+				<div style="margin-top:-20px">
+					<h6>{{main.r_address}}</h6>
+				</div>
+				<div style="margin-top:-20px">
+					<h6>{{main.r_ampher}}</h6>
+				</div>
+				<div style="margin-top:-20px">
+					<h6>{{main.r_country}}</h6>
+				</div>
+				<div style="margin-left:6em">
+					<h4 style="margin-top:-25px">{{main.r_postcode}}</h4>
+				</div>
+			</div>
+		</div>
+		<div id='div2'>
+			<div style="margin-top:88px">
+				<svg class="barcode"
+					 jsbarcode-value="{{main.order}}"
+					 jsbarcode-textmargin="0"
+					 jsbarcode-fontoptions="bold">
+				</svg>
+			</div>
+			<div style="margin-top:-31px">
+				<h5>{{main.order}}</h5>
+			</div>
+			<div style="margin-top:-26px">
+				<svg class="barcode"
+					 jsbarcode-value="{{main.barcode}}"
+					 jsbarcode-textmargin="0"
+					 jsbarcode-fontoptions="bold">
+				</svg>
+			</div>
+			<br>
+			<div style="margin-top:-48px">
+				<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{main.barcode}}</h6>
+			</div>
+
+			<div style="margin-top:-3px">
+				<h6>มูลค่า {{main.price}} บาท</h6>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+   JsBarcode(".barcode", "Smallest width", {
+   width: 0.6,
+   height: 18,
+   fontSize: 0
+ }).init();
+   //JsBarcode("#barcode").init();
+  </script>
+
+</section>
+
+</body>
+
+</html>

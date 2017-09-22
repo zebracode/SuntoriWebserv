@@ -1,35 +1,58 @@
 <section class="row" data-ng-controller="EditProfileController">
-  <div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4">
+  <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
+    <h3 class="text-center">แก้ไขข้อมูลผู้ส่ง</h3>
     <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
       <fieldset>
-        <div class="page-header">
-          <h1>เปลี่ยนข้อมูลประจำตัว</h1>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>ชื่อ</label>
+            <input ng-model="user.firstName">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>นามสกุล</label>
+            <input ng-model="user.lastName">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>เบอร์โทร</label>
+            <input ng-model="user.tel">
+          </md-input-container>
         </div>
-        <div class="form-group">
-          <label for="firstName">ชื่อ</label>
-          <input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="ชื่อ">
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block">
+            <label>ชื่อผู้ใช้</label>
+            <input ng-model="user.username">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>อีเมลล์</label>
+            <input ng-model="user.email">
+          </md-input-container>
         </div>
-        <div class="form-group">
-          <label for="lastName">นามสกุล</label>
-          <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="นามสกุล">
-        </div>
-        <div class="form-group">
-          <label for="email">อีเมลล์</label>
-          <input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="อีเมลล์">
-        </div>
-        <div class="form-group">
-          <label for="username">ชื่อผู้ใช้บริการ</label>
-          <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="ชื่อผู้ใช้บริการ">
-        </div>
-        <div class="form-group">
-          <label for="username">เลขบัตรประชาชน</label>
-          <input type="text" id="idNumber" name="idNumber" class="form-control" data-ng-model="user.idNumber" placeholder="เลขบัตรประชาชน">
+
+        <div class="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>เลขบัตรประชาชน</label>
+            <input name="idNumber" ng-model="user.idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
+                   required ng-pattern="/^[0-9]{13}$/" md-maxlength="13">
+
+            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">กรุณาใส่เลขบัตรประชาชน</div>
+              <div ng-message="pattern" class="my-message">เลขบัตรประชาชนไม่ถูกต้อง
+              </div>
+              <div ng-message="md-maxlength" class="my-message">
+                กรอกเลขบัตรประชาชน 13 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่ถูกต้อง
+              </div>
+            </div>
+          </md-input-container>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-lg btn-primary">Save Profile</button>
+          <button class="btn btn-primary" type="submit" ng-click="ok()">ตกลง</button>
+          <button class="btn btn-warning" type="button" data-ui-sref="home">ยกเลิก</button>
         </div>
         <div data-ng-show="success" class="text-center text-success">
-          <strong>Profile Saved Successfully</strong>
+          <!--<strong>บันทึกข้อมูลสำเร็จ</strong>-->
+          <button data-ui-sref="home">คลิก!! เพื่อกลับสู่หน้าหลัก</button>
         </div>
         <div data-ng-show="error" class="text-center text-danger">
           <strong data-ng-bind="error"></strong>

@@ -17,8 +17,23 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         // Find a list of Mains
         $scope.find = function () {
-            $scope.mains = Mains.query();          
-        };    
+            $scope.mains = Mains.query();
+            console.log("mains", $scope.mains);
+        };
+
+        $scope.printformA6 = function(main) {
+                    console.log("Print AW FormA6");
+                    //$http.get('/print/awpost');
+                }
+
+        $scope.printformA5 = function(main) {
+            console.log("Print AW FormA5");
+            //$http.get('/print/awpost');
+        }
+        $scope.printformA4 = function(main) {
+                    console.log("Print AW FormA4");
+                    //$http.get('/print/awpost');
+                }
      
 
         /**
@@ -103,4 +118,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         self.share        = share;
 
     }
+
+
 ]);

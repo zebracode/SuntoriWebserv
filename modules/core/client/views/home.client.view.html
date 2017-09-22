@@ -33,8 +33,8 @@
       <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
     </md-card-actions>
     <div class="list-group">
-      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
-      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
+      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายการจัดส่ง</a>
+      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
       <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
       <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
       <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
@@ -62,45 +62,48 @@
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
             </div>
           </ul>
-          <div class="col-md-12">
-            <div class="x_panel">
-              <!--<div id="mainb" style="height:350px;"></div>-->
-              <div class="row top_tiles">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-university"></i></div>
-                    <div class="count">179</div>
-                    <h3>เงินคงเหลือ</h3>
-                    <p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>
-                  </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-graduation-cap"></i></div>
-                    <div class="count">179</div>
-                    <h3>ส่งสำเร็จ</h3>
-                    <p>จำนวนรายการส่งสำเร็จ</p>
-                  </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-paper-plane"></i></div>
-                    <div class="count">179</div>
-                    <h3>กำลังจัดส่ง</h3>
-                    <p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>
-                  </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                  <div class="tile-stats">
-                    <div class="icon"><i class="fa fa-fire-extinguisher"></i></div>
-                    <div class="count">179</div>
-                    <h3>ส่งไม่สำเร็จ</h3>
-                    <p>จำนวนรายการที่ส่งไม่สำเร็จ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <!-- Summary -->
+          <!--<div class="col-md-12">-->
+            <!--<div class="x_panel">-->
+              <!--&lt;!&ndash;<div id="mainb" style="height:350px;"></div>&ndash;&gt;-->
+              <!--<div class="row top_tiles">-->
+                <!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-university"></i></div>-->
+                    <!--<div class="count">{{balanceAmount}}</div>-->
+                    <!--<h3>เงินคงเหลือ</h3>-->
+                    <!--<p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-graduation-cap"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>ส่งสำเร็จ</h3>-->
+                    <!--<p>จำนวนรายการส่งสำเร็จ</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-paper-plane"></i></div>-->
+                    <!--<div class="count" data-ng-show="authentication.user._id">{{mains.length}}</div>-->
+                    <!--<h3>จำนวนรายการ</h3>-->
+                    <!--<p>จำนวนรายการทั้งหมด</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-fire-extinguisher"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>ส่งไม่สำเร็จ</h3>-->
+                    <!--<p>จำนวนรายการที่ส่งไม่สำเร็จ</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
           <div class="clearfix"></div>
           <div class="x_content">
             <br />
@@ -108,13 +111,15 @@
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                 <tr class="headings">
-                  <th class="column-title">ที่</th>
                   <th class="column-title">วันที่ </th>
-                  <th class="column-title">EN</th>
-                  <th class="column-title">ผู้รับ </th>
+                  <th class="column-title">Tracking No.</th>
+                  <th class="column-title">ผู้ส่ง </th>
                   <th class="column-title">เบอร์โทร </th>
-                  <th class="column-title">นน.(กรัม) </th>
-                  <th class="column-title">ค่าส่ง </th>
+                  <th class="column-title">นน.ก่อน </th>
+                  <th class="column-title">นน.หลัง </th>
+                  <th class="column-title">ค่าส่งก่อน </th>
+                  <th class="column-title">ค่าส่งหลัง </th>
+                  <th class="column-title">ส่วนต่าง </th>
                   <th class="column-title">สถานะจัดส่ง </th>
                   <th class="column-title">ชำระเงิน</th>
                   <th class="bulk-actions" colspan="7">
@@ -123,21 +128,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
-                  <td>{{ $index + 1 }}</td>
+                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status !== 'ยังไม่ได้ชำระเงิน'">
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.barcode"></td>
-                  <td class="list-group-item-heading" ng-bind="main.r_name"></td>
-                  <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
+                  <td class="list-group-item-heading" ng-bind="main.s_name"></td>
+                  <td class="list-group-item-heading" ng-bind="main.s_tel"></td>
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
-                  <td class="list-group-item-heading" ng-bind="main.price"></td>
+                  <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
+                  <td class="list-group-item-heading" ng-bind="main.total"></td>
+                  <td class="list-group-item-heading" ng-bind="main.total"></td>
+                  <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
-                    <a class="btn btn-warning btn-xs"><i class="fa fa-print"></i> ปริ้นใบติดกล่อง </a>
+                    <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
+                    <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>
+                    <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A6 </a>
                   </td>
                 </tr>
                 </tbody>
               </table>
+
+              <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+              </div>
+
             </div>
             <div class="text-center form-group">
               <nav aria-label="Page navigation">
@@ -166,6 +180,7 @@
     </div>
   </md-content>
   </div>
+  <!-- HomePage -->
   <div flex layout="column"data-ng-hide="authentication.user">
     <md-content>
       <!--Modal box-->
@@ -227,69 +242,69 @@
                     <h2 class="text-dec">Suntori Express</h2>
                   </div>
                   <div class="intro-para text-center quote">
-                    <p class="big-text">รับถึงที่ ...  ส่งถึงมือ...</p>
-                    <p class="small-text">ทดลองใช้ระบบ Suntori Express Web Service บันทึกข้อมูลลูกค้าของคุณ กรอกรายละเอียดที่อยู่จัดส่ง ปริ้นใบแปะหน้ากล่อง ส่งไปรษณีย์ไทยไกล้บ้านกว่า 113 สาขา ได้ทันที่ ประหยัดเวลาไม่ต้องต่อคิว</p>
-                    <a href="http://localhost:3000/authentication/signup" class="btn get-quote">สมัครสมาชิก</a>
-                    <a href="http://localhost:3000/authentication/signin" class="btn get-quote">เข้าสู่ระบบ</a>
+                    <p class="big-text">เรื่องเดลิเวอรี่ ซันโตริจัดให้...</p>
+                    <p class="big-text">Suntori Express ยินดีให้บริการครับ     สมัครสมาชิกฟรี!</p>
+                    <p class="small-text">ระบบส่งสินค้าทั่วประเทศไทยผ่านจุดไปรษณีย์ใกล้บ้านท่าน 230 แห่งทั่วประเทศ ท่านสามารถบริหารระบบรายชื่อลูกค้าได้ด้วยตัวเองง่ายๆประหยัดเงินและเวลาทำงาน ไม่ต้องต่อคิวส่งพัสดุให้เสียเวลา คุ้มค่าทุกนาทีใช้ซันโตริ เอ็กซ์เพรสนะคร้าบบบ</p>
+                    <a data-ui-sref="authentication.signup" class="btn get-quote">สมัครสมาชิก</a>
+                    <a data-ui-sref="authentication.signin" class="btn get-quote">เข้าสู่ระบบ</a>
                   </div> <br />
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
       <!--/ Banner-->
       <!--Organisations-->
-      <section id ="organisations" class="section-padding">
-        <div class="container">
-          <div class="col-md-2"></div>
-          <div class="col-md-8">
-            <div class="row">
-              <div class="col-md-6">
-                <iframe width="450" height="253" src="https://www.youtube.com/embed/y3a5BFST6BU" frameborder="0" allowfullscreen></iframe>
-                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">-->
-                  <!--<div class="orga-stru">-->
-                    <!--<h3>65%</h3>-->
-                    <!--<p>Say NO!!</p>-->
-                    <!--<i class="fa fa-male"></i>-->
-                  <!--</div>-->
+      <!--<section id ="organisations" class="section-padding">-->
+        <!--<div class="container">-->
+          <!--<div class="col-md-2"></div>-->
+          <!--<div class="col-md-8">-->
+            <!--<div class="row">-->
+              <!--<div class="col-md-6">-->
+                <!--<iframe width="450" height="253" src="https://www.youtube.com/embed/y3a5BFST6BU" frameborder="0" allowfullscreen></iframe>-->
+                <!--&lt;!&ndash;<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&ndash;&gt;-->
+                  <!--&lt;!&ndash;<div class="orga-stru">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<h3>65%</h3>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<p>Say NO!!</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="fa fa-male"></i>&ndash;&gt;-->
+                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&ndash;&gt;-->
+                  <!--&lt;!&ndash;<div class="orga-stru">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<h3>20%</h3>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<p>Says Yes!!</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="fa fa-male"></i>&ndash;&gt;-->
+                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&ndash;&gt;-->
+                  <!--&lt;!&ndash;<div class="orga-stru">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<h3>15%</h3>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<p>Can't Say!!</p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="fa fa-male"></i>&ndash;&gt;-->
+                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+              <!--</div>-->
+              <!--<div class="col-md-6">-->
+                <!--<div class="detail-info">-->
+                  <!--<hgroup>-->
+                    <!--<h3 class="det-txt"> ขั้นตอนการใช้งานระบบ </h3>-->
+                    <!--<h4 class="sm-txt">เริ่มต้นเพียงแค่ 60 บาทเท่านั้น!</h4>-->
+                  <!--</hgroup>-->
+                  <!--<li><i class="fa fa-building"></i> ไม่ต้องต่อคิว</li>-->
+                  <!--<li><i class="fa fa-building"></i> สะดวกด้วยจุด Drop off 113 แห่งทั่วประเทศ </li>-->
+                  <!--<li><i class="fa fa-building"></i> มีบริการเรียกรับพัสดุ (เฉพาะกรุงเทพฯ และปริมณฑล)</li>-->
+                  <!--<li><i class="fa fa-building"></i> ชำระเงินออนไลน์ได้เลย </li>-->
+                  <!--<li><i class="fa fa-building"></i> ฟรี! สร้างใบปะหน้า </li>-->
+                  <!--<li><i class="fa fa-building"></i> ฟรี! ระบบติดตามพัสดุ </li>-->
+                  <!--<li><i class="fa fa-building"></i> ฟรี! สร้างหมายเลขพัสดุไว้ก่อน </li>-->
                 <!--</div>-->
-                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">-->
-                  <!--<div class="orga-stru">-->
-                    <!--<h3>20%</h3>-->
-                    <!--<p>Says Yes!!</p>-->
-                    <!--<i class="fa fa-male"></i>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">-->
-                  <!--<div class="orga-stru">-->
-                    <!--<h3>15%</h3>-->
-                    <!--<p>Can't Say!!</p>-->
-                    <!--<i class="fa fa-male"></i>-->
-                  <!--</div>-->
-                <!--</div>-->
-              </div>
-              <div class="col-md-6">
-                <div class="detail-info">
-                  <hgroup>
-                    <h3 class="det-txt"> ขั้นตอนการใช้งานระบบ </h3>
-                    <h4 class="sm-txt">เริ่มต้นเพียงแค่ 60 บาทเท่านั้น!</h4>
-                  </hgroup>
-                  <li><i class="fa fa-building"></i> ไม่ต้องต่อคิว</li>
-                  <li><i class="fa fa-building"></i> สะดวกด้วยจุด Drop off 113 แห่งทั่วประเทศ </li>
-                  <li><i class="fa fa-building"></i> มีบริการเรียกรับพัสดุ (เฉพาะกรุงเทพฯ และปริมณฑล)</li>
-                  <li><i class="fa fa-building"></i> ชำระเงินออนไลน์ได้เลย </li>
-                  <li><i class="fa fa-building"></i> ฟรี! สร้างใบปะหน้า </li>
-                  <li><i class="fa fa-building"></i> ฟรี! ระบบติดตามพัสดุ </li>
-                  <li><i class="fa fa-building"></i> ฟรี! สร้างหมายเลขพัสดุไว้ก่อน </li>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2"></div>
-        </div>
-      </section>
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="col-md-2"></div>-->
+        <!--</div>-->
+      <!--</section>-->
       <!--/ Organisations-->
       <!--Footer-->
       <footer id="footer" class="footer">

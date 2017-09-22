@@ -26,12 +26,23 @@ var RecipientSchema = new Schema({
     trim: true,
     required: 'Title cannot be blank'
   },
+  email: {
+      type: String,
+      default: '',
+      trim: true
+    },
   address: {
     type: String,
     default: '',
     trim: true,
     required: 'Title cannot be blank'
   },
+  ampher: {
+      type: String,
+      default: '',
+      trim: true,
+      required: 'Title cannot be blank'
+    },
   country: {
       type: String,
       default: '',
@@ -43,6 +54,11 @@ var RecipientSchema = new Schema({
       default: '',
       trim: true,
       required: 'Title cannot be blank'
+    },
+  comment: {
+      type: String,
+      default: '',
+      trim: true
     },
   user: {
     type: Schema.ObjectId,

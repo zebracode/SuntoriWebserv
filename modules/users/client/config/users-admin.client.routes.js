@@ -32,6 +32,11 @@ angular.module('users.admin.routes').config(['$stateProvider',
             });
           }]
         }
+      })
+      .state('admin.lists', {
+         url: '/lists',
+         templateUrl: 'modules/users/views/admin/list.client.view.html',
+         controller: 'UserListController'
       });
   }
 ]);

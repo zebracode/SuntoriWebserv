@@ -7,16 +7,26 @@ exports.getOrderStatus = function(req, res) {
     .then(function(res) {
         return res.json();
     }).then(function(json) {
-        res.send(json.statusDescription);
+        res.send(json);
     });
 };
 
 exports.createOrder = function(req, res) {
-    fetch('http://suntoriexpress:suntoriexpressws@r_dservice.thailandpost.com:8080/webservice/getOrderByBarcode?barcode=' + req.query.barcode)
-    .then(function(res) {
-        return res.json();
-    }).then(function(json) {
-        res.send(json.statusDescription);
+  req.body.productWeight = req.body.productWeight.substring(req.body.productWeight.lastIndexOf('-') + 1, req.body.productWeight.length).replace(/,/g, "");
+  console.log("req.body",req.body);
+  fetch('http://suntoriexpress:suntoriexpressws@r_dservice.thailandpost.com:8080/webservice/addItem',{
+	method: 'POST',
+	body:    JSON.stringify(req.body),
+	headers: {
+          'Content-Type': 'application/json' 
+        }
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      console.log(json);
+      res.send(json);
     });
 };
 

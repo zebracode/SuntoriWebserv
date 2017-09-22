@@ -10,6 +10,13 @@ module.exports = function (app) {
   // Return a 404 for all undefined api, module or lib routes
   app.route('/:url(api|modules|lib)/*').get(core.renderNotFound);
 
+  // Print AW Post Form
+  app.get('/print/formA5', core.printformA5);
+  app.get('/print/formA4', core.printformA4);
+  app.get('/print/formA6', core.printformA6);
+
   // Define application route
-  app.route('/*').get(core.renderIndex);
+  app.route('/*')
+  .get(core.renderIndex)
+  .post(core.renderIndex);
 };

@@ -24,7 +24,7 @@ var MainSchema = new Schema({
 //    type: String,
 //    default: '',
 //    trim: true,
-//    required: 'กรุณากรอกเ Content'
+//    required: 'กรุณากรอก Content'
 //  },
   s_name: {
     type: String,
@@ -42,13 +42,19 @@ var MainSchema = new Schema({
     type: String,
     default: '',
     trim: true,
-    required: 'กรุณากรอดที่อยู่ ผู้ส่ง'
+    required: 'กรุณากรอกที่อยู่ ผู้ส่ง'
   },
+  s_ampher: {
+        type: String,
+        default: '',
+        trim: true,
+        required: 'กรุณากรอกจังหวัด ผู้ส่ง'
+      },
   s_country: {
       type: String,
       default: '',
       trim: true,
-      required: 'กรุณากรอกจังหมัด ผู้ส่ง'
+      required: 'กรุณากรอกจังหวัด ผู้ส่ง'
     },
   s_postcode: {
       type: String,
@@ -60,7 +66,7 @@ var MainSchema = new Schema({
         type: String,
         default: '',
         trim: true,
-        required: 'กรุณากรอกเลขบัตรปรชาชน ผู้ส่ง'
+        required: 'กรุณากรอกเลขบัตรประชาชน ผู้ส่ง'
       },
   r_name: {
     type: String,
@@ -72,8 +78,13 @@ var MainSchema = new Schema({
     type: String,
     default: '',
     trim: true,
-    required: 'กรุณากรอดเบอร์โทรศัพท์ ผู้รับ'
+    required: 'กรุณากรอกเบอร์โทรศัพท์ ผู้รับ'
   },
+  r_email: {
+      type: String,
+      default: '',
+      trim: true
+    },
   r_address: {
     type: String,
     default: '',
@@ -92,6 +103,18 @@ var MainSchema = new Schema({
       trim: true,
       required: 'กรุณากรอกรหัสไปรณณีย์ ผู้รับ'
     },
+  r_ampher: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'กรุณากรอกข้อมูลอำเภอ'
+  },
+  r_comment: {
+      type: String,
+      default: '',
+      trim: true
+    },
+  
   order: {
         type: String,
         default: '',
@@ -101,7 +124,8 @@ var MainSchema = new Schema({
   invoice: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        required: true
     },
   price: {
         type: String,
@@ -112,13 +136,14 @@ var MainSchema = new Schema({
   weight: {
         type: String,
         default: '',
-        trim: true
+        trim: true,
+        required: 'กรุณากรอกน้ำหนัก'
       },
   detail: {
         type: String,
         default: '',
         trim: true,
-        required: 'กรุณากรอกรายละเอียดสินค้า'
+        required: 'กรุณากรอกข้อมูลให้ครบถ้วน'
       },
   barcode: {
         type: String,
@@ -126,10 +151,15 @@ var MainSchema = new Schema({
         trim: true
       },
   total: {
-          type: String,
-          default: '',
-          trim: true
-        },
+        type: String,
+        default: '',
+        trim: true
+      },
+  selectedOption: {
+        type: String,
+        default: '',
+        trim: true
+      },
   user: {
       type: Schema.ObjectId,
       ref: 'User'
@@ -138,7 +168,12 @@ var MainSchema = new Schema({
       type: String,
       default: '',
       trim: true
-    }
+    },
+  tpWeight: {
+    type: String,
+    default: '',
+    trim: true
+  }
 });
 
 mongoose.model('Main', MainSchema);

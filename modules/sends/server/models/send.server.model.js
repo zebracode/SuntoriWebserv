@@ -26,6 +26,11 @@ var SendSchema = new Schema({
     trim: true,
     required: 'Title cannot be blank'
   },
+  email: {
+      type: String,
+      default: '',
+      trim: true
+    },
   address: {
     type: String,
     default: '',
@@ -38,6 +43,12 @@ var SendSchema = new Schema({
       trim: true,
       required: 'Title cannot be blank'
     },
+  ampher: {
+        type: String,
+        default: '',
+        trim: true,
+        required: 'Title cannot be blank'
+      },
   postcode: {
       type: String,
       default: '',
@@ -50,6 +61,13 @@ var SendSchema = new Schema({
       trim: true,
       required: 'Title cannot be blank'
     },
+  product: {
+        type: String,
+        default: '',
+        trim: true,
+        required: 'Title cannot be blank'
+      },
+
   user: {
     type: Schema.ObjectId,
     ref: 'User'

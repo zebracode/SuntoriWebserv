@@ -1,4 +1,4 @@
-<div data-ui-view flex layout="row" data-ng-controller="MainsController" data-ng-init="find()">
+<div data-ui-view flex layout="row" data-ng-controller="MainsController" data-ng-init="find(); setBalanceAmt();">
   <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
             class="md-whiteframe-z2" data-ng-show="authentication.user">
   <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
@@ -31,8 +31,8 @@
       <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
     </md-card-actions>
     <div class="list-group">
-      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
-      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
+      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายการจัดส่ง</a>
+      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
       <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
       <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
       <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
@@ -40,30 +40,6 @@
   </md-card>
 </md-sidenav>
   <md-content flex id="content" data-ng-show="authentication.user">
-  <!--<md-button class="share" md-no-ink ng-click="ul.share($event)"-->
-  <!--aria-label="Share">-->
-  <!--<md-icon md-svg-icon="share" ></md-icon>-->
-  <!--</md-button>-->
-
-  <!--<div class="page-header">-->
-  <!--<h1>ข้อมูลผู้ส่ง</h1>-->
-  <!--</div>-->
-  <!--<div class="list-group">-->
-  <!--<a data-ng-repeat="send in sends" data-ui-sref="sends.view({sendId: send._id})" class="list-group-item">-->
-  <!--<small class="list-group-item-text">-->
-  <!--Posted on-->
-  <!--<span data-ng-bind="send.created | date:'mediumDate'"></span>-->
-  <!--by-->
-  <!--<span data-ng-bind="send.user.displayName"></span>-->
-  <!--</small>-->
-  <!--<h4 class="list-group-item-heading" data-ng-bind="send.title"></h4>-->
-  <!--<p class="list-group-item-text" data-ng-bind="send.content"></p>-->
-  <!--</a>-->
-  <!--</div>-->
-  <!--<div class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">-->
-  <!--No sends yet, why don't you <a data-ui-sref="sends.create">create one</a>?-->
-  <!--</div>-->
-
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
@@ -76,9 +52,10 @@
               </span>
             </div><!-- /input-group -->
           </div>
+
           <ul class="nav navbar-right panel_toolbox">
             <div class="text-center mtop20">
-              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการจัดส่งสินค้า</button>
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
             </div>
           </ul>
 
@@ -89,11 +66,12 @@
               <table class="table table-striped jambo_table bulk_action">
                 <thead>
                 <tr class="headings">
-                  <th class="column-title"> ที่</th>
+                  <th class="column-title">ที่ </th>
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">ผู้รับ </th>
                   <th class="column-title">เบอร์โทร </th>
-                  <th class="column-title">นน.(กรัม) </th>
+                  <!--<th class="column-title">นน.(กรัม) </th>-->
+                  <!--<th class="column-title">ยอดเรียกเก็บ </th>-->
                   <th class="column-title">ค่าส่ง </th>
                   <th class="column-title">สถานะจัดส่ง </th>
                   <th class="column-title">ชำระเงิน</th>
@@ -103,24 +81,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
+                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status === 'ยังไม่ได้ชำระเงิน'">
                   <td ng-init="addSelectInvoice(main.invoice);">{{ $index + 1 }}</td>
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
-                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
-                  <td class="list-group-item-heading" ng-bind="main.price"></td>
+                  <!--<td class="list-group-item-heading" ng-bind="main.weight"></td>-->
+                  <!--<td class="list-group-item-heading" ng-bind="main.price"></td>-->
+                  <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td ng-init="disabled=true;">
-                    <a ng-show="disabled" class="btn btn-success btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.price); "><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
-                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.price);"><i class="fa fa-money"></i> ยังไม่ได้ชำระเงิน </a>
+                    <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
+                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.total); addSelectMain(main);"><i class="fa fa-money"></i> ชำระเงิน </a>
                   </td>
                   <td>
                     <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
-                    <a class="btn btn-danger btn-xs" data-ng-click="remove(main);"><i class="fa fa-trash-o"></i> ลบ </a>
+                    <a class="btn btn-danger btn-xs" data-ng-click="remove(main); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-trash-o"></i> ลบ </a>
                   </td>
                 </tr>
                 </tbody>
               </table>
+
+              <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+              </div>
 
               <div class="x_content">
 
@@ -172,13 +155,8 @@
                           </div>
                         </div>
                         <div class="text-center form-group">
-                      <!--<button type="button" class="btn btn-warning" ng-click="calTotalPrice(mains)">คำนวนเงิน</button>-->
-                          <button type="button" class="btn btn-primary">เติมเงิน</button>
-<<<<<<< HEAD
-                      <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" data-ui-sref="home">ชำระเงิน</button>
-=======
-                          <button type="submit" class="btn btn-success {{balanceAmount - totalPrice | isDisabled}}" ng-click="setBarcode(selectedInvoices);">ชำระเงิน</button>
->>>>>>> origin/thailandpost_api
+                          <button type="button" class="btn btn-primary" ng-click="showTopUpPromt($event)">เติมเงิน</button>
+                          <button type="submit" class="btn btn-success" ng-disabled="disabled" ng-click="showConfirm($event, selectedMains);">ชำระเงิน</button>
                         </div>
                       </div>
                     </div>
@@ -191,4 +169,49 @@
       </div>
     </div>
   </md-content>
+    
+    <form action='https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment' method='POST' name='authForm'>
+    <!--display wait message to user when page is loading-->
+    <!-- Please wait for a while. Do not close the browser or refresh the page.-->
+    <!--load request data-->
+
+        <input type='hidden' id='version' name='version' value="{{version}}"/>
+        <input type='hidden' id='merchant_id' name='merchant_id' value="{{merchant_id}}"/>
+        <input type='hidden' id='payment_description' name='payment_description' value="{{payment_description}}"/>
+        <input type='hidden' id='order_id' name='order_id' value="{{order_id}}"/>                    
+        <input type='hidden' id='invoice_no' name='invoice_no' value="{{invoice_no}}"/>
+        <input type='hidden' id='currency' name='currency' ng-model='currency'/>
+<<<<<<< HEAD
+        <input type='hidden' id='amount' name='amount' value="000000002500" ng-model='amount'/>
+        <input type='hidden' id='customer_email' name='customer_email' ng-model='customer_email'/>
+        <input type='hidden' id='pay_category_id' name='pay_category_id' ng-model='pay_category_id'/>
+        <input type='hidden' id='promotion' name='promotion' ng-model='promotion'/>
+        <input type='hidden' id='user_defined_1' name='user_defined_1' ng-model='user_defined_1'/>
+        <input type='hidden' id='user_defined_2' name='user_defined_2' ng-model='user_defined_2'/>
+        <input type='hidden' id='user_defined_3' name='user_defined_3' ng-model='user_defined_3'/>
+        <input type='hidden' id='user_defined_4' name='user_defined_4' ng-model='user_defined_4'/>
+        <input type='hidden' id='user_defined_5' name='user_defined_5' ng-model='user_defined_5'/>
+        <input type='hidden' id='result_url_1' name='result_url_1' ng-model='result_url_1'/>
+        <input type='hidden' id='result_url_2' name='result_url_2' ng-model='result_url_2'/>
+        <input type='hidden' id='request_3ds' name='request_3ds' ng-model='request_3ds'/>
+        <!--<input type='text' id='hash_value' name='hash_value' value="{{hash_value}}"/>-->
+=======
+        <input type='hidden' id='amount' name='amount' value="{{amount}}"/>
+        <input type='hidden' id='customer_email' name='customer_email'/>
+        <input type='hidden' id='pay_category_id' name='pay_category_id'/>
+        <input type='hidden' id='promotion' name='promotion'/>
+        <input type='hidden' id='user_defined_1' name='user_defined_1'/>
+        <input type='hidden' id='user_defined_2' name='user_defined_2'/>
+        <input type='hidden' id='user_defined_3' name='user_defined_3'/>
+        <input type='hidden' id='user_defined_4' name='user_defined_4'/>
+        <input type='hidden' id='user_defined_5' name='user_defined_5'/>
+        <input type='hidden' id='result_url_1' name='result_url_1' value="{{result_url_1}}"/>
+        <input type='hidden' id='result_url_2' name='result_url_2' value="{{result_url_2}}"/>
+        <input type='hidden' id='default_lang' name='default_lang' value="{{default_lang}}"/>
+        <input type='hidden' id='request_3ds' name='request_3ds'/>
+        <input type='text' id='hash_value' name='hash_value' value="{{hash_value}}"/>
+>>>>>>> origin/zebracode
+
+    </form>
+    
 </div>

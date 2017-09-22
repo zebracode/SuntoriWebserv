@@ -3,9 +3,6 @@
     <h3 class="text-center">สมัครสมาชิก</h3>
     <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
       <fieldset>
-        <alert type="danger" data-ng-show="error" class="text-center text-danger">
-          <span data-ng-bind="error"></span>
-        </alert>
         <div class="form-group">
           <div class="input-group input-group-lg">
             <span class="input-group-addon" id="basic-addon1">
@@ -36,6 +33,16 @@
         <div class="form-group">
           <div class="input-group input-group-lg">
             <span class="input-group-addon" id="basic-addon1">
+              <i class="glyphicon glyphicon-envelope"></i>
+            </span>
+            <input type="tel" id="tel" name="tel" class="form-control" data-ng-model="credentials.tel"
+                   placeholder="เบอร์โทรศัพท์">
+          </div>
+        </div>
+        <div
+        <div class="form-group">
+          <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="basic-addon1">
               <i class="glyphicon glyphicon-user"></i>
             </span>
             <input type="text" id="username" name="username" class="form-control"
@@ -51,6 +58,9 @@
                    data-ng-model="credentials.password" placeholder="รหัสผ่าน">
           </div>
         </div>
+        <alert type="danger" data-ng-show="error" class="text-center text-danger">
+          <span data-ng-bind="error"></span>
+        </alert>
         <div class="text-center form-group">
           <button type="submit" class="btn btn-success btn-lg btn-block">สมัครสมาชิก</button><br />
           <button class="loginBtn loginBtn--facebook" ng-click="callOauthProvider('/api/auth/facebook')">
@@ -60,9 +70,9 @@
           <button class="loginBtn loginBtn--google" ng-click="callOauthProvider('/api/auth/google')">
             Login with Google
           </button>
-          <div class="text-center forgot-password">
-            <a data-ui-sref="authentication.signin">เข้าสู่ระบบ</a>
-          </div>
+        </div>
+        <div class="text-center forgot-password">
+          <a data-ui-sref="authentication.signin">คลิกเพื่อ.. เข้าสู่ระบบ</a>
         </div>
       </fieldset>
     </form>

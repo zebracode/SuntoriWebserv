@@ -67,6 +67,12 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyPassword, 'กรุณากรอก Password']
   },
+  tel: {
+      type: String,
+      unique: 'มีผู้ใช้เบอร์นี้',
+      required: 'กรุณากรอก เบอร์โทร',
+      trim: true
+    },
   idNumber: {
     type: String,
     trim: true,

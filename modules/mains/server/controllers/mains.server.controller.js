@@ -14,7 +14,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var main = new Main(req.body);
   main.user = req.user;
-
+  console.log("rea.body", req.body);
   main.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -42,18 +42,21 @@ exports.update = function (req, res) {
   main.s_name = req.body.s_name;
   main.s_tel = req.body.s_tel;
   main.s_address = req.body.s_address;
+  main.s_ampher = req.body.s_ampher;
   main.s_country = req.body.s_country;
   main.s_postcode = req.body.s_postcode;
   main.s_idNumber = req.body.s_idNumber;
   main.r_name = req.body.r_name;
   main.r_tel = req.body.r_tel;
   main.r_address = req.body.r_address;
+  main.r_ampher = req.body.r_ampher;
   main.r_country = req.body.r_country;
   main.r_postcode = req.body.r_postcode;
   main.order = req.body.order;
   main.invoice = req.body.invoice;
   main.price = req.body.price;
   main.weight = req.body.weight;
+//  main.selectedOption = req.body.selectedOption;
   main.detail = req.body.detail;
   main.barcode = req.body.barcode;
   main.status = req.body.status;
@@ -90,7 +93,18 @@ exports.delete = function (req, res) {
  * List of Mains
  */
 exports.list = function (req, res) {
-  Main.find().sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+  if (typeof req.query.status === "undefined"){
+    Main.find().sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(mains);
+      }
+    });
+  } else {
+    Main.find({user: req.user, status: req.query.status}).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -99,6 +113,9 @@ exports.list = function (req, res) {
       res.json(mains);
     }
   });
+  }
+  console.log("status", req.query.status);
+  
 };
 
 /**

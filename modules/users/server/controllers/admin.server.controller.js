@@ -27,6 +27,7 @@ exports.update = function (req, res) {
   user.displayName = user.firstName + ' ' + user.lastName;
   user.roles = req.body.roles;
   user.idNumber = req.body.idNumber;
+  user.tel = req.body.tel;
 
   user.save(function (err) {
     if (err) {

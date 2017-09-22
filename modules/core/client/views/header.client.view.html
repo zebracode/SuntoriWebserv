@@ -11,7 +11,7 @@
                 <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
                 <span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>
                 </md-button>
-                <md-button href="/admin/users" target="_self" class="md-raised md-primary" data-ng-show="authentication.user ">Admin Panel</md-button>
+                <md-button href="/admin/users" target="_self" class="md-raised md-primary" data-ng-show="authentication.user">Admin Panel</md-button>
                 <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary" data-ng-show="authentication.user">ออกจากระบบ</md-button>
             </div>
         </div>

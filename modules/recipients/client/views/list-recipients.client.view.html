@@ -32,8 +32,8 @@
         <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
       </md-card-actions>
       <div class="list-group">
-        <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
-        <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; การใช้งาน</a>
+        <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายการจัดส่ง</a>
+        <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
         <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
         <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
         <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
@@ -43,85 +43,22 @@
 
   <!-- Container #4 Right -->
   <md-content flex id="content" data-ng-show="authentication.user">
-    <!--<md-button class="share" md-no-ink ng-click="ul.share($event)"-->
-               <!--aria-label="Share">-->
-      <!--<md-icon md-svg-icon="share" ></md-icon>-->
-    <!--</md-button>-->
-
-    <!--<div class="list-group">-->
-      <!--<a data-ng-repeat="recipient in recipients" data-ui-sref="recipients.view({recipientId: recipient._id})" class="list-group-item">-->
-        <!--<small class="list-group-item-text">-->
-          <!--Posted on-->
-          <!--<span data-ng-bind="recipient.created | date:'mediumDate'"></span>-->
-          <!--by-->
-          <!--<span data-ng-bind="recipient.user.displayName"></span>-->
-        <!--</small>-->
-        <!--<h4 class="list-group-item-heading" data-ng-bind="recipient.name"></h4>-->
-        <!--<p class="list-group-item-text" data-ng-bind="recipient.tel"></p>-->
-      <!--</a>-->
-    <!--</div>-->
-
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
           <h2>รายชื่อผู้รับ<small>เพิ่มรายชื่อผู้รับได้ที่นี่!!</small></h2>
           <div class="col-lg-4">
             <div class="input-group">
-              <input class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
               <span class="input-group-btn">
         <button class="btn btn-default" type="button">Go!</button>
       </span>
             </div><!-- /input-group -->
           </div>
           <ul class="nav navbar-right panel_toolbox">
-            <div class="text-center mtop20" ng-controller="PopupReController">
-              <button type="button" class="btn btn-mg btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">เพิ่มรายชื่อผู้รับ</button>
+            <div class="text-center mtop20">
+              <button type="button" class="btn btn-mg btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="recipients.create">เพิ่มรายชื่อผู้รับ</button>
               <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
-              <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">เพิ่มข้อมูลผู้ส่ง</h4>
-                    </div>
-                    <div class="modal-body">
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ชื่อ-นามสกุล <span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">เบอร์โทร <span class="required">*</span>
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">ที่อยู่</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea class="form-control" rows="3"></textarea>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">รหัสไปรษณีย์</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                          </div>
-                        </div>
-                      </form>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
           </ul>
           <div class="clearfix"></div>
         </div>
@@ -131,13 +68,14 @@
             <table class="table table-striped jambo_table bulk_action">
               <thead>
               <tr class="headings">
-                <th class="column-title">ที่ </th>
                 <th class="column-title">วันที่ </th>
                 <th class="column-title">ชื่อ-นามสกุล </th>
                 <th class="column-title">เบอร์โทรศัพท์ </th>
                 <th class="column-title">ที่อยู่ </th>
+                <th class="column-title">อำเภอ </th>
                 <th class="column-title">จังหวัด </th>
                 <th class="column-title">รหัสไปรษณีย์ </th>
+                <th class="column-title">Comment </th>
                 <th class="column-title no-link last"><span class="nobr">แก้ไข</span>
                 </th>
                 <th class="bulk-actions" colspan="7">
@@ -147,13 +85,14 @@
               </thead>
               <tbody>
               <tr class="even pointer" data-ng-repeat="recipient in recipients | filter:searchText" data-ng-show="authentication.user._id == recipient.user._id">
-                <td>{{ $index + 1 }}</td>
                 <td ng-bind="recipient.created | date:'mediumDate'"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.name"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.tel"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.address"></td>
+                <td class="list-group-item-heading" ng-bind="recipient.ampher"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.country"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.postcode"></td>
+                <td class="list-group-item-heading" ng-bind="recipient.comment"></td>
                 <td>
                   <a href="#" class="btn btn-info btn-xs" data-ui-sref="recipients.edit({recipientId: recipient._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
                   <a href="#" class="btn btn-danger btn-xs" data-ng-click="remove(recipient);"><i class="fa fa-trash-o"></i> ลบ </a>
@@ -161,12 +100,11 @@
               </tr>
               </tbody>
             </table>
-            <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
-              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
+            <div class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="recipients.create">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
             </div>
           </div>
-        </div>
-      </div>
+        </div></div>
       <div class="text-center form-group">
         <nav aria-label="Page navigation">
           <ul class="pagination">
