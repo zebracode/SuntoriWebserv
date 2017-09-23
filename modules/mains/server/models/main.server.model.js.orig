@@ -109,11 +109,14 @@ var MainSchema = new Schema({
     trim: true,
     required: 'กรุณากรอกข้อมูลอำเภอ'
   },
+<<<<<<< HEAD
   r_comment: {
       type: String,
       default: '',
       trim: true
     },
+=======
+>>>>>>> origin/zebracode
   
   order: {
         type: String,
@@ -125,8 +128,12 @@ var MainSchema = new Schema({
         type: String,
         default: '',
         trim: true,
+<<<<<<< HEAD
+        required: true
+=======
         required: true,
         unique: true
+>>>>>>> origin/zebracode
     },
   price: {
         type: String,

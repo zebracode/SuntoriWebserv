@@ -1,4 +1,4 @@
-<div flex layout="row" data-ng-controller="SendsController as ul" data-ng-init="findOne()">
+<div flex layout="row" data-ng-controller="RecipientsController as ul" data-ng-init="findOne()">
     <!-- Container Left -->
     <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
                 class="md-whiteframe-z2" data-ng-show="authentication.user">
@@ -46,7 +46,7 @@
             <div class="col-md-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>รายชื่อผู้ส่ง</h2>
+                        <h2>รายชื่อผู้รับ</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -54,18 +54,17 @@
                             <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                 <tr class="headings">
-                                    <th class="text-center">เพิ่มรายชื่อผู้ส่ง</th>
+                                    <th class="text-center">เพิ่มรายชื่อผู้รับ</th>
                                 </tr>
                                 </thead>
                             </table>
-                            <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="sends.$resolved && !sends.length">
+                            <div ng-controller="PopupReController" class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
                                 <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ng-click="CreateOpen('lg')">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้ส่ง</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
-
-                        <form name="sendForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+                        <form name="recipientForm" class="form-horizontal" data-ng-submit="create()" novalidate>
                             <fieldset>
                                 <div layout-gt-sm="row">
                                     <md-input-container class="md-block" flex-gt-sm>
@@ -77,10 +76,13 @@
                                         <label>เบอร์โทรศัพท์</label>
                                         <input ng-model="tel">
                                     </md-input-container>
+<<<<<<< HEAD
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>อีเมลล์</label>
                                         <input ng-model="email">
                                     </md-input-container>
+=======
+>>>>>>> origin/zebracode
                                 </div>
 
                                 <md-input-container class="md-block">
@@ -119,46 +121,17 @@
                                             </div>
                                         </div>
                                     </md-input-container>
-
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <label>สินค้า</label>
-                                        <md-select ng-model="product">
-                                            <md-option ng-repeat="product in products" value="{{product.abbrev}}">
-                                                {{product.abbrev}}
-                                            </md-option>
-                                        </md-select>
+<<<<<<< HEAD
+                                    <md-input-container class="md-block">
+                                        <label>Comment</label>
+                                        <input ng-model="comment">
                                     </md-input-container>
-                                </div>
-
-                                <div class="row">
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <label>เลขบัตรประชาชน</label>
-                                        <input name="idNumber" ng-model="idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
-                                               required ng-pattern="/^[0-9]{13}$/" md-maxlength="13">
-
-                                        <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-                                            <div ng-message="required" class="my-message">กรุณาใส่เลขบัตรประชาชน</div>
-                                            <div ng-message="pattern" class="my-message">เลขบัตรประชาชนไม่ถูกต้อง
-                                            </div>
-                                            <div ng-message="md-maxlength" class="my-message">
-                                                กรอกเลขบัตรประชาชน 13 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่ถูกต้อง
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <label>เลขบัตรประชาชน</label>
-                                        <input name="idNumber" ng-model="idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
-                                               required ng-pattern="/^[0-9]{13}$/" md-maxlength="13">
-
-                                        <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-                                            <div ng-message="required" class="my-message">กรุณาใส่เลขบัตรประชาชน</div>
-                                            <div ng-message="pattern" class="my-message">เลขบัตรประชาชนไม่ถูกต้อง
-                                            </div>
-                                        </div>
-                                    </md-input-container>
-                                </div>
-                                    </md-input-container>
+=======
+>>>>>>> origin/zebracode
                                 </div>
                                 <div class="text-center form-group">
                                     <button class="btn btn-primary" type="submit" ng-click="ok()">ตกลง</button>
-                                    <button class="btn btn-warning" type="button" data-ui-sref="sends.list">ยกเลิก</button>
+                                    <button class="btn btn-warning" type="button" data-ui-sref="recipients.list">ยกเลิก</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -168,6 +141,3 @@
         </div>
     </md-content>
 </div>
-
-
-

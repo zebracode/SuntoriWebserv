@@ -19,7 +19,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.find = function () {
             $scope.mains = Mains.query();
             console.log("mains", $scope.mains);
-        }; 
+<<<<<<< HEAD
+        };
 
         $scope.printformA6 = function(main) {
                     console.log("Print AW FormA6");
@@ -32,9 +33,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         }
         $scope.printformA4 = function(main) {
                     console.log("Print AW FormA4");
-                    //$http.get('/print/awpost');
-                }
-     
+=======
+        }; 
+
 
         $scope.printformA5 = function(main) {
             console.log("Print AW Form");
@@ -42,6 +43,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         }
         $scope.printformA4 = function(main) {
                     console.log("Print AW Form");
+>>>>>>> origin/zebracode
                     //$http.get('/print/awpost');
                 }
      

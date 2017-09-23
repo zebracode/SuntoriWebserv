@@ -77,10 +77,13 @@
                                         <label>เบอร์โทรศัพท์</label>
                                         <input ng-model="tel">
                                     </md-input-container>
+<<<<<<< HEAD
                                     <md-input-container class="md-block" flex-gt-sm>
                                         <label>อีเมลล์</label>
                                         <input ng-model="email">
                                     </md-input-container>
+=======
+>>>>>>> origin/zebracode
                                 </div>
 
                                 <md-input-container class="md-block">
@@ -142,18 +145,8 @@
                                             </div>
                                             <div ng-message="md-maxlength" class="my-message">
                                                 กรอกเลขบัตรประชาชน 13 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่ถูกต้อง
-                                    <md-input-container class="md-block" flex-gt-sm>
-                                        <label>เลขบัตรประชาชน</label>
-                                        <input name="idNumber" ng-model="idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
-                                               required ng-pattern="/^[0-9]{13}$/" md-maxlength="13">
-
-                                        <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
-                                            <div ng-message="required" class="my-message">กรุณาใส่เลขบัตรประชาชน</div>
-                                            <div ng-message="pattern" class="my-message">เลขบัตรประชาชนไม่ถูกต้อง
                                             </div>
                                         </div>
-                                    </md-input-container>
-                                </div>
                                     </md-input-container>
                                 </div>
                                 <div class="text-center form-group">

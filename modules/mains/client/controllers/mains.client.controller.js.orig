@@ -10,9 +10,12 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.thailandPost = new ThailandPost();
     $scope.selectedMains = [];
     $scope.price = 0;
+<<<<<<< HEAD
     $scope.order = 0;
     $scope.invoice = 0;
 
+=======
+>>>>>>> origin/zebracode
     // Create new Main
     $scope.create = function () {
       var total = $filter("provincePrice")(this.selectedOption.price, this.s_country, this.r_country);
@@ -61,13 +64,20 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.r_country = '';
         $scope.r_ampher = '';
         $scope.r_postcode = '';
+<<<<<<< HEAD
         $scope.r_comment = '';
         $scope.order = 0;
         $scope.invoice = 0;
         $scope.price = 0;
         $scope.weight = '';
-        $scope.detail = '';
+//        $scope.selectedOption.value = '';
         $scope.option.name = --เลือกน้ำหนัก/เลือกขนาด--;
+=======
+        $scope.order = '';
+        $scope.invoice = '';
+        $scope.price = 0;
+        $scope.weight = '';
+>>>>>>> origin/zebracode
 //        $scope.detail = '';
         $scope.barcode = '';
       }, function (errorResponse) {
@@ -130,8 +140,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     $scope.options = [
         {
+<<<<<<< HEAD
           name: '--เลือกน้ำหนัก/เลือกขนาด--',
           value: '',
+=======
+          name: 'เลือกกล่องน้ำหนัก',
+          value: '0',
+>>>>>>> origin/zebracode
           price: '0'
         },
         {
@@ -265,9 +280,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       $scope.reset = function() {
           $scope.options = {เลือกกล่องน้ำหนัก}
       };
+<<<<<<< HEAD
 
 
       // Autocomplete
+=======
+      
+>>>>>>> origin/zebracode
       $scope.getSenderName = function(searchText) {
           return $http
             .get('/api/send/findByName?searchText=' + searchText + '&userId=' + $scope.authentication.user._id)
@@ -323,7 +342,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $scope.totalPrice = $scope.totalPrice - Number(total);
           setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/zebracode
     function setBarcode(selectedMain, inc) {
         var prefix = "EY";
         var suffix = "TH";
@@ -533,6 +556,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.status = 'You decided to keep your debt.';
         });
     };
+<<<<<<< HEAD
 
     $scope.showAddlist = function (ev, selectedMains) {
           // Appending dialog to document.body to cover sidenav in docs app
@@ -548,157 +572,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.status = 'Confirm';
         });
     };
-    
-    // Set 2P2C request parameter
-    $scope.setPaymentForm = function(amount){
-        var formatedAmount = formatAmount(amount, 10);
-        console.log("$scope.authentication", $scope.authentication);
-        var topUpUser = $scope.authentication.user.firstName + ' ' + $scope.authentication.user.lastName;
-        var data = {
-          amount: formatedAmount,
-          paymentDescription: 'Top-up by ' + topUpUser
-        };
-
-        $http.post("/payment", data)
-        .then(function(response) {
-            $scope.version = response.data.version;
-            $scope.merchant_id = response.data.merchantId;
-            $scope.payment_description = response.data.paymentDescription;
-            $scope.order_id = response.data.orderId;
-            $scope.invoice_no = response.data.invoiceNo;
-            $scope.amount = response.data.amount;
-            $scope.result_url_1 = response.data.resultUrl1;
-            $scope.result_url_2 = response.data.resultUrl2;
-            $scope.default_lang = response.data.defaultLang;
-            $scope.hash_value = response.data.hashValue;
-            console.log("version", $scope.version);
-            console.log("merchant_id", $scope.merchant_id);
-            console.log("order_id", $scope.order_id);
-            console.log("amount", $scope.amount);
-            console.log("hash_value", $scope.hash_value);
-        });
-
-        function formatAmount(amount, length) {
-          var str = '' + amount;
-          while (str.length < length) {
-            str = '0' + str;
-          }
-
-          return str + '00';
-        }
-    };
-    
-    $scope.payment = function(){
-        document.authForm.submit();        
-    };
-    
-    $scope.retrieveMain = function(){
-      var result = Mains.retrieveMain(Authentication.user);
-      console.log("Result: ", result);
-    };
-    
-    $scope.setBalanceAmt = function(){
-        $http.get("/api/balance?userId=" + $scope.authentication.user._id)
-            .then(function(res) {
-              if (res.data !== null) {
-                $scope.balanceAmount = res.data.balanceAmt;
-              } else {
-                $scope.balanceAmount = '0';
-              }
-        });
-    };
-    
-    $scope.updateBalance = function (balanceAmt) {
-        var data = { userId: $scope.authentication.user._id, balanceAmt: balanceAmt};
-        $scope.balanceAmount = balanceAmt;
-        $http.put('/api/balance',data).then(function(){
-        });      
-    };
-    
-    /************************** Dialog Zone ****************************/
-    $scope.showConfirm = function (ev, selectedMains) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-        .title('ยืนยันการชำระเงิน')
-        .textContent('กรุณายืนยันการชำระเงิน')
-        .ariaLabel('Lucky day')
-        .targetEvent(ev)
-        .ok('ยืนยัน')
-        .cancel('ยกเลิก');
-
-      $mdDialog.show(confirm).then(function () {
-        $scope.status = 'Confirm';
-        
-        //update balance amount
-        $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
-        
-        selectedMains.sort();
-        for(var i=0; i<selectedMains.length; i++){
-            setBarcode(selectedMains[i], i);
-        }
-        
-        
-        var inc = selectedMains.length;
-        
-        $http.get("/lastNumber").then(function (response) {
-          var req = {
-            method: 'PUT',
-            url: '/lastNumber',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            data: {
-                number : parseInt(response.data.number) + inc + ""
-            }
-          };
-
-          $http(req).then(function (response) {
-            $scope.find();   
-          });
-        });        
-      }, function () {
-        $scope.status = 'Cancel';
-      });
-    };
-    
-    $scope.showTopUpPromt = function(event) {
-    // Appending dialog to document.body to cover sidenav in docs app
-        var confirm = $mdDialog.prompt()
-          .title('เติมเงิน')
-          .textContent('ระบุจำนวนเงินที่ต้องการเติม')
-          .placeholder('จำนวนเงิน')
-          .ariaLabel('')
-          .initialValue('')
-          .targetEvent(event)
-          .ok('ตกลง')
-          .cancel('ยกเลิก');
-
-          $mdDialog.show(confirm).then(function(result) {
-            $scope.setPaymentForm(result);
-            $scope.showConfirmTopUp(event, result);
-            //$scope.payment();
-            $scope.status = 'You decided to name your dog ' + result + '.';
-          }, function() {
-            $scope.status = 'You didn\'t name your dog.';
-          });
-    };    
-    
-    $scope.showConfirmTopUp = function(event, amount) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        var confirm = $mdDialog.confirm()
-              .title('ยืนยันการเติมเงิน')
-              .textContent('ยอดเติมเงิน ' + amount)
-              .ariaLabel('Lucky day')
-              .targetEvent(event)
-              .ok('ตกลง')
-              .cancel('ยกเลิก');
-
-        $mdDialog.show(confirm).then(function() {
-          $scope.payment();
-          }, function() {
-            $scope.status = 'You decided to keep your debt.';
-        });
-    };
+=======
+>>>>>>> origin/zebracode
     
     // Set 2P2C request parameter
     $scope.setPaymentForm = function(amount){

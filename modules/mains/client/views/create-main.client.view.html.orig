@@ -66,7 +66,11 @@
                 </md-autocomplete>
               </div>
 
+<<<<<<< HEAD
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+=======
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+>>>>>>> origin/zebracode
                 <input name="s_name" type="text" data-ng-model="s_name" id="s_name" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล" required>
                 <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
               </div>
@@ -85,14 +89,22 @@
                 <input name="s_address" type="text" data-ng-model="s_address" id="s_address" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ที่อยู่">
                 <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
               </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="s_ampher" type="text" data-ng-model="s_ampher" type="text" class="form-control has-feedback-left" id="inputSuccess6" placeholder="อำเภอ">
                 <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+<<<<<<< HEAD
                 <input name="s_idNumber" type="text" data-ng-model="s_idNumber" type="text" class="form-control" id="inputSuccess4" placeholder="เลขบัตรประชาชน">
                 <span class="fa fa-plane form-control-feedback right" aria-hidden="true"></span>
+=======
+                <input name="s_ampher" type="text" data-ng-model="s_ampher" id="s_ampher" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="อำเภอ">
+                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+>>>>>>> origin/zebracode
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+<<<<<<< HEAD
                 <md-input-container class="md-block" flex-gt-sm>
                   <label>จังหวัด</label>
                   <md-select ng-model="s_country">
@@ -101,13 +113,26 @@
                     </md-option>
                   </md-select>
                 </md-input-container>
+=======
+                <input name="s_country" type="text" data-ng-model="s_country" type="text" class="form-control" id="inputSuccess4" placeholder="จังหวัด">
+                <span class="fa fa-plane form-control-feedback right" aria-hidden="true"></span>
+>>>>>>> origin/zebracode
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+<<<<<<< HEAD
                 <md-input-container class="md-block" flex-gt-sm>
                   <label>รหัสไปรษณีย์</label>
                   <input name="postcode" ng-model="s_postcode"
                          required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
                 </md-input-container>
+=======
+                <input name="s_postcode" type="text" data-ng-model="s_postcode" type="text" class="form-control has-feedback-left" id="inputSuccess6" placeholder="รหัสไปรษณีย์">
+                <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input name="s_idNumber" type="text" data-ng-model="s_idNumber" type="text" class="form-control" id="inputSuccess4" placeholder="เลขบัตรประชาชน">
+                <span class="fa fa-plane form-control-feedback right" aria-hidden="true"></span>
+>>>>>>> origin/zebracode
               </div>
 
               <!--<div class="form-group">-->
@@ -143,13 +168,13 @@
                   <span md-highlight-text="searchText">{{recipient.name}}</span>
                 </md-autocomplete>
 
+<<<<<<< HEAD
               </div>
 
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 <input name="r_name" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ชื่อ-นามสกุล" required>
                 <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
               </div>
-
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="r_tel" data-ng-model="r_tel" id="r_tel" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="เบอร์โทร" required>
@@ -158,6 +183,18 @@
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="r_email" data-ng-model="r_email" id="r_email" type="text" class="form-control" id="inputSuccess3" placeholder="อีเมลล์">
+=======
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input name="r_name" type="text" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ชื่อ-นามสกุล" required>
+                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input name="r_tel" type="r_tel" data-ng-model="r_tel" id="r_tel" type="text" class="form-control" id="inputSuccess3" placeholder="เบอร์โทร">
+>>>>>>> origin/zebracode
                 <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
               </div>
 
@@ -167,6 +204,7 @@
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+<<<<<<< HEAD
                 <input name="r_ampher" type="text" data-ng-model="r_ampher" id="r_ampher" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="อำเภอ">
                 <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
               </div>
@@ -194,12 +232,28 @@
                 </md-input-container>
               </div>
 
+=======
+                <input name="r_ampher" type="text" data-ng-model="r_ampher" id="r_ampher" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="อำเภอ">
+                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+              <input name="r_country" type="text" data-ng-model="r_country" id="r_country" type="text" class="form-control" id="inputSuccess4" placeholder="จังหวัด">
+              <span class="fa fa-globe form-control-feedback right" aria-hidden="true"></span>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <input name="r_postcode" type="text" data-ng-model="r_postcode" id="r_postcode" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="รหัสไปรษณีย์">
+                <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
+              </div>
+
+
+>>>>>>> origin/zebracode
               <!--<div class="form-group">-->
                 <!--<div class="col-md-2 col-sm-9 col-xs-12 col-md-offset-0">-->
                   <!--<button class="btn btn-primary" type="reset">รีเซ็ตผู้ส่ง</button>-->
                 <!--</div>-->
               <!--</div>-->
-
 
             </form>
           </div>
@@ -219,7 +273,11 @@
               <input type="hidden" ng-model="total" value="selectedOption.price">
               <input type="hidden" ng-model="weight" value="selectedOption.value">
               
+<<<<<<< HEAD
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" controller="Scoper">
+=======
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+>>>>>>> origin/zebracode
                 <input name="order" type="text" data-ng-model="order" id="order" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Order No">
                 <span class="fa fa-shopping-cart form-control-feedback left" aria-hidden="true"></span>
               </div>
@@ -278,15 +336,20 @@
                     </div>
                   </div>
                   <div class="form-group">
+<<<<<<< HEAD
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
                       <button class="btn btn-warning" type="submit" ng-disabled="myForm.$error.required" ng-click="showAddlist($event, selectedMains);">ยืนยัน</button>
                       <button class="btn btn-primary" type="submit" data-ui-sref="mains.list">ชำระเงิน</button>
+=======
+                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2">
+                      <button class="btn btn-warning" type="submit">เพิ่มรายการต่อไป</button>
+                      <button class="btn btn-primary" type="submit" data-ui-sref="mains.list">ขั้นตอนชำระเงิน</button>
+>>>>>>> origin/zebracode
                     </div>
                   </div>
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                     <alert type="danger" data-ng-show="error" class="text-center text-danger">
                       <span data-ng-bind="error"></span>
-                    </alert>
                     </alert>
                   </div>
                 </div>

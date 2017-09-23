@@ -70,8 +70,12 @@
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">ผู้รับ </th>
                   <th class="column-title">เบอร์โทร </th>
-                  <!--<th class="column-title">นน.(กรัม) </th>-->
-                  <!--<th class="column-title">ยอดเรียกเก็บ </th>-->
+<<<<<<< HEAD
+                  <th class="column-title">นน.ก่อน </th>
+=======
+                  <th class="column-title">นน.(คาดว่า) </th>
+>>>>>>> origin/zebracode
+                  <th class="column-title">COD </th>
                   <th class="column-title">ค่าส่ง </th>
                   <th class="column-title">สถานะจัดส่ง </th>
                   <th class="column-title">ชำระเงิน</th>
@@ -86,8 +90,9 @@
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_name"></td>
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
-                  <!--<td class="list-group-item-heading" ng-bind="main.weight"></td>-->
+                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <!--<td class="list-group-item-heading" ng-bind="main.price"></td>-->
+                  <td class="list-group-item-heading" ng-bind="main.price"></td>
                   <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td ng-init="disabled=true;">
                     <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
@@ -181,21 +186,6 @@
         <input type='hidden' id='order_id' name='order_id' value="{{order_id}}"/>                    
         <input type='hidden' id='invoice_no' name='invoice_no' value="{{invoice_no}}"/>
         <input type='hidden' id='currency' name='currency' ng-model='currency'/>
-<<<<<<< HEAD
-        <input type='hidden' id='amount' name='amount' value="000000002500" ng-model='amount'/>
-        <input type='hidden' id='customer_email' name='customer_email' ng-model='customer_email'/>
-        <input type='hidden' id='pay_category_id' name='pay_category_id' ng-model='pay_category_id'/>
-        <input type='hidden' id='promotion' name='promotion' ng-model='promotion'/>
-        <input type='hidden' id='user_defined_1' name='user_defined_1' ng-model='user_defined_1'/>
-        <input type='hidden' id='user_defined_2' name='user_defined_2' ng-model='user_defined_2'/>
-        <input type='hidden' id='user_defined_3' name='user_defined_3' ng-model='user_defined_3'/>
-        <input type='hidden' id='user_defined_4' name='user_defined_4' ng-model='user_defined_4'/>
-        <input type='hidden' id='user_defined_5' name='user_defined_5' ng-model='user_defined_5'/>
-        <input type='hidden' id='result_url_1' name='result_url_1' ng-model='result_url_1'/>
-        <input type='hidden' id='result_url_2' name='result_url_2' ng-model='result_url_2'/>
-        <input type='hidden' id='request_3ds' name='request_3ds' ng-model='request_3ds'/>
-        <!--<input type='text' id='hash_value' name='hash_value' value="{{hash_value}}"/>-->
-=======
         <input type='hidden' id='amount' name='amount' value="{{amount}}"/>
         <input type='hidden' id='customer_email' name='customer_email'/>
         <input type='hidden' id='pay_category_id' name='pay_category_id'/>
@@ -209,8 +199,7 @@
         <input type='hidden' id='result_url_2' name='result_url_2' value="{{result_url_2}}"/>
         <input type='hidden' id='default_lang' name='default_lang' value="{{default_lang}}"/>
         <input type='hidden' id='request_3ds' name='request_3ds'/>
-        <input type='text' id='hash_value' name='hash_value' value="{{hash_value}}"/>
->>>>>>> origin/zebracode
+        <input type='hidden' id='hash_value' name='hash_value' value="{{hash_value}}"/>
 
     </form>
     
