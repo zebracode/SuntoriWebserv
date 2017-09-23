@@ -52,16 +52,16 @@
           <div class="x_content">
 
             <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
-              
+
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                
+
                 <md-autocomplete
-                  placeholder ='ค้นหาผู้ส่ง'
-                  md-selected-item="selectedSender" 
-                  md-search-text="searchText" 
-                  md-items="item in getSenderName(searchText)" 
-                  md-item-text="item.name"
-                  md-selected-item-change='setSenderData()'>
+                        placeholder ='ค้นหาผู้ส่ง'
+                        md-selected-item="selectedSender"
+                        md-search-text="searchText"
+                        md-items="item in getSenderName(searchText)"
+                        md-item-text="item.name"
+                        md-selected-item-change='setSenderData()'>
                   <span md-highlight-text="searchText">{{item.name}}</span>
                 </md-autocomplete>
               </div>
@@ -80,11 +80,13 @@
                 <input name="s_email" type="text" data-ng-model="s_email" id="s_email" type="text" class="form-control" id="inputSuccess3" placeholder="อีเมลล์">
                 <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
               </div>
-              
+
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 <input name="s_address" type="text" data-ng-model="s_address" id="s_address" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ที่อยู่">
                 <span class="fa fa-home form-control-feedback left" aria-hidden="true"></span>
               </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="s_ampher" type="text" data-ng-model="s_ampher" type="text" class="form-control has-feedback-left" id="inputSuccess6" placeholder="อำเภอ">
                 <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
               </div>
@@ -111,9 +113,9 @@
               </div>
 
               <!--<div class="form-group">-->
-                <!--<div class="col-md-2 col-sm-9 col-xs-12 col-md-offset-0">-->
-                  <!--<button class="btn btn-primary" type="reset">รีเซ็ตผู้รับ</button>-->
-                <!--</div>-->
+              <!--<div class="col-md-2 col-sm-9 col-xs-12 col-md-offset-0">-->
+              <!--<button class="btn btn-primary" type="reset">รีเซ็ตผู้รับ</button>-->
+              <!--</div>-->
               <!--</div>-->
 
               <!--<div class="ln_solid"></div>-->
@@ -134,12 +136,12 @@
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
 
                 <md-autocomplete
-                  placeholder ='ค้นหาผู้รับ'
-                  md-selected-item="selectedRecipient"
-                  md-search-text="search"
-                  md-items="recipient in getRecipients(search)"
-                  md-item-text="recipient.name"
-                  md-selected-item-change='setRecipientData()'>
+                        placeholder ='ค้นหาผู้รับ'
+                        md-selected-item="selectedRecipient"
+                        md-search-text="search"
+                        md-items="recipient in getRecipients(search)"
+                        md-item-text="recipient.name"
+                        md-selected-item-change='setRecipientData()'>
                   <span md-highlight-text="searchText">{{recipient.name}}</span>
                 </md-autocomplete>
 
@@ -149,7 +151,6 @@
                 <input name="r_name" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ชื่อ-นามสกุล" required>
                 <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
               </div>
-
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="r_tel" data-ng-model="r_tel" id="r_tel" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="เบอร์โทร" required>
@@ -195,11 +196,10 @@
               </div>
 
               <!--<div class="form-group">-->
-                <!--<div class="col-md-2 col-sm-9 col-xs-12 col-md-offset-0">-->
-                  <!--<button class="btn btn-primary" type="reset">รีเซ็ตผู้ส่ง</button>-->
-                <!--</div>-->
+              <!--<div class="col-md-2 col-sm-9 col-xs-12 col-md-offset-0">-->
+              <!--<button class="btn btn-primary" type="reset">รีเซ็ตผู้ส่ง</button>-->
               <!--</div>-->
-
+              <!--</div>-->
 
             </form>
           </div>
@@ -215,10 +215,10 @@
           <div class="x_content">
 
             <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
-              
+
               <input type="hidden" ng-model="total" value="selectedOption.price">
               <input type="hidden" ng-model="weight" value="selectedOption.value">
-              
+
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" controller="Scoper">
                 <input name="order" type="text" data-ng-model="order" id="order" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Order No">
                 <span class="fa fa-shopping-cart form-control-feedback left" aria-hidden="true"></span>
@@ -286,7 +286,6 @@
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                     <alert type="danger" data-ng-show="error" class="text-center text-danger">
                       <span data-ng-bind="error"></span>
-                    </alert>
                     </alert>
                   </div>
                 </div>
