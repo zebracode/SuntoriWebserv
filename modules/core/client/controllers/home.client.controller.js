@@ -42,6 +42,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.currentPage = 1;
         $scope.pageSize = 10;
 
+
         // Remove existing Main
         $scope.remove = function (main) {
               if (main) {

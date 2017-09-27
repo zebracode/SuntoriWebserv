@@ -10,8 +10,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.thailandPost = new ThailandPost();
     $scope.selectedMains = [];
     $scope.price = 0;
-    $scope.order = 0;
-    $scope.invoice = 0;
+    $scope.order = Date.now();
+    $scope.invoice = Date.now();
+
 
     // Create new Main
     $scope.create = function () {
@@ -54,6 +55,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 //        $scope.s_ampher = '';
 //        $scope.s_country = '';
 //        $scope.s_postcode = '';
+//        $scope.detail = '';
         $scope.r_name = '';
         $scope.r_tel = '';
         $scope.r_email = '';
@@ -62,11 +64,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.r_ampher = '';
         $scope.r_postcode = '';
         $scope.r_comment = '';
-        $scope.order = 0;
-        $scope.invoice = 0;
+        $scope.order = Date.now();
+        $scope.invoice = Date.now();
         $scope.price = 0;
         $scope.weight = '';
-        $scope.detail = '';
         $scope.option.name = --เลือกน้ำหนัก/เลือกขนาด--;
 //        $scope.detail = '';
         $scope.barcode = '';
