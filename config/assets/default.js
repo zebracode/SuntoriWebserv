@@ -10,7 +10,8 @@ module.exports = {
         'public/lib/angular-bootstrap/ui-bootstrap-csp.css',
         'public/lib/gentelella/build/css/custom.css',
         'public/lib/gentelella/vendors/font-awesome/css/font-awesome.css',
-        'public/lib/gentelella/vendors/nprogress/nprogress.css'
+        'public/lib/gentelella/vendors/nprogress/nprogress.css',
+        'public/lib/ng-table/dist/ng-table.min.css'
       ],
       js: [
         'public/lib/angular/angular.js',
@@ -22,7 +23,9 @@ module.exports = {
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/angular-file-upload/angular-file-upload.js'
+        'public/lib/angular-file-upload/angular-file-upload.js',
+        'public/lib/angularUtils-pagination/dirPagination.js',
+        'public/lib/ng-table/dist/ng-table.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -13,7 +13,8 @@
     "angular-ui-router": "~0.2",
     "angular-file-upload": "1.1.5",
     "angular-material": "^1.1.4",
-    "gentelella": "^1.4.0"
+    "gentelella": "^1.4.0",
+    "ng-table": "1.0.0"
   },
   "resolutions": {
     "angular": "~1.3"

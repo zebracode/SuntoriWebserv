@@ -114,6 +114,7 @@
                   <th class="column-title">วันที่ </th>
                   <th class="column-title">Tracking No.</th>
                   <th class="column-title">ผู้ส่ง </th>
+                  <th class="column-title">ผู้รับ </th>
                   <th class="column-title">เบอร์โทร </th>
                   <th class="column-title">นน.ก่อน </th>
                   <th class="column-title">นน.หลัง </th>
@@ -122,28 +123,33 @@
                   <th class="column-title">ส่วนต่าง </th>
                   <th class="column-title">สถานะจัดส่ง </th>
                   <th class="column-title">ชำระเงิน</th>
+                  <!--<th class="column-title">แก้ไข</th>-->
                   <th class="bulk-actions" colspan="7">
-                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions <span class="action-cnt"> </span> <i class="fa fa-chevron-down"></i></a>
                   </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status !== 'ยังไม่ได้ชำระเงิน'">
+                <tr class="even pointer" data-ng-repeat="main in mains | pagination: (currentPage - 1) * pageSize | limitTo: pageSize | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status !== 'ยังไม่ได้ชำระเงิน'">
                   <td ng-bind="main.created | date:'mediumDate'"></td>
                   <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                   <td class="list-group-item-heading" ng-bind="main.s_name"></td>
+                  <td class="list-group-item-heading" ng-bind="main.r_name"></td>
                   <td class="list-group-item-heading" ng-bind="main.s_tel"></td>
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
-                  <td class="list-group-item-heading" ng-bind="main.total"></td>
-                  <td class="list-group-item-heading" ng-bind="main.total"></td>
-                  <td class="list-group-item-heading" ng-bind="main.total"></td>
+                  <td class="list-group-item-heading" ng-bind=""></td>
+                  <td class="list-group-item-heading" ng-bind=""></td>
+                  <td class="list-group-item-heading" ng-bind=""></td>
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
                     <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
                     <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>
                     <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A6 </a>
                   </td>
+                  <!--<td>-->
+                    <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                  <!--</td>-->
                 </tr>
                 </tbody>
               </table>
@@ -154,25 +160,7 @@
 
             </div>
             <div class="text-center form-group">
-              <nav aria-label="Page navigation">
-                <ul class="pagination">
-                  <li>
-                    <a href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li>
-                    <a href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <ul uib-pagination total-items="mains.length" items-per-page="pageSize" ng-model="currentPage" ng-change="pageChanged()"></ul>
             </div>
           </div>
         </div>
@@ -254,58 +242,7 @@
           </div>
         </div>
       </div>
-      <!--/ Banner-->
-      <!--Organisations-->
-      <!--<section id ="organisations" class="section-padding">-->
-        <!--<div class="container">-->
-          <!--<div class="col-md-2"></div>-->
-          <!--<div class="col-md-8">-->
-            <!--<div class="row">-->
-              <!--<div class="col-md-6">-->
-                <!--<iframe width="450" height="253" src="https://www.youtube.com/embed/y3a5BFST6BU" frameborder="0" allowfullscreen></iframe>-->
-                <!--&lt;!&ndash;<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<div class="orga-stru">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<h3>65%</h3>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p>Say NO!!</p>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<i class="fa fa-male"></i>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<div class="orga-stru">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<h3>20%</h3>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p>Says Yes!!</p>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<i class="fa fa-male"></i>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<div class="orga-stru">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<h3>15%</h3>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p>Can't Say!!</p>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<i class="fa fa-male"></i>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-              <!--</div>-->
-              <!--<div class="col-md-6">-->
-                <!--<div class="detail-info">-->
-                  <!--<hgroup>-->
-                    <!--<h3 class="det-txt"> ขั้นตอนการใช้งานระบบ </h3>-->
-                    <!--<h4 class="sm-txt">เริ่มต้นเพียงแค่ 60 บาทเท่านั้น!</h4>-->
-                  <!--</hgroup>-->
-                  <!--<li><i class="fa fa-building"></i> ไม่ต้องต่อคิว</li>-->
-                  <!--<li><i class="fa fa-building"></i> สะดวกด้วยจุด Drop off 113 แห่งทั่วประเทศ </li>-->
-                  <!--<li><i class="fa fa-building"></i> มีบริการเรียกรับพัสดุ (เฉพาะกรุงเทพฯ และปริมณฑล)</li>-->
-                  <!--<li><i class="fa fa-building"></i> ชำระเงินออนไลน์ได้เลย </li>-->
-                  <!--<li><i class="fa fa-building"></i> ฟรี! สร้างใบปะหน้า </li>-->
-                  <!--<li><i class="fa fa-building"></i> ฟรี! ระบบติดตามพัสดุ </li>-->
-                  <!--<li><i class="fa fa-building"></i> ฟรี! สร้างหมายเลขพัสดุไว้ก่อน </li>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="col-md-2"></div>-->
-        <!--</div>-->
-      <!--</section>-->
-      <!--/ Organisations-->
+
       <!--Footer-->
       <footer id="footer" class="footer">
         <div class="container text-center">
@@ -317,7 +254,8 @@
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Mentor
             -->
-            System by <a href="https://zebra-code.com/">ZebraCode Co.,Ltd.</a>
+            <h2>ติดต่อลูกค้าสัมพันธ์ 062-9452422</h2>
+            <h2> LINE ID : @suntorix</h2>
           </div>
         </div>
       </footer>

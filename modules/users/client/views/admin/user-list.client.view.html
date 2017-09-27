@@ -1,4 +1,4 @@
-<!--<section>-->
+<!--<section data-ng-controller="UserListController">-->
   <!--<div class="page-header">-->
     <!--<div class="row">-->
       <!--<div class="col-md-2"></div>-->
@@ -13,13 +13,16 @@
     <!--</div>-->
   <!--</div>-->
   <!--<div class="list-group">-->
-    <!--<a data-ng-repeat="user in pagedItems" data-ui-sref="admin.user({userId: user._id})" class="list-group-item">-->
+    <!--<a data-ng-repeat="user in pagedItems | limitTo: itemsPerPage" data-ui-sref="admin.user({userId: user._id})" class="list-group-item">-->
       <!--<h4 class="list-group-item-heading" data-ng-bind="user.username"></h4>-->
       <!--<p class="list-group-item-text" data-ng-bind="user.email"></p>-->
     <!--</a>-->
   <!--</div>-->
 
   <!--<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
+
+  <!--<ul uib-pagination total-items="users.length" items-per-page="itemsPerPage" ng-model="currentPage"></ul>-->
+
 <!--</section>-->
 
 
@@ -123,11 +126,10 @@
                     <th class="column-title">ยอดเงิน</th>
                     <th class="column-title">เติมเงิน</th>
                     <!--<th class="column-title">แก้ไข</th>-->
-                    <th class="column-title">แก้ไข</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="user in users | filter:searchText"  class="list-group-item"  ng-init="setBalanceAmt($index);">
+                  <tr class="even pointer" data-ng-repeat="user in users | pagination: (currentPage - 1) * pageSize | limitTo: pageSize |filter:searchText"  class="list-group-item"  ng-init="setBalanceAmt($index);">
                     <td>{{ $index + 1 }}</td>
                     <td ng-bind="user.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
@@ -146,25 +148,7 @@
                 </table>
               </div>
               <div class="text-center form-group">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                      <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+                <ul uib-pagination total-items="users.length" items-per-page="pageSize" ng-model="currentPage" ng-change="pageChanged()"></ul>
               </div>
             </div>
           </div>
