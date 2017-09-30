@@ -449,52 +449,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         });      
     };
     
-    /************************** Dialog Zone ****************************/
-    $scope.showConfirm = function (ev, selectedMains) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-        .title('ยืนยันการชำระเงิน')
-        .textContent('กรุณายืนยันการชำระเงิน')
-        .ariaLabel('Lucky day')
-        .targetEvent(ev)
-        .ok('ยืนยัน')
-        .cancel('ยกเลิก');
-
-      $mdDialog.show(confirm).then(function () {
-        $scope.status = 'Confirm';
-        
-        //update balance amount
-        $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
-        
-        selectedMains.sort();
-        for(var i=0; i<selectedMains.length; i++){
-            setBarcode(selectedMains[i], i);
-        }
-        
-        
-        var inc = selectedMains.length;
-        
-        $http.get("/lastNumber").then(function (response) {
-          var req = {
-            method: 'PUT',
-            url: '/lastNumber',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            data: {
-                number : parseInt(response.data.number) + inc + ""
-            }
-          };
-
-          $http(req).then(function (response) {
-            $scope.find();   
-          });
-        });        
-      }, function () {
-        $scope.status = 'Cancel';
-      });
-    };
-    
     $scope.showTopUpPromt = function(event) {
     // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.prompt()
@@ -627,7 +581,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         .cancel('ยกเลิก');
 
       $mdDialog.show(confirm).then(function () {
-        $scope.status = 'Confirm';
+        /*$scope.status = 'Confirm';
         
         //update balance amount
         $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
@@ -655,7 +609,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $http(req).then(function (response) {
             $scope.find();   
           });
-        });        
+        }); */
+  
+        //Show dialog for print all and bill
+        $scope.showPrintAllAndBill(ev);
+
       }, function () {
         $scope.status = 'Cancel';
       });
@@ -699,6 +657,35 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.status = 'You decided to keep your debt.';
         });
     };
+
+    $scope.showPrintAllAndBill = function(ev) { $mdDialog.show({
+        controller: DialogController,
+        templateUrl: 'dialog1.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+    };
+
+    function DialogController($scope, $mdDialog) {
+      $scope.hide = function() {
+        $mdDialog.hide();
+      };
+
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+
+      $scope.answer = function(answer) {
+        $mdDialog.hide(answer);
+      };
+    }
     
     // Set 2P2C request parameter
     $scope.setPaymentForm = function(amount){
