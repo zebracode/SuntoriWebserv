@@ -80,24 +80,31 @@
 
 
             <div class="clearfix"></div>
-            <div class="x_content">
-              <br />
-
-              <div class="md-padding" ng-cloak>
-                <div>
-                  <h1 class="md-title">เลือกจากเข้าของบัญชี</h1>
-                  <div layout="row">
-                    <md-input-container>
-                      <label>ชื่อเจ้าของบัญชี</label>
-                      <md-select ng-model="user.displayName" md-selected-text="getSelectedText()">
-                        <md-optgroup label="เลือกเจ้าของบัญชี">
-                          <md-option ng-value="item" ng-repeat="user in users">{{ user.displayName }}</md-option>
-                        </md-optgroup>
-                      </md-select>
-                    </md-input-container>
-                  </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div layout="column"class="md-padding" layout-align="center center">
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.username" md-on-open="loadUsers()" style="min-width: 200px;">
+                    <md-option ng-value="user.username" ng-repeat="user in users">{{user.username}}</md-option>
+                  </md-select>
+                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.username : 'ยังไม่ได้เลือก' }}</p>
+                  <md-button type="reset" ng-disabled="!(user.username)">Clear</md-button>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div layout="column"class="md-padding" layout-align="center center">
+                  <span>
+                  <md-datepicker ng-model="main.created"></md-datepicker>
+                  </span>
+                  <span>
+                  <md-datepicker ng-model="main.created"></md-datepicker>
+                    </span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="x_content">
+              <br />
 
               <div class="table-responsive">
                 <table class="table table-striped jambo_table bulk_action">
@@ -118,7 +125,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="main in mains | pagination: (currentPage - 1) * pageSize | limitTo: pageSize | filter:searchText">
+                  <tr class="even pointer" data-ng-repeat="main in mains | pagination: (currentPage - 1) * pageSize | limitTo: pageSize | filter:user.username + searchText">
                     <td ng-bind="main.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                     <td class="list-group-item-heading" ng-bind="main.s_name"></td>

@@ -13,7 +13,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.order = Date.now();
     $scope.invoice = Date.now();
 
-
     // Create new Main
     $scope.create = function () {
       var total = $filter("provincePrice")(this.selectedOption.price, this.s_country, this.r_country);
