@@ -25,4 +25,7 @@ module.exports = function (app) {
   
   app.post('/api/update/barcode', mains.setBarcode).all(mainsPolicy.isAllowed);
   
+  app.get('/print/list', mains.printList);
+  app.get('/print/bill', mains.printBill);
+
 };

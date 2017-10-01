@@ -174,6 +174,11 @@ var MainSchema = new Schema({
     type: String,
     default: '',
     trim: true
+  },
+  rcpDocNo: {
+    type: String,
+    default: '',
+    trim: true
   }
 });
 

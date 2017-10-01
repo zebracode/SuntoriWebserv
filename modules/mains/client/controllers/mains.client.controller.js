@@ -107,6 +107,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.find = function () {
       $scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
         var firstTotalPrice = 0;
+        $scope.selectedMains = [];
         for (var i=0; i<result.length; i++){
             firstTotalPrice += parseInt(result[i].total);
             $scope.selectedMains.push(result[i]);
@@ -324,7 +325,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
 
-    function setBarcode(selectedMain, inc) {
+    function setBarcode(selectedMain, rcpDocNo, inc) {
         var prefix = "EY";
         var suffix = "TH";
         var number = "";
@@ -348,7 +349,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                     data: {
                         invoice : selectedMain.invoice,
                         barcode : barcode,
-                        status : "ชำระเงินแล้ว"
+                        status : "ชำระเงินแล้ว",
+                        rcpDocNo: rcpDocNo
                     }
                 };
             
@@ -581,19 +583,28 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         .cancel('ยกเลิก');
 
       $mdDialog.show(confirm).then(function () {
-        /*$scope.status = 'Confirm';
-        
+        $scope.status = 'Confirm';
+
         //update balance amount
         $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
-        
-        selectedMains.sort();
-        for(var i=0; i<selectedMains.length; i++){
-            setBarcode(selectedMains[i], i);
-        }
-        
-        
+
+        // Get next document number of bill (RCP)
+        $http.get('/docno/RCP').then(function(response){
+          var rcpDocNo = response.data.prefix + response.data.nextNumber;
+          console.log("rcpDocNo", rcpDocNo);
+          $scope.rcpDocNo = rcpDocNo;
+
+          selectedMains.sort();
+          for(var i=0; i<selectedMains.length; i++){
+            setBarcode(selectedMains[i], rcpDocNo, i);
+          }
+
+          //Show dialog for print all and bill
+          $scope.showPrintAllAndBill(ev);
+        });
+
         var inc = selectedMains.length;
-        
+
         $http.get("/lastNumber").then(function (response) {
           var req = {
             method: 'PUT',
@@ -609,10 +620,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $http(req).then(function (response) {
             $scope.find();   
           });
-        }); */
-  
-        //Show dialog for print all and bill
-        $scope.showPrintAllAndBill(ev);
+        });
 
       }, function () {
         $scope.status = 'Cancel';
@@ -658,34 +666,52 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         });
     };
 
-    $scope.showPrintAllAndBill = function(ev) { $mdDialog.show({
-        controller: DialogController,
-        templateUrl: 'dialog1.tmpl.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-      })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
+    $scope.showPrintAllAndBill = function($event) {
+       var parentEl = angular.element(document.body);
+       $mdDialog.show({
+         parent: parentEl,
+         targetEvent: $event,
+         clickOutsideToClose: true,
+         template:
+           '<md-dialog>' +
+           '  <md-dialog-content class="md-dialog-content">'+
+           '    <h2 class="md-title ng-bi55nding">พิมพ์รายการ และใบเสร็จรับเงิน</h2>' +
+           '  </md-dialog-content>' +
+           '  <md-dialog-actions>' +
+           '    <md-button class="md-primary" href="/print/list?rcpDocNo={{items}}" target="_blank">' +
+           '      พิมพ์รายการ' +
+           '    </md-button>' +
+           '    <md-button class="md-primary" href="/print/bill?rcpDocNo={{items}}" target="_blank">' +
+           '      พิมพ์ใบเสร็จ' +
+           '    </md-button>' +
+           '  </md-dialog-actions>' +
+           '</md-dialog>',
+         locals: {
+           items: $scope.rcpDocNo
+         },
+         controller: DialogController
       });
+      function DialogController($scope, $mdDialog, items) {
+        $scope.items = items;
+        var nextNumber = items.substring(3);
+        var req = {
+            method: 'PUT',
+            url: '/docno/RCP',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            data: {
+                nextNumber : parseInt(nextNumber) + 1 + ""
+            }
+          };
+
+        $http(req).then(function (response) {
+          
+        });
+      }
     };
 
-    function DialogController($scope, $mdDialog) {
-      $scope.hide = function() {
-        $mdDialog.hide();
-      };
-
-      $scope.cancel = function() {
-        $mdDialog.cancel();
-      };
-
-      $scope.answer = function(answer) {
-        $mdDialog.hide(answer);
-      };
-    }
+    
     
     // Set 2P2C request parameter
     $scope.setPaymentForm = function(amount){
