@@ -678,7 +678,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
            '    <h2 class="md-title ng-bi55nding">พิมพ์รายการ และใบเสร็จรับเงิน</h2>' +
            '  </md-dialog-content>' +
            '  <md-dialog-actions>' +
-           '    <md-button class="md-primary" href="/print/list?rcpDocNo={{items}}" target="_blank">' +
+           '    <md-button class="md-primary" href="/print/all?rcpDocNo={{items}}" target="_blank">' +
            '      พิมพ์รายการ' +
            '    </md-button>' +
            '    <md-button class="md-primary" href="/print/bill?rcpDocNo={{items}}" target="_blank">' +

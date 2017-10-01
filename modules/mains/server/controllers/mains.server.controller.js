@@ -165,24 +165,27 @@ exports.setBarcode = function(req, res, next) {
     );
 };
 
-exports.printList = function(req, res, next) {
-
-  Main.findById(req.query.mainId, function(err, main) {
+exports.printAll = function(req, res, next) {
+  console.log("ddd",req.query.rcpDocNo);
+  Main.find({rcpDocNo:req.query.rcpDocNo}, function(err, mains) {
     if (err)
       return next(err);
     else
-      console.log('main', main);  
-
-      res.render('modules/core/server/views/formA5', {
-        title: 'FormA5',
-        main:main
+      var position = 37;
+      for (var i=0; i<mains.length; i++) {
+        mains[i].position = position;
+        position += 460;
+      }
+      res.render('modules/mains/server/views/formAll', {
+        title: 'Form ALl',
+        mains:mains
       });
   });
 
 };
 
 exports.printBill = function(req, res, next) {
-  console.log("ddd",req.query.rcpDocNo);
+  
   Main.find({rcpDocNo:req.query.rcpDocNo}, function(err, mains) {
     if (err)
       return next(err);
