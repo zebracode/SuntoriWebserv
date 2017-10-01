@@ -107,6 +107,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.find = function () {
       $scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
         var firstTotalPrice = 0;
+        $scope.selectedMains = [];
         for (var i=0; i<result.length; i++){
             firstTotalPrice += parseInt(result[i].total);
             $scope.selectedMains.push(result[i]);
@@ -340,7 +341,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
 
-    function setBarcode(selectedMain, inc) {
+    function setBarcode(selectedMain, rcpDocNo, inc) {
         var prefix = "EY";
         var suffix = "TH";
         var number = "";
@@ -364,7 +365,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                     data: {
                         invoice : selectedMain.invoice,
                         barcode : barcode,
-                        status : "ชำระเงินแล้ว"
+                        status : "ชำระเงินแล้ว",
+                        rcpDocNo: rcpDocNo
                     }
                 };
             
@@ -463,52 +465,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.balanceAmount = balanceAmt;
         $http.put('/api/balance',data).then(function(){
         });      
-    };
-    
-    /************************** Dialog Zone ****************************/
-    $scope.showConfirm = function (ev, selectedMains) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-        .title('ยืนยันการชำระเงิน')
-        .textContent('กรุณายืนยันการชำระเงิน')
-        .ariaLabel('Lucky day')
-        .targetEvent(ev)
-        .ok('ยืนยัน')
-        .cancel('ยกเลิก');
-
-      $mdDialog.show(confirm).then(function () {
-        $scope.status = 'Confirm';
-        
-        //update balance amount
-        $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
-        
-        selectedMains.sort();
-        for(var i=0; i<selectedMains.length; i++){
-            setBarcode(selectedMains[i], i);
-        }
-        
-        
-        var inc = selectedMains.length;
-        
-        $http.get("/lastNumber").then(function (response) {
-          var req = {
-            method: 'PUT',
-            url: '/lastNumber',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            data: {
-                number : parseInt(response.data.number) + inc + ""
-            }
-          };
-
-          $http(req).then(function (response) {
-            $scope.find();   
-          });
-        });        
-      }, function () {
-        $scope.status = 'Cancel';
-      });
     };
     
     $scope.showTopUpPromt = function(event) {
@@ -644,18 +600,27 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
       $mdDialog.show(confirm).then(function () {
         $scope.status = 'Confirm';
-        
+
         //update balance amount
         $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
-        
-        selectedMains.sort();
-        for(var i=0; i<selectedMains.length; i++){
-            setBarcode(selectedMains[i], i);
-        }
-        
-        
+
+        // Get next document number of bill (RCP)
+        $http.get('/docno/RCP').then(function(response){
+          var rcpDocNo = response.data.prefix + response.data.nextNumber;
+          console.log("rcpDocNo", rcpDocNo);
+          $scope.rcpDocNo = rcpDocNo;
+
+          selectedMains.sort();
+          for(var i=0; i<selectedMains.length; i++){
+            setBarcode(selectedMains[i], rcpDocNo, i);
+          }
+
+          //Show dialog for print all and bill
+          $scope.showPrintAllAndBill(ev);
+        });
+
         var inc = selectedMains.length;
-        
+
         $http.get("/lastNumber").then(function (response) {
           var req = {
             method: 'PUT',
@@ -671,7 +636,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $http(req).then(function (response) {
             $scope.find();   
           });
-        });        
+        });
+
       }, function () {
         $scope.status = 'Cancel';
       });
@@ -715,6 +681,53 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.status = 'You decided to keep your debt.';
         });
     };
+
+    $scope.showPrintAllAndBill = function($event) {
+       var parentEl = angular.element(document.body);
+       $mdDialog.show({
+         parent: parentEl,
+         targetEvent: $event,
+         clickOutsideToClose: true,
+         template:
+           '<md-dialog>' +
+           '  <md-dialog-content class="md-dialog-content">'+
+           '    <h2 class="md-title ng-bi55nding">พิมพ์รายการ และใบเสร็จรับเงิน</h2>' +
+           '  </md-dialog-content>' +
+           '  <md-dialog-actions>' +
+           '    <md-button class="md-primary" href="/print/all?rcpDocNo={{items}}" target="_blank">' +
+           '      พิมพ์รายการ' +
+           '    </md-button>' +
+           '    <md-button class="md-primary" href="/print/bill?rcpDocNo={{items}}" target="_blank">' +
+           '      พิมพ์ใบเสร็จ' +
+           '    </md-button>' +
+           '  </md-dialog-actions>' +
+           '</md-dialog>',
+         locals: {
+           items: $scope.rcpDocNo
+         },
+         controller: DialogController
+      });
+      function DialogController($scope, $mdDialog, items) {
+        $scope.items = items;
+        var nextNumber = items.substring(3);
+        var req = {
+            method: 'PUT',
+            url: '/docno/RCP',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            data: {
+                nextNumber : parseInt(nextNumber) + 1 + ""
+            }
+          };
+
+        $http(req).then(function (response) {
+          
+        });
+      }
+    };
+
+    
     
     // Set 2P2C request parameter
     $scope.setPaymentForm = function(amount){

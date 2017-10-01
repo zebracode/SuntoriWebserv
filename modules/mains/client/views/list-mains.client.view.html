@@ -200,3 +200,24 @@
     </form>
     
 </div>
+
+<!-- Dialog template for print list and bill -->
+<script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2 class="md-title ng-bi55nding">พิมพ์รายการ และใบเสร็จรับเงิน</h2>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button href="/print/list" target="_blank">
+        พิมพ์รายการ
+      </md-button>
+      <span flex></span>
+      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank">
+        พิมพ์ใบเสร็จ
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

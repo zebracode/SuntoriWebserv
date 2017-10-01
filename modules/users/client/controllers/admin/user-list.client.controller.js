@@ -53,8 +53,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     $scope.updateBalance = function (user, index, amt) {
       var balanceAmt = parseInt($scope.pagedItems[index].balanceAmt);
       console.log(balanceAmt);
-      if (balanceAmt > 0){
-        console.log("if");
+      if (!isNaN(balanceAmt)){
         balanceAmt += parseInt(amt);
         var data = { userId: user._id, balanceAmt: balanceAmt};
         $scope.pagedItems[index].balanceAmt = balanceAmt;
@@ -62,7 +61,6 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
         });
         
       } else {
-        console.log("else");
         $scope.pagedItems[index].balanceAmt = amt;
         $http.post('/api/balance',{userId: user._id, balanceAmt: amt}).then(function(){
         });
