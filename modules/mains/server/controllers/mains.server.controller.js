@@ -177,7 +177,7 @@ exports.printAll = function(req, res, next) {
         position += 460;
       }
       res.render('modules/mains/server/views/formAll', {
-        title: 'Form ALl',
+        title: 'Form All',
         mains:mains
       });
   });
@@ -187,12 +187,22 @@ exports.printAll = function(req, res, next) {
 exports.printBill = function(req, res, next) {
   
   Main.find({rcpDocNo:req.query.rcpDocNo}, function(err, mains) {
-    if (err)
+    if (err) {
       return next(err);
-    else
+    } else {
+      var totalAmount = 0;
+      for (var i=0; i<mains.length; i++) {
+        var price = parseInt(mains[i].price);
+        if (!isNaN(price)) {
+          totalAmount += price;
+        }
+      }
+
       res.render('modules/mains/server/views/formBill', {
-      title: 'Form Bill',
-      mains:mains
-    });
+        title: 'Form Bill',
+        mains:mains,
+        totalAmount: totalAmount
+      });
+    }
   });
 };
