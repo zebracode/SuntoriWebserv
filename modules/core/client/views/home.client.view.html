@@ -141,8 +141,9 @@
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
                   <td class="list-group-item-heading" ng-bind=""></td>
+                  <td class="list-group-item-heading">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
                   <td class="list-group-item-heading" ng-bind=""></td>
-                  <td class="list-group-item-heading" ng-bind=""></td>
+                  <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
                     <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>

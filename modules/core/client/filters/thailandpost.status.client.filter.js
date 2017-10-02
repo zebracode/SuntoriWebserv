@@ -5,7 +5,6 @@ angular.module('core').filter('updateStatus',['$http', '$location', function($ht
         }
         $http.get("/getOrderStatus?barcode=" + barcode)
         .then(function(response) {
-            console.log('response', response.data);
             var status = response.data.statusDescription;
             var tpWeight = response.data.productWeight;
             var data = {"barcode": barcode, "status": status, tpWeight: tpWeight};
