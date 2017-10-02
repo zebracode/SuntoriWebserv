@@ -124,11 +124,7 @@
                   <th class="column-title">ค่าส่งหลัง </th>
                   <th class="column-title">ส่วนต่าง </th>
                   <th class="column-title">สถานะจัดส่ง </th>
-                  <th class="column-title">ชำระเงิน</th>
-                  <!--<th class="column-title">แก้ไข</th>-->
-                  <th class="bulk-actions" colspan="7">
-                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions <span class="action-cnt"> </span> <i class="fa fa-chevron-down"></i></a>
-                  </th>
+                  <th class="column-title">ปริ้น</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -140,15 +136,13 @@
                   <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
-<<<<<<< HEAD
-                  <td class="list-group-item-heading" ng-bind=""></td>
-                  <td class="list-group-item-heading" ng-bind=""></td>
-                  <td class="list-group-item-heading" ng-bind=""></td>
-=======
                   <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td class="list-group-item-heading">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
-                  <td class="list-group-item-heading" ng-bind="main.total"></td>
->>>>>>> c8bf955672e2ae44dbaede506db24c29ffbc62a7
+<<<<<<< HEAD
+                  <td class="list-group-item-heading" ng-bind=""></td>
+=======
+                  <td class="list-group-item-heading">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
+>>>>>>> d6f7c9219b10a3137ab6e4667c3ec2eb267d983b
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
                     <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
