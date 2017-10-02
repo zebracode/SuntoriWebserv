@@ -179,7 +179,8 @@ var MainSchema = new Schema({
     type: String,
     default: '',
     trim: true
-  }
+  },
+  afterPrice: String
 });
 
 mongoose.model('Main', MainSchema);

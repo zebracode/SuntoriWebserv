@@ -136,7 +136,7 @@
                   <td class="list-group-item-heading" ng-bind="main.weight"></td>
                   <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
                   <td class="list-group-item-heading" ng-bind="main.total"></td>
-                  <td class="list-group-item-heading" ng-bind="main.total"></td>
+                  <td class="list-group-item-heading">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
                   <td class="list-group-item-heading" ng-bind="main.total"></td>
                   <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                   <td>
