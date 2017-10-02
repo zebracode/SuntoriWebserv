@@ -10,8 +10,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.thailandPost = new ThailandPost();
     $scope.selectedMains = [];
     $scope.price = 0;
-    $scope.order = 0;
-    $scope.invoice = 0;
+    $scope.order = Date.now();
+    $scope.invoice = Date.now();
 
     // Create new Main
     $scope.create = function () {
@@ -54,6 +54,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 //        $scope.s_ampher = '';
 //        $scope.s_country = '';
 //        $scope.s_postcode = '';
+//        $scope.detail = '';
         $scope.r_name = '';
         $scope.r_tel = '';
         $scope.r_email = '';
@@ -62,11 +63,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.r_ampher = '';
         $scope.r_postcode = '';
         $scope.r_comment = '';
-        $scope.order = 0;
-        $scope.invoice = 0;
+        $scope.order = Date.now();
+        $scope.invoice = Date.now();
         $scope.price = 0;
         $scope.weight = '';
-        $scope.detail = '';
         $scope.option.name = --เลือกน้ำหนัก/เลือกขนาด--;
 //        $scope.detail = '';
         $scope.barcode = '';
@@ -123,6 +123,22 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         mainId: $stateParams.mainId
       });
     };
+
+    //Pagination
+  $scope.totalItems = 10;
+  $scope.currentPage = 1;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    $log.log('Page changed to: ' + $scope.currentPage);
+  };
+
+  $scope.maxSize = 5;
+  $scope.bigTotalItems = 175;
+  $scope.bigCurrentPage = 1;
 
     // Country
     $scope.states = ('กรุงเทพมหานคร กระบี่ กาญจนบุรี กาฬสินธุ์ กำแพงเพชร ขอนแก่น จันทบุรี ฉะเชิงเทรา ชลบุรี ชัยนาท ชัยภูมิ ชุมพร เชียงราย เชียงใหม่ ตรัง ตราด ตาก นครนายก นครปฐม นครพนม นครราชสีมา นครศรีธรรมราช นครสวรรค์ นนทบุรี นราธิวาส น่าน บึงกาฬ บุรีรัมย์ ปทุมธานี ประจวบคีรีขันธ์ ปราจีนบุรี ปัตตานี พระนครศรีอยุธยา พังงา พัทลุง พิจิตร พิษณุโลก เพชรบุรี เพชรบูรณ์ แพร่ พะเยา ภูเก็ต มหาสารคาม มุกดาหาร แม่ฮ่องสอน ยะลา ยโสธร ร้อยเอ็ด ระนอง ระยอง ราชบุรี ลพบุรี ลำปาง ลำพูน เลย ศรีสะเกษ สกลนคร สงขลา สตูล สมุทรปราการ สมุทรสงคราม สมุทรสาคร สระแก้ว สระบุรี สิงห์บุรี สุโขทัย สุพรรณบุรี สุราษฎร์ธานี สุรินทร์ หนองคาย หนองบัวลำภู อ่างทอง อุดรธานี อุทัยธานี อุตรดิตถ์ อุบลราชธานี อำนาจเจริญ').split(' ').map(function(state) {
@@ -384,11 +400,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     };
     
     $scope.selectedInvoices = [];
+
     $scope.addSelectInvoice = function (invoiceNo) {
         $scope.selectedInvoices.push(invoiceNo);
         //console.log("invoices: ", $scope.selectedInvoices);
     };
-
     $scope.removeSelectInvoice = function (invoiceNo) {
         for (var i=0; i < $scope.selectedInvoices.length; i++) {
             if ($scope.selectedInvoices[i] === invoiceNo) {
@@ -757,5 +773,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     };
   }
 ]);
+
+
 
 

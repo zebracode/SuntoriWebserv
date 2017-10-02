@@ -78,62 +78,74 @@
               </div>
             </div>
 
+
             <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6">
+                <div layout="column"class="md-padding" layout-align="center center">
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.username" md-on-open="loadUsers()" style="min-width: 200px;">
+                    <md-option ng-value="user.username" ng-repeat="user in users">{{user.username}}</md-option>
+                  </md-select>
+                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.username : 'ยังไม่ได้เลือก' }}</p>
+                  <md-button type="reset" ng-disabled="!(user.username)">Clear</md-button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div layout="column"class="md-padding" layout-align="center center">
+                  <span>
+                  <md-datepicker ng-model="main.created"></md-datepicker>
+                  </span>
+                  <span>
+                  <md-datepicker ng-model="main.created"></md-datepicker>
+                    </span>
+                </div>
+              </div>
+            </div>
+
+
             <div class="x_content">
               <br />
+
               <div class="table-responsive">
                 <table class="table table-striped jambo_table bulk_action">
                   <thead>
                   <tr class="headings">
                     <th class="column-title">วันที่ </th>
                     <th class="column-title">Tracking No.</th>
-                    <th class="column-title">ผู้รับ </th>
+                    <th class="column-title">ผู้ใช้งาน </th>
+                    <th class="column-title">เจ้าของบัญชี </th>
                     <th class="column-title">เบอร์โทร </th>
                     <th class="column-title">นน.ก่อน </th>
                     <th class="column-title">นน.หลัง </th>
-                    <th class="column-title">ชำระเงิน</th>
+                    <th class="column-title">ค่าส่งก่อน </th>
+                    <th class="column-title">ค่าส่งหลัง </th>
+                    <th class="column-title">ส่วนต่าง </th>
                     <th class="column-title">สถานะจัดส่ง </th>
-                    <th class="column-title">ชำระเงิน</th>
+                    <th class="column-title">ปริ้น</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText">
+                  <tr class="even pointer" data-ng-repeat="main in mains | pagination: (currentPage - 1) * pageSize | limitTo: pageSize | filter:user.username + searchText">
                     <td ng-bind="main.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="main.barcode"></td>
-                    <td class="list-group-item-heading" ng-bind="main.r_name"></td>
+                    <td class="list-group-item-heading" ng-bind="main.s_name"></td>
+                    <td class="list-group-item-heading" ng-bind="main.user.displayName"></td>
                     <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
                     <td class="list-group-item-heading" ng-bind="main.weight"></td>
                     <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
                     <td class="list-group-item-heading" ng-bind="main.total"></td>
+                    <td class="list-group-item-heading" ng-bind=""></td>
+                    <td class="list-group-item-heading" ng-bind=""></td>
                     <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                     <td>
                       <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>
-                      <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
                     </td>
                   </tr>
                   </tbody>
                 </table>
               </div>
               <div class="text-center form-group">
-                <nav aria-label="Page navigation">
-                  <ul class="pagination">
-                    <li>
-                      <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                      <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+                <ul uib-pagination total-items="mains.length" items-per-page="pageSize" ng-model="currentPage" ng-change="pageChanged()"></ul>
               </div>
             </div>
           </div>

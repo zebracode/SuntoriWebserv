@@ -11,6 +11,8 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
       $scope.pagedItems = [];
       $scope.itemsPerPage = 10;
       $scope.currentPage = 1;
+      $scope.pageSize = 10;
+
       $scope.figureOutItemsToDisplay();
     };
 
@@ -76,4 +78,10 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     };
 
   }
-]);
+])
+
+.filter('pagination', function() {
+    return function(data, start){
+        return data.slice(start);
+    };
+});

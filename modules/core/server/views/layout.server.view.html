@@ -35,7 +35,6 @@
   {% for cssFile in cssFiles %}
   <link rel="stylesheet" href="{{cssFile}}">
   {% endfor %}
-  <link rel="stylesheet"; href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
 </head>
 
 <body class="ng-cloak">
@@ -59,12 +58,12 @@
   <script type="text/javascript" src="{{jsFile}}"></script>
   {% endfor %}
 
-  <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 
   {% if livereload %}
   <!--Livereload script rendered -->
   <script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
   {% endif %}
+
 
 </body>
 

@@ -56,13 +56,20 @@
                       <div layout-gt-sm="row">
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>ชื่อ-นามสกุล</label>
-                              <input ng-model="send.name">
+                              <input ng-model="send.name" required>
+                              <div ng-messages="userForm.send.name.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณากรอกชื่อ-นามสกุล</div>
+                              </div>
                           </md-input-container>
 
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>เบอร์โทรศัพท์</label>
-                              <input ng-model="send.tel">
+                              <input ng-model="send.tel" required>
+                              <div ng-messages="userForm.send.tel.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณากรอกเบอร์โทรศัพท์</div>
+                              </div>
                           </md-input-container>
+
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>อีเมลล์</label>
                               <input ng-model="send.email">
@@ -71,21 +78,31 @@
 
                       <md-input-container class="md-block">
                           <label>ที่อยู่</label>
-                          <input ng-model="send.address">
+                          <input ng-model="send.address" required>
+                          <div ng-messages="userForm.send.address.$error" role="alert" multiple>
+                              <div ng-message="required" class="my-message">กรุณากรอกที่อยู่</div>
+                          </div>
                       </md-input-container>
 
                       <div layout-gt-sm="row">
                           <md-input-container class="md-block">
                               <label>อำเภอ</label>
-                              <input ng-model="send.ampher">
+                              <input ng-model="send.ampher" required>
+                              <div ng-messages="userForm.send.ampher.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณากรอกอำเภอ</div>
+                              </div>
                           </md-input-container>
+
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>จังหวัด</label>
-                              <md-select ng-model="send.country">
+                              <md-select ng-model="send.country" required>
                                   <md-option ng-repeat="state in states" value="{{state.abbrev}}">
                                       {{state.abbrev}}
                                   </md-option>
                               </md-select>
+                              <div ng-messages="userForm.send.country.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณาเลือกจังหวัด</div>
+                              </div>
                           </md-input-container>
                       </div>
 
@@ -95,23 +112,21 @@
                               <input name="postcode" ng-model="send.postcode" placeholder="12345"
                                      required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
 
-                              <div ng-messages="userForm.postcode.$error" role="alert" multiple>
-                                  <div ng-message="required" class="my-message">ไม่ได้ใส่รหัสไปรษณีย์</div>
-                                  <div ng-message="pattern" class="my-message">รหัสไปรษณีย์ไม่ถูกต้อง
-                                  </div>
-                                  <div ng-message="md-maxlength" class="my-message">
-                                      กรอกรหัสไปรษณีย์ ไม่ครบ หรือเกิน 5 หลัก
-                                  </div>
+                              <div ng-messages="userForm.send.postcode.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณากรอกรหัสไปรษณีย์</div>
                               </div>
                           </md-input-container>
 
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>สินค้า</label>
-                              <md-select ng-model="send.product">
+                              <md-select ng-model="send.product" required>
                                   <md-option ng-repeat="product in products" value="{{product.abbrev}}">
                                       {{product.abbrev}}
                                   </md-option>
                               </md-select>
+                              <div ng-messages="userForm.send.product.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณาเล่ือกสินค้า</div>
+                              </div>
                           </md-input-container>
                       </div>
                       <div class="row">
@@ -120,13 +135,8 @@
                               <input name="idNumber" ng-model="send.idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
                                      required ng-pattern="/^[0-9]{13}$/" md-maxlength="13">
 
-                              <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                              <div ng-messages="userForm.send.idNumber.$error" role="alert" multiple>
                                   <div ng-message="required" class="my-message">กรุณาใส่เลขบัตรประชาชน</div>
-                                  <div ng-message="pattern" class="my-message">เลขบัตรประชาชนไม่ถูกต้อง
-                                  </div>
-                                  <div ng-message="md-maxlength" class="my-message">
-                                      กรอกเลขบัตรประชาชน 13 หลักไม่ตรงกับรูปแบบ กรุณากรอกเลขตามรูปแบบที่ถูกต้อง
-                                  </div>
                               </div>
                           </md-input-container>
                       </div>

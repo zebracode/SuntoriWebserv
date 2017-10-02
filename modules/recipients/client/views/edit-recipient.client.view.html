@@ -56,12 +56,18 @@
                       <div layout-gt-sm="row">
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>ชื่อ-นามสกุล</label>
-                              <input ng-model="recipient.name">
+                              <input ng-model="recipient.name" required>
+                              <div ng-messages="userForm.recipient.name.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณากรอกชื่อ-นามสกุล</div>
+                              </div>
                           </md-input-container>
 
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>เบอร์โทรศัพท์</label>
-                              <input ng-model="recipient.tel">
+                              <input ng-model="recipient.tel" required>
+                              <div ng-messages="userForm.recipient.tel.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณากรอกเบอร์โทรศัพท์</div>
+                              </div>
                           </md-input-container>
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>อีเมลล์</label>
@@ -71,22 +77,31 @@
 
                       <md-input-container class="md-block">
                           <label>ที่อยู่</label>
-                          <input ng-model="recipient.address">
+                          <input ng-model="recipient.address" required>
+                          <div ng-messages="userForm.recipient.address.$error" role="alert" multiple>
+                              <div ng-message="required" class="my-message">กรุณากรอกที่อยู่</div>
+                          </div>
                       </md-input-container>
 
                       <div layout-gt-sm="row">
                           <md-input-container class="md-block">
                               <label>อำเภอ</label>
-                              <input ng-model="recipient.ampher">
+                              <input ng-model="recipient.ampher" required>
+                              <div ng-messages="userForm.recipient.ampher.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณากรอกอำเภอ</div>
+                              </div>
                           </md-input-container>
 
                           <md-input-container class="md-block" flex-gt-sm>
                               <label>จังหวัด</label>
-                              <md-select ng-model="recipient.country">
+                              <md-select ng-model="recipient.country" required>
                                   <md-option ng-repeat="state in states" value="{{state.abbrev}}">
                                       {{state.abbrev}}
                                   </md-option>
                               </md-select>
+                              <div ng-messages="userForm.recipient.country.$error" role="alert" multiple>
+                                  <div ng-message="required" class="my-message">กรุณาเลือกจังหวัด</div>
+                              </div>
                           </md-input-container>
                       </div>
 
@@ -97,12 +112,7 @@
                                      required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
 
                               <div ng-messages="userForm.postcode.$error" role="alert" multiple>
-                                  <div ng-message="required" class="my-message">ไม่ได้ใส่รหัสไปรษณีย์</div>
-                                  <div ng-message="pattern" class="my-message">รหัสไปรษณีย์ไม่ถูกต้อง
-                                  </div>
-                                  <div ng-message="md-maxlength" class="my-message">
-                                      กรอกรหัสไปรษณีย์ ไม่ครบ หรือเกิน 5 หลัก
-                                  </div>
+                                  <div ng-message="required" class="my-message">ใส่รหัสไปรษณีย์ไม่ถูกต้อง</div>
                               </div>
                           </md-input-container>
                           <md-input-container class="md-block">

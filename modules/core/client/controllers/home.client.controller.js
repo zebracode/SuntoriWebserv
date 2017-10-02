@@ -32,27 +32,42 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.printformA6 = function(main) {
                     console.log("Print AW FormA6");
                     //$http.get('/print/awpost');
-                }
+        }
 
         $scope.printformA5 = function(main) {
             console.log("Print AW FormA5");
             //$http.get('/print/awpost');
         }
+
         $scope.printformA4 = function(main) {
                     console.log("Print AW FormA4");
                     //$http.get('/print/awpost');
-                }
-     
-
-        $scope.printformA5 = function(main) {
-            console.log("Print AW Form");
-            //$http.get('/print/awpost');
         }
-        $scope.printformA4 = function(main) {
-                    console.log("Print AW Form");
-                    //$http.get('/print/awpost');
+
+        // Pagination
+        $scope.pagedItems = [];
+        $scope.itemsPerPage = 5;
+        $scope.currentPage = 1;
+        $scope.pageSize = 10;
+
+
+        // Remove existing Main
+        $scope.remove = function (main) {
+              if (main) {
+                main.$remove();
+
+                for (var i in $scope.mains) {
+                  if ($scope.mains[i] === main) {
+                    $scope.mains.splice(i, 1);
+                  }
                 }
-     
+              } else {
+                $scope.main.$remove(function () {
+                  $location.path('mains');
+                });
+              }
+            };
+
 
         /**
          * Main Controller for the Angular Material Starter App
@@ -137,5 +152,5 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
     }
 
-
 ]);
+

@@ -68,17 +68,17 @@
 
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 <input name="s_name" type="text" data-ng-model="s_name" id="s_name" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล" required>
-                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="s_tel" type="text" data-ng-model="s_tel" id="s_tel" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="เบอร์โทร">
-                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="s_email" type="text" data-ng-model="s_email" id="s_email" type="text" class="form-control" id="inputSuccess3" placeholder="อีเมลล์">
-                <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
@@ -88,11 +88,11 @@
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="s_ampher" type="text" data-ng-model="s_ampher" type="text" class="form-control has-feedback-left" id="inputSuccess6" placeholder="อำเภอ">
-                <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
+                <span class="fa fa-tree form-control-feedback left" aria-hidden="true"></span>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="s_idNumber" type="text" data-ng-model="s_idNumber" type="text" class="form-control" id="inputSuccess4" placeholder="เลขบัตรประชาชน">
-                <span class="fa fa-plane form-control-feedback right" aria-hidden="true"></span>
+                <span class="fa fa-book form-control-feedback right" aria-hidden="true"></span>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <md-input-container class="md-block" flex-gt-sm>
@@ -149,17 +149,17 @@
 
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 <input name="r_name" data-ng-model="r_name" id="r_name" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="ชื่อ-นามสกุล" required>
-                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="r_tel" data-ng-model="r_tel" id="r_tel" type="text" class="form-control has-feedback-left" id="inputSuccess4" placeholder="เบอร์โทร" required>
-                <span class="fa fa-globe form-control-feedback left" aria-hidden="true"></span>
+                <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="r_email" data-ng-model="r_email" id="r_email" type="text" class="form-control" id="inputSuccess3" placeholder="อีเมลล์">
-                <span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
+                <span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
@@ -169,7 +169,7 @@
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="r_ampher" type="text" data-ng-model="r_ampher" id="r_ampher" type="text" class="form-control has-feedback-left" id="inputSuccess5" placeholder="อำเภอ">
-                <span class="fa fa-plane form-control-feedback left" aria-hidden="true"></span>
+                <span class="fa fa-tree form-control-feedback left" aria-hidden="true"></span>
               </div>
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -220,7 +220,7 @@
               <input type="hidden" ng-model="weight" value="selectedOption.value">
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" controller="Scoper">
-                <input name="order" type="text" data-ng-model="order" id="order" class="form-control has-feedback-left" id="inputSuccess2" placeholder="Order No">
+                <input name="order" type="text" data-ng-model="order" id="order" class="form-control has-feedback-left" id="inputSuccess2" placeholder="order">
                 <span class="fa fa-shopping-cart form-control-feedback left" aria-hidden="true"></span>
               </div>
 
@@ -279,7 +279,8 @@
                   </div>
                   <div class="form-group">
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
-                      <button class="btn btn-warning" type="submit" ng-disabled="myForm.$error.required" ng-click="showAddlist($event, selectedMains);">ยืนยัน</button>
+                      <!--<button class="btn btn-warning" type="submit" ng-disabled="myForm.$error.required" ng-click="showAddlist($event, selectedMains);">ยืนยัน</button>-->
+                      <button class="btn btn-warning" type="submit">ยืนยัน</button>
                       <button class="btn btn-primary" type="submit" data-ui-sref="mains.list">ชำระเงิน</button>
                     </div>
                   </div>
