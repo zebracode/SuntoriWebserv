@@ -46,94 +46,33 @@ table, th, td {
 <section class="sheet padding-10mm">
 
 	<!-- Write HTML just like a web page -->
-	<div style="background-image:url(/assets/img/formA5.png); position:absolute; left:37px; top:37px; width:730px; height:450px;" title="">
-		<table style="width:100%">
-		<tr>
-			<td>RCPT # {{mains[0].rcpDocNo}}</td>
-		</tr>
-		</table>
-		<table style="width:100%">
-		<tr>
-		    <th>ชื่อผู้รับ</th>
-		    <th>EMS No.</th> 
-		    <th>ปณ. ปลายทาง</th>
-		    <th>น้ำหนัก</th>
-		    <th>ยอดเงิน</th>
-  		</tr>
-		{% for main in mains %}
-		<tr>
-			<td>{{main.r_name}}</td>
-			<td>{{main.barcode}}</td>
-			<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
-			<td>{{main.weight}}</td>
-			<td>{{main.price}}</td>
-		</tr>	
-		{% endfor %}
+	<div style="background-image:url(/assets/img/Rev.png); position:absolute; left:37px; top:37px; width:730px; height:470px;" title="">
 
-		</table>
-		<div id='div1'>
-			<div style="margin-left:3em">
-				<div style="margin-top:60px">
-					<h3>{{main.s_name}}</h3>
-				</div>
-				<div style="margin-top:-10px">
-					<span>{{main.s_address}}</span>
-				</div>
-				<div style="margin-top: 10px">
-					<span>{{main.s_ampher}}</span>
-				</div>
-				<div style="margin-top:10px">
-					<span>{{main.s_country}}</span>
-				</div>
-				<br><br>
-				<div style="margin-left:10em">
-					<h1 style="margin-top:-20px">{{main.s_postcode}}</h1>
-				</div>
-			</div>
-			<div style="margin-left:11em">
-				<div style="margin-top:50px">
-					<h3>{{main.r_name}} ({{main.r_tel}})</h3>
-				</div>
-				<div style="margin-top:-10px">
-					<span>{{main.r_address}}</span>
-				</div>
-				<div style="margin-top:10px">
-					<span>{{main.r_ampher}}</span>
-				</div>
-				<div style="margin-top:10px">
-					<span>{{main.r_country}}</span>
-				</div>
-				<div style="margin-left:10em">
-					<h1 style="margin-top:10px">{{main.r_postcode}}</h1>
-				</div>
-			</div>
+		<div class="row" style="margin-top:105px">
+			<h3>RCPT # {{mains[0].rcpDocNo}}</h3>
+			<h2></h2>
 		</div>
-		<div id='div2'>
-			<div style="margin-top:150px">
-				<svg class="barcode"
-					 jsbarcode-value="{{main.order}}"
-					 jsbarcode-textmargin="0"
-					 jsbarcode-fontoptions="bold">
-				</svg>
-			</div>
-			<div style="margin-top:-5px">
-				<span>{{main.order}}</span>
-			</div>
-			<div style="margin-top:0px">
-				<svg class="barcode"
-					 jsbarcode-value="{{main.barcode}}"
-					 jsbarcode-textmargin="0"
-					 jsbarcode-fontoptions="bold">
-				</svg>
-			</div>
-			<br>
-			<div style="margin-top:-20px">
-				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{main.barcode}}</span>
-			</div>
+		<div class="row" style="margin-top:-10px">
+			<table style="width:100%">
+				<tr>
+					<th>ชื่อผู้รับ</th>
+					<th>EMS No.</th>
+					<th>ปณ. ปลายทาง</th>
+					<th>น้ำหนัก</th>
+					<th>ยอดเงิน</th>
+				</tr>
+				{% for main in mains %}
 
-			<div style="margin-top:45px">
-				<span>มูลค่า {{main.price}} บาท</span>
-			</div>
+				<tr>
+					<td>{{main.r_name}}</td>
+					<td>{{main.barcode}}</td>
+					<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
+					<td>{{main.weight}}</td>
+					<td>{{main.total}}</td>
+				</tr>
+				{% endfor %}
+
+			</table>
 		</div>
 
 		<script type="text/javascript">

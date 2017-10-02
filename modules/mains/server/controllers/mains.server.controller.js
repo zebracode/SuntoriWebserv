@@ -171,10 +171,10 @@ exports.printAll = function(req, res, next) {
     if (err)
       return next(err);
     else
-      var position = 37;
+      var position = 0;
       for (var i=0; i<mains.length; i++) {
         mains[i].position = position;
-        position += 460;
+        position += 560;
       }
       res.render('modules/mains/server/views/formAll', {
         title: 'Form ALl',
