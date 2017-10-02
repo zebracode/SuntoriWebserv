@@ -192,9 +192,9 @@ exports.printBill = function(req, res, next) {
     } else {
       var totalAmount = 0;
       for (var i=0; i<mains.length; i++) {
-        var price = parseInt(mains[i].price);
-        if (!isNaN(price)) {
-          totalAmount += price;
+        var total = parseInt(mains[i].total);
+        if (!isNaN(total)) {
+          totalAmount += total;
         }
       }
 
