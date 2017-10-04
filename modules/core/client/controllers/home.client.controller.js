@@ -18,20 +18,18 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         // Find a list of Mains
         $scope.find = function () {
             $scope.mains = Mains.query(function(mains) {
-                console.log("mains", mains);
             });
 
             $http.get('/price')
             .then(function(response){
                 $scope.price = response.data;
-                console.log("price", $scope.price);
             });
             
         };
 
         $scope.printformA6 = function(main) {
-                    console.log("Print AW FormA6");
-                    //$http.get('/print/awpost');
+            console.log("Print AW FormA6");
+            //$http.get('/print/awpost');
         }
 
         $scope.printformA5 = function(main) {
