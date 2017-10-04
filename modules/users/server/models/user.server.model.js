@@ -70,7 +70,6 @@ var UserSchema = new Schema({
   tel: {
       type: String,
       unique: 'มีผู้ใช้เบอร์นี้',
-      required: 'กรุณากรอก เบอร์โทร',
       trim: true
     },
   idNumber: {
