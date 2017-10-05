@@ -78,18 +78,19 @@
               </div>
             </div>
 
-            <!--&lt;!&ndash;เลือกผู้ใช้ระบบ&ndash;&gt;-->
+            <!--เลือกผู้ใช้ระบบ-->
             <div class="clearfix"></div>
-            <!--<div class="row">-->
-              <!--<div class="col-md-6">-->
-                <!--<div layout="column"class="md-padding" layout-align="center center">-->
-                  <!--<md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.username" md-on-open="loadUsers()" style="min-width: 200px;">-->
-                    <!--<md-option ng-value="user.username" ng-repeat="user in users">{{user.username}}</md-option>-->
-                  <!--</md-select>-->
-                  <!--<p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.username : 'ยังไม่ได้เลือก' }}</p>-->
-                  <!--<md-button type="reset" ng-disabled="!(user.username)">Clear</md-button>-->
-                <!--</div>-->
-              <!--</div>-->
+            <div class="row">
+              <div class="col-md-12">
+                <div layout="column"class="md-padding" layout-align="center center">
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" md-on-open="loadUsers()" style="min-width: 200px;">
+                    <md-option ng-value="user.displayName" ng-repeat="user in users">{{user.displayName}}</md-option>
+                  </md-select>
+                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
+                  <md-button ng-click="clearValue()" ng-disabled="!(user.displayName)">Clear</md-button>
+                </div>
+              </div>
+
               <!--<div class="col-md-6">-->
                 <!--<div layout="column"class="md-padding" layout-align="center center">-->
                   <!--<span>-->
@@ -100,7 +101,7 @@
                     <!--</span>-->
                 <!--</div>-->
               <!--</div>-->
-            <!--</div>-->
+            </div>
 
 
             <div class="x_content">
@@ -125,7 +126,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="main in mains | filter:user.username + searchText">
+                  <tr class="even pointer" data-ng-repeat="main in mains | filter:user.displayName + searchText">
                     <td ng-bind="main.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                     <td class="list-group-item-heading" ng-bind="main.r_name"></td>

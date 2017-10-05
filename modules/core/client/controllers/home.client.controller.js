@@ -48,6 +48,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.currentPage = 1;
         $scope.pageSize = 10;
 
+        //Clear
+        $scope.clearValue = function() {
+            $scope.user.displayName = undefined;
+          };
 
         // Remove existing Main
         $scope.remove = function (main) {
