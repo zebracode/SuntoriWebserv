@@ -67,8 +67,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.invoice = Date.now();
         $scope.price = 0;
         $scope.weight = '';
-        $scope.option.name = --เลือกน้ำหนัก/เลือกขนาด--;
-//        $scope.detail = '';
         $scope.barcode = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
