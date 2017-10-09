@@ -53,9 +53,10 @@ table, th, td {
 	<div style="background-image:url(/assets/img/Rev.png); position:absolute; left:37px; top:37px; width:730px; height:470px;" title="">
 
 		<div class="row" style="margin-top:105px">
-<<<<<<< HEAD
 			<div class="col-md-3">
-				<h5>Ref # {{mains[0].rcpDocNo}}</h5>
+			<h3>Date # {{dateString}}</h3>
+			<h3>Time # {{timeString}}</h3>
+<<<<<<< HEAD
 			</div>
 			<div class="col-md-3">
 				<h5>วันที่ {{mains[0].rcpDocNo}}</h5>
@@ -64,11 +65,9 @@ table, th, td {
 				<h5>User {{mains[0].rcpDocNo}}</h5>
 			</div>
 =======
-			<h3>RCPT # {{mains[0].rcpDocNo}}</h3>
-			<h3>Date # {{dateString}}</h3>
-			<h3>Time # {{timeString}}</h3>
+			<h3>User # {{user}}</h3>
 			<h2></h2>
->>>>>>> ef576d437df0352d062a87f74356e7ccbbcd96c0
+>>>>>>> origin/zebracode
 		</div>
 
 		<div class="row" style="margin-left:2px">
