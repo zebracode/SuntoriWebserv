@@ -17,6 +17,10 @@ angular.module('core').filter('diffPrice', function(){
             return 0;
         }
 
+        if(typeof priceList === 'undefined') {
+            return 0;
+        }
+
         for(var i=0; i<priceList.length; i++) {
             if(weightInt <= parseInt(priceList[i].weight)) { 
                price =  parseInt(priceList[i].price);

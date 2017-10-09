@@ -17,6 +17,10 @@ angular.module('core').filter('afterPrice', function(){
             return basePrice;
         }
 
+        if(typeof priceList === 'undefined') {
+            return basePrice;
+        }
+
         for(var i=0; i<priceList.length; i++) {
             if(weightInt <= parseInt(priceList[i].weight)) { 
                price =  parseInt(priceList[i].price);
