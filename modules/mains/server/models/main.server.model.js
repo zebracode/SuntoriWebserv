@@ -180,7 +180,8 @@ var MainSchema = new Schema({
     default: '',
     trim: true
   },
-  afterPrice: String
+  afterPrice: String,
+  receiptDate: Date
 });
 
 mongoose.model('Main', MainSchema);
