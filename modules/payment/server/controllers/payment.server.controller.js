@@ -9,9 +9,9 @@ exports.request = function(req, res, next) {
     var defaultLang = 'th';
     var resultUrl1 = 'http://188.166.183.79:3000/mains';
     var resultUrl2 = 'http://188.166.183.79:3000/mains';
-    var resultUrl1 = 'http://localhost:3000/mains';
-    var resultUrl2 = 'http://localhost:3000/mains';
-    var secretKey  = 'YyzifJ5hy8qj';
+    var resultUrl1 = 'http://suntoriexpress.com/mains';
+    var resultUrl2 = 'http://suntoriexpress.com/mains';
+    var secretKey  = 'SyVSRZHCDk28';
     var stringToHash  = "";
 
     // Set Order ID

@@ -83,7 +83,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12 profile_details" data-ng-repeat="send in sends | pagination: (currentPage - 1) * pageSize | limitTo: pageSize | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
+        <div class="col-md-4 col-sm-4 col-xs-12 profile_details" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
           <div class="well profile_view">
             <div class="col-sm-12">
               <div class="left col-xs-12">

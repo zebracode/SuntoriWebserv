@@ -67,7 +67,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.invoice = Date.now();
         $scope.price = 0;
         $scope.weight = '';
-        $scope.option.name = --เลือกน้ำหนัก/เลือกขนาด--;
+//        $scope.option.name = --เลือกน้ำหนัก/เลือกขนาด--;
 //        $scope.detail = '';
         $scope.barcode = '';
       }, function (errorResponse) {
@@ -279,9 +279,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 
       $scope.selectedOption = $scope.options[0];
-      $scope.reset = function() {
-          $scope.options = {เลือกกล่องน้ำหนัก}
-      };
+//      $scope.reset = function() {
+//          $scope.options = {เลือกกล่องน้ำหนัก}
+//      };
 
 
       // Autocomplete
