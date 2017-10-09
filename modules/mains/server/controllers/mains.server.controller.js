@@ -15,7 +15,7 @@ var path = require('path'),
 exports.create = function (req, res) {
   var main = new Main(req.body);
   main.user = req.user;
-  console.log("rea.body", req.body);
+  console.log("req.body", req.body);
   main.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -192,8 +192,16 @@ exports.printBill = function(req, res, next) {
       return next(err);
     } else {
       var totalAmount = 0;
+      var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
+      var month = mains[0].receiptDate.getMonth() < 10 ? '0' + mains[0].receiptDate.getMonth() : mains[0].receiptDate.getMonth();
+      var hour = mains[0].receiptDate.getHours() < 10 ? '0' + mains[0].receiptDate.getHours() : mains[0].receiptDate.getHours();
+      var minute = mains[0].receiptDate.getMinutes() < 10 ? '0' + mains[0].receiptDate.getMinutes() : mains[0].receiptDate.getMinutes();
+      var second = mains[0].receiptDate.getSeconds() < 10 ? '0' + mains[0].receiptDate.getSeconds() : mains[0].receiptDate.getSeconds();
+      var dateString = date + '/' + month + '/' + mains[0].receiptDate.getFullYear();
+      var timeString = hour + ':' + minute + ':' + second;
       for (var i=0; i<mains.length; i++) {
         var total = parseInt(mains[i].total);
+        
         if (!isNaN(total)) {
           totalAmount += total;
         }
@@ -202,7 +210,9 @@ exports.printBill = function(req, res, next) {
       res.render('modules/mains/server/views/formBill', {
         title: 'Form Bill',
         mains:mains,
-        totalAmount: totalAmount
+        totalAmount: totalAmount,
+        dateString: dateString,
+        timeString: timeString
       });
     }
   });

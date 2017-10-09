@@ -67,8 +67,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.invoice = Date.now();
         $scope.price = 0;
         $scope.weight = '';
-//        $scope.option.name = --เลือกน้ำหนัก/เลือกขนาด--;
-//        $scope.detail = '';
         $scope.barcode = '';
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
@@ -348,6 +346,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         var weight = "";
         var barcode = "";
         var checkDigit = "";
+        var now = new Date();
 
         $http.get("/lastNumber").then(function (response) {
             console.log("getLastNumber: ", response.data);
@@ -366,7 +365,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                         invoice : selectedMain.invoice,
                         barcode : barcode,
                         status : "ชำระเงินแล้ว",
-                        rcpDocNo: rcpDocNo
+                        rcpDocNo: rcpDocNo,
+                        receiptDate: now
                     }
                 };
             
@@ -593,7 +593,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       var confirm = $mdDialog.confirm()
         .title('ยืนยันการชำระเงิน')
         .textContent('กรุณายืนยันการชำระเงิน')
-        .ariaLabel('Lucky day')
         .targetEvent(ev)
         .ok('ยืนยัน')
         .cancel('ยกเลิก');
