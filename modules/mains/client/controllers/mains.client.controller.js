@@ -603,6 +603,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         //update balance amount
         $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
 
+
+
         // Get next document number of bill (RCP)
         $http.get('/docno/RCP').then(function(response){
           var rcpDocNo = response.data.prefix + response.data.nextNumber;
@@ -614,8 +616,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             setBarcode(selectedMains[i], rcpDocNo, i);
           }
 
-          //Show dialog for print all and bill
-          $scope.showPrintAllAndBill(ev);
         });
 
         var inc = selectedMains.length;
@@ -633,7 +633,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           };
 
           $http(req).then(function (response) {
-            $scope.find();   
+            //Show dialog for print all and bill
+            $scope.showPrintAllAndBill(ev);
           });
         });
 
@@ -682,6 +683,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     };
 
     $scope.showPrintAllAndBill = function($event) {
+      $scope.find();
        var parentEl = angular.element(document.body);
        $mdDialog.show({
          parent: parentEl,
