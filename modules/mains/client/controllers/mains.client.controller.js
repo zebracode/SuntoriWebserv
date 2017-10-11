@@ -371,8 +371,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
                 };
             
             $http(req).then(function (response) {
-                console.log("updateBarcode: ", response);
-                createOrder(selectedMain, barcode);
+              $scope.find();
+              createOrder(selectedMain, barcode);
             });
         });
 
@@ -599,11 +599,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
       $mdDialog.show(confirm).then(function () {
         $scope.status = 'Confirm';
-
         //update balance amount
         $scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
-
-
 
         // Get next document number of bill (RCP)
         $http.get('/docno/RCP').then(function(response){
@@ -615,27 +612,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           for(var i=0; i<selectedMains.length; i++){
             setBarcode(selectedMains[i], rcpDocNo, i);
           }
-
-        });
-
-        var inc = selectedMains.length;
-
-        $http.get("/lastNumber").then(function (response) {
-          var req = {
-            method: 'PUT',
-            url: '/lastNumber',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            data: {
-                number : parseInt(response.data.number) + inc + ""
-            }
-          };
-
-          $http(req).then(function (response) {
-            //Show dialog for print all and bill
-            $scope.showPrintAllAndBill(ev);
-          });
+          $scope.showPrintAllAndBill(ev);
         });
 
       }, function () {
@@ -683,7 +660,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     };
 
     $scope.showPrintAllAndBill = function($event) {
-      $scope.find();
        var parentEl = angular.element(document.body);
        $mdDialog.show({
          parent: parentEl,
