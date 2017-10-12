@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Main = mongoose.model('Main'),
   User = mongoose.model('User'),
+  TpLastNumber = require('mongoose').model('TpLastNumber'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -160,7 +161,22 @@ exports.setBarcode = function(req, res, next) {
             if(err) {
                 return next(err);
             } else {
-                return res.json(main);
+              TpLastNumber.findOne({}, function(err, tpLastNumber){
+                if(err){
+                  return next(err);
+                }else{
+                  TpLastNumber.findOneAndUpdate(
+                    {}, 
+                    {"number": parseInt(tpLastNumber.number) + 1 + ""}, 
+                    function(err, tpLastNumber){
+                      if(err) {
+                        return next(err);
+                      } else {
+                        res.json(tpLastNumber);
+                      }
+                    });
+                }
+              });
             }
         }
     );
