@@ -161,22 +161,7 @@ exports.setBarcode = function(req, res, next) {
             if(err) {
                 return next(err);
             } else {
-              TpLastNumber.findOne({}, function(err, tpLastNumber){
-                if(err){
-                  return next(err);
-                }else{
-                  TpLastNumber.findOneAndUpdate(
-                    {}, 
-                    {"number": parseInt(tpLastNumber.number) + 1 + ""}, 
-                    function(err, tpLastNumber){
-                      if(err) {
-                        return next(err);
-                      } else {
-                        res.json(tpLastNumber);
-                      }
-                    });
-                }
-              });
+              res.json(main);
             }
         }
     );
@@ -214,7 +199,7 @@ exports.printBill = function(req, res, next) {
 
       if (typeof mains[0].receiptDate !== 'undefined') {
         var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
-        var month = mains[0].receiptDate.getMonth() < 10 ? '0' + mains[0].receiptDate.getMonth() : mains[0].receiptDate.getMonth();
+        var month = (mains[0].receiptDate.getMonth() + 1) < 10 ? '0' + (mains[0].receiptDate.getMonth() + 1) : (mains[0].receiptDate.getMonth() + 1);
         var hour = mains[0].receiptDate.getHours() < 10 ? '0' + mains[0].receiptDate.getHours() : mains[0].receiptDate.getHours();
         var minute = mains[0].receiptDate.getMinutes() < 10 ? '0' + mains[0].receiptDate.getMinutes() : mains[0].receiptDate.getMinutes();
         var second = mains[0].receiptDate.getSeconds() < 10 ? '0' + mains[0].receiptDate.getSeconds() : mains[0].receiptDate.getSeconds();

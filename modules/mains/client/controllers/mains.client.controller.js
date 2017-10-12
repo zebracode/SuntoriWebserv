@@ -345,7 +345,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         var number = "";
         var barcode = "";
         var checkDigit = "";
-        var now = new Date();
+        var now = Date.now();
 
         number = parseInt(currentnumber) + inc + "";
         checkDigit = getCheckDigit(number, weight);
