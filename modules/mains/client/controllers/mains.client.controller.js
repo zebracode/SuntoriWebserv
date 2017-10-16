@@ -277,9 +277,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 
       $scope.selectedOption = $scope.options[0];
-//      $scope.reset = function() {
-//          $scope.options = {เลือกกล่องน้ำหนัก}
-//      };
+      $scope.reset = function() {
+          $scope.options = {เลือกกล่องน้ำหนัก}
+      };
 
 
       // Autocomplete
@@ -339,45 +339,39 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           setDisbled($scope.balanceAmount - $scope.totalPrice);
       };
 
-    function setBarcode(selectedMain, rcpDocNo, inc) {
+    function setBarcode(selectedMain, rcpDocNo, inc, currentnumber, weight) {
         var prefix = "EY";
         var suffix = "TH";
         var number = "";
-        var weight = "";
         var barcode = "";
         var checkDigit = "";
-        var now = new Date();
+        var now = Date.now();
 
-        $http.get("/lastNumber").then(function (response) {
-            console.log("getLastNumber: ", response.data);
-            number = parseInt(response.data.number) + inc + "";
-            weight = response.data.weight;
-            checkDigit = getCheckDigit(number, weight);
-            barcode = prefix + number + checkDigit + suffix;  
-            
-            var req = {
-                    method: 'POST',
-                    url: '/api/update/barcode',
-                    headers: {
-                        'Content-Type' : 'application/json'
-                    },
-                    data: {
-                        invoice : selectedMain.invoice,
-                        barcode : barcode,
-                        status : "ชำระเงินแล้ว",
-                        rcpDocNo: rcpDocNo,
-                        receiptDate: now
-                    }
-                };
-            
-            $http(req).then(function (response) {
-                console.log("updateBarcode: ", response);
-                createOrder(selectedMain, barcode);
-            });
+        number = parseInt(currentnumber) + inc + "";
+        checkDigit = getCheckDigit(number, weight);
+        barcode = prefix + number + checkDigit + suffix;  
+        
+        var req = {
+          method: 'POST',
+          url: '/api/update/barcode',
+          headers: {
+              'Content-Type' : 'application/json'
+          },
+          data: {
+              invoice : selectedMain.invoice,
+              barcode : barcode,
+              status : "ชำระเงินแล้ว",
+              rcpDocNo: rcpDocNo,
+              receiptDate: now
+          }
+        };
+        
+        $http(req).then(function (response) {
+            $scope.find();
+            createOrder(selectedMain, barcode);
         });
 
         function getCheckDigit(number, weight) {
-
             var sum = 0;
             var mod = 0;
             var checkDigit = "";
@@ -394,8 +388,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             } else {
                 checkDigit = (11 - mod) + "";
             }
-
-            return checkDigit;
+          return checkDigit;
         }
     };
     
@@ -606,35 +599,33 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         // Get next document number of bill (RCP)
         $http.get('/docno/RCP').then(function(response){
           var rcpDocNo = response.data.prefix + response.data.nextNumber;
-          console.log("rcpDocNo", rcpDocNo);
           $scope.rcpDocNo = rcpDocNo;
 
-          selectedMains.sort();
-          for(var i=0; i<selectedMains.length; i++){
-            setBarcode(selectedMains[i], rcpDocNo, i);
-          }
+          var inc = selectedMains.length;
+          
+          $http.get("/lastNumber").then(function (response) {
+
+            var req = {
+              method: 'PUT',
+              url: '/lastNumber',
+              headers: {
+                  'Content-Type' : 'application/json'
+              },
+              data: {
+                  number : parseInt(response.data.number) + inc + ""
+              }
+            };
+  
+            $http(req).then(function (response) {
+              selectedMains.sort();
+              for(var i=0; i<selectedMains.length; i++){
+                setBarcode(selectedMains[i], rcpDocNo, i, response.data.number, response.data.weight);
+              }  
+            });
+          });
 
           //Show dialog for print all and bill
           $scope.showPrintAllAndBill(ev);
-        });
-
-        var inc = selectedMains.length;
-
-        $http.get("/lastNumber").then(function (response) {
-          var req = {
-            method: 'PUT',
-            url: '/lastNumber',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            data: {
-                number : parseInt(response.data.number) + inc + ""
-            }
-          };
-
-          $http(req).then(function (response) {
-            $scope.find();   
-          });
         });
 
       }, function () {
@@ -750,11 +741,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.result_url_2 = response.data.resultUrl2;
             $scope.default_lang = response.data.defaultLang;
             $scope.hash_value = response.data.hashValue;
-            console.log("version", $scope.version);
-            console.log("merchant_id", $scope.merchant_id);
-            console.log("order_id", $scope.order_id);
-            console.log("amount", $scope.amount);
-            console.log("hash_value", $scope.hash_value);
         });
 
         function formatAmount(amount, length) {

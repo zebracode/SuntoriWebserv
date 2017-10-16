@@ -1,0 +1,263 @@
+<div data-ng-controller="HomeController" data-ng-init="find()">
+  <div flex layout="row" data-ng-show="authentication.user">
+  <!-- Container #3 Left -->
+  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+            class="md-whiteframe-z2" data-ng-show="authentication.user">
+  <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">ยินดีต้อนรับ</span>
+        <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
+      </md-card-title-text>
+      <md-card-title-media>
+        <div>
+          <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
+        </div>
+      </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <div>
+        <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
+          <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+          <md-icon md-svg-icon="pencil"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
+          <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+          <md-icon md-svg-icon="picture"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
+          <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+          <md-icon md-svg-icon="key"></md-icon>
+        </md-button>
+      </div>
+      <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
+    </md-card-actions>
+    <div class="list-group">
+      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายการจัดส่ง</a>
+      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
+      <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
+      <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
+      <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
+    </div>
+  </md-card>
+</md-sidenav>
+
+  <!-- Container #4 Right -->
+  <md-content flex id="content">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <!--User Login -->
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
+          <div class="col-lg-4">
+            <div class="input-group">
+              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+
+          </div>
+          <ul class="nav navbar-right panel_toolbox">
+            <div class="text-center mtop20">
+              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
+            </div>
+
+          </ul>
+
+          <!-- Summary -->
+          <!--<div class="col-md-12">-->
+            <!--<div class="x_panel">-->
+              <!--&lt;!&ndash;<div id="mainb" style="height:350px;"></div>&ndash;&gt;-->
+              <!--<div class="row top_tiles">-->
+                <!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-university"></i></div>-->
+                    <!--<div class="count">{{balanceAmount}}</div>-->
+                    <!--<h3>เงินคงเหลือ</h3>-->
+                    <!--<p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-graduation-cap"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>ส่งสำเร็จ</h3>-->
+                    <!--<p>จำนวนรายการส่งสำเร็จ</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-paper-plane"></i></div>-->
+                    <!--<div class="count" data-ng-show="authentication.user._id">{{mains.length}}</div>-->
+                    <!--<h3>จำนวนรายการ</h3>-->
+                    <!--<p>จำนวนรายการทั้งหมด</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
+                  <!--<div class="tile-stats">-->
+                    <!--<div class="icon"><i class="fa fa-fire-extinguisher"></i></div>-->
+                    <!--<div class="count">179</div>-->
+                    <!--<h3>ส่งไม่สำเร็จ</h3>-->
+                    <!--<p>จำนวนรายการที่ส่งไม่สำเร็จ</p>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <div class="clearfix"></div>
+          <div class="x_content">
+            <br />
+            <div class="table-responsive">
+              <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                <tr class="headings">
+                  <th class="column-title">วันที่ </th>
+                  <th class="column-title">Tracking No.</th>
+                  <th class="column-title">ผู้ส่ง </th>
+                  <th class="column-title">ผู้รับ </th>
+                  <th class="column-title">เบอร์โทร </th>
+                  <th class="column-title">นน.ก่อน </th>
+                  <th class="column-title">นน.หลัง </th>
+                  <th class="column-title">ค่าส่งก่อน </th>
+                  <th class="column-title">ค่าส่งหลัง </th>
+                  <th class="column-title">ส่วนต่าง </th>
+                  <th class="column-title">สถานะจัดส่ง </th>
+                  <th class="column-title">ปริ้น</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status !== 'ยังไม่ได้ชำระเงิน'">
+                  <td ng-bind="main.created | date:'mediumDate'"></td>
+                  <td class="list-group-item-heading" ng-bind="main.barcode"></td>
+                  <td class="list-group-item-heading" ng-bind="main.s_name"></td>
+                  <td class="list-group-item-heading" ng-bind="main.r_name"></td>
+                  <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
+                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
+                  <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
+                  <td class="list-group-item-heading" ng-bind="main.total"></td>
+                  <td class="list-group-item-heading">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price}}</td>
+                  <td class="list-group-item-heading">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price}}</td>
+                  <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
+                  <td>
+                    <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
+                    <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>
+                    <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A6 </a>
+                  </td>
+                  <!--<td>-->
+                    <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                  <!--</td>-->
+                </tr>
+                </tbody>
+              </table>
+
+              <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+              </div>
+
+            </div>
+            <div class="text-center form-group">
+              <ul uib-pagination total-items="mains.length" items-per-page="pageSize" ng-model="currentPage" ng-change="pageChanged()"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </md-content>
+  </div>
+  <!-- HomePage -->
+  <div flex layout="column"data-ng-hide="authentication.user">
+    <md-content>
+      <!--Modal box-->
+      <div class="modal fade" id="login" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+          <!-- Modal content no 1-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title text-center form-title">Login</h4>
+            </div>
+            <div class="modal-body padtrbl">
+
+              <div class="login-box-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                <div class="form-group">
+                  <form name="" id="loginForm">
+                    <div class="form-group has-feedback"> <!----- username -------------->
+                      <input class="form-control" placeholder="Username"  id="loginid" type="text" autocomplete="off" />
+                      <span style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginid"></span><!---Alredy exists  ! -->
+                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback"><!----- password -------------->
+                      <input class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
+                      <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span><!---Alredy exists  ! -->
+                      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="checkbox icheck">
+                          <label>
+                            <input type="checkbox" id="loginrem" > Remember Me
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-xs-12">
+                        <button type="button" class="btn btn-green btn-block btn-flat" onclick="userlogin()">Sign In</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--/ Modal box-->
+      <!--Banner-->
+      <div class="banner">
+        <div class="bg-color">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <div class="banner-text text-center">
+                  <div class="text-border">
+                    <h2 class="text-dec">Suntori Express</h2>
+                  </div>
+                  <div class="intro-para text-center quote">
+                    <p class="big-text">เรื่องเดลิเวอรี่ ซันโตริจัดให้...</p>
+                    <p class="big-text">Suntori Express ยินดีให้บริการครับ     สมัครสมาชิกฟรี!</p>
+                    <p class="small-text">ระบบส่งสินค้าทั่วประเทศไทยผ่านจุดไปรษณีย์ใกล้บ้านท่าน 230 แห่งทั่วประเทศ ท่านสามารถบริหารระบบรายชื่อลูกค้าได้ด้วยตัวเองง่ายๆประหยัดเงินและเวลาทำงาน ไม่ต้องต่อคิวส่งพัสดุให้เสียเวลา คุ้มค่าทุกนาทีใช้ซันโตริ เอ็กซ์เพรสนะคร้าบบบ</p>
+                    <a data-ui-sref="authentication.signup" class="btn get-quote">สมัครสมาชิก</a>
+                    <a data-ui-sref="authentication.signin" class="btn get-quote">เข้าสู่ระบบ</a>
+                  </div> <br />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <footer id="footer" class="footer">
+        <div class="container text-center">
+          ©2017 Suntori Express Co.,Ltd. All rights reserved
+          <div class="credits">
+            <!--
+                All the links in the footer should remain intact.
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/
+                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Mentor
+            -->
+            <h2>ติดต่อลูกค้าสัมพันธ์ 062-9452422</h2>
+            <h2> LINE ID : @suntorix</h2>
+          </div>
+        </div>
+      </footer>
+      <!--/ Footer-->
+    </md-content>
+  </div>
+</div>

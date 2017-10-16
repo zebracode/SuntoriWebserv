@@ -126,6 +126,7 @@
                     <th class="column-title">#</th>
                     <th class="column-title">วันสมัคร </th>
                     <th class="column-title">ชื่อผู้ใช้</th>
+					<th class="column-title">ชื่อสมาชิก</th>
                     <th class="column-title">อีเมลล์ </th>
                     <th class="column-title">เบอร์โทร </th>
                     <th class="column-title">ยอดเงิน</th>
@@ -138,6 +139,7 @@
                     <td>{{ $index + 1 }}</td>
                     <td ng-bind="user.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
+					<td class="list-group-item-heading" ng-bind="user.displayName"></td>
                     <td class="list-group-item-heading" ng-bind="user.email"></td>
                     <td class="list-group-item-heading" ng-bind="user.tel"></td>
                     <td class="list-group-item-heading" ng-bind="user.balanceAmt"></td>
