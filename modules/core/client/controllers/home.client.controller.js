@@ -10,14 +10,27 @@
 'use strict';
 
 angular.module('core').controller('HomeController', ['$scope', 'Authentication',
-'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains',
-    function($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, thailandPostStatus) {
+'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains', '$filter',
+    function($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, thailandPostStatus, $filter) {
+        $scope.totalItems = 0;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 5;
+      
+        $scope.setPage = function (pageNo) {
+          $scope.currentPage = pageNo;
+        };
+      
+        $scope.pageChanged = function() {
+          $log.log('Page changed to: ' + $scope.currentPage);
+        };
+
         // This provides Authentication context.
         $scope.authentication = Authentication;
 
         // Find a list of Mains
         $scope.find = function () {
             $scope.mains = Mains.query(function(mains) {
+                $scope.totalItems = mains.length;
             });
 
             $http.get('/price')
@@ -41,17 +54,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     console.log("Print AW FormA4");
                     //$http.get('/print/awpost');
         }
-
-        // Pagination
-        $scope.pagedItems = [];
-        $scope.itemsPerPage = 5;
-        $scope.currentPage = 1;
-        $scope.pageSize = 10;
-
-        //Clear
-        $scope.clearValue = function() {
-            $scope.user.displayName = undefined;
-          };
 
         // Remove existing Main
         $scope.remove = function (main) {
