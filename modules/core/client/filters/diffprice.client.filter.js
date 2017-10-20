@@ -44,9 +44,9 @@ angular.module('core').filter('diffPrice', function(){
     	}
 
     	if (addPrice1 || addPrice2) {
-    		return (price + charge) - basePrice;
+    		return  basePrice - (price + charge);
     	} else {
-            return price - basePrice;
+            return basePrice - price;
         }
 
     };

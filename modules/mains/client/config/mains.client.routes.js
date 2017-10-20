@@ -17,6 +17,10 @@ angular.module('mains').config(['$stateProvider',
         url: '',
         templateUrl: 'modules/mains/views/list-mains.client.view.html'
       })
+      .state('mains.summary', {
+        url: '/summary',
+        templateUrl: 'modules/mains/views/summary-mains.client.view.html'
+      })
       .state('mains.create', {
         url: '/create',
         templateUrl: 'modules/mains/views/create-main.client.view.html'

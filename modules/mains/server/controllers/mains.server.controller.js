@@ -235,3 +235,14 @@ exports.printBill = function(req, res, next) {
     }
   });
 };
+
+
+exports.mainByUserAndStatus = function (req, res, next) {  
+    Main.find({"user": req.query.user, "status": req.query.status},function (err, main) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(main)
+      }
+    });
+};

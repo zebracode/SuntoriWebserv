@@ -18,6 +18,8 @@ module.exports = function (app) {
     .put(mains.update)
     .delete(mains.delete);
 
+  app.get('/api/mainByUserAndStatus', mains.mainByUserAndStatus);
+
   // Finish by binding the main middleware
   app.param('mainId', mains.mainByID);
   

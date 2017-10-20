@@ -1,171 +1,5 @@
-<div data-ng-controller="HomeController" data-ng-init="find()">
-  <div flex layout="row" data-ng-show="authentication.user">
-  <!-- Container #3 Left -->
-  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
-            class="md-whiteframe-z2" data-ng-show="authentication.user">
-  <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">ยินดีต้อนรับ</span>
-        <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
-      </md-card-title-text>
-      <md-card-title-media>
-        <div>
-          <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
-        </div>
-      </md-card-title-media>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-      <div>
-        <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
-          <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
-          <md-icon md-svg-icon="pencil"></md-icon>
-        </md-button>
-        <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
-          <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
-          <md-icon md-svg-icon="picture"></md-icon>
-        </md-button>
-        <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
-          <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
-          <md-icon md-svg-icon="key"></md-icon>
-        </md-button>
-      </div>
-      <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
-    </md-card-actions>
-    <div class="list-group">
-      <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายการจัดส่ง</a>
-      <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
-      <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
-      <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
-      <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
-    </div>
-  </md-card>
-</md-sidenav>
+<div data-ng-controller="HomeController" data-ng-init="find() ; setBalanceAmt();">
 
-  <!-- Container #4 Right -->
-  <md-content flex id="content">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <!--User Login -->
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
-          <div class="col-lg-4">
-            <div class="input-group">
-              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>
-            </div><!-- /input-group -->
-
-          </div>
-          <ul class="nav navbar-right panel_toolbox">
-            <div class="text-center mtop20">
-              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
-            </div>
-
-          </ul>
-
-          <!-- Summary -->
-          <!--<div class="col-md-12">-->
-            <!--<div class="x_panel">-->
-              <!--&lt;!&ndash;<div id="mainb" style="height:350px;"></div>&ndash;&gt;-->
-              <!--<div class="row top_tiles">-->
-                <!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
-                  <!--<div class="tile-stats">-->
-                    <!--<div class="icon"><i class="fa fa-university"></i></div>-->
-                    <!--<div class="count">{{balanceAmount}}</div>-->
-                    <!--<h3>เงินคงเหลือ</h3>-->
-                    <!--<p>จำนวนเงินคงเหลือที่สามารถใช้ได้.</p>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
-                  <!--<div class="tile-stats">-->
-                    <!--<div class="icon"><i class="fa fa-graduation-cap"></i></div>-->
-                    <!--<div class="count">179</div>-->
-                    <!--<h3>ส่งสำเร็จ</h3>-->
-                    <!--<p>จำนวนรายการส่งสำเร็จ</p>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
-                  <!--<div class="tile-stats">-->
-                    <!--<div class="icon"><i class="fa fa-paper-plane"></i></div>-->
-                    <!--<div class="count" data-ng-show="authentication.user._id">{{mains.length}}</div>-->
-                    <!--<h3>จำนวนรายการ</h3>-->
-                    <!--<p>จำนวนรายการทั้งหมด</p>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">-->
-                  <!--<div class="tile-stats">-->
-                    <!--<div class="icon"><i class="fa fa-fire-extinguisher"></i></div>-->
-                    <!--<div class="count">179</div>-->
-                    <!--<h3>ส่งไม่สำเร็จ</h3>-->
-                    <!--<p>จำนวนรายการที่ส่งไม่สำเร็จ</p>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <div class="clearfix"></div>
-          <div class="x_content">
-            <br />
-            <div class="table-responsive">
-              <table class="table table-striped jambo_table bulk_action">
-                <thead>
-                <tr class="headings">
-                  <th class="column-title">วันที่ </th>
-                  <th class="column-title">Tracking No.</th>
-                  <th class="column-title">ผู้ส่ง </th>
-                  <th class="column-title">ผู้รับ </th>
-                  <th class="column-title">เบอร์โทร </th>
-                  <th class="column-title">นน.ก่อน </th>
-                  <th class="column-title">นน.หลัง </th>
-                  <th class="column-title">ค่าส่งก่อน </th>
-                  <th class="column-title">ค่าส่งหลัง </th>
-                  <th class="column-title">ส่วนต่าง </th>
-                  <th class="column-title">สถานะจัดส่ง </th>
-                  <th class="column-title">ปริ้น</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText | startFrom:currentPage-1 : itemsPerPage" data-ng-show="authentication.user._id == main.user._id && main.status !== 'ยังไม่ได้ชำระเงิน'">
-                  <td ng-bind="main.created | date:'mediumDate'"></td>
-                  <td class="list-group-item-heading" ng-bind="main.barcode"></td>
-                  <td class="list-group-item-heading" ng-bind="main.s_name"></td>
-                  <td class="list-group-item-heading" ng-bind="main.r_name"></td>
-                  <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
-                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
-                  <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
-                  <td class="list-group-item-heading" ng-bind="main.total"></td>
-                  <td class="list-group-item-heading">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price}}</td>
-                  <td class="list-group-item-heading">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price}}</td>
-                  <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
-                  <td>
-                    <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
-                    <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>
-                    <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A6 </a>
-                  </td>
-                  <!--<td>-->
-                    <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
-                  <!--</td>-->
-                </tr>
-                </tbody>
-              </table>
-
-              <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
-                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
-              </div>
-
-            </div>
-            <div class="text-center form-group">
-              <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" items-per-page="itemsPerPage" ng-change="pageChanged()"></ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </md-content>
-  </div>
   <!-- HomePage -->
   <div flex layout="column"data-ng-hide="authentication.user">
     <md-content>
@@ -258,6 +92,163 @@
         </div>
       </footer>
       <!--/ Footer-->
+    </md-content>
+  </div>
+
+  <div flex layout="row" data-ng-show="authentication.user">
+    <!-- Container #3 Left -->
+    <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+                class="md-whiteframe-z2" data-ng-show="authentication.user">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">ยินดีต้อนรับ</span>
+            <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div>
+              <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <div>
+            <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
+              <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+              <md-icon md-svg-icon="pencil"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
+              <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+              <md-icon md-svg-icon="picture"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
+              <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+              <md-icon md-svg-icon="key"></md-icon>
+            </md-button>
+          </div>
+          <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
+        </md-card-actions>
+        <div class="list-group">
+          <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
+          <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
+          <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
+          <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
+          <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
+          <a class="list-group-item" data-ui-sref="mains.summary"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</a>
+        </div>
+      </md-card>
+    </md-sidenav>
+
+    <!-- Container #4 Right -->
+    <md-content flex id="content">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <!--User Login -->
+        <div class="x_panel">
+          <div class="x_title">
+
+            <div class="clearfix"></div>
+            <div class="x_content">
+              <!---Profile--->
+              <!-- page content -->
+              <div class="right_col" role="main">
+                <div class="">
+                  <div class="page-title">
+                    <div class="title_left">
+                      <h3>ยินดีต้อนรับ คุณ<span data-ng-bind="authentication.user.firstName"></span>&nbsp; <span data-ng-bind="authentication.user.lastName"></span></h3>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_content">
+                          <div class="col-md-7 col-sm-6 col-xs-12">
+                            <div class="x_panel fixed_height_320">
+                              <div class="x_title">
+                                <h2>รายชื่อผู้ส่ง <small>รายชื่อผู้ส่ง/ตัวแทนจำหน่าย</small></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                  <div class="title_right">
+                                    <ul class="nav navbar-right panel_toolbox">
+                                      <div class="text-center mtop20">
+                                        <button type="button" class="btn btn-mg btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>
+                                      </div>
+                                    </ul>
+                                  </div>
+                                </ul>
+                                <div class="clearfix"></div>
+                              </div>
+                              <div class="x_content" ng-controller="SendsController" data-ng-init="find()">
+
+                                <!-- start project list -->
+                                <table class="table table-striped projects">
+                                  <thead>
+                                  <tr>
+                                    <th style="width: 20%">วันสมัคร</th>
+                                    <th>ชื่อร้าน/ผู้ส่ง</th>
+                                    <th>สินค้า</th>
+                                    <th>เบอร์โทร</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr class="even pointer" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
+                                    <td ng-bind="send.created | date:'mediumDate'"></td>
+                                    <td class="list-group-item-heading" ng-bind="send.name"></td>
+                                    <td class="list-group-item-heading" ng-bind="send.product"></td>
+                                    <td class="list-group-item-heading" ng-bind="send.tel"></td>
+                                  </tr>
+                                  </tbody>
+                                </table>
+                                <!-- end project list -->
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-5 col-sm-6 col-xs-12">
+                            <div class="x_panel fixed_height_320">
+                              <div class="x_title">
+                                <h2>เมนูลัด <small>ใช้เมนูลัดเพื่อความรวดเร็ว</small></h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                  <div class="title_right">
+                                    <ul class="nav navbar-right panel_toolbox">
+                                      <div class="text-center mtop20">
+
+                                      </div>
+                                    </ul>
+                                  </div>
+                                </ul>
+                                <div class="clearfix"></div>
+                              </div>
+                                <div class="x_content">
+                                  <md-card-actions layout="row" layout-align="start center">
+                                    <md-card-icon-actions>
+                                      <md-button class="md-icon-button" aria-label="Favorite">
+                                        <md-icon md-svg-icon="pencil"></md-icon>
+                                      </md-button>
+                                      <md-button class="md-icon-button" aria-label="Share">
+                                        <md-icon md-svg-icon="key"></md-icon>
+                                      </md-button>
+
+                                    </md-card-icon-actions>
+                                    <md-button data-ui-sref="mains.create">เพิ่มรายการ</md-button>
+                                    <md-button data-ui-sref="mains.list">ค้างชำระ</md-button>
+                                    <md-button data-ui-sref="mains.summary">การใช้งาน</md-button>
+                                  </md-card-actions>
+                                </div>
+                            </div>
+                          </div>
+                          <!-- /page content -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <!-- /page content -->
+            </div>
+          </div>
+        </div>
     </md-content>
   </div>
 </div>

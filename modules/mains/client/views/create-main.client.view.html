@@ -1,5 +1,6 @@
 <div flex layout="row" data-ng-controller="MainsController" data-ng-init="find(); s_country=''; r_country=''">
-  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" data-ng-show="authentication.user">
+  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
+              class="md-whiteframe-z2" data-ng-show="authentication.user">
     <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
       <md-card-title>
         <md-card-title-text>
@@ -30,11 +31,12 @@
         <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
       </md-card-actions>
       <div class="list-group">
-        <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; รายการจัดส่ง</a>
+        <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
         <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
         <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
         <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
         <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
+        <a class="list-group-item" data-ui-sref="mains.summary"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</a>
       </div>
     </md-card>
   </md-sidenav>
@@ -220,9 +222,19 @@
               <input type="hidden" ng-model="weight" value="selectedOption.value">
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" controller="Scoper">
+                <md-header class="md-no-sticky">กรอกเลข OrderNo.</md-header>
+              </div>
+
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                <md-header class="md-no-sticky">กรอกเลข InvoiceNo.</md-header>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback" controller="Scoper">
                 <input name="order" type="text" data-ng-model="order" id="order" class="form-control has-feedback-left" id="inputSuccess2" placeholder="order">
                 <span class="fa fa-shopping-cart form-control-feedback left" aria-hidden="true"></span>
               </div>
+
 
               <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                 <input name="invoice" type="text" data-ng-model="invoice" id="invoice" class="form-control" id="inputSuccess3" placeholder="Invoice No">
