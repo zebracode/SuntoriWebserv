@@ -155,17 +155,17 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           price: '40'
         },
         {
-         name: 'น้ำหนัก 0.5 - 1 กก.',
-          value: '500-1,000',
-          price: '60'
-        },
-        {
           name: '- กล่อง เบอร์ 0',
           value: '500-1,000',
-          price: '60'
+          price: '40'
         },
         {
           name: '- กล่อง เบอร์ AA',
+          value: '500-1,000',
+          price: '40'
+        },
+        {
+         name: 'น้ำหนัก 0.5 - 1 กก.',
           value: '500-1,000',
           price: '60'
         },
@@ -231,7 +231,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
         },
         {
-          name: 'น้ำหนัก 3 - 5 กก.',
+          name: 'น้ำหนัก 5 - 10 กก.',
           value: '5,000-10,000',
           price: '130'
         },
