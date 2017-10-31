@@ -103,7 +103,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
+      //$scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
+      $scope.mains = Mains.query(function(result){
         var firstTotalPrice = 0;
         $scope.selectedMains = [];
         for (var i=0; i<result.length; i++){
