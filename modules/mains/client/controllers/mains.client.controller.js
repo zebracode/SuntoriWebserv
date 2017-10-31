@@ -108,8 +108,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         var firstTotalPrice = 0;
         $scope.selectedMains = [];
         for (var i=0; i<result.length; i++){
-            firstTotalPrice += parseInt(result[i].total);
-            $scope.selectedMains.push(result[i]);
+            if(result[i].user === null) {
+              continue;
+            }
+            if (Authentication.user._id === result[i].user._id && result[i].status === 'ยังไม่ได้ชำระเงิน') {
+              firstTotalPrice += parseInt(result[i].total);
+              $scope.selectedMains.push(result[i]);
+            }
         }
       $scope.totalPrice = firstTotalPrice;
       setDisbled($scope.balanceAmount - $scope.totalPrice);
