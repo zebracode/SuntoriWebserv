@@ -103,12 +103,18 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Find a list of Mains
     $scope.find = function () {
-      $scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
+      //$scope.mains = Mains.getMain({user: Authentication.user, status: 'ยังไม่ได้ชำระเงิน'}, function(result){
+      $scope.mains = Mains.query(function(result){
         var firstTotalPrice = 0;
         $scope.selectedMains = [];
         for (var i=0; i<result.length; i++){
-            firstTotalPrice += parseInt(result[i].total);
-            $scope.selectedMains.push(result[i]);
+            if(result[i].user === null) {
+              continue;
+            }
+            if (Authentication.user._id === result[i].user._id && result[i].status === 'ยังไม่ได้ชำระเงิน') {
+              firstTotalPrice += parseInt(result[i].total);
+              $scope.selectedMains.push(result[i]);
+            }
         }
       $scope.totalPrice = firstTotalPrice;
       setDisbled($scope.balanceAmount - $scope.totalPrice);
@@ -459,6 +465,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $http.put('/api/balance',data).then(function(){
         });      
     };
+
     
     $scope.showTopUpPromt = function(event) {
     // Appending dialog to document.body to cover sidenav in docs app

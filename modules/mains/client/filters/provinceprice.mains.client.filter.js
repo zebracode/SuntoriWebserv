@@ -3,7 +3,7 @@ angular.module('mains').filter('provincePrice', function(){
     	var perimeter = ['กรุงเทพมหานคร', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ', 'สมุทรสาคร'];
     	var addPrice1 = true;
     	var addPrice2 = true;
-    
+
     	if (senderProvince === '' || receiverProvince === '') {
     		return basePrice;
     	}
@@ -29,4 +29,3 @@ angular.module('mains').filter('provincePrice', function(){
         return basePrice;
     };
 });
-
