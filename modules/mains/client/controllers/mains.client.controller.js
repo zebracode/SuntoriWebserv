@@ -163,15 +163,15 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         },
         {
           name: '- กล่อง เบอร์ 0',
-          value: '500-1,000',
-          price: '60',
-          weight: 1000
+          value: '0-500',
+          price: '40',
+          weight: 500
         },
         {
           name: '- กล่อง เบอร์ AA',
-          value: '500-1,000',
-          price: '60',
-          weight: 1000
+          value: '0-500',
+          price: '40',
+          weight: 500
         },
         {
          name: 'น้ำหนัก 0.5 - 1 กก.',
