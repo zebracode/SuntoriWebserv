@@ -162,12 +162,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           weight: 500
         },
         {
-         name: 'น้ำหนัก 0.5 - 1 กก.',
-          value: '500-1,000',
-          price: '60',
-          weight: 1000
-        },
-        {
           name: '- กล่อง เบอร์ 0',
           value: '500-1,000',
           price: '60',
@@ -175,6 +169,12 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         },
         {
           name: '- กล่อง เบอร์ AA',
+          value: '500-1,000',
+          price: '60',
+          weight: 1000
+        },
+        {
+         name: 'น้ำหนัก 0.5 - 1 กก.',
           value: '500-1,000',
           price: '60',
           weight: 1000
@@ -252,7 +252,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           weight: 5000
         },
         {
-          name: 'น้ำหนัก 3 - 5 กก.',
+          name: 'น้ำหนัก 5 - 10 กก.',
           value: '5,000-10,000',
           price: '130',
           weight: 10000
