@@ -15,7 +15,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Create new Main
     $scope.create = function () {
-      var total = $filter("provincePrice")(this.selectedOption.price, this.s_country, this.r_country);
+      var total = $filter("provincePrice")(this.selectedOption.price, this.s_country, this.r_country, this.selectedOption.weight);
       // Create new Main object
       var main = new Mains({
         s_name: this.s_name,
@@ -158,124 +158,147 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         {
           name: 'น้ำหนักไม่เกิน 0.5 กก.',
           value: '500',
-          price: '40'
+          price: '40',
+          weight: 500
         },
         {
           name: '- กล่อง เบอร์ 0',
           value: '500-1,000',
-          price: '40'
+          price: '60',
+          weight: 1000
         },
         {
           name: '- กล่อง เบอร์ AA',
           value: '500-1,000',
-          price: '40'
+          price: '60',
+          weight: 1000
         },
         {
          name: 'น้ำหนัก 0.5 - 1 กก.',
           value: '500-1,000',
-          price: '60'
+          price: '60',
+          weight: 1000
         },
         {
           name: '- กล่อง เบอร์ AA+4',
           value: '500-1,000',
-          price: '60'
+          price: '60',
+          weight: 1000
         },
         {
           name: '- กล่อง เบอร์ A (ก)',
           value: '500-1,000',
-          price: '60'
+          price: '60',
+          weight: 1000
         },
         {
           name: 'น้ำหนัก 1 - 3 กก.',
           value: '1,000-3,000',
-          price: '80'
+          price: '80',
+          weight: 3000
         },
         {
           name: '- กล่อง เบอร์ CD',
           value: '1,000-3,000',
-          price: '80'
+          price: '80',
+          weight: 3000
         },
         {
           name: '- กล่อง เบอร์ 2A',
           value: '1,000-3,000',
-          price: '80'
+          price: '80',
+          weight: 3000
         },
         {
           name: '- กล่อง เบอร์ B (ข)',
           value: '1,000-3,000',
-          price: '80'
+          price: '80',
+          weight: 3000
         },
         {
           name: '- กล่อง เบอร์ BH',
           value: '1,000-3,000',
-          price: '80'
+          price: '80',
+          weight: 3000
         },
         {
           name: '- กล่อง เบอร์ 2B',
           value: '1,000-3,000',
-          price: '80'
+          price: '80',
+          weight: 3000
         },
         {
           name: 'น้ำหนัก 3 - 5 กก.',
           value: '3,000-5,000',
-          price: '90'
+          price: '90',
+          weight: 5000
         },
         {
           name: '- กล่อง เบอร์ C (ค)',
           value: '3,000-5,000',
-          price: '90'
+          price: '90',
+          weight: 5000
         },
         {
           name: '- กล่อง เบอร์ C+8',
           value: '3,000-5,000',
-          price: '90'
+          price: '90',
+          weight: 5000
         },
         {
           name: '- กล่อง เบอร์ D (ง)',
           value: '3,000-5,000',
-          price: '90'
-
+          price: '90',
+          weight: 5000
         },
         {
           name: 'น้ำหนัก 5 - 10 กก.',
           value: '5,000-10,000',
-          price: '130'
+          price: '130',
+          weight: 10000
         },
         {
           name: '- กล่อง เบอร์ F (สั้น)',
           value: '5,000-10,000',
-          price: '130'
+          price: '130',
+          weight: 10000
         },
         {
           name: '- กล่อง เบอร์ E (จ)',
           value: '5,000-10,000',
-          price: '130'
+          price: '130',
+          weight: 10000
         },
         {
           name: '- กล่อง เบอร์ F (ฉ)',
           value: '5,000-10,000',
-          price: '130'
+          price: '130',
+          weight: 10000
 
         },
         {
           name: 'น้ำหนัก 10 - 15 กก.',
           value: '10,000-15,000',
-          price: '220'
+          price: '220',
+          weight: 15000
         },
         {
           name: '- กล่อง เบอร์ G (ยาว)',
           value: '10,000-15,000',
-          price: '220'
+          price: '220',
+          weight: 15000
         },
         {
           name: 'น้ำหนัก 15 - 20 กก.',
           value: '15,000-20,000',
-          price: '260'
+          price: '260',
+          weight: 20000
         },
         {
           name: '- 50*50*50 cm',
           value: '15,000-20,000',
-          price: '260'
+          price: '260',
+          weight: 20000
         }
       ];
 

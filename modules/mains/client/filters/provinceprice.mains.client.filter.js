@@ -1,5 +1,5 @@
 angular.module('mains').filter('provincePrice', function(){
-    return function(basePrice, senderProvince, receiverProvince){
+    return function(basePrice, senderProvince, receiverProvince, weight){
     	var perimeter = ['กรุงเทพมหานคร', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ', 'สมุทรสาคร'];
     	var addPrice1 = true;
     	var addPrice2 = true;
@@ -23,6 +23,9 @@ angular.module('mains').filter('provincePrice', function(){
     	}
 
     	if (addPrice1 || addPrice2) {
+			if(weight <= 1000) {
+				return parseInt(basePrice) + 10;
+			}
     		return parseInt(basePrice) + 20;
     	}
 
