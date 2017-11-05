@@ -103,6 +103,7 @@ exports.oauthCall = function (strategy, scope) {
  */
 exports.oauthCallback = function (strategy) {
   return function (req, res, next) {
+    
     // Pop redirect URL from session
     var sessionRedirectURL = req.session.redirect_to;
     delete req.session.redirect_to;

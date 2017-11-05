@@ -23,7 +23,14 @@ module.exports = function (app) {
   app.route('/api/auth/facebook').get(users.oauthCall('facebook', {
     scope: ['email']
   }));
+  //app.get('/api/auth/facebook', passport.authenticate('facebook'));
+
   app.route('/api/auth/facebook/callback').get(users.oauthCallback('facebook'));
+  // app.get('/api/auth/facebook/callback',
+  // passport.authenticate('facebook', { 
+  //   successRedirect: '/',
+  //   failureRedirect: '/authentication/signin' 
+  // }));
 
   // Setting the twitter oauth routes
   app.route('/api/auth/twitter').get(users.oauthCall('twitter'));

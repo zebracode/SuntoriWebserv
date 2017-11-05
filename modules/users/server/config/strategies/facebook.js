@@ -8,16 +8,16 @@ var passport = require('passport'),
   users = require('../../controllers/users.server.controller');
 
 module.exports = function (config) {
-  
-  // Use facebook strategy
+
   passport.use(new FacebookStrategy({
     clientID: config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL,
     profileFields: ['id', 'displayName', 'photos', 'email'],
     passReqToCallback: true
-    }, function(req, accessToken, refreshToken, profile, cb) {
-      // Set the provider data and include tokens
+  },
+    function (req, accessToken, refreshToken, profile, done) {
+      //Set the provider data and include tokens
       var providerData = profile._json;
       providerData.accessToken = accessToken;
       providerData.refreshToken = refreshToken;
@@ -35,7 +35,7 @@ module.exports = function (config) {
       };
 
       // Save the user OAuth profile
-      users.saveOAuthUserProfile(req, providerUserProfile, cb);
+      users.saveOAuthUserProfile(req, providerUserProfile, done);
     }
   ));
 };
