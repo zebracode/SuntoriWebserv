@@ -27,7 +27,7 @@ module.exports = {
   facebook: {
     clientID: process.env.FACEBOOK_ID || '1879899495671563',
     clientSecret: process.env.FACEBOOK_SECRET || '1e4b53186ccf3cc57e10311534059c44',
-    callbackURL: 'http://localhost:3000/api/auth/facebook/callback'
+    callbackURL: 'http://www.suntoriexpress.com/api/auth/facebook/callback'
   },
   twitter: {
     clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
@@ -37,7 +37,7 @@ module.exports = {
   google: {
     clientID: process.env.GOOGLE_ID || '300039047767-ujc7f9ko836s7uqknlml45uunnqu3aqo.apps.googleusercontent.com',
     clientSecret: process.env.GOOGLE_SECRET || 'mTYIOQwab0tt7n0A98evQaQR',
-    callbackURL: '/api/auth/google/callback'
+    callbackURL: 'http://www.suntoriexpress.com/api/auth/google/callback'
   },
   linkedin: {
     clientID: process.env.LINKEDIN_ID || 'APP_ID',
