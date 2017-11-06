@@ -25,9 +25,9 @@ module.exports = {
     title: defaultEnvConfig.app.title + ' - Development Environment'
   },
   facebook: {
-    clientID: process.env.FACEBOOK_ID || '628870480642473',
-    clientSecret: process.env.FACEBOOK_SECRET || '8ddc95abe2db2414292f1c31fc142064',
-    callbackURL: '/api/auth/facebook/callback'
+    clientID: process.env.FACEBOOK_ID || '1879899495671563',
+    clientSecret: process.env.FACEBOOK_SECRET || '1e4b53186ccf3cc57e10311534059c44',
+    callbackURL: 'http://www.suntoriexpress.com/api/auth/facebook/callback'
   },
   twitter: {
     clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
@@ -37,7 +37,7 @@ module.exports = {
   google: {
     clientID: process.env.GOOGLE_ID || '300039047767-ujc7f9ko836s7uqknlml45uunnqu3aqo.apps.googleusercontent.com',
     clientSecret: process.env.GOOGLE_SECRET || 'mTYIOQwab0tt7n0A98evQaQR',
-    callbackURL: '/api/auth/google/callback'
+    callbackURL: 'http://www.suntoriexpress.com/api/auth/google/callback'
   },
   linkedin: {
     clientID: process.env.LINKEDIN_ID || 'APP_ID',
@@ -58,10 +58,13 @@ module.exports = {
   mailer: {
     from: process.env.MAILER_FROM || 'MAILER_FROM',
     options: {
+      host: 'smtp.gmail.com',
+      port: '465',
+      secure: true,
       service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
       auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+        user: process.env.MAILER_EMAIL_ID || 'info@suntoriexpress.com',
+        pass: process.env.MAILER_PASSWORD || 'suntoriP@ssw0rd'
       }
     }
   },

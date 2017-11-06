@@ -23,7 +23,14 @@ module.exports = function (app) {
   app.route('/api/auth/facebook').get(users.oauthCall('facebook', {
     scope: ['email']
   }));
+  //app.get('/api/auth/facebook', passport.authenticate('facebook'));
+
   app.route('/api/auth/facebook/callback').get(users.oauthCallback('facebook'));
+  // app.get('/api/auth/facebook/callback',
+  // passport.authenticate('facebook', { 
+  //   successRedirect: '/',
+  //   failureRedirect: '/authentication/signin' 
+  // }));
 
   // Setting the twitter oauth routes
   app.route('/api/auth/twitter').get(users.oauthCall('twitter'));
@@ -32,8 +39,8 @@ module.exports = function (app) {
   // Setting the google oauth routes
   app.route('/api/auth/google').get(users.oauthCall('google', {
     scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
+      'https://www.googleapis.com/auth/plus.login',
+      'https://www.googleapis.com/auth/plus.profile.emails.read'
     ]
   }));
   app.route('/api/auth/google/callback').get(users.oauthCallback('google'));

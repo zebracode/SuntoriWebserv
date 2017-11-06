@@ -16,6 +16,7 @@ module.exports = function (config) {
       passReqToCallback: true
     },
     function (req, accessToken, refreshToken, profile, done) {
+      console.log('profile: ', profile);
       // Set the provider data and include tokens
       var providerData = profile._json;
       providerData.accessToken = accessToken;
@@ -28,11 +29,13 @@ module.exports = function (config) {
         displayName: profile.displayName,
         email: profile.emails[0].value,
         username: profile.username,
-        profileImageURL: (providerData.picture) ? providerData.picture : undefined,
+        profileImageURL: (providerData.image.url) ? providerData.image.url : undefined,
         provider: 'google',
         providerIdentifierField: 'id',
         providerData: providerData
       };
+
+      console.log('providerUserProfile: ', providerUserProfile);
 
       // Save the user OAuth profile
       users.saveOAuthUserProfile(req, providerUserProfile, done);
