@@ -58,10 +58,13 @@ module.exports = {
   mailer: {
     from: process.env.MAILER_FROM || 'MAILER_FROM',
     options: {
+      host: 'smtp.gmail.com',
+      port: '465',
+      secure: true,
       service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
       auth: {
-        user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-        pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
+        user: process.env.MAILER_EMAIL_ID || 'info@suntoriexpress.com',
+        pass: process.env.MAILER_PASSWORD || 'suntoriP@ssw0rd'
       }
     }
   },
