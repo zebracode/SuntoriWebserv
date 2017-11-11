@@ -16,7 +16,6 @@ var path = require('path'),
 exports.create = function (req, res) {
   var main = new Main(req.body);
   main.user = req.user;
-  console.log("req.body", req.body);
   main.save(function (err) {
     if (err) {
       return res.status(400).send({
@@ -166,7 +165,6 @@ exports.setBarcode = function(req, res, next) {
 };
 
 exports.printAll = function(req, res, next) {
-  console.log("ddd",req.query.rcpDocNo);
   Main.find({rcpDocNo:req.query.rcpDocNo}, function(err, mains) {
     if (err)
       return next(err);
