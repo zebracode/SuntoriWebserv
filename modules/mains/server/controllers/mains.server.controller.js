@@ -96,7 +96,7 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   if (typeof req.query.status === "undefined"){
-    Main.find().sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+    Main.find().sort('-created').populate('user').exec(function (err, mains) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
@@ -116,8 +116,6 @@ exports.list = function (req, res) {
     }
   });
   }
-  console.log("status", req.query.status);
-  
 };
 
 /**

@@ -16,6 +16,17 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     // Create new Main
     $scope.create = function () {
 
+      // Recipient Data
+      var recipientData = {
+        name: $scope.r_name,
+        postcode: $scope.r_postcode,
+        country: $scope.r_country,
+        ampher: $scope.r_ampher,
+        address: $scope.r_address,
+        email: $scope.r_email,
+        tel: $scope.r_tel
+      };
+
       // Recipients
       Recipients.query(function(response){
         var recipient;
@@ -29,31 +40,23 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
         // Update Recipients
         if(recipient) {
-          console.log("Update Recipients");
           $scope.recipient = Recipients.get({
             recipientId: recipient._id
           }, function(){
             $scope.recipient._id = recipient._id;
-            $scope.recipient.postcode = $scope.r_postcode;
-            $scope.recipient.country = $scope.r_country;
-            $scope.recipient.ampher = $scope.r_ampher;
-            $scope.recipient.address = $scope.r_address;
-            $scope.recipient.email = $scope.r_email;
-            $scope.recipient.tel = $scope.r_tel;
+            $scope.recipient.postcode = recipientData.postcode;
+            $scope.recipient.country = recipientData.country;
+            $scope.recipient.ampher = recipientData.ampher;
+            $scope.recipient.address = recipientData.address;
+            $scope.recipient.email = recipientData.email;
+            $scope.recipient.tel = recipientData.tel;
             $scope.recipient.$update();
           });
+
         // Add Recipients
         } else {
           if($scope.r_name) {
-            var newRecipient = new Recipients({
-              name: $scope.r_name,
-              postcode: $scope.r_postcode,
-              country: $scope.r_country,
-              ampher: $scope.r_ampher,
-              address: $scope.r_address,
-              email: $scope.r_email,
-              tel: $scope.r_tel
-            }); 
+            var newRecipient = new Recipients(recipientData); 
             newRecipient.$save();
           }
         }
