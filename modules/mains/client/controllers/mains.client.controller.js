@@ -1,8 +1,8 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', "$filter",
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', "$filter", 'Recipients',
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients) {
 
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
@@ -15,6 +15,50 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     // Create new Main
     $scope.create = function () {
+
+      // Recipients
+      Recipients.query(function(response){
+        var recipient;
+        for(var i=0; i<response.length; i++) {
+          if (response[i].user) {
+            if(Authentication.user._id === response[i].user._id && $scope.r_name === response[i].name ) {
+              recipient = response[i];
+            }
+          } 
+        }
+
+        // Update Recipients
+        if(recipient) {
+          console.log("Update Recipients");
+          $scope.recipient = Recipients.get({
+            recipientId: recipient._id
+          }, function(){
+            $scope.recipient._id = recipient._id;
+            $scope.recipient.postcode = $scope.r_postcode;
+            $scope.recipient.country = $scope.r_country;
+            $scope.recipient.ampher = $scope.r_ampher;
+            $scope.recipient.address = $scope.r_address;
+            $scope.recipient.email = $scope.r_email;
+            $scope.recipient.tel = $scope.r_tel;
+            $scope.recipient.$update();
+          });
+        // Add Recipients
+        } else {
+          if($scope.r_name) {
+            var newRecipient = new Recipients({
+              name: $scope.r_name,
+              postcode: $scope.r_postcode,
+              country: $scope.r_country,
+              ampher: $scope.r_ampher,
+              address: $scope.r_address,
+              email: $scope.r_email,
+              tel: $scope.r_tel
+            }); 
+            newRecipient.$save();
+          }
+        }
+      });
+
       var total = $filter("provincePrice")(this.selectedOption.price, this.s_country, this.r_country, this.selectedOption.weight);
       // Create new Main object
       var main = new Mains({
@@ -71,6 +115,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
+
+      //Update Receiptent Address
+      
+
+
     };
 
     // Remove existing Main
@@ -333,7 +382,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.detail = $scope.selectedSender.product;
         }
       };
-
+      
+      // Autocomplete Recipients
       $scope.getRecipients = function(search) {
           return $http
             .get('/api/recipient/findByName?searchText=' + search + '&userId=' + $scope.authentication.user._id)
