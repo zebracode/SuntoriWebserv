@@ -85,7 +85,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr class="even pointer" data-ng-repeat="recipient in recipients | filter:searchText" data-ng-show="authentication.user._id == recipient.user._id">
+              <tr class="even pointer" data-ng-repeat="recipient in recipients | filter:searchText">
                 <td ng-bind="recipient.created | date:'mediumDate'"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.name"></td>
                 <td class="list-group-item-heading" ng-bind="recipient.tel"></td>
