@@ -95,7 +95,7 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   if (typeof req.query.status === "undefined"){
-    Main.find().sort('-created').populate('user').exec(function (err, mains) {
+    Main.find({user: req.query.user}).sort('-created').populate('user').exec(function (err, mains) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)

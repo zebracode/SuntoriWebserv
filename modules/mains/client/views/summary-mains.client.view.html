@@ -197,7 +197,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status !== 'ยังไม่ได้ชำระเงิน'">
+                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText">
                     <td ng-bind="main.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                     <td class="list-group-item-heading" ng-bind="main.s_name"></td>
@@ -227,7 +227,7 @@
 
               </div>
               <div class="text-center form-group">
-                <ul uib-pagination total-items="mains.length" items-per-page="pageSize" ng-model="currentPage" ng-change="pageChanged()"></ul>
+                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
               </div>
             </div>
           </div>
