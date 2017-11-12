@@ -38,17 +38,19 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 var tempMains = [];
                 var pageMains = [];
                 var pageIndex = 0;
+                var itemCount = 0;
                 for(var i=0; i<mains.length; i++) {
                     if(!mains[i].status) {
                         continue;
                     }
                     if(mains[i].status !== "ยังไม่ได้ชำระเงิน") {
+                        itemCount++;
                         tempMains.push(mains[i]);
-                        if((i+1)%($scope.itemsPerPage) === 0) {
+                        if((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)){
                             pageIndex++;
                             pageMains[pageIndex] = tempMains;
                             tempMains = [];
-                        } 
+                        }
                         $scope.totalItems += 1;
                     }
                 }
