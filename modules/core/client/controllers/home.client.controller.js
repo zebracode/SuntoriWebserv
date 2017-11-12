@@ -22,6 +22,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
       
         $scope.pageChanged = function() {
           $log.log('Page changed to: ' + $scope.currentPage);
+          $scope.mains = $scope.allPage[$scope.currentPage];
         };
 
         // This provides Authentication context.
@@ -29,15 +30,43 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         // Find a list of Mains
         $scope.find = function () {
-            $scope.mains = Mains.query(function(mains) {
-                $scope.totalItems = mains.length;
+            $scope.mains = Mains.query(
+                {
+                    user:Authentication.user._id
+                },
+            function(mains) {
+                var tempMains = [];
+                var pageMains = [];
+                var pageIndex = 0;
+                for(var i=0; i<mains.length; i++) {
+                    if(!mains[i].status) {
+                        continue;
+                    }
+                    if(mains[i].status !== "ยังไม่ได้ชำระเงิน") {
+                        tempMains.push(mains[i]);
+                        if((i+1)%($scope.itemsPerPage) === 0) {
+                            pageIndex++;
+                            pageMains[pageIndex] = tempMains;
+                            tempMains = [];
+                        } 
+                        $scope.totalItems += 1;
+                    }
+                }
+
+                if(tempMains.length > 0) {
+                    pageMains[pageIndex + 1] = tempMains;
+                }
+                
+                $scope.allPage = pageMains;
+
+                // Set first page
+                $scope.mains = pageMains[1];
             });
 
             $http.get('/price')
             .then(function(response){
                 $scope.price = response.data;
             });
-            
         };
 
         $scope.printformA6 = function(main) {

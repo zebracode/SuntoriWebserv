@@ -14,7 +14,9 @@
     "angular-file-upload": "1.1.5",
     "angular-material": "^1.1.4",
     "gentelella": "^1.4.0",
-    "ng-table": "1.0.0"
+    "ng-table": "1.0.0",
+    "angular-touch": "^1.6.6",
+    "angular-aria": "^1.6.6"
   },
   "resolutions": {
     "angular": "~1.3"
