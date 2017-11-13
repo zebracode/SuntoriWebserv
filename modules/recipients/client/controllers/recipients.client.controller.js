@@ -67,7 +67,10 @@ angular.module('recipients').controller('RecipientsController', ['$scope', '$sta
 
     // Find a list of Recipients
     $scope.find = function () {
-      $scope.recipients = Recipients.query({userId: Authentication.user._id});
+      $scope.recipients = Recipients.query({userId: Authentication.user._id}, 
+        function(recipients) {
+          $scope.recipients = recipients;
+        });
     };
 
     // Find existing Recipient
