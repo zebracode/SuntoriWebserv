@@ -68,7 +68,6 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     };
     
     $scope.setBalanceAmt = function(index){
-    console.log("pagedItems: ", index);
     $http.get("/api/balance?userId=" + $scope.pagedItems[index]._id)
         .then(function(res) {
            if (res.data !== null) {
@@ -82,6 +81,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 
 .filter('pagination', function() {
     return function(data, start){
+        if (typeof data !== "undefined" )
         return data.slice(start);
     };
 });
