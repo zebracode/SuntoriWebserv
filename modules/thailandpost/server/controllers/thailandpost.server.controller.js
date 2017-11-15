@@ -20,9 +20,6 @@ exports.createOrder = function(req, res) {
           'Content-Type': 'application/json' 
         }
     })
-    .then(function(response) {
-      return response.json();
-    })
     .then(function(json) {
       res.send(json);
     });
@@ -48,7 +45,7 @@ exports.getLastNumber = function(req, res, next) {
         if (err) {
             return next(err);
         } else {
-            return res.json(tpLastNumbers);
+            res.json(tpLastNumbers);
         }
     });
 };
@@ -61,7 +58,7 @@ exports.updateLastNumber = function(req, res, next) {
             if(err) {
                 return next(err);
             } else {
-                return res.json(tpLastNumbers);
+                res.json(tpLastNumbers);
             }
         }
     );
