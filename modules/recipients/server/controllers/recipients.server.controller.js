@@ -80,15 +80,27 @@ exports.delete = function (req, res) {
  * List of Recipients
  */
 exports.list = function (req, res) {
-  Recipient.find({user:req.query.userId}).sort('-created').populate('user', 'displayName').exec(function (err, recipients) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.json(recipients);
-    }
-  });
+  if (req.query.userId) {
+    Recipient.find({user: req.query.userId}).sort('-created').populate('user', 'displayName').exec(function (err, recipients) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(recipients);
+      }
+    });
+  } else {
+    Recipient.find().sort('-created').populate('user', 'displayName').exec(function (err, recipients) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(recipients);
+      }
+    });
+  }
 };
 
 /**
