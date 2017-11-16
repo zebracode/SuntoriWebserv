@@ -38,6 +38,8 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
       // Set first page
       $scope.users = pageData[1];
 
+      $scope.pagedItems = pageData[1];
+
       //$scope.figureOutItemsToDisplay();
     };
 
@@ -53,6 +55,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 
     $scope.pageChanged = function () {
       $scope.users = $scope.allPage[$scope.currentPage];
+      $scope.pagedItems = $scope.allPage[$scope.currentPage];
     };
 
     $scope.showTopUpPromt = function(event, user, index) {
