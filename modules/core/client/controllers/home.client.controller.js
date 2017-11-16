@@ -29,11 +29,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.authentication = Authentication;
 
         // Find a list of Mains
-        $scope.find = function () {
-            $scope.mains = Mains.query(
-                {
+        $scope.find = function (viewName) {
+            var data = {}
+            if(viewName === 'summary'){
+                data = {
                     user:Authentication.user._id
-                },
+                };
+            } 
+
+            $scope.mains = Mains.query(
+                data,
             function(mains) {
                 var tempMains = [];
                 var pageMains = [];

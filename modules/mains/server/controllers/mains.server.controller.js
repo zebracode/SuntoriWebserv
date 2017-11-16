@@ -94,7 +94,7 @@ exports.delete = function (req, res) {
  * List of Mains
  */
 exports.list = function (req, res) {
-  if (typeof req.query.status === "undefined") {
+  if (typeof req.query.user !== "undefined") {
     Main.find({ user: req.query.user }).sort('-created').populate('user').exec(function (err, mains) {
       if (err) {
         return res.status(400).send({
@@ -105,7 +105,7 @@ exports.list = function (req, res) {
       }
     });
   } else {
-    Main.find({ user: req.user, status: req.query.status }).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+    Main.find({}).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
       if (err) {
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
