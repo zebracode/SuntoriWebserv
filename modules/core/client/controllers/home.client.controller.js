@@ -133,6 +133,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
 
 
+        // Set to Today
+        $scope.todaySet = function(){
+            console.log("set today");
+            $scope.startDate = new Date();
+            $scope.endDate = new Date();
+            $scope.find("listClient");
+        };
+
         /**
          * Main Controller for the Angular Material Starter App
          * @param $scope
