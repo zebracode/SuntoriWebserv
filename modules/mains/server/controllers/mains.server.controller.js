@@ -95,25 +95,39 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
   if (typeof req.query.user !== "undefined") {
-    Main.find({ user: req.query.user }).sort('-created').populate('user').exec(function (err, mains) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.json(mains);
-      }
-    });
+    Main.find(
+      {
+        user: req.query.user
+      }).sort('-created').populate('user').exec(function (err, mains) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.json(mains);
+        }
+      });
   } else {
-    Main.find({}).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
-      if (err) {
-        return res.status(400).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      } else {
-        res.json(mains);
+    var queryObject = {};
+    if (req.query.startDate !== req.query.endDate) {
+      queryObject = {
+        created: { $gte: req.query.startDate, $lte: req.query.endDate }
       }
-    }); 
+    } else {
+      queryObject = {
+        created: { $gte: req.query.startDate}
+      }
+    }
+    Main.find(queryObject).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          //console.log("created date:", mains[0].created);
+          res.json(mains);
+        }
+      });
   }
 };
 

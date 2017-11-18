@@ -15,13 +15,17 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.totalItems = 0;
         $scope.currentPage = 1;
         $scope.itemsPerPage = 5;
-      
+        
+        $scope.startDate = new Date();
+        $scope.endDate = new Date();
+
         $scope.setPage = function (pageNo) {
           $scope.currentPage = pageNo;
         };
       
         $scope.pageChanged = function() {
           $log.log('Page changed to: ' + $scope.currentPage);
+          console.log("start date: ", $scope.startDate);
           $scope.mains = $scope.allPage[$scope.currentPage];
         };
 
@@ -30,12 +34,20 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         // Find a list of Mains
         $scope.find = function (viewName) {
+            $scope.totalItems = 0;
             var data = {}
             if(viewName === 'summary'){
                 data = {
-                    user:Authentication.user._id
+                    user:Authentication.user._id,
+                    startDate: $scope.startDate,
+                    endDate: $scope.endDate
                 };
-            } 
+            } else {
+                data = {
+                    startDate: $scope.startDate,
+                    endDate: $scope.endDate
+                };
+            }
 
             $scope.mains = Mains.query(
                 data,
@@ -107,6 +119,19 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 });
               }
             };
+        
+        // When change start date
+        $scope.startDateChanged = function(){
+            console.log("start date change: ", $scope.startDate);
+            $scope.find("listClient");
+
+        };
+
+        // When change end date
+        $scope.endDateChanged = function(){
+            console.log("end date change: ", $scope.endDate);
+            $scope.find("listClient");
+        };
 
 
         /**
