@@ -141,6 +141,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.find("listClient");
         };
 
+        $scope.setColor = function(diffPrice){
+            console.log("set color");
+        };
+
         /**
          * Main Controller for the Angular Material Starter App
          * @param $scope
