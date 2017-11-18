@@ -1,4 +1,4 @@
-<div data-ng-controller="HomeController" data-ng-init="find()">
+<div data-ng-controller="HomeController" data-ng-init="find('listClient')">
   <div flex layout="row" data-ng-show="authentication.user">
     <!-- Container #3 Left -->
     <!--<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"-->
@@ -97,10 +97,10 @@
                 </div>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="main.created"></md-datepicker>
+                <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="main.created"></md-datepicker>
+                <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
               </div>
               <div class="text-center mtop20">
                 <button type="button" class="btn btn-mg btn-primary">วันนี้</button>
@@ -173,7 +173,7 @@
                 </table>
               </div>
               <div class="text-center form-group">
-                <ul uib-pagination total-items="mains.length" items-per-page="pageSize" ng-model="currentPage" ng-change="pageChanged()"></ul>
+                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
               </div>
             </div>
           </div>

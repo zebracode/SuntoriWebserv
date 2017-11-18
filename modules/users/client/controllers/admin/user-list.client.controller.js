@@ -2,18 +2,45 @@
 
 angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin', '$mdDialog', '$http',
   function ($scope, $filter, Admin, $mdDialog, $http) {
+
+    $scope.totalItems = 0;
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 5;
+
     Admin.query(function (data) {
       $scope.users = data;
-      $scope.buildPager();
+      $scope.buildPager(data);
     });
 
-    $scope.buildPager = function () {
-      $scope.pagedItems = [];
-      $scope.itemsPerPage = 50;
-      $scope.currentPage = 1;
-      $scope.pageSize = 50;
+    $scope.buildPager = function (data) {
+      var tempData = [];
+      var pageData = [];
+      var pageIndex = 0;
+      var itemCount = 0;
+      for(var i=0; i<data.length; i++) {
+          itemCount++;
+          tempData.push(data[i]);
+          if((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)){
+              pageIndex++;
+              pageData[pageIndex] = tempData;
+              tempData = [];
+          }
+          $scope.totalItems += 1;
+          
+      }
 
-      $scope.figureOutItemsToDisplay();
+      if(tempData.length > 0) {
+        pageData[pageIndex + 1] = tempData;
+      }
+      
+      $scope.allPage = pageData;
+
+      // Set first page
+      $scope.users = pageData[1];
+
+      $scope.pagedItems = pageData[1];
+
+      //$scope.figureOutItemsToDisplay();
     };
 
     $scope.figureOutItemsToDisplay = function () {
@@ -27,7 +54,8 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     };
 
     $scope.pageChanged = function () {
-      $scope.figureOutItemsToDisplay();
+      $scope.users = $scope.allPage[$scope.currentPage];
+      $scope.pagedItems = $scope.allPage[$scope.currentPage];
     };
 
     $scope.showTopUpPromt = function(event, user, index) {
@@ -68,7 +96,6 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     };
     
     $scope.setBalanceAmt = function(index){
-    console.log("pagedItems: ", index);
     $http.get("/api/balance?userId=" + $scope.pagedItems[index]._id)
         .then(function(res) {
            if (res.data !== null) {
@@ -82,6 +109,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 
 .filter('pagination', function() {
     return function(data, start){
+        if (typeof data !== "undefined" )
         return data.slice(start);
     };
 });

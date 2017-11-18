@@ -128,8 +128,6 @@ exports.printformA5 = function(req, res, next) {
     if (err)
       return next(err);
     else
-      console.log('main', main);  
-
       res.render('modules/core/server/views/formA5', {
         title: 'FormA5',
         main:main
@@ -137,15 +135,13 @@ exports.printformA5 = function(req, res, next) {
   });
 
 };
-
+  
 exports.printformA4 = function(req, res, next) {
 
   Main.findById(req.query.mainId, function(err, main) {
     if (err)
       next(err);
     else
-      console.log('main', main);
-
       res.render('modules/core/server/views/formA4', {
         title: 'formA4',
         main:main
@@ -160,8 +156,6 @@ exports.printformA6 = function(req, res, next) {
     if (err)
       next(err);
     else
-      console.log('main', main);
-
       res.render('modules/core/server/views/formA6', {
         title: 'formA6',
         main:main

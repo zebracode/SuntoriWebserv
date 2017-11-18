@@ -13,7 +13,6 @@ exports.getOrderStatus = function(req, res) {
 
 exports.createOrder = function(req, res) {
   req.body.productWeight = req.body.productWeight.substring(req.body.productWeight.lastIndexOf('-') + 1, req.body.productWeight.length).replace(/,/g, "");
-  console.log("req.body",req.body);
   fetch('http://suntoriexpress:suntoriexpressws@r_dservice.thailandpost.com:8080/webservice/addItem',{
 	method: 'POST',
 	body:    JSON.stringify(req.body),
@@ -21,11 +20,7 @@ exports.createOrder = function(req, res) {
           'Content-Type': 'application/json' 
         }
     })
-    .then(function(response) {
-      return response.json();
-    })
     .then(function(json) {
-      console.log(json);
       res.send(json);
     });
 };
@@ -50,7 +45,7 @@ exports.getLastNumber = function(req, res, next) {
         if (err) {
             return next(err);
         } else {
-            return res.json(tpLastNumbers);
+            res.json(tpLastNumbers);
         }
     });
 };
@@ -63,7 +58,7 @@ exports.updateLastNumber = function(req, res, next) {
             if(err) {
                 return next(err);
             } else {
-                return res.json(tpLastNumbers);
+                res.json(tpLastNumbers);
             }
         }
     );
