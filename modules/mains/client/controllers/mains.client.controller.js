@@ -192,7 +192,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $log.log('Page changed to: ' + $scope.currentPage);
   };
 
-  $scope.maxSize = 5;
+  $scope.maxSize = 10;
   $scope.bigTotalItems = 175;
   $scope.bigCurrentPage = 1;
 
@@ -596,6 +596,22 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.status = 'Confirm';
         });
     };
+
+    $scope.showAlert = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('ส่งข้อมูลสำเร็จ')
+            .textContent('ข้อมูลถูกส่งไปในรายการค้างชำระเพื่อรอชำระเงินเรียบร้อยแล้ว.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('OK')
+            .targetEvent(ev)
+        );
+      };
     
     // Set 2P2C request parameter
     $scope.setPaymentForm = function(amount){

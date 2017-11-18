@@ -59,6 +59,7 @@
               </span>
               </div><!-- /input-group -->
             </div>
+
             <div class="col-md-12">
               <div class="x_panel">
                 <!--<div id="mainb" style="height:350px;"></div>-->
@@ -100,6 +101,9 @@
               </div>
               <div class="col-md-2">
                 <md-datepicker ng-model="main.created"></md-datepicker>
+              </div>
+              <div class="text-center mtop20">
+                <button type="button" class="btn btn-mg btn-primary">วันนี้</button>
               </div>
             </div>
           </div>
@@ -144,7 +148,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="main in mains | filter:user.displayName + searchText">
+                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText">
                     <td ng-bind="main.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="main.barcode"></td>
                     <td class="list-group-item-heading" ng-bind="main.user.displayName"></td>
