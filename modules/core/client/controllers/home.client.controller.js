@@ -16,8 +16,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.currentPage = 1;
         $scope.itemsPerPage = 5;
         
-        $scope.startDate = new Date();
-        $scope.endDate = new Date();
+        var toDay = new Date();
+        $scope.startDate = new Date(toDay.getFullYear(), toDay.getMonth(), 1);
+        $scope.endDate = new Date(toDay.getFullYear(), toDay.getMonth() + 1, 0);
 
         $scope.setPage = function (pageNo) {
           $scope.currentPage = pageNo;
@@ -38,9 +39,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             var data = {}
             if(viewName === 'summary'){
                 data = {
-                    user:Authentication.user._id,
-                    startDate: $scope.startDate,
-                    endDate: $scope.endDate
+                    user:Authentication.user._id
                 };
             } else {
                 data = {
