@@ -113,7 +113,7 @@ exports.list = function (req, res) {
       } else {
         res.json(mains);
       }
-    });
+    }); 
   }
 };
 
