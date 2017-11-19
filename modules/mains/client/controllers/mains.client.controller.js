@@ -854,7 +854,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           .title($scope.error? 'ส่งข้อมูลไม่สำเร็จ' : 'ส่งข้อมูลสำเร็จ')
           .textContent($scope.error? $scope.error : 'ข้อมูลถูกส่งไปในรายการค้างชำระเพื่อรอชำระเงินเรียบร้อยแล้ว')
           .ariaLabel('Alert Dialog Demo')
-          .ok('Got it!')
+          .ok('OK')
           .targetEvent(ev)
       );
     };
