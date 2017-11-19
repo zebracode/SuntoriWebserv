@@ -18,6 +18,7 @@ exports.create = function (req, res) {
   main.user = req.user;
   main.save(function (err) {
     if (err) {
+      console.log("err", errorHandler.getErrorMessage(err));
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });

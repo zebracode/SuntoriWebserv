@@ -115,8 +115,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.price = 0;
         $scope.weight = '';
         $scope.barcode = '';
+        $scope.showAlert();
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
+        $scope.showAlert();
       });
 
       //Update Receiptent Address
@@ -839,6 +841,24 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.payment = function(){
         document.authForm.submit();        
     };
+
+
+    /*************************************************/
+    /******      Dialog Zone     *********************/
+    /*************************************************/
+    $scope.showAlert = function(ev) {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title($scope.error? 'ส่งข้อมูลไม่สำเร็จ' : 'ส่งข้อมูลสำเร็จ')
+          .textContent($scope.error? $scope.error : 'ข้อมูลถูกส่งไปในรายการค้างชำระเพื่อรอชำระเงินเรียบร้อยแล้ว')
+          .ariaLabel('Alert Dialog Demo')
+          .ok('Got it!')
+          .targetEvent(ev)
+      );
+    };
+
   }
 ]);
 
