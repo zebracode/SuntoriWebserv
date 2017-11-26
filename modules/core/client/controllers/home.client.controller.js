@@ -68,6 +68,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                             tempMains = [];
                         }
                         $scope.totalItems += 1;
+                        $scope.totalMains = $scope.totalItems;
                     }
                 }
 

@@ -25,8 +25,8 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
               pageData[pageIndex] = tempData;
               tempData = [];
           }
-          $scope.totalItems += 1;
-          
+          $scope.totalItems += 1; 
+          $scope.totalUsers = $scope.totalItems;
       }
 
       if(tempData.length > 0) {
