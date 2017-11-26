@@ -9,6 +9,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 
     Admin.query(function (data) {
       $scope.users = data;
+      $scope.allUser = data;
       $scope.buildPager(data);
     });
 
