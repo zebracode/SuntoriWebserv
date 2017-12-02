@@ -9,6 +9,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 
     Admin.query(function (data) {
       $scope.users = data;
+      $scope.allUser = data;
       $scope.buildPager(data);
     });
 
@@ -25,8 +26,8 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
               pageData[pageIndex] = tempData;
               tempData = [];
           }
-          $scope.totalItems += 1;
-          
+          $scope.totalItems += 1; 
+          $scope.totalUsers = $scope.totalItems;
       }
 
       if(tempData.length > 0) {

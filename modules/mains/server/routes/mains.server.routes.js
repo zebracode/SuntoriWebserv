@@ -20,6 +20,8 @@ module.exports = function (app) {
 
   app.get('/api/mainByUserAndStatus', mains.mainByUserAndStatus);
 
+  app.get('/api/mainsTotal', mains.totalMains);
+
   // Finish by binding the main middleware
   app.param('mainId', mains.mainByID);
   

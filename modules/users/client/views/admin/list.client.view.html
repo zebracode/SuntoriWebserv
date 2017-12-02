@@ -1,4 +1,4 @@
-<div data-ng-controller="HomeController" data-ng-init="find('listClient')">
+<div data-ng-controller="HomeController" data-ng-init="find('listClient'); setTotalMains();">
   <div flex layout="row" data-ng-show="authentication.user">
     <!-- Container #3 Left -->
     <!--<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"-->
@@ -73,7 +73,7 @@
                         <md-button ng-click="clearValue()" ng-disabled="!(user.displayName)">Clear</md-button>
                       </div>
                       <div class="icon"><i class="fa fa-university"></i></div>
-                      <div class="count">{{users.length}}</div>
+                      <div class="count">{{totalUsers}}</div>
                       <h3>ผู้ใช้ระบบ</h3>
                       <p>จำนวนผู้ใช้ระบบ.</p>
                     </div>
@@ -87,7 +87,7 @@
                         <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
                       </div>
                       <div class="icon"><i class="fa fa-paper-plane"></i></div>
-                      <div class="count">{{mains.length}}</div>
+                      <div class="count">{{totalMains}}</div>
                       <h3>รายการจัดส่ง</h3>
                       <p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>
                     </div>
@@ -101,11 +101,11 @@
             <div class="row">
               <div class="col-md-8">
                 <div layout="column"class="md-padding" layout-align="center center">
-                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" md-on-open="loadUsers()" style="min-width: 400px;">
-                    <md-option ng-value="user.displayName" ng-repeat="user in users">{{user.displayName}}</md-option>
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(allUser);">
+                    <md-option ng-value="user.displayName" ng-repeat="user in allUser">{{user.displayName}}</md-option>
                   </md-select>
                   <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
-                  <md-button ng-click="clearValue()" ng-disabled="!(user.displayName)">Clear</md-button>
+                  <md-button ng-click="userSelectClear()" ng-disabled="!(user.displayName)">Clear</md-button>
                 </div>
               </div>
               <div class="col-md-2">
@@ -115,7 +115,7 @@
                 <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
               </div>
               <div class="text-center mtop20">
-                <button type="button" class="btn btn-mg btn-primary">วันนี้</button>
+                <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
               </div>
             </div>
           </div>
@@ -172,7 +172,7 @@
                     <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
                     <td class="list-group-item-heading" ng-bind="main.total"></td>
                     <td class="list-group-item-heading">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
-                    <td class="list-group-item-heading">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
+                    <td class="list-group-item-heading {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
                     <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                     <td>
                       <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i> {{main.rcpDocNo}} </a>

@@ -26,9 +26,15 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
       
         $scope.pageChanged = function() {
           $log.log('Page changed to: ' + $scope.currentPage);
-          console.log("start date: ", $scope.startDate);
           $scope.mains = $scope.allPage[$scope.currentPage];
         };
+
+        $scope.setTotalMains = function() {
+            $http.get("/api/mainsTotal")
+            .then(function(response) {
+                $scope.totalMains = response.data;
+            });
+        }
 
         // This provides Authentication context.
         $scope.authentication = Authentication;
@@ -43,6 +49,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 };
             } else {
                 data = {
+                    userId: $scope.selectedUserId,
                     startDate: $scope.startDate,
                     endDate: $scope.endDate
                 };
@@ -133,6 +140,34 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
 
 
+        // Set to Today
+        $scope.todaySet = function(){
+            console.log("set today");
+            $scope.startDate = new Date();
+            $scope.endDate = new Date();
+            $scope.find("listClient");
+        };
+
+
+        // Select user
+        $scope.userSelectChanged = function(users) {
+            for(var i=0; i<users.length; i++) {
+                if(users[i].displayName === $scope.user.displayName) {
+                    $scope.selectedUserId = users[i]._id;
+                    $scope.find("listClient");
+                }
+                
+            }
+           
+        };
+
+         // Select user
+         $scope.userSelectClear = function(users) {
+            $scope.user.displayName = null;
+            $scope.selectedUserId = null;
+            $scope.find("listClient");
+        };
+
         /**
          * Main Controller for the Angular Material Starter App
          * @param $scope
@@ -215,6 +250,5 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         self.share        = share;
 
     }
-
 ]);
 

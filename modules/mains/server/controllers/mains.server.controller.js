@@ -109,22 +109,28 @@ exports.list = function (req, res) {
       });
   } else {
     var queryObject = {};
+
     if (req.query.startDate !== req.query.endDate) {
       queryObject = {
         created: { $gte: req.query.startDate, $lte: req.query.endDate }
       }
     } else {
       queryObject = {
-        created: { $gte: req.query.startDate}
+        created: { $gte: req.query.startDate }
       }
     }
+
+    if (req.query.userId){
+      queryObject.user = req.query.userId;
+    }
+    
     Main.find(queryObject).sort('-created').populate('user', 'displayName').exec(function (err, mains) {
         if (err) {
           return res.status(400).send({
             message: errorHandler.getErrorMessage(err)
           });
         } else {
-          //console.log("created date:", mains[0].created);
+          //console.log("user: ", mains[0].user._id);
           res.json(mains);
         }
       });
@@ -255,7 +261,18 @@ exports.mainByUserAndStatus = function (req, res, next) {
     if (err) {
       return next(err);
     } else {
-      res.json(main)
+      res.json(main);
+    }
+  });
+};
+
+
+exports.totalMains = function (req, res, next) {
+  Main.count({}, function(err, count){
+    if (err) {
+      return next(err);
+    } else {
+      res.json(count);
     }
   });
 };
