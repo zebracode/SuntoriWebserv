@@ -1,0 +1,128 @@
+<div data-ng-controller="HomeController" data-ng-init="find('listClient')">
+  <div flex layout="row" data-ng-show="authentication.user">
+    <!-- Container #3 Left -->
+
+    <!-- Container #4 Right -->
+    <md-content flex id="content">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <!--User Login -->
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <div class="text-center mtop20">
+                <button type="button" class="btn btn-mg btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.users">ผู้ใช้งานระบบ</button>
+              </div>
+            </ul>
+            <!--<div class="col-lg-4">
+              <div class="input-group">
+                <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+              </div>
+            </div>-->
+
+
+            <!--เลือกผู้ใช้ระบบ-->
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="x_panel">
+              <div class="col-md-7">
+                <div layout="column"class="md-padding" layout-align="center center">
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" md-on-open="loadUsers()" style="min-width: 400px;">
+                    <md-option ng-value="user.displayName" ng-repeat="user in users">{{user.displayName}}</md-option>
+                  </md-select>
+                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
+                  <md-button ng-click="clearValue()" ng-disabled="!(user.displayName)">Clear</md-button>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
+              </div>
+              <div class="col-md-2">
+                <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
+              </div>
+              <div class="col-md-1">
+                <a class="btn btn-app" ng-click="todaySet()">
+                  <i class="fa fa-edit"></i> วันนี้
+                </a>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+            <div class="x_content">
+              <br />
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="alert">
+                    <strong class="text-danger">ค่าส่วนต่างติดลบ (-)</strong> ระบบจะหักเงินจากบัญชีลูกค้าเพิ่มเติมตามค่าใช้จ่ายจริง.
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="alert">
+                    <strong class="text-success">ค่าส่วนต่างไม่ติดลบ (+)</strong> ระบบจะคืนเงินเข้าบัญชีลูกค้าเนื่องจากชำระเกินจำนวน.
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                  <tr class="headings">
+                    <th class="column-title">วันที่ </th>
+                    <th class="column-title">Tracking No.</th>
+                    <th class="column-title">เจ้าของบัญชี </th>
+                    <th class="column-title">ผู้รับ </th>
+                    <th class="column-title">เบอร์โทร </th>
+                    <th class="column-title">จว ต้นทาง </th>
+                    <th class="column-title">จว ปลายทาง</th>
+                    <th class="column-title">นน.ก่อน </th>
+                    <th class="column-title">นน.หลัง </th>
+                    <th class="column-title">ค่าส่งก่อน </th>
+                    <th class="column-title">ค่าส่งหลัง </th>
+                    <th class="column-title">ส่วนต่าง </th>
+                    <th class="column-title">สถานะจัดส่ง </th>
+                    <th class="column-title">ใบเสร็จ </th>
+                    <th class="column-title">ลบ</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="even pointer" data-ng-repeat="main in mains | filter:user.displayName + searchText">
+                    <td ng-bind="main.created | date:'mediumDate'"></td>
+                    <td class="list-group-item-heading" ng-bind="main.barcode"></td>
+                    <td class="list-group-item-heading" ng-bind="main.user.displayName"></td>
+                    <td class="list-group-item-heading" ng-bind="main.r_name"></td>
+                    <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
+                    <td class="list-group-item-heading" ng-bind="main.s_country"></td>
+                    <td class="list-group-item-heading" ng-bind="main.r_country"></td>
+                    <td class="list-group-item-heading" ng-bind="main.weight"></td>
+                    <td class="list-group-item-heading" ng-bind="main.tpWeight"></td>
+                    <td class="list-group-item-heading" ng-bind="main.total"></td>
+                    <td class="list-group-item-heading">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
+                    <td class="list-group-item-heading {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
+                    <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
+                    <td>
+                      <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i> {{main.rcpDocNo}} </a>
+                    </td>
+                    <td>
+                    <a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="text-center form-group">
+                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-content>
+  </div>
+</div>
