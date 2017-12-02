@@ -62,10 +62,16 @@
 
             <div class="col-md-12">
               <div class="x_panel">
-                <!--<div id="mainb" style="height:350px;"></div>-->
                 <div class="row top_tiles">
                   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="tile-stats">
+                      <div layout="column"class="md-padding" layout-align="center center">
+                        <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" md-on-open="loadUsers()" style="min-width: 400px;">
+                          <md-option ng-value="user.displayName" ng-repeat="user in users">{{user.displayName}}</md-option>
+                        </md-select>
+                        <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
+                        <md-button ng-click="clearValue()" ng-disabled="!(user.displayName)">Clear</md-button>
+                      </div>
                       <div class="icon"><i class="fa fa-university"></i></div>
                       <div class="count">{{users.length}}</div>
                       <h3>ผู้ใช้ระบบ</h3>
@@ -74,6 +80,12 @@
                   </div>
                   <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="tile-stats">
+                      <div class="col-md-2">
+                        <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
+                      </div>
+                      <div class="col-md-2">
+                        <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
+                      </div>
                       <div class="icon"><i class="fa fa-paper-plane"></i></div>
                       <div class="count">{{mains.length}}</div>
                       <h3>รายการจัดส่ง</h3>
