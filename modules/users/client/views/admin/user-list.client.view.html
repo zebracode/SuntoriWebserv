@@ -123,7 +123,6 @@
                 <table class="table table-striped jambo_table bulk_action">
                   <thead>
                   <tr class="headings">
-                    <th class="column-title">#</th>
                     <th class="column-title">วันสมัคร </th>
                     <th class="column-title">ชื่อผู้ใช้</th>
 					          <th class="column-title">ชื่อสมาชิก</th>
@@ -136,7 +135,6 @@
                   </thead>
                   <tbody>
                   <tr class="even pointer" data-ng-repeat="user in users |filter:searchText"  class="list-group-item"  ng-init="setBalanceAmt($index);">
-                    <td>{{ $index + 1 }}</td>
                     <td ng-bind="user.created | date:'mediumDate'"></td>
                     <td class="list-group-item-heading" ng-bind="user.username"></td>
 					<td class="list-group-item-heading" ng-bind="user.displayName"></td>
