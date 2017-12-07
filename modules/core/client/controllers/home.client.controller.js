@@ -142,8 +142,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         // Set to Today
         $scope.todaySet = function(){
-            console.log("set today");
             $scope.startDate = new Date();
+            $scope.startDate.setHours(0,0,0,0);
             $scope.endDate = new Date();
             $scope.find("listClient");
         };
