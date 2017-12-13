@@ -16,7 +16,6 @@ module.exports = function (config) {
       passReqToCallback: true
     },
     function (req, accessToken, refreshToken, profile, done) {
-      console.log('profile: ', profile);
       // Set the provider data and include tokens
       var providerData = profile._json;
       providerData.accessToken = accessToken;
