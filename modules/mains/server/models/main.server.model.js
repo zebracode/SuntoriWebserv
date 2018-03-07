@@ -146,6 +146,16 @@ var MainSchema = new Schema({
         trim: true,
         required: 'กรุณากรอกข้อมูลให้ครบถ้วน'
       },
+  detail_Product: {
+          type: String,
+          default: '',
+          trim: true
+        },
+  insurance: {
+            type: String,
+            default: '',
+            trim: true
+          },
   barcode: {
         type: String,
         default: '',

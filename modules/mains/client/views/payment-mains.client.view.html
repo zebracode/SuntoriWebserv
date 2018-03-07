@@ -1,4 +1,4 @@
-<div flex layout="row" data-ng-controller="RecipientsController" data-ng-init="find()">
+<div data-ng-controller="HomeController" data-ng-init="find('summary')">
   <div layout="column" style="height: 1000px;">
     <md-sidenav class="md-sidenav-left" md-component-id="left"
                 md-disable-backdrop md-whiteframe="4">
@@ -44,18 +44,20 @@
     </md-sidenav>
 
     <!-- Container #4 Right -->
-    <md-content flex id="content" data-ng-show="authentication.user">
+    <md-content flex id="content">
       <div class="col-md-12 col-sm-12 col-xs-12">
+        <!--User Login -->
         <div class="x_panel">
           <div class="x_title">
-            <h2>รายชื่อผู้รับ<small>เพิ่มรายชื่อผู้รับได้ที่นี่!!</small></h2>
+            <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
             <div class="col-lg-4">
               <div class="input-group">
                 <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
               </div><!-- /input-group -->
+
             </div>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
@@ -65,50 +67,58 @@
                 <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
               </div>
             </ul>
-            <div class="clearfix"></div>
-          </div>
 
-          <div class="x_content">
-            <div class="table-responsive">
-              <table class="table table-striped jambo_table bulk_action">
-                <thead>
-                <tr class="headings">
-                  <th class="md-caption">วันที่ </th>
-                  <th class="md-caption">ชื่อ-นามสกุล </th>
-                  <th class="md-caption">เบอร์โทรศัพท์ </th>
-                  <th class="md-caption">ที่อยู่ </th>
-                  <th class="md-caption">อำเภอ </th>
-                  <th class="md-caption">จังหวัด </th>
-                  <th class="md-caption">รหัสไปรษณีย์ </th>
-                  <th class="md-caption">Comment </th>
-                  <th class="md-caption"><span class="nobr">แก้ไข</span>
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="even pointer" data-ng-repeat="recipient in recipients | filter:searchText">
-                  <td class="md-caption" ng-bind="recipient.created | date:'mediumDate'"></td>
-                  <td class="md-caption" ng-bind="recipient.name"></td>
-                  <td class="md-caption" ng-bind="recipient.tel"></td>
-                  <td class="md-caption" ng-bind="recipient.address"></td>
-                  <td class="md-caption" ng-bind="recipient.ampher"></td>
-                  <td class="md-caption" ng-bind="recipient.country"></td>
-                  <td class="md-caption" ng-bind="recipient.postcode"></td>
-                  <td class="md-caption" ng-bind="recipient.comment"></td>
-                  <td>
-                    <a class="btn btn-info btn-xs" data-ui-sref="recipients.edit({recipientId: recipient._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
-                    <a class="btn btn-danger btn-xs" data-ng-click="remove(recipient);"><i class="fa fa-trash-o"></i> ลบ </a>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-              <div class="alert alert-warning text-center" data-ng-if="recipients.$resolved && !recipients.length">
-                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="recipients.create">ยังไม่มีชื่อในระบบ... คลิกเพื่อเพิ่มรายชื่อผู้รับ</button>
+            <div class="clearfix"></div>
+            <div class="x_content">
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="md-caption alert">
+                    <strong class="text-danger">ค่าส่วนต่างติดลบ (-)</strong> ระบบจะหักเงินจากบัญชีลูกค้าเพิ่มเติมตามค่าใช้จ่ายจริง.
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="md-caption alert">
+                    <strong class="text-success">ค่าส่วนต่างไม่ติดลบ (+)</strong> ระบบจะคืนเงินเข้าบัญชีลูกค้าเนื่องจากชำระเกินจำนวน.
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                  <tr class="headings">
+                    <th class="md-caption">วันที่ </th>
+                    <th class="md-caption">รายการการใช้งาน</th>
+                    <th class="md-caption">ยอดเงินเข้า </th>
+                    <th class="md-caption">ยอดเงินออก </th>
+                    <th class="md-caption">คงเหลือ </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText">
+                    <td class="md-caption" ng-bind="main.created | date:'mediumDate'"></td>
+                    <td class="md-caption" ng-bind="main.total"></td>
+                    <td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price}}</td>
+                    <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price}}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price}}</td>
+                    <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
+                    <!--<td>-->
+                    <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                    <!--</td>-->
+                  </tr>
+                  </tbody>
+                </table>
+
+                <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                  <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+                </div>
+
+              </div>
+              <div class="text-center form-group">
+                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
               </div>
             </div>
-          </div></div>
-        <div class="text-center form-group">
-          <ul uib-pagination total-items="recipients.length" items-per-page="pageSize" ng-model="currentPage" ng-change="pageChanged()"></ul>
+          </div>
         </div>
       </div>
     </md-content>

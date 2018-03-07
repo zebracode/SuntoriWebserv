@@ -1,20 +1,19 @@
 <div data-ui-view flex layout="row" data-ng-controller="MainsController" data-ng-init="find(); setBalanceAmt();">
-  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"
-              class="md-whiteframe-z2" data-ng-show="authentication.user">
-    <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">ยินดีต้อนรับ</span>
-          <span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>
-        </md-card-title-text>
-        <md-card-title-media>
-          <div>
-            <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />
-          </div>
-        </md-card-title-media>
-      </md-card-title>
-      <md-card-actions layout="row" layout-align="end center">
-        <div>
+  <div layout="column" style="height: 1000px;">
+    <md-sidenav class="md-sidenav-left" md-component-id="left"
+                md-disable-backdrop md-whiteframe="4">
+      <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+          <md-button ng-disabled="true" class="md-primary" data-ng-show="authentication.user">
+            <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+            <span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-content layout-margin>
+        <md-card-actions layout="row" layout-align="end center">
+
           <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
             <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
             <md-icon md-svg-icon="pencil"></md-icon>
@@ -27,138 +26,142 @@
             <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
             <md-icon md-svg-icon="key"></md-icon>
           </md-button>
-        </div>
-        <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>
-      </md-card-actions>
-      <div class="list-group">
-        <a class="list-group-item" data-ui-sref="home"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</a>
-        <a class="list-group-item" data-ui-sref="mains.list"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</a>
-        <a class="list-group-item" data-ui-sref="mains.create"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</a>
-        <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
-        <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
-        <a class="list-group-item" data-ui-sref="mains.summary"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</a>
-      </div>
-    </md-card>
-  </md-sidenav>
+          <md-button ng-click="toggleLeft()" class="md-accent">
+            ปิดแถบเมนู
+          </md-button>
+        </md-card-actions>
+        <ul class="nav side-menu">
+          <a class="list-group-item" data-ui-sref="home"><h6><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</h6></a>
+          <a class="list-group-item" data-ui-sref="mains.list"><h6><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</h6></a>
+          <a class="list-group-item" data-ui-sref="mains.create"><h6><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</h6></a>
+          <a class="list-group-item" data-ui-sref="recipients.list"><h6><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</h6></a>
+          <a class="list-group-item" data-ui-sref="sends.list"><h6><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</h6></a>
+          <a class="list-group-item" data-ui-sref="mains.summary"><h6><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</h6></a>
+          <a class="list-group-item" data-ui-sref="mains.payment"><h6><i class="fa fa-money fa-fw" aria-hidden="true"></i>&nbsp; การเงินย้อนหลัง</h6></a>
+        </ul>
+      </md-content>
 
-  <md-content flex id="content" data-ng-show="authentication.user">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
-        <div class="x_title">
-          <h2>รายการค้างชำระ<small>ตรวจสอบรายการค้างชำระ</small></h2>
-          <div class="col-lg-4">
-            <div class="input-group">
-              <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
+    </md-sidenav>
+
+    <md-content flex id="content" data-ng-show="authentication.user">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>รายการค้างชำระ<small>ตรวจสอบรายการค้างชำระ</small></h2>
+            <div class="col-lg-4">
+              <div class="input-group">
+                <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
                 <button class="btn btn-default" type="button">Go!</button>
               </span>
-            </div><!-- /input-group -->
-          </div>
-
-          <ul class="nav navbar-right panel_toolbox">
-            <div class="text-center mtop20">
-              <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
+              </div><!-- /input-group -->
             </div>
-          </ul>
 
-          <div class="clearfix"></div>
-          <div class="x_content">
-            <br />
-            <div class="table-responsive">
-              <table class="table table-striped jambo_table bulk_action">
-                <thead>
-                <tr class="headings">
-                  <th class="column-title">ที่ </th>
-                  <th class="column-title">วันที่ </th>
-                  <th class="column-title">ผู้รับ </th>
-                  <th class="column-title">เบอร์โทร </th>
-                  <th class="column-title">นน.ก่อน </th>
-                  <th class="column-title">COD </th>
-                  <th class="column-title">ค่าส่ง </th>
-                  <th class="column-title">สถานะจัดส่ง </th>
-                  <th class="column-title">ชำระเงิน</th>
-                  <th class="bulk-actions" colspan="7">
-                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status === 'ยังไม่ได้ชำระเงิน'">
-                  <td ng-init="addSelectInvoice(main.invoice);">{{ $index + 1 }}</td>
-                  <td ng-bind="main.created | date:'mediumDate'"></td>
-                  <td class="list-group-item-heading" ng-bind="main.r_name"></td>
-                  <td class="list-group-item-heading" ng-bind="main.r_tel"></td>
-                  <td class="list-group-item-heading" ng-bind="main.weight"></td>
-                  <td class="list-group-item-heading" ng-bind="main.price"></td>
-                  <td class="list-group-item-heading" ng-bind="main.total"></td>
-                  <td ng-init="disabled=true;">
-                    <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
-                    <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.total); addSelectMain(main);"><i class="fa fa-money"></i> ชำระเงิน </a>
-                  </td>
-                  <td>
-                    <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
-                    <a class="btn btn-danger btn-xs" data-ng-click="remove(main); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-trash-o"></i> ลบ </a>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-
-              <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
-                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+            <ul class="nav navbar-right panel_toolbox">
+              <div class="text-center mtop20">
+                <ul class="nav navbar-right panel_toolbox">
+                  <button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>
+                </ul>
+                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
               </div>
+            </ul>
 
-              <div class="x_content">
+            <div class="clearfix"></div>
+            <div class="x_content">
+              <br />
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                  <tr class="headings">
+                    <th class="md-caption">ที่ </th>
+                    <th class="md-caption">วันที่ </th>
+                    <th class="md-caption">ผู้รับ </th>
+                    <th class="md-caption">เบอร์โทร </th>
+                    <th class="md-caption">นน.ก่อน </th>
+                    <th class="md-caption">COD </th>
+                    <th class="md-caption">ค่าส่ง </th>
+                    <th class="md-caption">สถานะจัดส่ง </th>
+                    <th class="md-caption">ชำระเงิน</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id && main.status === 'ยังไม่ได้ชำระเงิน'">
+                    <td class="md-caption" ng-init="addSelectInvoice(main.invoice);">{{ $index + 1 }}</td>
+                    <td class="md-caption" ng-bind="main.created | date:'mediumDate'"></td>
+                    <td class="md-caption" ng-bind="main.r_name"></td>
+                    <td class="md-caption" ng-bind="main.r_tel"></td>
+                    <td class="md-caption" ng-bind="main.weight"></td>
+                    <td class="md-caption" ng-bind="main.price"></td>
+                    <td class="md-caption" ng-bind="main.total"></td>
+                    <td ng-init="disabled=true;">
+                      <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
+                      <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.total); addSelectMain(main);"><i class="fa fa-money"></i> ชำระเงิน </a>
+                    </td>
+                    <td>
+                      <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
+                      <a class="btn btn-danger btn-xs" data-ng-click="remove(main); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-trash-o"></i> ลบ </a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
 
-                <div class="ln_solid"></div>
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>สถานที่จัดส่งพัสดุ</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <div layout="row">
-                            <h2 data-ui-sref="mains.edit({mainId: main._id})">Dropoff</h2>
-                          </div>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                        <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <div class="tile-stats">
-                            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=11kIWJ2PCRZ7wyAyKiq8LKL8Q7po" width="425" height="140"></iframe>
+                <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                  <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+                </div>
+
+                <div class="x_content">
+
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-xs-6">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>สถานที่จัดส่งพัสดุ</h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <div layout="row">
+                              <h2 data-ui-sref="mains.edit({mainId: main._id})">Dropoff</h2>
+                            </div>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                          <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="tile-stats">
+                              <iframe src="https://www.google.com/maps/d/u/0/embed?mid=11kIWJ2PCRZ7wyAyKiq8LKL8Q7po" width="425" height="140"></iframe>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-xs-6">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>ยอดค่าใช้จ่าย</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <div layout="row">
-                            <h2 class="text-default">เงินคงเหลือ {{balanceAmount}} บาท</h2>
-                          </div>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                        <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <div class="tile-stats">
-                            <div class="icon"><i class="fa fa-money"></i>
+                    <!-- /.col -->
+                    <div class="col-xs-6">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>ยอดค่าใช้จ่าย</h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <div layout="row">
+                              <h2 class="text-default">เงินคงเหลือ {{balanceAmount}} บาท</h2>
                             </div>
-                        <div class="count">{{ totalPrice }}
-                              <span>บาท</span>
-                            </div>
-
-                            <h3>ยอดเงินที่ต้องชำระ</h3>
-                            <p>เพิ่มรายการได้อย่างต่อเนื่อง และคลิกชำระเงินเพื่อชำระเงินพร้อมกันทุกรายการ.</p>
-                          </div>
+                          </ul>
+                          <div class="clearfix"></div>
                         </div>
-                        <div class="text-center form-group">
-                          <button type="button" class="btn btn-primary" ng-click="showTopUpPromt($event)">เติมเงิน</button>
-                          <button type="submit" class="btn btn-success" ng-disabled="disabled" ng-click="showConfirm($event, selectedMains);">ชำระเงิน</button>
+                        <div class="x_content">
+                          <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="tile-stats">
+                              <div class="icon"><i class="fa fa-money"></i>
+                              </div>
+                              <div class="count">{{ totalPrice }}
+                                <span>บาท</span>
+                              </div>
+
+                              <h3>ยอดเงินที่ต้องชำระ</h3>
+                              <p>เพิ่มรายการได้อย่างต่อเนื่อง และคลิกชำระเงินเพื่อชำระเงินพร้อมกันทุกรายการ.</p>
+                            </div>
+                          </div>
+                          <div class="text-center form-group">
+                            <button type="button" class="btn btn-primary" ng-click="showTopUpPromt($event)">เติมเงิน</button>
+                            <button type="submit" class="btn btn-success" ng-disabled="disabled" ng-click="showConfirm($event, selectedMains);">ชำระเงิน</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -169,38 +172,37 @@
           </div>
         </div>
       </div>
-    </div>
-  </md-content>
-    
+    </md-content>
+
     <!-- <form action='https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment' method='POST' name='authForm'> -->
     <form action='https://t.2c2p.com/RedirectV3/payment' method='POST' name='authForm'>
-    <!--display wait message to user when page is loading-->
-    <!-- Please wait for a while. Do not close the browser or refresh the page.-->
-    <!--load request data-->
+      <!--display wait message to user when page is loading-->
+      <!-- Please wait for a while. Do not close the browser or refresh the page.-->
+      <!--load request data-->
 
-        <input type='hidden' id='version' name='version' value="{{version}}"/>
-        <input type='hidden' id='merchant_id' name='merchant_id' value="{{merchant_id}}"/>
-        <input type='hidden' id='payment_description' name='payment_description' value="{{payment_description}}"/>
-        <input type='hidden' id='order_id' name='order_id' value="{{order_id}}"/>                    
-        <input type='hidden' id='invoice_no' name='invoice_no' value="{{invoice_no}}"/>
-        <input type='hidden' id='currency' name='currency' ng-model='currency'/>
-        <input type='hidden' id='amount' name='amount' value="{{amount}}"/>
-        <input type='hidden' id='customer_email' name='customer_email'/>
-        <input type='hidden' id='pay_category_id' name='pay_category_id'/>
-        <input type='hidden' id='promotion' name='promotion'/>
-        <input type='hidden' id='user_defined_1' name='user_defined_1'/>
-        <input type='hidden' id='user_defined_2' name='user_defined_2'/>
-        <input type='hidden' id='user_defined_3' name='user_defined_3'/>
-        <input type='hidden' id='user_defined_4' name='user_defined_4'/>
-        <input type='hidden' id='user_defined_5' name='user_defined_5'/>
-        <input type='hidden' id='result_url_1' name='result_url_1' value="{{result_url_1}}"/>
-        <input type='hidden' id='result_url_2' name='result_url_2' value="{{result_url_2}}"/>
-        <input type='hidden' id='default_lang' name='default_lang' value="{{default_lang}}"/>
-        <input type='hidden' id='request_3ds' name='request_3ds'/>
-        <input type='hidden' id='hash_value' name='hash_value' value="{{hash_value}}"/>
+      <input type='hidden' id='version' name='version' value="{{version}}"/>
+      <input type='hidden' id='merchant_id' name='merchant_id' value="{{merchant_id}}"/>
+      <input type='hidden' id='payment_description' name='payment_description' value="{{payment_description}}"/>
+      <input type='hidden' id='order_id' name='order_id' value="{{order_id}}"/>
+      <input type='hidden' id='invoice_no' name='invoice_no' value="{{invoice_no}}"/>
+      <input type='hidden' id='currency' name='currency' ng-model='currency'/>
+      <input type='hidden' id='amount' name='amount' value="{{amount}}"/>
+      <input type='hidden' id='customer_email' name='customer_email'/>
+      <input type='hidden' id='pay_category_id' name='pay_category_id'/>
+      <input type='hidden' id='promotion' name='promotion'/>
+      <input type='hidden' id='user_defined_1' name='user_defined_1'/>
+      <input type='hidden' id='user_defined_2' name='user_defined_2'/>
+      <input type='hidden' id='user_defined_3' name='user_defined_3'/>
+      <input type='hidden' id='user_defined_4' name='user_defined_4'/>
+      <input type='hidden' id='user_defined_5' name='user_defined_5'/>
+      <input type='hidden' id='result_url_1' name='result_url_1' value="{{result_url_1}}"/>
+      <input type='hidden' id='result_url_2' name='result_url_2' value="{{result_url_2}}"/>
+      <input type='hidden' id='default_lang' name='default_lang' value="{{default_lang}}"/>
+      <input type='hidden' id='request_3ds' name='request_3ds'/>
+      <input type='hidden' id='hash_value' name='hash_value' value="{{hash_value}}"/>
 
     </form>
-    
+  </div>
 </div>
 
 <!-- Dialog template for print list and bill -->

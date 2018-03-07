@@ -48,52 +48,33 @@
             <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
+                <button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>
+                <button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>
                 <button type="button" class="btn btn-mg btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.users">ผู้ใช้งานระบบ</button>
               </div>
             </ul>
             <div class="col-lg-4">
               <div class="input-group">
-                <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+                <!--<input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button">Go!</button>
-              </span>
+              </span>-->
               </div><!-- /input-group -->
             </div>
-
-            <div class="col-md-12">
-              <div class="x_panel">
-                <div class="row top_tiles">
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="tile-stats">
-                      <div class="icon"><i class="fa fa-university"></i></div>
-                      <div class="count">{{totalUsers}}</div>
-                      <h3>ผู้ใช้ระบบ</h3>
-                      <p>จำนวนผู้ใช้ระบบ.</p>
-                    </div>
-                  </div>
-                  <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="tile-stats">
-                      <div class="icon"><i class="fa fa-paper-plane"></i></div>
-                      <div class="count">{{totalMains}}</div>
-                      <h3>รายการจัดส่ง</h3>
-                      <p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
 
             <!--เลือกผู้ใช้ระบบ-->
             <div class="clearfix"></div>
             <div class="row">
-              <div class="col-md-7">
-                <div layout="column"class="md-padding" layout-align="center center">
+              <div class="col-md-4">
+                <div style="margin-top:-15px">
                   <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(allUser);">
                     <md-option ng-value="user.displayName" ng-repeat="user in allUser">{{user.displayName}}</md-option>
                   </md-select>
                   <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
-                  <md-button ng-click="userSelectClear()" ng-disabled="!(user.displayName)">Clear</md-button>
                 </div>
+              </div>
+              <div class="col-md-3">
+                <md-button ng-click="userSelectClear()" ng-disabled="!(user.displayName)">Clear</md-button>
               </div>
               <div class="col-md-2">
                 <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
@@ -103,7 +84,7 @@
               </div>
               <div class="col-md-1">
                 <a class="btn btn-app" ng-click="todaySet()">
-                  <i class="fa fa-edit"></i> วันนี้
+                  <i class="fa fa-edit"></i> สร้างรายการ
                 </a>
               </div>
             </div>
