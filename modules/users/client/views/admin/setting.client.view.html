@@ -1,0 +1,192 @@
+<div data-ng-controller="HomeController" data-ng-init="find(listClient); setTotalMains(); s_country=''; r_country=''">
+  <div layout="column" style="height: 1000px;">
+    <md-content flex id="content" data-ng-show="authentication.user">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>ประวัติการชำระเงิน<small>ตรวจสอบประวัติการชำระเงิน</small></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <div class="text-center mtop20">
+                <a class="btn btn-app" data-ui-sref="admin.users">
+                  <span class="badge bg-red">{{totalUsers}}</span>
+                  <i class="fa fa-edit"></i> ผู้ใช้ระบบ
+                </a>
+                <a class="btn btn-app" data-ui-sref="admin.lists">
+                  <span class="badge bg-red">{{totalMains}}</span>
+                  <i class="fa fa-edit"></i> รายการ
+                </a>
+                <a class="btn btn-app" data-ui-sref="admin.payments">
+                  <span class="badge bg-red">{{totalMains}}</span>
+                  <i class="fa fa-edit"></i> ชำระเงิน
+                </a>
+                <a class="btn btn-app" data-ui-sref="admin.settings">
+                  <span class="badge bg-red">{{totalMains}}</span>
+                  <i class="fa fa-edit"></i> ตั้งค่าระบบ
+                </a>
+                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>-->
+                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>-->
+                <!--<button type="button" class="btn btn-mg btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.users">ผู้ใช้งานระบบ</button>-->
+              </div>
+            </ul>
+            <div class="col-lg-4">
+              <div class="input-group">
+                <!--<input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>-->
+              </div><!-- /input-group -->
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="x_content">
+              <br />
+              <div class="col-md-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>ตั้งราคาน้ำหนัก <small>ตั้งค่าราคาตามน้ำหนัก</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <!--<button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>-->
+                      <!--<md-button-->
+                      <!--ng-click="toggleLeft()"-->
+                      <!--class="md-fab md-accent"-->
+                      <!--aria-label="Code"-->
+                      <!--ng-click="ctrl.showContentMenu($event, ctrl.code)">-->
+                      <!--<md-icon md-svg-icon="assets/svg/list.svg"></md-icon>-->
+                      <!--</md-button>-->
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
+                      <div class="row">
+
+                        <div class="form-group">
+                          <label class="col-md-2 col-sm-2 col-xs-12 control-label">
+                            <small class="text-navy">ไม่เกิน 0.5 กก. </small>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                            <button class="btn btn-primary" type="text">บันทึก</button>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 col-sm-2 col-xs-12 control-label">
+                            <small class="text-navy">น้ำหนัก 0.5-1 กก. </small>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                            <button class="btn btn-primary" type="text">บันทึก</button>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 col-sm-2 col-xs-12 control-label">
+                            <small class="text-navy">น้ำหนัก 1-3 กก. </small>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                            <button class="btn btn-primary" type="text">บันทึก</button>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 col-sm-2 col-xs-12 control-label">
+                            <small class="text-navy">น้ำหนัก 3-5 กก. </small>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                            <button class="btn btn-primary" type="text">บันทึก</button>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 col-sm-2 col-xs-12 control-label">
+                            <small class="text-navy">น้ำหนัก 5-10 กก. </small>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                            <button class="btn btn-primary" type="text">บันทึก</button>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 col-sm-2 col-xs-12 control-label">
+                            <small class="text-navy">น้ำหนัก 10-15 กก. </small>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                            <button class="btn btn-primary" type="text">บันทึก</button>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 col-sm-2 col-xs-12 control-label">
+                            <small class="text-navy">น้ำหนัก 15-20 กก. </small>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                            <input type="text" data-ng-model="order" class="form-control" placeholder="กรอกราคา">
+                            <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                          </div>
+                          <div class="col-md-2 col-sm-2 col-xs-12">
+                            <button class="btn btn-primary" type="text">บันทึก</button>
+                          </div>
+                        </div>
+
+                      </div>
+                      <br />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-content>
+  </div>
+</div>
+
+
+

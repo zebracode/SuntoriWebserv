@@ -61,10 +61,10 @@
             </div>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
-                <ul class="nav navbar-right panel_toolbox">
-                  <button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>
-                </ul>
-                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button>
+                <!--<ul class="nav navbar-right panel_toolbox">-->
+                  <!--<button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>-->
+                <!--</ul>-->
+                <button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Export Excel</button>
               </div>
             </ul>
 
@@ -98,6 +98,7 @@
                     <th class="md-caption">ค่าส่งก่อน </th>
                     <th class="md-caption">ค่าส่งหลัง </th>
                     <th class="md-caption">ส่วนต่าง </th>
+                    <th class="md-caption">Comment </th>
                     <th class="md-caption">สถานะจัดส่ง </th>
                     <th class="md-caption">ปริ้น</th>
                   </tr>
@@ -114,11 +115,12 @@
                     <td class="md-caption" ng-bind="main.total"></td>
                     <td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price}}</td>
                     <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price}}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price}}</td>
+                    <td class="md-caption" ng-bind="main.detail_Product"></td>
                     <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                     <td>
-                      <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A4 </a>
-                      <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A5 </a>
-                      <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> ปริ้น A6 </a>
+                      <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> A4 </a>
+                      <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> A5 </a>
+                      <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank"><i class="fa fa-print"></i> A6 </a>
                     </td>
                     <!--<td>-->
                     <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->

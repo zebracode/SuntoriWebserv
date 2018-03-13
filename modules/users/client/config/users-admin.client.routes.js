@@ -37,6 +37,16 @@ angular.module('users.admin.routes').config(['$stateProvider',
          url: '/lists',
          templateUrl: 'modules/users/views/admin/list.client.view.html',
          controller: 'UserListController'
+      })
+      .state('admin.payments', {
+         url: '/payments',
+         templateUrl: 'modules/users/views/admin/payment-list.client.view.html',
+         controller: 'UserListController'
+      })
+      .state('admin.settings', {
+         url: '/settings',
+         templateUrl: 'modules/users/views/admin/setting.client.view.html',
+         controller: 'UserListController'
       });
   }
 ]);
