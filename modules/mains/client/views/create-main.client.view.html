@@ -223,6 +223,9 @@
                 <div class="x_title">
                   <h2>รายละเอียดสินค้า <small>กรอกรายละเอียดสินค้า</small></h2>
                   <ul class="nav navbar-right panel_toolbox">
+                    <div class="text-center mtop20">
+                      <button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Import Excel</button>
+                    </div>
                     <!--<button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>-->
                     <!--<md-button-->
                             <!--ng-click="toggleLeft()"-->
@@ -342,7 +345,16 @@
                               <span>บาท</span>
                             </div>
                             <h3>ยอดเงินที่ต้องชำระ</h3>
-                            <p>เพิ่มรายการได้อย่างต่อเนื่อง และคลิกชำระเงินเพื่อชำระเงินพร้อมกันทุกรายการ.</p>
+                            <p>แสดงรายละเอียดยอดเงินที่ต้องชำระ</p>
+                            <div class="form-group">
+                              <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                                <p>ค่าส่งสินค้า {{ price }} บาท</p>
+                                <p>ค่าธรรมเนียม COD {{ price }} บาท</p>
+                                <p>ค่าประกันสินค้า {{ price }} บาท</p>
+                                <p>ภาษีมูลค่าเพิ่ม {{ price }} บาท</p>
+                                <strong>ยอดรวมชำระ {{ price }} บาท</strong>
+                              </label>
+                            </div>
                           </div>
                         </div>
                         <div class="form-group">

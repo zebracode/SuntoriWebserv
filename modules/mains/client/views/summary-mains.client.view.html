@@ -50,21 +50,31 @@
         <div class="x_panel">
           <div class="x_title">
             <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
-            <div class="col-lg-4">
+            <div class="col-md-3">
               <div class="input-group">
                 <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button">Go!</button>
               </span>
               </div><!-- /input-group -->
-
+            </div>
+            <div class="col-md-2">
+              <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
+            </div>
+            <div class="col-md-2">
+              <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
+            </div>
+            <div class="nav navbar-right panel_toolbox">
+              <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
+              <button type="button" class="btn btn-mg btn-default">Export Excel</button>
             </div>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
+
                 <!--<ul class="nav navbar-right panel_toolbox">-->
                   <!--<button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>-->
                 <!--</ul>-->
-                <button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Export Excel</button>
+                <!--<button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Export Excel</button>-->
               </div>
             </ul>
 

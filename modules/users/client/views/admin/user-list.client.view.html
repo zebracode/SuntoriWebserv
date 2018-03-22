@@ -85,12 +85,8 @@
                   <i class="fa fa-edit"></i> รายการ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.payments">
-                  <span class="badge bg-red">{{totalMains}}</span>
+                  <!--<span class="badge bg-red">{{totalMains}}</span>-->
                   <i class="fa fa-edit"></i> ชำระเงิน
-                </a>
-                <a class="btn btn-app" data-ui-sref="admin.settings">
-                  <span class="badge bg-red">{{totalMains}}</span>
-                  <i class="fa fa-edit"></i> ตั้งค่าระบบ
                 </a>
                 <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>-->
                 <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>-->
@@ -147,6 +143,7 @@
                     <td class="md-caption" ng-bind="user.balanceAmt"></td>
                     <td>
                       <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)"><i class="fa fa-pencil"></i> เติมเงิน </a>
+                      <a class="btn btn-danger btn-xs" data-ui-sref="admin.user({userId: user._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
                     </td>
                     <!--<td>-->
                       <!--<a class="btn btn-danger btn-xs" data-ui-sref="admin.user-edit({userId: user._id})"><i class="fa fa-pencil"></i> แก้ไข </a>-->

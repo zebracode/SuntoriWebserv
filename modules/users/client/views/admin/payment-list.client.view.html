@@ -18,16 +18,9 @@
                   <i class="fa fa-edit"></i> รายการ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.payments">
-                  <span class="badge bg-red">{{totalMains}}</span>
+                  <!--<span class="badge bg-red">{{totalMains}}</span>-->
                   <i class="fa fa-edit"></i> ชำระเงิน
                 </a>
-                <a class="btn btn-app" data-ui-sref="admin.settings">
-                  <span class="badge bg-red">{{totalMains}}</span>
-                  <i class="fa fa-edit"></i> ตั้งค่าระบบ
-                </a>
-                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>-->
-                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>-->
-                <!--<button type="button" class="btn btn-mg btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.users">ผู้ใช้งานระบบ</button>-->
               </div>
             </ul>
             <div class="col-lg-4">
@@ -90,8 +83,8 @@
                     <th class="md-caption">ยอดเงินเข้า </th>
                     <th class="md-caption">ยอดเงินออก </th>
                     <th class="md-caption">ยอดเงินคงเหลือ </th>
-                    <th class="md-caption">ใบเสร็จ </th>
-                    <th class="md-caption">ลบ</th>
+                    <!--<th class="md-caption">ใบเสร็จ </th>-->
+                    <!--<th class="md-caption">ลบ</th>-->
                   </tr>
                   </thead>
                   <tbody>
@@ -102,12 +95,12 @@
                     <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
                     <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
                     <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
-                    <td>
-                      <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i> {{main.rcpDocNo}} </a>
-                    </td>
-                    <td>
-                      <a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>
-                    </td>
+                    <!--<td>-->
+                      <!--<a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i> {{main.rcpDocNo}} </a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                      <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                    <!--</td>-->
                   </tr>
                   </tbody>
                 </table>
