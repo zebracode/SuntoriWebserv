@@ -37,6 +37,7 @@
          <a class="list-group-item" data-ui-sref="recipients.list"><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</a>
          <a class="list-group-item" data-ui-sref="sends.list"><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</a>
          <a class="list-group-item" data-ui-sref="mains.summary"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</a>
+         <a class="list-group-item" data-ui-sref="mains.payment"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; การเงินย้อนหลัง</a>
        </div>
      </md-card>
    </md-sidenav>
@@ -171,10 +172,17 @@
                        <div class="col-md-4 col-sm-4 col-xs-12">
                          <input name="detail" type="text" data-ng-model="main.detail" id="detail" class="form-control" placeholder="รายละเอียดสิ่งของ">
                        </div>
-                       <!--<label class="control-label col-md-2 col-sm-2 col-xs-12">น้ำหนักสินค้า<span class="required">*</span></label>-->
-                       <!--<div class="col-md-4 col-sm-4 col-xs-12">-->
-                         <!--<input name="option" type="text" data-ng-model="{{ selectedOption.value }}" id="weight" class="form-control" placeholder="น้ำหนักสินค้า (กรัม)" disabled>-->
-                       <!--</div>-->
+
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">รายละเอียดพัสดุ<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="detail_Product" type="text" data-ng-model="main.detail_Product" id="detail_Product" class="form-control" placeholder="รายละเอียดพัสดุ">
+                       </div>
+
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ประกัน<span class="required">*</span></label>
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                         <input name="insurance" type="text" data-ng-model="main.insurance" id="insurance" class="form-control" placeholder="ประกัน">
+                       </div>
+
                      </div>
 
                      <div data-ng-show="error" class="text-danger">

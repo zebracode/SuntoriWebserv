@@ -15,6 +15,15 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.totalItems = 0;
         $scope.currentPage = 1;
         $scope.itemsPerPage = 5;
+
+        $scope.toggleLeft = buildToggler('left');
+            $scope.toggleRight = buildToggler('right');
+
+            function buildToggler(componentId) {
+              return function() {
+                $mdSidenav(componentId).toggle();
+              };
+            }
         
         var toDay = new Date();
         $scope.startDate = new Date(toDay.getFullYear(), toDay.getMonth(), 1);

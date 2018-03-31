@@ -1,8 +1,8 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', "$filter", 'Recipients',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog','ThailandPost', "$filter", 'Recipients','$mdSidenav',
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav) {
 
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
@@ -12,6 +12,15 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.price = 0;
     $scope.order = Date.now();
     $scope.invoice = Date.now();
+
+    $scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+
+       function buildToggler(componentId) {
+          return function() {
+          $mdSidenav(componentId).toggle();
+          };
+       }
 
     // Create new Main
     $scope.create = function () {
@@ -83,6 +92,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         price: this.price,
         weight: this.selectedOption.value,
         detail: this.detail,
+        detail_Product: this.detail_Product,
+        insurance: this.insurance,
         barcode: this.barcode,
         s_idNumber: this.s_idNumber,
         total: total,
@@ -113,6 +124,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.order = Date.now();
         $scope.invoice = Date.now();
         $scope.price = 0;
+        $scope.detail_Product = '';
+        $scope.insurance = '';
         $scope.weight = '';
         $scope.barcode = '';
         $scope.showAlert();
@@ -194,7 +207,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $log.log('Page changed to: ' + $scope.currentPage);
   };
 
-  $scope.maxSize = 5;
+  $scope.maxSize = 10;
   $scope.bigTotalItems = 175;
   $scope.bigCurrentPage = 1;
 
@@ -205,7 +218,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     $scope.options = [
         {
-          name: '--เลือกน้ำหนัก/เลือกขนาด--',
+          name: '--น้ำหนัก/ขนาด--',
           value: '',
           price: '0'
         },
@@ -356,12 +369,72 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         }
       ];
 
+    $scope.insurances = [
+            {
+              name: '--มูลค่าสินค้า--',
+              value: '0',
+              charge: '0'
+            },
+            {
+              name: '2,001 - 5,000 บาท',
+              value: '5000',
+              charge: '10'
+            },
+            {
+              name: '5,001 - 10,000 บาท',
+              value: '10000',
+              charge: '20'
+            },
+            {
+              name: '10,001 - 15,000 บาท',
+              value: '15000',
+              charge: '30'
+            },
+            {
+              name: '15,001 - 20,000 บาท',
+              value: '20000',
+              charge: '40'
+            },
+            {
+              name: '20,001 - 25,000 บาท',
+              value: '25000',
+              charge: '50'
+            },
+            {
+              name: '25,001 - 30,000 บาท',
+              value: '30000',
+              charge: '60'
+            },
+            {
+              name: '30,000 - 35,000 บาท',
+              value: '35000',
+              charge: '70'
+            },
+            {
+              name: '35,001 - 40,000 บาท',
+              value: '40000',
+              charge: '80'
+            },
+            {
+              name: '40,001 - 45,000 บาท',
+              value: '45000',
+              charge: '90'
+            },
+            {
+              name: '45,001 - 50,000 บาท',
+              value: '50000',
+              charge: '100'
+            }
+          ];
+
       //data generate
 
 
+      $scope.selectedInsurance = $scope.insurances[0];
       $scope.selectedOption = $scope.options[0];
       $scope.reset = function() {
           $scope.options = {เลือกกล่องน้ำหนัก}
+          $scope.insurances = {มูลค่าสินค้า}
       };
 
 
@@ -444,7 +517,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           data: {
               invoice : selectedMain.invoice,
               barcode : barcode,
-              status : "ชำระเงินแล้ว",
+              status : "กำลังดำเนินการ",
               rcpDocNo: rcpDocNo,
               receiptDate: now
           }
@@ -598,6 +671,22 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             $scope.status = 'Confirm';
         });
     };
+
+    $scope.showAlert = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('ส่งข้อมูลสำเร็จ')
+            .textContent('ข้อมูลถูกส่งไปในรายการค้างชำระเพื่อรอชำระเงินเรียบร้อยแล้ว.')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('OK')
+            .targetEvent(ev)
+        );
+      };
     
     // Set 2P2C request parameter
     $scope.setPaymentForm = function(amount){

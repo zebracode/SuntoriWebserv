@@ -1,11 +1,20 @@
 'use strict';
 
 // Sends controller
-angular.module('sends').controller('SendsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sends',
+angular.module('sends').controller('SendsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sends', '$mdSidenav',
 
-  function ($scope, $stateParams, $location, Authentication, Sends) {
+  function ($scope, $stateParams, $location, Authentication, Sends, $mdSidenav) {
 
     $scope.authentication = Authentication;
+
+    $scope.toggleLeft = buildToggler('left');
+            $scope.toggleRight = buildToggler('right');
+
+               function buildToggler(componentId) {
+                  return function() {
+                  $mdSidenav(componentId).toggle();
+                  };
+               }
 
     // Create new Send
     $scope.create = function () {

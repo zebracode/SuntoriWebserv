@@ -1,35 +1,69 @@
 <section>
-  <div class="page-header">
-    <h1>User <span data-ng-bind="user.username"</span</h1>
-  </div>
-  <div class="col-md-12">
-    <form name="userForm" class="form-horizontal" data-ng-submit="update()" novalidate>
-      <fieldset>
-        <div class="form-group">
-          <label class="control-label" for="firstName">First Name</label>
-          <div class="controls">
-            <input name="firstName" type="text" data-ng-model="user.firstName" id="firstName" class="form-control" placeholder="First Name" required>
+  <md-content flex id="content" data-ng-show="authentication.user">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>รายชื่อสมาชิก</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="col-xs-offset-0 col-xs-12 col-md-offset-2 col-md-8 login-form-bg">
+            <h3 class="text-center">ชื่อสมาชิก : {{ user.username }}</h3>
+            <form name="userForm" class="form-horizontal" data-ng-submit="update()" novalidate>
+              <fieldset>
+                <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>ชื่อ-นามสกุล</label>
+                    <input name="firstName" type="text" data-ng-model="user.firstName" id="firstName"  placeholder="ชื่อ" required>
+                    <div ng-messages="userForm.user.firstName.$error" role="alert" multiple>
+                      <div ng-message="required" class="my-message">กรุณากรอกชื่อ</div>
+                    </div>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>นามสกุล</label>
+                    <input name="lastName" type="text" data-ng-model="user.lastName" id="lastName"  placeholder="นามสกุล" required>
+                    <div ng-messages="userForm.user.lastName.$error" role="alert" multiple>
+                      <div ng-message="required" class="my-message">กรุณากรอกนามสกุล</div>
+                    </div>
+                  </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>เบอร์โทรศัพท์</label>
+                    <input ng-model="user.tel" required>
+                    <div ng-messages="userForm.user.tel.$error" role="alert" multiple>
+                      <div ng-message="required" class="my-message">กรุณากรอกเบอร์โทรศัพท์</div>
+                    </div>
+                  </md-input-container>
+
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>อีเมลล์</label>
+                    <input ng-model="user.email">
+                  </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>เลขบัตรประชาชน</label>
+                    <input name="idNumber" ng-model="user.idNumber" placeholder="กรอกเลขบัตรประชาชน 13 หลัก"
+                           required ng-pattern="/^[0-9]{13}$/" md-maxlength="13">
+
+                    <div ng-messages="userForm.user.idNumber.$error" role="alert" multiple>
+                      <div ng-message="required" class="my-message">กรุณาใส่เลขบัตรประชาชน</div>
+                    </div>
+                  </md-input-container>
+                </div>
+                <div class="text-center form-group">
+                  <button class="btn btn-default" type="submit" value="Update" >อัพเดท</button>
+                </div>
+              </fieldset>
+            </form>
           </div>
         </div>
-        <div class="form-group">
-          <label class="control-label" for="lastName">Last Name</label>
-          <div class="controls">
-            <input type="text" name="lastName" data-ng-model="user.lastName" id="lastName" class="form-control" placeholder="Last Name" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="roles">Roles</label>
-          <div class="controls">
-            <input class="form-control" type="text" name="roles" data-ng-model="user.roles" id="roles" ng-list />
-          </div>
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Update" class="btn btn-default">
-        </div>
-        <div data-ng-show="error" class="text-danger">
-          <strong data-ng-bind="error"></strong>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+      </div>
+    </div>
+  </md-content>
 </section>
+
+

@@ -76,16 +76,37 @@
             <h2>ข้อมูลสมาชิก<small>ตรวจสอบข้อมูลสมาชิกได้</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
-                <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.lists">ประวัติการใช้งาน</button>
+                <a class="btn btn-app" data-ui-sref="admin.users">
+                  <span class="badge bg-red">{{totalUsers}}</span>
+                  <i class="fa fa-edit"></i> ผู้ใช้ระบบ
+                </a>
+                <a class="btn btn-app" data-ui-sref="admin.lists">
+                  <span class="badge bg-red">{{totalMains}}</span>
+                  <i class="fa fa-edit"></i> รายการ
+                </a>
+                <a class="btn btn-app" data-ui-sref="admin.payments">
+                  <!--<span class="badge bg-red">{{totalMains}}</span>-->
+                  <i class="fa fa-edit"></i> ชำระเงิน
+                </a>
+                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>-->
+                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>-->
+                <!--<button type="button" class="btn btn-mg btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.users">ผู้ใช้งานระบบ</button>-->
               </div>
             </ul>
+            <!--<ul class="nav navbar-right panel_toolbox">-->
+              <!--<div class="text-center mtop20">-->
+                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>-->
+                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>-->
+                <!--<button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.lists">ประวัติการใช้งาน</button>-->
+              <!--</div>-->
+            <!--</ul>-->
             <div class="col-lg-4">
 
               <div class="input-group">
-                <input class="form-control col-md-4" type="text" ng-model="searchText" placeholder="Search">
+                <!--<input class="form-control col-md-4" type="text" ng-model="searchText" placeholder="Search">
                 <span class="input-group-btn">
                 <button class="btn btn-default" type="button">Go!</button>
-              </span>
+              </span>-->
               </div><!-- /input-group -->
             </div>
             <!--<ul class="nav navbar-right panel_toolbox">-->
@@ -93,29 +114,6 @@
                 <!--<button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="authentication.signup">เพิ่มสมาชิก</button>-->
               <!--</div>-->
             <!--</ul>-->
-            <div class="col-md-12">
-              <div class="x_panel">
-                <!--<div id="mainb" style="height:350px;"></div>-->
-                <div class="row top_tiles">
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="tile-stats">
-                      <div class="icon"><i class="fa fa-university"></i></div>
-                      <div class="count">{{totalUsers}}</div>
-                      <h3>ผู้ใช้ระบบ</h3>
-                      <p>จำนวนผู้ใช้ระบบ.</p>
-                    </div>
-                  </div>
-                  <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="tile-stats">
-                      <div class="icon"><i class="fa fa-paper-plane"></i></div>
-                      <div class="count">{{totalMains}}</div>
-                      <h3>รายการจัดส่ง</h3>
-                      <p>จำนวนรายการที่อยู่ในระหว่างจัดส่ง</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="clearfix"></div>
             <div class="x_content" data-ng-controller="UserListController">
               <br />
@@ -123,28 +121,29 @@
                 <table class="table table-striped jambo_table bulk_action">
                   <thead>
                   <tr class="headings">
-                    <th class="column-title">#</th>
-                    <th class="column-title">วันสมัคร </th>
-                    <th class="column-title">ชื่อผู้ใช้</th>
-					          <th class="column-title">ชื่อสมาชิก</th>
-                    <th class="column-title">อีเมลล์ </th>
-                    <th class="column-title">เบอร์โทร </th>
-                    <th class="column-title">ยอดเงิน</th>
-                    <th class="column-title">เติมเงิน</th>
+                    <!--<th class="md-caption">#</th>-->
+                    <th class="md-caption">วันสมัคร </th>
+                    <th class="md-caption">ชื่อผู้ใช้</th>
+                    <th class="md-caption">ชื่อสมาชิก</th>
+                    <th class="md-caption">อีเมลล์ </th>
+                    <th class="md-caption">เบอร์โทร </th>
+                    <th class="md-caption">ยอดเงิน</th>
+                    <th class="md-caption">เติมเงิน</th>
                     <!--<th class="column-title">แก้ไข</th>-->
                   </tr>
                   </thead>
                   <tbody>
                   <tr class="even pointer" data-ng-repeat="user in users |filter:searchText"  class="list-group-item"  ng-init="setBalanceAmt($index);">
-                    <td>{{ $index + 1 }}</td>
-                    <td ng-bind="user.created | date:'mediumDate'"></td>
-                    <td class="list-group-item-heading" ng-bind="user.username"></td>
-					<td class="list-group-item-heading" ng-bind="user.displayName"></td>
-                    <td class="list-group-item-heading" ng-bind="user.email"></td>
-                    <td class="list-group-item-heading" ng-bind="user.tel"></td>
-                    <td class="list-group-item-heading" ng-bind="user.balanceAmt"></td>
+                    <!--<td>{{ $index + 1 }}</td>-->
+                    <td class="md-caption" ng-bind="user.created | date:'mediumDate'"></td>
+                    <td class="md-caption" ng-bind="user.username"></td>
+					<td class="md-caption" ng-bind="user.displayName"></td>
+                    <td class="md-caption" ng-bind="user.email"></td>
+                    <td class="md-caption" ng-bind="user.tel"></td>
+                    <td class="md-caption" ng-bind="user.balanceAmt"></td>
                     <td>
                       <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)"><i class="fa fa-pencil"></i> เติมเงิน </a>
+                      <a class="btn btn-danger btn-xs" data-ui-sref="admin.user({userId: user._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
                     </td>
                     <!--<td>-->
                       <!--<a class="btn btn-danger btn-xs" data-ui-sref="admin.user-edit({userId: user._id})"><i class="fa fa-pencil"></i> แก้ไข </a>-->

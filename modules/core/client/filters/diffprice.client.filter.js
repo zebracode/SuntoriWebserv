@@ -1,6 +1,6 @@
 angular.module('core').filter('diffPrice', function(){
     return function(weight, basePrice, senderProvince, receiverProvince, priceList){
-    	var perimeter = ['กรุงเทพมหานคร', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ', 'สมุทรสาคร'];
+    	var perimeter = ['กรุงเทพมหานคร', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ'];
         var price = 0;
         var charge = 0;
     	var addPrice1 = true;

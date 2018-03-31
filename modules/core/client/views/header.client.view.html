@@ -1,26 +1,129 @@
-<div data-ng-controller="HeaderController" flex>
-    <md-toolbar class="md-hue-2" layout="row" data-ng-controller="HomeController as ul">
-        <div class="md-toolbar-tools">
-            <div flex>
-                <img data-ui-sref="home" ng-src="modules/users/img/buttons/logo-suntori50.png">
+<div class="container" data-ng-controller="HeaderController" data-ng-show="authentication.user">
+    <div class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+        <ul class="nav navbar-nav">
+            <div layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <div flex>
+                    <img data-ui-sref="home" width="150" ng-src="modules/users/img/buttons/logo-suntori50.png">
+                </div>
+                <div class="" style="margin-left:50px">
+                    <md-button data-ui-sref="home" md-no-ink class="md-primary"><md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon><h6>หน้าหลัก</h6></md-button>
+                    <md-button data-ui-sref="mains.create" class="md-primary"><md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon><h6>สร้างรายการ</h6></md-button>
+                    <md-button data-ui-sref="mains.list" class="md-primary"><md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon><h6>ชำระเงิน</h6></md-button>
+                    <md-button data-ui-sref="sends.list" class="md-primary"><md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon><h6>รายชื่อผู้ส่ง</h6></md-button>
+                    <md-button data-ui-sref="recipients.list" class="md-primary"><md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon><h6>รายชื่อผู้รับ</h6></md-button>
+                    <md-button data-ui-sref="mains.summary"  class="md-primary"><md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon><h6>ประวัติจัดส่ง</h6></md-button>
+                    <md-button data-ui-sref="mains.payment" class="md-primary"><md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon><h6>ประวัติการเงิน</h6></md-button>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
-                <md-button class="md-raised md-primary" data-ui-sref="authentication.signin" data-ng-hide="authentication.user">เข้าสู่ระบบ</md-button>
-                <md-button class="md-raised md-primary" data-ui-sref="authentication.signup" data-ng-hide="authentication.user">สมัครสมาชิก</md-button>
-                <md-button ng-disabled="true" class="md-primary" data-ng-show="authentication.user">
-                <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-                <span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>
-                </md-button>
-                <md-button href="/admin/users" target="_self" class="md-raised md-primary" data-ng-show="authentication.user">Admin Panel</md-button>
-                <md-button href="/api/auth/signout" target="_self" class="md-raised md-primary" data-ng-show="authentication.user">ออกจากระบบ</md-button>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+            <div layout="row" layout-sm="column" layout-align="center center" style="margin-top:22px" layout-wrap>
+                <md-menu md-position-mode="target-right target">
+                    <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                        <md-icon md-menu-origin md-svg-icon="assets/svg/change-power-options.svg"></md-icon>
+                    </md-button>
+                    <md-menu-content width="4" >
+                        <md-menu-item ng-repeat="item in [1]">
+                            <md-button ng-click="ctrl.announceClick($index)">
+                                <div layout="row" flex>
+                                    <p class="md-caption" data-ui-sref="settings.profile" flex>ข้อมูลธุรกิจ</p>
+                                    <md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon>
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-repeat="item in [1]">
+                            <md-button ng-click="ctrl.announceClick($index)">
+                                <div layout="row" flex>
+                                    <p class="md-caption" data-ui-sref="settings.picture" flex>เปลี่ยนรูปภาพ</p>
+                                    <md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon>
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-repeat="item in [1]">
+                            <md-button ng-click="ctrl.announceClick($index)">
+                                <div layout="row" flex>
+                                    <p class="md-caption" data-ui-sref="settings.password" flex>เปลี่ยนรหัสผ่าน</p>
+                                    <md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon>
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-divider></md-divider>
+                        <md-menu-item ng-repeat="item in [1]">
+                            <md-button target="_self" class="" data-ng-show="authentication.user">
+                                <div layout="row" flex>
+                                    <p class="md-caption" data-ui-sref="admin.users" flex>ผู้ดูแลระบบ</p>
+                                    <md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon>
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item ng-repeat="item in [1]">
+                            <md-button href="/api/auth/signout" target="_self" class="" data-ng-show="authentication.user">
+                                <div layout="row" flex>
+                                    <p class="md-caption" flex>ออกจากระบบ</p>
+                                    <md-icon md-menu-align-target md-svg-icon="assets/svg/home.svg" style="margin: auto 3px auto 0;"></md-icon>
+                                </div>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
             </div>
-        </div>
-        <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()"
-                   aria-label="Show User List" data-ng-show="authentication.user">
-            <md-icon md-svg-icon="menu" ></md-icon>
-        </md-button>
-    </md-toolbar>
+        </ul>
+
+        <!--<ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">-->
+        <!--<li data-ui-sref-active="active">-->
+        <!--<a data-ui-sref="authentication.signup">สมัครสมาชิก</a>-->
+        <!--</li>-->
+        <!--<li class="divider-vertical"></li>-->
+        <!--<li data-ui-sref-active="active">-->
+        <!--<a data-ui-sref="authentication.signin">เข้าสู่ระบบ</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+
+        <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+            <li class="dropdown" dropdown style="margin-top:5px">
+                <a>
+                    <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
+                    <span class="md-caption" data-ng-bind="authentication.user.displayName"></span>
+                </a>
+            </li>
+        </ul>
+
+        <!--<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">-->
+        <!--<div class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">-->
+        <!--<md-button class="md-raised md-primary" data-ui-sref="authentication.signin" data-ng-hide="authentication.user">เข้าสู่ระบบ</md-button>-->
+        <!--<md-button class="md-raised md-primary" data-ui-sref="authentication.signup" data-ng-hide="authentication.user">สมัครสมาชิก</md-button>-->
+        <!--</div>-->
+        <!--</ul>-->
+
+    </div>
 </div>
+
+
+<!--<div data-ng-controller="HeaderController" flex>-->
+    <!--<md-toolbar class="md-hue-2" layout="row" data-ng-controller="HomeController as ul">-->
+        <!--<div class="md-toolbar-tools">-->
+            <!--<div flex>-->
+                <!--<img data-ui-sref="home" ng-src="modules/users/img/buttons/logo-suntori50.png">-->
+            <!--</div>-->
+
+            <!--<div class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">-->
+                <!--<md-button class="md-raised md-primary" data-ui-sref="authentication.signin" data-ng-hide="authentication.user">เข้าสู่ระบบ</md-button>-->
+                <!--<md-button class="md-raised md-primary" data-ui-sref="authentication.signup" data-ng-hide="authentication.user">สมัครสมาชิก</md-button>-->
+                <!--<md-button ng-disabled="true" class="md-primary" data-ng-show="authentication.user">-->
+                <!--<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />-->
+                <!--<span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>-->
+                <!--</md-button>-->
+                <!--<md-button href="/admin/users" target="_self" class="md-raised md-primary" data-ng-show="authentication.user">Admin Panel</md-button>-->
+                <!--<md-button href="/api/auth/signout" target="_self" class="md-raised md-primary" data-ng-show="authentication.user">ออกจากระบบ</md-button>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<md-button class="menu" hide-gt-sm ng-click="ul.toggleList()"-->
+                   <!--aria-label="Show User List" data-ng-show="authentication.user">-->
+            <!--<md-icon md-svg-icon="menu" ></md-icon>-->
+        <!--</md-button>-->
+    <!--</md-toolbar>-->
+<!--</div>-->
 
 <!--<div class="container" data-ng-controller="HeaderController">-->
     <!--<div class="navbar-header">-->

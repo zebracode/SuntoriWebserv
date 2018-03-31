@@ -1,9 +1,18 @@
     'use strict';
 
 // Recipients controller
-angular.module('recipients').controller('RecipientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Recipients',
-  function ($scope, $stateParams, $location, Authentication, Recipients) {
+angular.module('recipients').controller('RecipientsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Recipients','$mdSidenav',
+  function ($scope, $stateParams, $location, Authentication, Recipients, $mdSidenav) {
     $scope.authentication = Authentication;
+
+    $scope.toggleLeft = buildToggler('left');
+        $scope.toggleRight = buildToggler('right');
+
+           function buildToggler(componentId) {
+              return function() {
+              $mdSidenav(componentId).toggle();
+              };
+           }
 
     // Create new Recipient
     $scope.create = function () {
