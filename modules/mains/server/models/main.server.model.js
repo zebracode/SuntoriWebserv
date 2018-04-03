@@ -191,7 +191,18 @@ var MainSchema = new Schema({
     trim: true
   },
   afterPrice: String,
-  receiptDate: Date
+  receiptDate: Date,
+
+  isCod: {
+    type: Boolean,
+    default: false
+  },
+
+  codAmnt: {
+    type: Number,
+    default: 0
+  }
+
 });
 
 mongoose.model('Main', MainSchema);

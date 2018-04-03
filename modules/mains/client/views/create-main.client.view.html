@@ -302,16 +302,18 @@
                         </div>
                         <div class="form-group">
                           <div class="dialog-demo-prerendered">
-                            <md-checkbox ng-model="listPrerenderedButton" class="md-caption">COD เก็บเงินปลายทาง</md-checkbox>
+                            <md-checkbox ng-model="cbCod" class="md-caption" ng-change="cbCodChanged()">COD เก็บเงินปลายทาง</md-checkbox>
                           </div>
-                          <input name="price" type="text" data-ng-model="price" id="price" class="form-control" id="inputSuccess3" placeholder="ราคาที่เรียกเก็บ" ng-if="listPrerenderedButton" ng-click="showPrerenderedDialog($event)">
+                          <input type="text" data-ng-model="productPrice" 
+                            class="form-control" id="inputSuccess3" 
+                            placeholder="ราคาที่เรียกเก็บ" ng-if="cbCod" ng-click="showPrerenderedDialog($event)" ng-blur="calCodAmnt(productPrice)">
                         </div>
                         <div class="form-group">
                           <div class="dialog-demo-prerendered">
-                            <md-checkbox ng-model="listPrerenderedButton1" class="md-caption">ประกันสินค้า</md-checkbox>
+                            <md-checkbox ng-model="cbWarranty" class="md-caption">ประกันสินค้า</md-checkbox>
                           </div>
                           <select class="form-control" data-ng-model="selectedInsurance"
-                                  ng-options="insurance.name for insurance in insurances" ng-if="listPrerenderedButton1" ng-click="showPrerenderedDialog($event)">
+                                  ng-options="insurance.name for insurance in insurances" ng-if="cbWarranty" ng-click="showPrerenderedDialog($event)">
                           </select>
                         </div>
                         <div class="form-group">
@@ -348,11 +350,11 @@
                             <p>แสดงรายละเอียดยอดเงินที่ต้องชำระ</p>
                             <div class="form-group">
                               <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                <p>ค่าส่งสินค้า {{ price }} บาท</p>
-                                <p>ค่าธรรมเนียม COD {{ price }} บาท</p>
-                                <p>ค่าประกันสินค้า {{ price }} บาท</p>
-                                <p>ภาษีมูลค่าเพิ่ม {{ price }} บาท</p>
-                                <strong>ยอดรวมชำระ {{ price }} บาท</strong>
+                                <p>ค่าส่งสินค้า {{ price | number }} บาท</p>
+                                <p>ค่าธรรมเนียม COD {{ codAmount | number }} บาท</p>
+                                <p>ค่าประกันสินค้า {{ price | number }} บาท</p>
+                                <p>ภาษีมูลค่าเพิ่ม {{ price | number }} บาท</p>
+                                <strong>ยอดรวมชำระ {{ price | number }} บาท</strong>
                               </label>
                             </div>
                           </div>
