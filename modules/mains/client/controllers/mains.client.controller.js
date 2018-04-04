@@ -133,6 +133,12 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.insurance = '';
         $scope.weight = '';
         $scope.barcode = '';
+        $scope.cbCod = false;
+        $scope.cbWarranty = false;
+        $scope.codAmount = 0;
+        $scope.insuranceAmount = 0;
+        $scope.selectedOption.price = 0;
+        $scope.grandTotal = 0;
         $scope.showAlert();
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
