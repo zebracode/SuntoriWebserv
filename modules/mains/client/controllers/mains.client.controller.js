@@ -8,6 +8,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     // Default
     $scope.codAmount = 0;
     $scope.insuranceAmount = 0;
+    $scope.grandTotal = 0;
 
 
     $scope.authentication = Authentication;
@@ -105,7 +106,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         total: total,
         status: "ยังไม่ได้ชำระเงิน",
         isCod: this.cbCod,
-        codAmnt: this.codAmount
+        codAmnt: this.codAmount,
+        isInsurance: this.cbWarranty,
+        insuranceAmnt: this.insuranceAmount,
+        codVatAmnt: this.codAmount * 0.07,
+        insuranceVatAmnt: this.insuranceAmount * 0.07,
+        totalVatAmnt: (this.codAmount * 0.07) + (this.insuranceAmount * 0.07),
+        grandTotalAmnt: this.grandTotal
       });
 
       // Redirect after save

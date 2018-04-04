@@ -371,7 +371,7 @@
                             <div class="icon">
                               <i class="fa fa-money"></i>
                             </div>
-                            <div class="count">{{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight }}
+                            <div class="count">{{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight | number: 2}}
                               <span>บาท</span>
                             </div>
                             <h3>ยอดเงินที่ต้องชำระ</h3>

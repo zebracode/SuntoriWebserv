@@ -198,7 +198,37 @@ var MainSchema = new Schema({
     default: false
   },
 
+  isInsurance: {
+    type: Boolean,
+    default: false
+  },
+
   codAmnt: {
+    type: Number,
+    default: 0
+  },
+
+  insuranceAmnt: {
+    type: Number,
+    default: 0
+  },
+
+  codVatAmnt: {
+    type: Number,
+    default: 0
+  },
+
+  insuranceVatAmnt: {
+    type: Number,
+    default: 0
+  },
+
+  totalVatAmnt: {
+    type: Number,
+    default: 0
+  },
+
+  grandTotalAmnt: {
     type: Number,
     default: 0
   }
