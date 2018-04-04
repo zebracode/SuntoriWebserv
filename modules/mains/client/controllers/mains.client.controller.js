@@ -1,12 +1,14 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', '$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', 
+'$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav', 'WarrantyPrice',
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav, WarrantyPrice) {
 
     // Default
     $scope.codAmount = 0;
-    
+    $scope.insuranceAmount = 0;
+
 
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
@@ -131,8 +133,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       });
 
       //Update Receiptent Address
-
-
 
     };
 
@@ -926,21 +926,37 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.payment = function () {
       document.authForm.submit();
     };
-    
+
     $scope.cbCodChanged = function () {
-      $scope.codAmount = 0; 
-      if($scope.cbCod) {
+      $scope.codAmount = 0;
+      if ($scope.cbCod) {
         $scope.codAmount = 60;
+        $scope.setGrandTotal();
       }
     };
 
 
-    $scope.calCodAmnt = function(productPrice) {
+    $scope.calCodAmnt = function (productPrice) {
       $scope.codAmount = 0;
-      if((productPrice * 0.150) > 60) {
+      if ((productPrice * 0.150) > 60) {
         $scope.codAmount = productPrice * 0.150;
+        $scope.setGrandTotal();
       }
+    };
+
+    // Set Insurance Amount
+    $scope.calInsurance = function (selectedInsurance) {
+      $scope.insuranceAmount = Number(selectedInsurance.charge);
+      $scope.setGrandTotal();
+    };
+
+    $scope.setGrandTotal = function(){
+      var ShippingPrice = $filter("provincePrice")($scope.selectedOption.price, $scope.s_country, $scope.r_country, $scope.selectedOption.weight);
+      $scope.grandTotal = Number(ShippingPrice) + Number($scope.codAmount * 1.07) + Number($scope.insuranceAmount * 1.07);
     }
+    
+
+
 
     /*************************************************/
     /******      Dialog Zone     *********************/
