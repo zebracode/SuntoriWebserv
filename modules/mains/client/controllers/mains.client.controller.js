@@ -948,13 +948,18 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       }
     };
 
-
-    $scope.calCodAmnt = function (productPrice) {
+    // Execute when product price is changed.
+    $scope.productPriceChanged = function (productPrice) {
       $scope.codAmount = 0;
-      if ((productPrice * 0.150) > 60) {
-        $scope.codAmount = productPrice * 0.150;
-        $scope.setGrandTotal();
+      $scope.grandTotal =  0;
+
+      // Product Price 1-4000, COD = 60
+      if (productPrice >=1 && productPrice <= 4000) {
+        $scope.codAmount = 60;
+      } else {
+        $scope.codAmount = Math.floor(productPrice * 0.015);
       }
+      $scope.setGrandTotal();
     };
 
     // Set Insurance Amount

@@ -329,17 +329,17 @@
                         </div>
                         <div class="form-group">
                           <div class="dialog-demo-prerendered">
-                            <md-checkbox ng-model="cbCod" class="md-caption" ng-change="cbCodChanged()">COD เก็บเงินปลายทาง</md-checkbox>
+                            <md-checkbox ng-model="cbCod" class="md-caption">COD เก็บเงินปลายทาง</md-checkbox>
                           </div>
                           <input type="text" data-ng-model="productPrice" class="form-control" id="inputSuccess3" placeholder="ราคาที่เรียกเก็บ" ng-if="cbCod"
-                            ng-click="showPrerenderedDialog($event)" ng-blur="calCodAmnt(productPrice)">
+                            ng-click="showPrerenderedDialog($event)" ng-blur="productPriceChanged(productPrice)">
                         </div>
                         <div class="form-group">
                           <div class="dialog-demo-prerendered">
                             <md-checkbox ng-model="cbWarranty" class="md-caption">ประกันสินค้า</md-checkbox>
                           </div>
                           <select class="form-control" data-ng-model="selectedInsurance" ng-options="insurance.name for insurance in insurances" ng-if="cbWarranty"
-                            ng-click="showPrerenderedDialog($event)"  ng-change="calInsurance(selectedInsurance)">
+                            ng-click="showPrerenderedDialog($event)" ng-change="calInsurance(selectedInsurance)">
                           </select>
                         </div>
                         <div class="form-group">
@@ -371,17 +371,19 @@
                             <div class="icon">
                               <i class="fa fa-money"></i>
                             </div>
-                            <div class="count">{{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight | number: 2}}
+                            <div class="count">{{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight | number:
+                              2}}
                               <span>บาท</span>
                             </div>
                             <h3>ยอดเงินที่ต้องชำระ</h3>
                             <p>แสดงรายละเอียดยอดเงินที่ต้องชำระ</p>
                             <div class="form-group">
                               <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                <p>ค่าส่งสินค้า {{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight | number:2 }} บาท</p>
+                                <p>ค่าส่งสินค้า {{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight
+                                  | number:2 }} บาท</p>
                                 <p>ค่าธรรมเนียม COD {{ codAmount | number:2 }} บาท</p>
                                 <p>ค่าประกันสินค้า {{ insuranceAmount | number:2 }} บาท</p>
-                                <p>ภาษีมูลค่าเพิ่ม {{ (codAmount +  insuranceAmount) * 0.07 | number:2 }} บาท</p>
+                                <p>ภาษีมูลค่าเพิ่ม {{ (codAmount + insuranceAmount) * 0.07 | number:2 }} บาท</p>
                                 <strong>ยอดรวมชำระ {{ grandTotal | number:2}} บาท</strong>
                               </label>
                             </div>
@@ -393,7 +395,7 @@
                             <button class="btn btn-warning" type="submit" ng-click="showAlert($event)">ยืนยัน</button>
                             <button class="btn btn-primary" type="submit" data-ui-sref="mains.list">ชำระเงิน</button>
                           </div>
-                        </div>
+                        </div>ะ
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                           <alert type="danger" data-ng-show="error" class="text-center text-danger">
                             <span data-ng-bind="error"></span>
