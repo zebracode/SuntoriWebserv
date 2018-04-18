@@ -44,9 +44,29 @@
 	<div style="background-image:url(/assets/img/formA6.png); position:absolute; left:30px; top:30px; width:420px; height:265px;" title="">
 		<div id='div1'>
 			<div style="margin-left:1em">
-				<div style="margin-top:35px">
+
+				{% if main.isCod %}
+				<div style="margin-left: 200px; 
+					margin-right: 10px;
+					padding-left:10px;
+					background-color: red"> 
+					<h5>COD</h5>
+				</div>
+				{% endif %}
+	
+				{% if !main.isCod %}
+				<div style="margin-left: 200px; 
+					margin-right: 10px;
+					padding-left:10px;
+					background-color: white"> 
+					<h5 style="color: white">COD</h5>
+				</div>
+				{% endif %}
+
+				<div style="margin-top:-25px">
 					<h5>{{main.s_name}}</h5>
 				</div>
+
 				<div style="margin-top:-20px">
 					<h6>{{main.s_address}}</h6>
 				</div>
