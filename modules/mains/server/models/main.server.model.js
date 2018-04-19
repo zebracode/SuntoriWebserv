@@ -197,12 +197,7 @@ var MainSchema = new Schema({
     type: Boolean,
     default: false
   },
-
-  isInsurance: {
-    type: Boolean,
-    default: false
-  },
-
+  
   codAmnt: {
     type: Number,
     default: 0

@@ -9,7 +9,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.codAmount = 0;
     $scope.insuranceAmount = 0;
     $scope.grandTotal = 0;
-
+    $scope.barcode = false;
 
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
@@ -100,14 +100,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         weight: this.selectedOption.value,
         detail: this.detail,
         detail_Product: this.detail_Product,
-        insurance: this.insurance,
+        insurance: this.cbWarranty?"Y":"N",
         barcode: this.barcode,
         s_idNumber: this.s_idNumber,
         total: total,
         status: "ยังไม่ได้ชำระเงิน",
         isCod: this.cbCod,
         codAmnt: this.codAmount,
-        isInsurance: this.cbWarranty,
         insuranceAmnt: this.insuranceAmount,
         codVatAmnt: this.codAmount * 0.07,
         insuranceVatAmnt: this.insuranceAmount * 0.07,
@@ -974,7 +973,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     }
     
 
-
+    $scope.manualEmsChanged = function(){
+      if($scope.barcode) {
+        document.getElementById("barcode").disabled = false;
+      } else {
+        document.getElementById("barcode").disabled = true;
+      }
+        
+    }
 
     /*************************************************/
     /******      Dialog Zone     *********************/
