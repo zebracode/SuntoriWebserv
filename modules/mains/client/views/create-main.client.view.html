@@ -274,9 +274,9 @@
                       <div class="form-group">
                         <div class="input-group input-group-lg">
                           <span class="input-group-addon">
-                            <md-switch ng-model="barcode" aria-label="" ng-disabled="isDisabled" ng-change="manualEmsChanged()"></md-switch>
+                            <md-switch ng-model="isManualEms" aria-label="" ng-disabled="isDisabled" ng-change="manualEmsChanged()"></md-switch>
                           </span>
-                          <input id="barcode" type="text" class="form-control" placeholder="กรอกเลข EMS จากไปรษณีย์" aria-describedby="basic-addon1"
+                          <input id="barcode" ng-model="barcode" type="text" class="form-control" placeholder="กรอกเลข EMS จากไปรษณีย์" aria-describedby="basic-addon1"
                             style="height:85px;" disabled>
                         </div>
                       </div>

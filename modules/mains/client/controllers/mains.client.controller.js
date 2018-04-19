@@ -9,7 +9,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     $scope.codAmount = 0;
     $scope.insuranceAmount = 0;
     $scope.grandTotal = 0;
-    $scope.barcode = false;
+    $scope.isManualEms = false;
 
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
@@ -505,16 +505,20 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     };
 
     function setBarcode(selectedMain, rcpDocNo, inc, currentnumber, weight) {
+      var barcode = "";
       var prefix = "EY";
       var suffix = "TH";
       var number = "";
-      var barcode = "";
       var checkDigit = "";
       var now = Date.now();
 
-      number = parseInt(currentnumber) + inc + "";
-      checkDigit = getCheckDigit(number, weight);
-      barcode = prefix + number + checkDigit + suffix;
+      if (selectedMain.barcode) {
+        barcode = selectedMain.barcode;
+      } else {
+        number = parseInt(currentnumber) + inc + "";
+        checkDigit = getCheckDigit(number, weight);
+        barcode = prefix + number + checkDigit + suffix;
+      }
 
       var req = {
         method: 'POST',
@@ -974,7 +978,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     
 
     $scope.manualEmsChanged = function(){
-      if($scope.barcode) {
+      if($scope.isManualEms) {
         document.getElementById("barcode").disabled = false;
       } else {
         document.getElementById("barcode").disabled = true;
