@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin', '$mdDialog', '$http',
-  function ($scope, $filter, Admin, $mdDialog, $http) {
+angular.module('users.admin').controller('UserListController', ['$scope', '$filter', 'Admin', '$mdDialog', '$http', 'StatementsService',
+  function ($scope, $filter, Admin, $mdDialog, $http, StatementsService) {
 
     $scope.totalItems = 0;
     $scope.currentPage = 1;
@@ -74,6 +74,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
           $mdDialog.show(confirm).then(function(result) {
             $scope.status = 'You decided to name your dog ' + result + '.';
             $scope.updateBalance(user, index, result);
+            saveStatement(parseInt($scope.pagedItems[index].balanceAmt), parseInt(result));
           }, function() {
             $scope.status = 'You didn\'t name your dog.';
         });
@@ -81,7 +82,6 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     
     $scope.updateBalance = function (user, index, amt) {
       var balanceAmt = parseInt($scope.pagedItems[index].balanceAmt);
-      console.log(balanceAmt);
       if (!isNaN(balanceAmt)){
         balanceAmt += parseInt(amt);
         var data = { userId: user._id, balanceAmt: balanceAmt};
@@ -104,6 +104,23 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
            }
         });
     };
+
+    //Add to statement
+    function saveStatement(balanceAmount, amount) {
+      var statement = new StatementsService({
+        name: "เติมเงินผ่าน Admin",
+        amountIn: amount > 0 ? amount : 0,
+        amountOut: amount < 0 ? amount : 0,
+        balanceAmount: balanceAmount
+      });
+
+      statement.$save(function(response){
+        
+      }, function(errorResponse){
+
+      });
+    }
+
 
   }
 ])

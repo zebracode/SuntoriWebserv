@@ -1,79 +1,14 @@
-<!--<section data-ng-controller="UserListController">-->
-  <!--<div class="page-header">-->
-    <!--<div class="row">-->
-      <!--<div class="col-md-2"></div>-->
-      <!--<div class="col-md-8">-->
-        <!--<div class="text-center">-->
-          <!--<h2>ข้อมูลสมาชิก<small>ตรวจสอบข้อมูลสมาชิกได้</small></h2>-->
-        <!--</div>-->
-        <!--<div class="input-group">-->
-          <!--<input class="form-control col-md-4" type="text" data-ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--<div class="list-group">-->
-    <!--<a data-ng-repeat="user in pagedItems | limitTo: itemsPerPage" data-ui-sref="admin.user({userId: user._id})" class="list-group-item">-->
-      <!--<h4 class="list-group-item-heading" data-ng-bind="user.username"></h4>-->
-      <!--<p class="list-group-item-text" data-ng-bind="user.email"></p>-->
-    <!--</a>-->
-  <!--</div>-->
-
-  <!--<pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
-
-  <!--<ul uib-pagination total-items="users.length" items-per-page="itemsPerPage" ng-model="currentPage"></ul>-->
-
-<!--</section>-->
-
-
 <div data-ng-controller="HomeController" data-ng-init="find(); setTotalMains();">
   <div flex layout="row" data-ng-show="authentication.user">
-    <!-- Container #3 Left -->
-    <!--<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left"-->
-                <!--class="md-whiteframe-z2" data-ng-show="authentication.user">-->
-      <!--<md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch>-->
-        <!--<md-card-title>-->
-          <!--<md-card-title-text>-->
-            <!--<span class="md-headline">ยินดีต้อนรับ</span>-->
-            <!--<span md-is-locked-open="$mdMedia('gt-sm')" class="md-subhead" data-ng-bind="authentication.user.displayName"></span>-->
-          <!--</md-card-title-text>-->
-          <!--<md-card-title-media>-->
-            <!--<div>-->
-              <!--<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="md-media-sm card-media" />-->
-            <!--</div>-->
-          <!--</md-card-title-media>-->
-        <!--</md-card-title>-->
-        <!--<md-card-actions layout="row" layout-align="end center">-->
-          <!--<div>-->
-            <!--<md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">-->
-              <!--<md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>-->
-              <!--<md-icon md-svg-icon="pencil"></md-icon>-->
-            <!--</md-button>-->
-            <!--<md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">-->
-              <!--<md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>-->
-              <!--<md-icon md-svg-icon="picture"></md-icon>-->
-            <!--</md-button>-->
-            <!--<md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">-->
-              <!--<md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>-->
-              <!--<md-icon md-svg-icon="key"></md-icon>-->
-            <!--</md-button>-->
-          <!--</div>-->
-          <!--<md-button href="/api/auth/signout" target="_self" class="md-raised md-primary">ออกจากระบบ</md-button>-->
-        <!--</md-card-actions>-->
-        <!--<div class="list-group">-->
-          <!--<a class="list-group-item" data-ui-sref="admin.users"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ผู้ใช้งานระบบ</a>-->
-          <!--<a class="list-group-item" data-ui-sref="admin.lists"><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</a>-->
-        <!--</div>-->
-      <!--</md-card>-->
-    <!--</md-sidenav>-->
-
     <!-- Container #4 Right -->
     <md-content flex id="content">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <!--User Login -->
         <div class="x_panel">
           <div class="x_title">
-            <h2>ข้อมูลสมาชิก<small>ตรวจสอบข้อมูลสมาชิกได้</small></h2>
+            <h2>ข้อมูลสมาชิก
+              <small>ตรวจสอบข้อมูลสมาชิกได้</small>
+            </h2>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
                 <a class="btn btn-app" data-ui-sref="admin.users">
@@ -85,71 +20,45 @@
                   <i class="fa fa-edit"></i> รายการ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.payments">
-                  <!--<span class="badge bg-red">{{totalMains}}</span>-->
                   <i class="fa fa-edit"></i> ชำระเงิน
                 </a>
-                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>-->
-                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>-->
-                <!--<button type="button" class="btn btn-mg btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.users">ผู้ใช้งานระบบ</button>-->
               </div>
             </ul>
-            <!--<ul class="nav navbar-right panel_toolbox">-->
-              <!--<div class="text-center mtop20">-->
-                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">ผู้ใช้ระบบ {{totalUsers}} คน</button>-->
-                <!--<button type="button" class="btn btn-mg btn-white" data-toggle="modal" data-target=".bs-example-modal-lg">จำนวน {{totalMains}} รายการ </button>-->
-                <!--<button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="admin.lists">ประวัติการใช้งาน</button>-->
-              <!--</div>-->
-            <!--</ul>-->
             <div class="col-lg-4">
-
               <div class="input-group">
-                <!--<input class="form-control col-md-4" type="text" ng-model="searchText" placeholder="Search">
-                <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
-              </span>-->
-              </div><!-- /input-group -->
+              </div>
             </div>
-            <!--<ul class="nav navbar-right panel_toolbox">-->
-              <!--<div class="text-center mtop20">-->
-                <!--<button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="authentication.signup">เพิ่มสมาชิก</button>-->
-              <!--</div>-->
-            <!--</ul>-->
             <div class="clearfix"></div>
             <div class="x_content" data-ng-controller="UserListController">
               <br />
               <div class="table-responsive">
                 <table class="table table-striped jambo_table bulk_action">
                   <thead>
-                  <tr class="headings">
-                    <!--<th class="md-caption">#</th>-->
-                    <th class="md-caption">วันสมัคร </th>
-                    <th class="md-caption">ชื่อผู้ใช้</th>
-                    <th class="md-caption">ชื่อสมาชิก</th>
-                    <th class="md-caption">อีเมลล์ </th>
-                    <th class="md-caption">เบอร์โทร </th>
-                    <th class="md-caption">ยอดเงิน</th>
-                    <th class="md-caption">เติมเงิน</th>
-                    <!--<th class="column-title">แก้ไข</th>-->
-                  </tr>
+                    <tr class="headings">
+                      <th class="md-caption">วันสมัคร </th>
+                      <th class="md-caption">ชื่อผู้ใช้</th>
+                      <th class="md-caption">ชื่อสมาชิก</th>
+                      <th class="md-caption">อีเมลล์ </th>
+                      <th class="md-caption">เบอร์โทร </th>
+                      <th class="md-caption">ยอดเงิน</th>
+                      <th class="md-caption">เติมเงิน</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="user in users |filter:searchText"  class="list-group-item"  ng-init="setBalanceAmt($index);">
-                    <!--<td>{{ $index + 1 }}</td>-->
-                    <td class="md-caption" ng-bind="user.created | date:'mediumDate'"></td>
-                    <td class="md-caption" ng-bind="user.username"></td>
-					<td class="md-caption" ng-bind="user.displayName"></td>
-                    <td class="md-caption" ng-bind="user.email"></td>
-                    <td class="md-caption" ng-bind="user.tel"></td>
-                    <td class="md-caption" ng-bind="user.balanceAmt"></td>
-                    <td>
-                      <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)"><i class="fa fa-pencil"></i> เติมเงิน </a>
-                      <a class="btn btn-danger btn-xs" data-ui-sref="admin.user({userId: user._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
-                    </td>
-                    <!--<td>-->
-                      <!--<a class="btn btn-danger btn-xs" data-ui-sref="admin.user-edit({userId: user._id})"><i class="fa fa-pencil"></i> แก้ไข </a>-->
-                    <!--</td>-->
-
-                  </tr>
+                    <tr class="even pointer" data-ng-repeat="user in users |filter:searchText" class="list-group-item" ng-init="setBalanceAmt($index);">
+                      <td class="md-caption" ng-bind="user.created | date:'mediumDate'"></td>
+                      <td class="md-caption" ng-bind="user.username"></td>
+                      <td class="md-caption" ng-bind="user.displayName"></td>
+                      <td class="md-caption" ng-bind="user.email"></td>
+                      <td class="md-caption" ng-bind="user.tel"></td>
+                      <td class="md-caption" ng-bind="user.balanceAmt"></td>
+                      <td>
+                        <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)">
+                          <i class="fa fa-pencil"></i> เติมเงิน </a>
+                        <a class="btn btn-danger btn-xs" data-ui-sref="admin.user({userId: user._id})">
+                          <i class="fa fa-pencil"></i> แก้ไข </a>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -163,4 +72,3 @@
     </md-content>
   </div>
 </div>
-

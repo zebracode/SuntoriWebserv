@@ -16,7 +16,7 @@
       })
       .state('statements.list', {
         url: '',
-        templateUrl: 'modules/statements/client/views/list-statements.client.view.html',
+        templateUrl: 'modules/statements/views/list-statements.client.view.html',
         controller: 'StatementsListController',
         controllerAs: 'vm',
         data: {
@@ -25,7 +25,7 @@
       })
       .state('statements.create', {
         url: '/create',
-        templateUrl: 'modules/statements/client/views/form-statement.client.view.html',
+        templateUrl: 'modules/statements/views/form-statement.client.view.html',
         controller: 'StatementsController',
         controllerAs: 'vm',
         resolve: {

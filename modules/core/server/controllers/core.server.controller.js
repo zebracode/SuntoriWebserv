@@ -10,6 +10,8 @@ var DocNo = require('mongoose').model('DocNo');
  */
 exports.renderIndex = function (req, res, next) {
   if (typeof req.body.amount !== 'undefined' && req.body.payment_status === '000') {
+    console.log("Enter if statement >>>>>");
+
     var amount = parseInt(req.body.amount.substring(0, req.body.amount.length - 2));
 
     //Update Order ID
@@ -75,7 +77,7 @@ exports.renderIndex = function (req, res, next) {
                 if(err) {
                     return next(err);
                 } else {
-                    res.redirect('/mains');
+                   res.redirect('/mains');
                 }
             }
           );
@@ -83,6 +85,7 @@ exports.renderIndex = function (req, res, next) {
       }
     });
   } else {
+    console.log("Enter else statement >>>>>");
     res.render('modules/core/server/views/index', {
       user: req.user || null
     });

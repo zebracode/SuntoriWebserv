@@ -10,12 +10,6 @@ var mongoose = require('mongoose'),
  * Statement Schema
  */
 var StatementSchema = new Schema({
-  name: {
-    type: String,
-    default: '',
-    required: 'Please fill Statement name',
-    trim: true
-  },
   created: {
     type: Date,
     default: Date.now
@@ -23,6 +17,24 @@ var StatementSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  name: {
+    type: String,
+    default: '',
+    required: 'Please fill Statement name',
+    trim: true
+  },
+  amountIn: {
+    type: Number,
+    default: 0
+  },
+  amountOut: {
+    type: Number,
+    default: 0
+  },
+  balanceAmount: {
+    type: Number,
+    default: 0
   }
 });
 
