@@ -35,6 +35,10 @@ var StatementSchema = new Schema({
   balanceAmount: {
     type: Number,
     default: 0
+  },
+  owner: {
+    type: Schema.ObjectId,
+    ref: 'User'
   }
 });
 

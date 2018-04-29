@@ -81,7 +81,7 @@ exports.delete = function(req, res) {
  * List of Statements
  */
 exports.list = function(req, res) {
-  Statement.find().sort('-created').populate('user', 'displayName').exec(function(err, statements) {
+  Statement.find().sort('-created').populate('user', 'displayName').populate('owner', 'displayName').exec(function(err, statements) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

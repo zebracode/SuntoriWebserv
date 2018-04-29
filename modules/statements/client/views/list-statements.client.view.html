@@ -141,7 +141,7 @@
                   <tbody>
                     <tr class="even pointer" ng-repeat="statement in vm.statements">
                       <td class="md-caption" ng-bind="statement.created | date:'mediumDate'"></td>
-                      <td class="md-caption" ng-bind="statement.user.displayName"></td>
+                      <td class="md-caption" ng-bind="statement.owner.displayName"></td>
                       <td class="md-caption" ng-bind="statement.name"></td>
                       <td class="md-caption" ng-bind="statement.amountIn | number: 2"></td>
                       <td class="md-caption" ng-bind="statement.amountOut | number: 2"></td>

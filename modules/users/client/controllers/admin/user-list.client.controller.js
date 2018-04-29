@@ -74,7 +74,7 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
           $mdDialog.show(confirm).then(function(result) {
             $scope.status = 'You decided to name your dog ' + result + '.';
             $scope.updateBalance(user, index, result);
-            saveStatement(parseInt($scope.pagedItems[index].balanceAmt), parseInt(result));
+            saveStatement($scope.pagedItems[index], parseInt(result));
           }, function() {
             $scope.status = 'You didn\'t name your dog.';
         });
@@ -106,12 +106,13 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     };
 
     //Add to statement
-    function saveStatement(balanceAmount, amount) {
+    function saveStatement(item, amount) {
       var statement = new StatementsService({
         name: "เติมเงินผ่าน Admin",
         amountIn: amount > 0 ? amount : 0,
         amountOut: amount < 0 ? amount : 0,
-        balanceAmount: balanceAmount
+        balanceAmount: item.balanceAmt,
+        owner: item
       });
 
       statement.$save(function(response){
