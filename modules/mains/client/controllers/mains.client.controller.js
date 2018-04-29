@@ -2,8 +2,8 @@
 
 // Mains controller
 angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', 
-'$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav', 'WarrantyPrice',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav, WarrantyPrice) {
+'$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav', 'WarrantyPrice', 'StatementsService',
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav, WarrantyPrice, StatementsService) {
 
     // Default
     $scope.codAmount = 0;
@@ -559,6 +559,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         }
         return checkDigit;
       }
+      saveStatement($scope.authentication.user, parseInt(selectedMain.total) * (-1), "ส่งสินค้า " + barcode);
     };
 
     $scope.selectedInvoices = [];
@@ -626,46 +627,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       var data = { userId: $scope.authentication.user._id, balanceAmt: balanceAmt };
       $scope.balanceAmount = balanceAmt;
       $http.put('/api/balance', data).then(function () {
-      });
-    };
-
-
-    $scope.showTopUpPromt = function (event) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.prompt()
-        .title('เติมเงิน')
-        .textContent('ระบุจำนวนเงินที่ต้องการเติม')
-        .placeholder('จำนวนเงิน')
-        .ariaLabel('')
-        .initialValue('')
-        .targetEvent(event)
-        .ok('ตกลง')
-        .cancel('ยกเลิก');
-
-      $mdDialog.show(confirm).then(function (result) {
-        $scope.setPaymentForm(result);
-        $scope.showConfirmTopUp(event, result);
-        //$scope.payment();
-        $scope.status = 'You decided to name your dog ' + result + '.';
-      }, function () {
-        $scope.status = 'You didn\'t name your dog.';
-      });
-    };
-
-    $scope.showConfirmTopUp = function (event, amount) {
-      // Appending dialog to document.body to cover sidenav in docs app
-      var confirm = $mdDialog.confirm()
-        .title('ยืนยันการเติมเงิน')
-        .textContent('ยอดเติมเงิน ' + amount)
-        .ariaLabel('Lucky day')
-        .targetEvent(event)
-        .ok('ตกลง')
-        .cancel('ยกเลิก');
-
-      $mdDialog.show(confirm).then(function () {
-        $scope.payment();
-      }, function () {
-        $scope.status = 'You decided to keep your debt.';
       });
     };
 
@@ -810,8 +771,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             });
           });
 
-          //Show dialog for print all and bill
-          $scope.showPrintAllAndBill(ev);
+          
         });
 
       }, function () {
@@ -836,6 +796,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $scope.showConfirmTopUp(event, result);
         //$scope.payment();
         $scope.status = 'You decided to name your dog ' + result + '.';
+
       }, function () {
         $scope.status = 'You didn\'t name your dog.';
       });
@@ -853,6 +814,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
       $mdDialog.show(confirm).then(function () {
         $scope.payment();
+        saveStatement(Authentication.user, parseInt(amount), "เติมเงินผ่าน 2P2C");
       }, function () {
         $scope.status = 'You decided to keep your debt.';
       });
@@ -908,7 +870,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     // Set 2P2C request parameter
     $scope.setPaymentForm = function (amount) {
       var formatedAmount = formatAmount(amount, 10);
-      console.log("$scope.authentication", $scope.authentication);
       var topUpUser = $scope.authentication.user.firstName + ' ' + $scope.authentication.user.lastName;
       var data = {
         amount: formatedAmount,
@@ -984,6 +945,23 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         document.getElementById("barcode").disabled = true;
       }
         
+    }
+
+    //Add to statement
+    function saveStatement(item, amount, name) {
+      var statement = new StatementsService({
+        name: name,
+        amountIn: amount > 0 ? amount : 0,
+        amountOut: amount < 0 ? amount : 0,
+        balanceAmount: parseInt($scope.balanceAmount) + amount,
+        owner: item
+      });
+
+      statement.$save(function(response){
+        
+      }, function(errorResponse){
+
+      });
     }
 
     /*************************************************/
