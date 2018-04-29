@@ -109,8 +109,8 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     function saveStatement(item, amount) {
       var statement = new StatementsService({
         name: "เติมเงินผ่าน Admin",
-        amountIn: amount > 0 ? amount : 0,
-        amountOut: amount < 0 ? amount : 0,
+        amountIn: amount > 0 ? Math.abs(amount) : 0,
+        amountOut: amount < 0 ? Math.abs(amount) : 0,
         balanceAmount: item.balanceAmt,
         owner: item
       });

@@ -814,7 +814,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
       $mdDialog.show(confirm).then(function () {
         $scope.payment();
-        saveStatement(Authentication.user, parseInt(amount), "เติมเงินผ่าน 2P2C");
+        //saveStatement(Authentication.user, parseInt(amount), "เติมเงินผ่าน 2P2C");
       }, function () {
         $scope.status = 'You decided to keep your debt.';
       });
@@ -951,9 +951,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     function saveStatement(item, amount, name) {
       var statement = new StatementsService({
         name: name,
-        amountIn: amount > 0 ? amount : 0,
-        amountOut: amount < 0 ? amount : 0,
-        balanceAmount: parseInt($scope.balanceAmount) + amount,
+        amountIn: amount > 0 ? Math.abs(amount) : 0,
+        amountOut: amount < 0 ? Math.abs(amount) : 0,
+        balanceAmount: parseInt($scope.balanceAmount),
         owner: item
       });
 
