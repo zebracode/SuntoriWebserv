@@ -138,7 +138,7 @@
                           <h2>ยอดค่าใช้จ่าย</h2>
                           <ul class="nav navbar-right panel_toolbox">
                             <div layout="row">
-                              <h2 class="text-default">เงินคงเหลือ {{balanceAmount}} บาท</h2>
+                              <h2 class="text-default">เงินคงเหลือ {{balanceAmount | number:2}} บาท</h2>
                             </div>
                           </ul>
                           <div class="clearfix"></div>
@@ -148,7 +148,7 @@
                             <div class="tile-stats">
                               <div class="icon"><i class="fa fa-money"></i>
                               </div>
-                              <div class="count">{{ totalPrice }}
+                              <div class="count">{{ totalPrice | number: 2}}
                                 <span>บาท</span>
                               </div>
 

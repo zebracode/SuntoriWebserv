@@ -38,7 +38,7 @@ angular.module('mains').factory('ThailandPost', ['$resource',
           "merchantId": "SUN001",
           "merchantZipcode": main.s_postcode,
           "storeLocationNo": "",
-          "insurance": "Y"
+          "insurance": main.insurance
         }
       );
     };

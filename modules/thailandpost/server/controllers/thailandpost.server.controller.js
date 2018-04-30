@@ -15,7 +15,7 @@ exports.createOrder = function(req, res) {
   req.body.productWeight = req.body.productWeight.substring(req.body.productWeight.lastIndexOf('-') + 1, req.body.productWeight.length).replace(/,/g, "");
   fetch('http://suntoriexpress:suntoriexpressws@r_dservice.thailandpost.com:8080/webservice/addItem',{
 	method: 'POST',
-	body:    JSON.stringify(req.body),
+	body: JSON.stringify(req.body),
 	headers: {
           'Content-Type': 'application/json' 
         }
