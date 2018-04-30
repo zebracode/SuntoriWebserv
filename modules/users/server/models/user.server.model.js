@@ -77,6 +77,16 @@ var UserSchema = new Schema({
     trim: true,
     default: ''
   },
+  bookbank: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  bank: {
+    type: String,
+    trim: true,
+    default: ''
+  },
   salt: {
     type: String
   },

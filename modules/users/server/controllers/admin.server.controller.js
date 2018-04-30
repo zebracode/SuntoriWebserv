@@ -28,6 +28,8 @@ exports.update = function (req, res) {
   user.roles = req.body.roles;
   user.idNumber = req.body.idNumber;
   user.tel = req.body.tel;
+  user.bookbank = req.body.bookbank;
+  user.bank = req.body.bank;
 
   user.save(function (err) {
     if (err) {

@@ -54,6 +54,16 @@
                     </div>
                   </md-input-container>
                 </div>
+                <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>ธนาคาร</label>
+                    <input ng-model="user.bank" placeholder="กรอกชื่อธนาคาร">
+                  </md-input-container>
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>เลขบัญชีธนาคาร</label>
+                    <input name="bookbank" ng-model="user.bookbank" placeholder="กรอกเลขบัญชีธนาคาร">
+                  </md-input-container>
+                </div>
                 <div class="text-center form-group">
                   <button class="btn btn-default" type="submit" value="Update" >อัพเดท</button>
                 </div>
