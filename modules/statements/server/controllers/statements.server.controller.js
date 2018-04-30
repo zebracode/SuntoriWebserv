@@ -12,11 +12,11 @@ var path = require('path'),
 /**
  * Create a Statement
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var statement = new Statement(req.body);
   statement.user = req.user;
 
-  statement.save(function(err) {
+  statement.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -30,7 +30,7 @@ exports.create = function(req, res) {
 /**
  * Show the current Statement
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var statement = req.statement ? req.statement.toJSON() : {};
 
@@ -44,12 +44,12 @@ exports.read = function(req, res) {
 /**
  * Update a Statement
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var statement = req.statement;
 
   statement = _.extend(statement, req.body);
 
-  statement.save(function(err) {
+  statement.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -63,10 +63,10 @@ exports.update = function(req, res) {
 /**
  * Delete an Statement
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var statement = req.statement;
 
-  statement.remove(function(err) {
+  statement.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -80,8 +80,8 @@ exports.delete = function(req, res) {
 /**
  * List of Statements
  */
-exports.list = function(req, res) {
-  Statement.find().sort('-created').populate('user', 'displayName').populate('owner', 'displayName').exec(function(err, statements) {
+exports.list = function (req, res) {
+  Statement.find().sort('-created').populate('user', 'displayName').populate('owner', 'displayName').exec(function (err, statements) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -95,7 +95,7 @@ exports.list = function(req, res) {
 /**
  * Statement middleware
  */
-exports.statementByID = function(req, res, next, id) {
+exports.statementByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -113,5 +113,29 @@ exports.statementByID = function(req, res, next, id) {
     }
     req.statement = statement;
     next();
+  });
+};
+
+// Excel Export
+exports.excel = function (req, res, next) {
+  Statement.find().sort('-created').populate('user', 'displayName').populate('owner', 'displayName').exec(function (err, statements) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      var jsonArr = [];
+      var json = {};
+      for (var i = 0; i < statements.length; i++) {
+        json.created = statements[i].created;
+        json.owner = statements[i].owner.displayName;
+        json.name = statements[i].name;
+        json.amountIn = statements[i].amountIn;
+        json.amountOut = statements[i].amountOut;
+        json.balanceAmount = statements[i].balanceAmount;
+        jsonArr.push(json);
+      }
+      res.xls('statements.xlsx', jsonArr);
+    }
   });
 };
