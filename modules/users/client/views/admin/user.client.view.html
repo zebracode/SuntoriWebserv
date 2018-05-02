@@ -6,10 +6,12 @@
         <!--User Login -->
         <div class="x_panel">
           <div class="x_title">
-            <h2>User Profile <small>หน้าจัดการสมาชิก</small></h2>
+            <h2>User Profile
+              <small>หน้าจัดการสมาชิก</small>
+            </h2>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
-                <button type="button" class="btn btn-mg btn-default"data-ui-sref="admin.users">ย้อนกลับ</button>
+                <button type="button" class="btn btn-mg btn-default" data-ui-sref="admin.users">ย้อนกลับ</button>
               </div>
             </ul>
             <div class="clearfix"></div>
@@ -46,39 +48,37 @@
                 <!--</li>-->
               </ul>
 
-              <a class="btn btn-success" data-ui-sref="admin.user-edit({userId: user._id})"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+              <a class="btn btn-success" data-ui-sref="admin.user-edit({userId: user._id})">
+                <i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
               <!--<a class="btn btn-danger" data-ng-click="remove();" ng-if="user._id !== authentication.user._id"><i class="fa fa-edit m-right-xs"></i>Delete</a>-->
               <br />
 
             </div>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-
+            <div class="col-md-9 col-sm-9 col-xs-12" data-ng-controller="UserPriceController" data-ng-init="findOne()">
               <div class="profile_title">
                 <div class="col-md-6">
                   <h2>ตั้งราคาค่าขนส่ง</h2>
                 </div>
                 <div class="col-md-6">
-
                 </div>
               </div>
               <div class="x_content">
-                <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
+                <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="save()" novalidate>
                   <div class="row">
-
                     <div class="form-group">
                       <label class="col-md-4 col-sm-2 col-xs-12 control-label">
                         <small class="text-navy">ไม่เกิน 0.5 กก. </small>
                       </label>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา กทม.">
+                        <input type="text" data-ng-model="userPrice.bkPrice1" class="form-control" placeholder="ราคา กทม.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา ตจว.">
+                        <input type="text" data-ng-model="userPrice.ctPrice1" class="form-control" placeholder="ราคา ตจว.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                        <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
+                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
                       <!--</div>-->
                     </div>
                     <div class="form-group">
@@ -86,15 +86,15 @@
                         <small class="text-navy">น้ำหนัก 0.5-1 กก. </small>
                       </label>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา กทม.">
+                        <input type="text" data-ng-model="userPrice.bkPrice2" class="form-control" placeholder="ราคา กทม.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา ตจว.">
+                        <input type="text" data-ng-model="userPrice.ctPrice2" class="form-control" placeholder="ราคา ตจว.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                        <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
+                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
                       <!--</div>-->
                     </div>
                     <div class="form-group">
@@ -102,15 +102,15 @@
                         <small class="text-navy">น้ำหนัก 1-3 กก. </small>
                       </label>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา กทม.">
+                        <input type="text" data-ng-model="userPrice.bkPrice3" class="form-control" placeholder="ราคา กทม.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา ตจว.">
+                        <input type="text" data-ng-model="userPrice.ctPrice3" class="form-control" placeholder="ราคา ตจว.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                        <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
+                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
                       <!--</div>-->
                     </div>
                     <div class="form-group">
@@ -118,15 +118,15 @@
                         <small class="text-navy">น้ำหนัก 3-5 กก. </small>
                       </label>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา กทม.">
+                        <input type="text" data-ng-model="userPrice.bkPrice4" class="form-control" placeholder="ราคา กทม.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา ตจว.">
+                        <input type="text" data-ng-model="userPrice.ctPrice4" class="form-control" placeholder="ราคา ตจว.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                        <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
+                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
                       <!--</div>-->
                     </div>
                     <div class="form-group">
@@ -134,15 +134,15 @@
                         <small class="text-navy">น้ำหนัก 5-10 กก. </small>
                       </label>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา กทม.">
+                        <input type="text" data-ng-model="userPrice.bkPrice5" class="form-control" placeholder="ราคา กทม.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา ตจว.">
+                        <input type="text" data-ng-model="userPrice.ctPrice5" class="form-control" placeholder="ราคา ตจว.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                        <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
+                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
                       <!--</div>-->
                     </div>
                     <div class="form-group">
@@ -150,15 +150,15 @@
                         <small class="text-navy">น้ำหนัก 10-15 กก. </small>
                       </label>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา กทม.">
+                        <input type="text" data-ng-model="userPrice.bkPrice6" class="form-control" placeholder="ราคา กทม.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา ตจว.">
+                        <input type="text" data-ng-model="userPrice.ctPrice6" class="form-control" placeholder="ราคา ตจว.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                        <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
+                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
                       <!--</div>-->
                     </div>
                     <div class="form-group">
@@ -166,22 +166,23 @@
                         <small class="text-navy">น้ำหนัก 15-20 กก. </small>
                       </label>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา กทม.">
+                        <input type="text" data-ng-model="userPrice.bkPrice7" class="form-control" placeholder="ราคา กทม.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="order" class="form-control" placeholder="ราคา ตจว.">
+                        <input type="text" data-ng-model="userPrice.ctPrice7" class="form-control" placeholder="ราคา ตจว.">
                         <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
                       </div>
                       <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                        <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
+                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
                       <!--</div>-->
                     </div>
 
 
-                      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
-                        <button type="button" class="btn btn-lg btn-primary"data-ui-sref="admin.users">บันทึก</button>
-                      </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
+                      <input type="submit" class="btn btn-lg btn-primary" value="บันทึก"/>
+                      <!-- <button type="submit" class="btn btn-lg btn-primary" data-ui-sref="admin.users">บันทึก</button> -->
+                    </div>
 
 
                   </div>
