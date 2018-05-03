@@ -11,20 +11,20 @@ angular.module('userprices').controller('UserPriceController', ['$scope', '$loca
 
         $scope.create = function () {
             var userPrice = new UserPricesService({
-                bkPrice1: this.bkPrice1,
-                bkPrice2: this.bkPrice2,
-                bkPrice3: this.bkPrice3,
-                bkPrice4: this.bkPrice4,
-                bkPrice5: this.bkPrice5,
-                bkPrice6: this.bkPrice6,
-                bkPrice7: this.bkPrice7,
-                ctPrice1: this.ctPrice1,
-                ctPrice2: this.ctPrice2,
-                ctPrice3: this.ctPrice3,
-                ctPrice4: this.ctPrice4,
-                ctPrice5: this.ctPrice5,
-                ctPrice6: this.ctPrice6,
-                ctPrice7: this.ctPrice7,
+                bkPrice1: $scope.userPrice.bkPrice1,
+                bkPrice2: $scope.userPrice.bkPrice2,
+                bkPrice3: $scope.userPrice.bkPrice3,
+                bkPrice4: $scope.userPrice.bkPrice4,
+                bkPrice5: $scope.userPrice.bkPrice5,
+                bkPrice6: $scope.userPrice.bkPrice6,
+                bkPrice7: $scope.userPrice.bkPrice7,
+                ctPrice1: $scope.userPrice.ctPrice1,
+                ctPrice2: $scope.userPrice.ctPrice2,
+                ctPrice3: $scope.userPrice.ctPrice3,
+                ctPrice4: $scope.userPrice.ctPrice4,
+                ctPrice5: $scope.userPrice.ctPrice5,
+                ctPrice6: $scope.userPrice.ctPrice6,
+                ctPrice7: $scope.userPrice.ctPrice7,
                 owner: $stateParams.userId
             });
 
