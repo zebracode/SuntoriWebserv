@@ -370,16 +370,15 @@
                             <div class="icon">
                               <i class="fa fa-money"></i>
                             </div>
-                            <div class="count">{{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight | number:
-                              2}}
+                            <div class="count">{{ grandTotal | number:2}}
                               <span>บาท</span>
                             </div>
                             <h3>ยอดเงินที่ต้องชำระ</h3>
                             <p>แสดงรายละเอียดยอดเงินที่ต้องชำระ</p>
                             <div class="form-group">
                               <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                <p>ค่าส่งสินค้า {{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight
-                                  | number:2 }} บาท</p>
+                                <!-- <p>ค่าส่งสินค้า {{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight -->
+                                <p>ค่าส่งสินค้า {{ shippingPrice | number:2 }} บาท</p>
                                 <p>ค่าธรรมเนียม COD {{ codAmount | number:2 }} บาท</p>
                                 <p>ค่าประกันสินค้า {{ insuranceAmount | number:2 }} บาท</p>
                                 <p>ภาษีมูลค่าเพิ่ม {{ (codAmount + insuranceAmount) * 0.07 | number:2 }} บาท</p>
