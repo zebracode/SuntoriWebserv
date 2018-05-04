@@ -1,19 +1,22 @@
 'use strict';
 
 // Mains controller
-angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http', 
-'$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav', 'WarrantyPrice', 'StatementsService',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav, WarrantyPrice, StatementsService) {
+angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http',
+  '$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav', 'WarrantyPrice', 'StatementsService', 'UserPricesService',
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav, WarrantyPrice, StatementsService, UserPricesService) {
 
     // Default
     $scope.codAmount = 0;
     $scope.insuranceAmount = 0;
     $scope.grandTotal = 0;
     $scope.isManualEms = false;
+    $scope.shippingPrice = 0;
+    var userPrices = [];
+    var perimeter = ['กรุงเทพมหานคร', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ'];
+
 
     $scope.authentication = Authentication;
     $scope.totalPrice = 0;
-    //    $scope.balanceAmount = 0;
     $scope.thailandPost = new ThailandPost();
     $scope.selectedMains = [];
     $scope.price = 0;
@@ -22,6 +25,22 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
     $scope.toggleLeft = buildToggler('left');
     $scope.toggleRight = buildToggler('right');
+
+    // Start get user prices
+    if (Authentication.user._id) {
+      UserPricesService.get({
+        userId: Authentication.user._id
+      }, function(userPrice){
+        userPrices.push({weight:500, bkPrice: userPrice.bkPrice1, ctPrice: userPrice.ctPrice1});
+        userPrices.push({weight:1000, bkPrice: userPrice.bkPrice2, ctPrice: userPrice.ctPrice2});
+        userPrices.push({weight:3000, bkPrice: userPrice.bkPrice3, ctPrice: userPrice.ctPrice3});
+        userPrices.push({weight:5000, bkPrice: userPrice.bkPrice4, ctPrice: userPrice.ctPrice4});
+        userPrices.push({weight:10000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5});
+        userPrices.push({weight:15000, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6});
+        userPrices.push({weight:20000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7});
+      });
+    }
+   // Eng get user prices
 
     function buildToggler(componentId) {
       return function () {
@@ -100,7 +119,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         weight: this.selectedOption.value,
         detail: this.detail,
         detail_Product: this.detail_Product,
-        insurance: this.cbWarranty?"Y":"N",
+        insurance: this.cbWarranty ? "Y" : "N",
         barcode: this.barcode,
         s_idNumber: this.s_idNumber,
         total: total,
@@ -435,9 +454,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       }
     ];
 
-    //data generate
-
-
     $scope.selectedInsurance = $scope.insurances[0];
     $scope.selectedOption = $scope.options[0];
     $scope.reset = function () {
@@ -683,11 +699,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
           $scope.result_url_2 = response.data.resultUrl2;
           $scope.default_lang = response.data.defaultLang;
           $scope.hash_value = response.data.hashValue;
-          console.log("version", $scope.version);
-          console.log("merchant_id", $scope.merchant_id);
-          console.log("order_id", $scope.order_id);
-          console.log("amount", $scope.amount);
-          console.log("hash_value", $scope.hash_value);
         });
 
       function formatAmount(amount, length) {
@@ -771,7 +782,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             });
           });
 
-          
+
         });
 
       }, function () {
@@ -915,10 +926,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     // Execute when product price is changed.
     $scope.productPriceChanged = function (productPrice) {
       $scope.codAmount = 0;
-      $scope.grandTotal =  0;
+      $scope.grandTotal = 0;
 
       // Product Price 1-4000, COD = 60
-      if (productPrice >=1 && productPrice <= 4000) {
+      if (productPrice >= 1 && productPrice <= 4000) {
         $scope.codAmount = 60;
       } else {
         $scope.codAmount = Math.floor(productPrice * 0.015);
@@ -932,19 +943,45 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       $scope.setGrandTotal();
     };
 
-    $scope.setGrandTotal = function(){
-      var ShippingPrice = $filter("provincePrice")($scope.selectedOption.price, $scope.s_country, $scope.r_country, $scope.selectedOption.weight);
-      $scope.grandTotal = Number(ShippingPrice) + Number($scope.codAmount * 1.07) + Number($scope.insuranceAmount * 1.07);
-    }
-    
+    // Start set grand total
+    $scope.setGrandTotal = function () {
+      var isPerimeter = false;
 
-    $scope.manualEmsChanged = function(){
-      if($scope.isManualEms) {
+      // Use shiping price from user prices
+      if (userPrices.length > 0) {
+        for(var i=0; i<perimeter.length; i++) {
+          if($scope.r_country === perimeter[i]){
+            isPerimeter = true;
+            break;
+          }
+        }
+
+        for(var i=0; i<=userPrices.length; i++){
+          if(userPrices[i].weight === $scope.selectedOption.weight) {
+            if(isPerimeter) {
+              $scope.shippingPrice = userPrices[i].bkPrice;
+            } else {
+              $scope.shippingPrice = userPrices[i].ctPrice;
+            }
+            break;
+          }
+        }
+      // Use default price
+      } else {
+        $scope.shippingPrice = $filter("provincePrice")($scope.selectedOption.price, $scope.s_country, $scope.r_country, $scope.selectedOption.weight);
+      }
+      $scope.grandTotal = Number($scope.shippingPrice) + Number($scope.codAmount * 1.07) + Number($scope.insuranceAmount * 1.07);
+    }
+    // End set grund total
+
+
+    $scope.manualEmsChanged = function () {
+      if ($scope.isManualEms) {
         document.getElementById("barcode").disabled = false;
       } else {
         document.getElementById("barcode").disabled = true;
       }
-        
+
     }
 
     //Add to statement
@@ -957,9 +994,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         owner: item
       });
 
-      statement.$save(function(response){
-        
-      }, function(errorResponse){
+      statement.$save(function (response) {
+
+      }, function (errorResponse) {
 
       });
     }

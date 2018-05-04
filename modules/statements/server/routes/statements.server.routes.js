@@ -19,4 +19,9 @@ module.exports = function(app) {
 
   // Finish by binding the Statement middleware
   app.param('statementId', statements.statementByID);
+
+  // Export Excel
+  app.route('/api/excel/statements')
+  .get(statements.excel);
+  
 };

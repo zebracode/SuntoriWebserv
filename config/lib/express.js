@@ -17,7 +17,8 @@ var config = require('../config'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
-  path = require('path');
+  path = require('path'),
+  json2xls = require('json2xls');
 
 /**
  * Initialize local variables
@@ -92,6 +93,9 @@ module.exports.initMiddleware = function (app) {
     dest: './uploads/',
     inMemory: true
   }));
+
+  // Add json2xls middleware
+  app.use(json2xls.middleware);
 };
 
 /**
