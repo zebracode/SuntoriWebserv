@@ -23,9 +23,11 @@ module.exports = {
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/angularUtils-pagination/dirPagination.js',
-        'public/lib/ng-table/dist/ng-table.min.js'
+        'public/lib/ng-table/dist/ng-table.min.js',
+        'public/lib/angular-file-upload/dist/angular-file-upload.js',
+        'public/lib/ng-file-upload/ng-file-upload.js',
+        'public/lib/ng-file-upload/ng-file-upload-shim.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

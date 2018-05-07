@@ -2,8 +2,10 @@
 
 // Mains controller
 angular.module('mains').controller('MainsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Mains', '$http',
-  '$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav', 'WarrantyPrice', 'StatementsService', 'UserPricesService',
-  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav, WarrantyPrice, StatementsService, UserPricesService) {
+  '$mdDialog', 'ThailandPost', "$filter", 'Recipients', '$mdSidenav', 'WarrantyPrice',
+  'StatementsService', 'UserPricesService', 'Upload', '$window',
+  function ($scope, $stateParams, $location, Authentication, Mains, $http, $mdDialog, ThailandPost, $filter, Recipients, $mdSidenav,
+    WarrantyPrice, StatementsService, UserPricesService, Upload, $window) {
 
     // Default
     $scope.codAmount = 0;
@@ -30,17 +32,17 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
     if (Authentication.user._id) {
       UserPricesService.get({
         userId: Authentication.user._id
-      }, function(userPrice){
-        userPrices.push({weight:500, bkPrice: userPrice.bkPrice1, ctPrice: userPrice.ctPrice1});
-        userPrices.push({weight:1000, bkPrice: userPrice.bkPrice2, ctPrice: userPrice.ctPrice2});
-        userPrices.push({weight:3000, bkPrice: userPrice.bkPrice3, ctPrice: userPrice.ctPrice3});
-        userPrices.push({weight:5000, bkPrice: userPrice.bkPrice4, ctPrice: userPrice.ctPrice4});
-        userPrices.push({weight:10000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5});
-        userPrices.push({weight:15000, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6});
-        userPrices.push({weight:20000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7});
+      }, function (userPrice) {
+        userPrices.push({ weight: 500, bkPrice: userPrice.bkPrice1, ctPrice: userPrice.ctPrice1 });
+        userPrices.push({ weight: 1000, bkPrice: userPrice.bkPrice2, ctPrice: userPrice.ctPrice2 });
+        userPrices.push({ weight: 3000, bkPrice: userPrice.bkPrice3, ctPrice: userPrice.ctPrice3 });
+        userPrices.push({ weight: 5000, bkPrice: userPrice.bkPrice4, ctPrice: userPrice.ctPrice4 });
+        userPrices.push({ weight: 10000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5 });
+        userPrices.push({ weight: 15000, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6 });
+        userPrices.push({ weight: 20000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7 });
       });
     }
-   // Eng get user prices
+    // Eng get user prices
 
     function buildToggler(componentId) {
       return function () {
@@ -949,16 +951,16 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
       // Use shiping price from user prices
       if (userPrices.length > 0) {
-        for(var i=0; i<perimeter.length; i++) {
-          if($scope.r_country === perimeter[i]){
+        for (var i = 0; i < perimeter.length; i++) {
+          if ($scope.r_country === perimeter[i]) {
             isPerimeter = true;
             break;
           }
         }
 
-        for(var i=0; i<=userPrices.length; i++){
-          if(userPrices[i].weight === $scope.selectedOption.weight) {
-            if(isPerimeter) {
+        for (var i = 0; i <= userPrices.length; i++) {
+          if (userPrices[i].weight === $scope.selectedOption.weight) {
+            if (isPerimeter) {
               $scope.shippingPrice = userPrices[i].bkPrice;
             } else {
               $scope.shippingPrice = userPrices[i].ctPrice;
@@ -966,7 +968,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
             break;
           }
         }
-      // Use default price
+        // Use default price
       } else {
         $scope.shippingPrice = $filter("provincePrice")($scope.selectedOption.price, $scope.s_country, $scope.r_country, $scope.selectedOption.weight);
       }
@@ -1000,6 +1002,32 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
       });
     }
+
+    /****************************
+     * Upload Excel of Shipping *
+    /****************************/
+    $scope.importExcel = function () {
+      Upload.upload({
+        url: 'api/upload/shipping', //webAPI exposed to upload the file
+        data: { file: $scope.excelFile } //pass file as data, should be user ng-model
+      }).then(function (resp) { //upload function returns a promise
+        if (resp.data.error_code === 0) { //validate success
+          $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+        } else {
+          $window.alert('an error occured');
+        }
+      }, function (resp) { //catch error
+        console.log('Error status: ' + resp.status);
+        $window.alert('Error status: ' + resp.status);
+      }, function (evt) {
+        console.log(evt);
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+      });
+    };
+    /** End Upload Excel of Shipping */
+
 
     /*************************************************/
     /******      Dialog Zone     *********************/
