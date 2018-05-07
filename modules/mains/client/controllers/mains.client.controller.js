@@ -1003,9 +1003,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
       });
     }
 
-    /****************************
-     * Upload Excel of Shipping *
-    /****************************/
+    /****************************************************************************************
+     *                            Upload Excel of Shipping                                  *
+    /****************************************************************************************/
     $scope.importExcel = function () {
       Upload.upload({
         url: 'api/upload/shipping', //webAPI exposed to upload the file
@@ -1021,13 +1021,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         $window.alert('Error status: ' + resp.status);
       }, function (evt) {
         console.log(evt);
-        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+        //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        //vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
       });
     };
-    /** End Upload Excel of Shipping */
-
 
     /*************************************************/
     /******      Dialog Zone     *********************/
