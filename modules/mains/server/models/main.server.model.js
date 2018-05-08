@@ -102,7 +102,6 @@ var MainSchema = new Schema({
 		default: '',
 		trim: true
 	},
-
 	order: {
 		type: String,
 		default: '',
@@ -180,42 +179,39 @@ var MainSchema = new Schema({
 	},
 	afterPrice: String,
 	receiptDate: Date,
-
 	isCod: {
 		type: Boolean,
 		default: false
 	},
-
 	codAmnt: {
 		type: Number,
 		default: 0
 	},
-
 	insuranceAmnt: {
 		type: Number,
 		default: 0
 	},
-
 	codVatAmnt: {
 		type: Number,
 		default: 0
 	},
-
 	insuranceVatAmnt: {
 		type: Number,
 		default: 0
 	},
-
 	totalVatAmnt: {
 		type: Number,
 		default: 0
 	},
-
 	grandTotalAmnt: {
 		type: Number,
 		default: 0
+	},
+	source: {
+		type: String,
+		default: 'manual',
+		trim: true
 	}
-
 });
 
 mongoose.model('Main', MainSchema);
