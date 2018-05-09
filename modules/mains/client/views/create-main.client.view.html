@@ -248,166 +248,170 @@
                   <h2>รายละเอียดสินค้า
                     <small>กรอกรายละเอียดสินค้า</small>
                   </h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <div class="text-center mtop20">
-                      <button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Import Excel</button>
-                    </div>
-                    <!--<button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>-->
-                    <!--<md-button-->
-                    <!--ng-click="toggleLeft()"-->
-                    <!--class="md-fab md-accent"-->
-                    <!--aria-label="Code"-->
-                    <!--ng-click="ctrl.showContentMenu($event, ctrl.code)">-->
-                    <!--<md-icon md-svg-icon="assets/svg/list.svg"></md-icon>-->
-                    <!--</md-button>-->
-                  </ul>
-                  <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <!-- <ul class="nav navbar-right panel_toolbox"> -->
+                <br/>
+                <div class="col-md-8">
+                  <input class="btn btn-mg btn-default" type="file" ngf-select ng-model="excelFile" name="file"/>
+                </div>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="importExcel()">Import Excel</button>
+                </div>
+                <br/>
+                <div data-ng-if="import">
+                  {{import}}
+                </div>
+                <div data-ng-if="error">
+                  {{error}}
+                </div>
+                <!-- </ul> -->
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
 
-                  <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
+                <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
 
-                    <!--Hidden-->
-                    <input type="hidden" ng-model="total" value="selectedOption.price">
-                    <input type="hidden" ng-model="weight" value="selectedOption.value">
-                    <div class="row">
+                  <!--Hidden-->
+                  <input type="hidden" ng-model="total" value="selectedOption.price">
+                  <input type="hidden" ng-model="weight" value="selectedOption.value">
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="input-group input-group-lg">
+                        <span class="input-group-addon">
+                          <md-switch ng-model="isManualEms" aria-label="" ng-disabled="isDisabled" ng-change="manualEmsChanged()"></md-switch>
+                        </span>
+                        <input id="barcode" ng-model="barcode" type="text" class="form-control" placeholder="กรอกเลข EMS จากไปรษณีย์" aria-describedby="basic-addon1"
+                          style="height:85px;" disabled>
+                      </div>
+                    </div>
+                    <div class="col-md-7 col-sm-6 col-xs-12 form-group has-feedback">
                       <div class="form-group">
-                        <div class="input-group input-group-lg">
-                          <span class="input-group-addon">
-                            <md-switch ng-model="isManualEms" aria-label="" ng-disabled="isDisabled" ng-change="manualEmsChanged()"></md-switch>
-                          </span>
-                          <input id="barcode" ng-model="barcode" type="text" class="form-control" placeholder="กรอกเลข EMS จากไปรษณีย์" aria-describedby="basic-addon1"
-                            style="height:85px;" disabled>
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">
+                          <small class="text-navy">Order </small>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input name="order" type="text" data-ng-model="order" id="order" class="form-control" id="inputSuccess2" placeholder="order">
+                          <span class="fa fa-shopping-cart form-control-feedback right" aria-hidden="true"></span>
                         </div>
                       </div>
-                      <div class="col-md-7 col-sm-6 col-xs-12 form-group has-feedback">
-                        <div class="form-group">
-                          <label class="col-md-3 col-sm-3 col-xs-12 control-label">
-                            <small class="text-navy">Order </small>
-                          </label>
-                          <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input name="order" type="text" data-ng-model="order" id="order" class="form-control" id="inputSuccess2" placeholder="order">
-                            <span class="fa fa-shopping-cart form-control-feedback right" aria-hidden="true"></span>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-3 col-sm-3 col-xs-12 control-label">
-                            <small class="text-navy">Invoice </small>
-                          </label>
-                          <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input name="invoice" type="text" data-ng-model="invoice" id="invoice" class="form-control" id="inputSuccess3" placeholder="Invoice No">
-                            <span class="fa fa-shopping-cart form-control-feedback right" aria-hidden="true"></span>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-3 col-sm-3 col-xs-12 control-label">
-                            <small class="text-navy">พัสดุ </small>
-                          </label>
-                          <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input name="detail" type="text" data-ng-model="detail" id="detail" class="form-control has-feedback-right" id="inputSuccess2"
-                              placeholder="พัสดุที่ส่ง">
-                            <span class="fa fa-gift form-control-feedback right" aria-hidden="true"></span>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-md-3 col-sm-3 col-xs-12 control-label">
-                            <small class="text-navy">Comment</small>
-                          </label>
-                          <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input name="detail" type="text" data-ng-model="detail_Product" id="detail" class="form-control has-feedback-right" id="inputSuccess2"
-                              placeholder="รายละเอียดพัสดุ">
-                            <span class="fa fa-gift form-control-feedback right" aria-hidden="true"></span>
-                          </div>
+                      <div class="form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">
+                          <small class="text-navy">Invoice </small>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input name="invoice" type="text" data-ng-model="invoice" id="invoice" class="form-control" id="inputSuccess3" placeholder="Invoice No">
+                          <span class="fa fa-shopping-cart form-control-feedback right" aria-hidden="true"></span>
                         </div>
                       </div>
-
-                      <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
-                        <div class="form-group">
-                          <select class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options" ng-change="setGrandTotal()">
-                          </select>
+                      <div class="form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">
+                          <small class="text-navy">พัสดุ </small>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input name="detail" type="text" data-ng-model="detail" id="detail" class="form-control has-feedback-right" id="inputSuccess2"
+                            placeholder="พัสดุที่ส่ง">
+                          <span class="fa fa-gift form-control-feedback right" aria-hidden="true"></span>
                         </div>
-                        <div class="form-group">
-                          <div class="dialog-demo-prerendered">
-                            <md-checkbox ng-model="cbCod" class="md-caption">COD เก็บเงินปลายทาง</md-checkbox>
-                          </div>
-                          <input type="text" data-ng-model="productPrice" class="form-control" id="inputSuccess3" placeholder="ราคาที่เรียกเก็บ" ng-if="cbCod"
-                            ng-click="showPrerenderedDialog($event)" ng-blur="productPriceChanged(productPrice)">
-                        </div>
-                        <div class="form-group">
-                          <div class="dialog-demo-prerendered">
-                            <md-checkbox ng-model="cbWarranty" class="md-caption">ประกันสินค้า</md-checkbox>
-                          </div>
-                          <select class="form-control" data-ng-model="selectedInsurance" ng-options="insurance.name for insurance in insurances" ng-if="cbWarranty"
-                            ng-click="showPrerenderedDialog($event)" ng-change="calInsurance(selectedInsurance)">
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <div class="col-md-4 col-sm-9 col-xs-12 col-md-offset-0">
-                            <button class="btn btn-primary" type="text">น้ำหนักประมาณ {{ selectedOption.value }} กรัม</button>
-                            <!--<button class="btn btn-primary" type="reset" ng-click="reset()">รีเซ็ต</button>-->
-                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">
+                          <small class="text-navy">Comment</small>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input name="detail" type="text" data-ng-model="detail_Product" id="detail" class="form-control has-feedback-right" id="inputSuccess2"
+                            placeholder="รายละเอียดพัสดุ">
+                          <span class="fa fa-gift form-control-feedback right" aria-hidden="true"></span>
                         </div>
                       </div>
                     </div>
-                    <br />
 
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>ยอดค่าใช้จ่าย</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <div layout="row">
-                            <img src="modules/core/img/brand/visa.png" alt="Visa">&nbsp
-                            <img src="modules/core/img/brand/mastercard.png" alt="Mastercard">&nbsp
-                            <img src="modules/core/img/brand/american-express.png" alt="American Express">&nbsp
-                            <img src="modules/core/img/brand/paypal.png" alt="Paypal">
-                          </div>
-                        </ul>
-                        <div class="clearfix"></div>
+                    <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
+                      <div class="form-group">
+                        <select class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options" ng-change="setGrandTotal()">
+                        </select>
                       </div>
-                      <div class="x_content">
-                        <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <div class="tile-stats">
-                            <div class="icon">
-                              <i class="fa fa-money"></i>
-                            </div>
-                            <div class="count">{{ grandTotal | number:2}}
-                              <span>บาท</span>
-                            </div>
-                            <h3>ยอดเงินที่ต้องชำระ</h3>
-                            <p>แสดงรายละเอียดยอดเงินที่ต้องชำระ</p>
-                            <div class="form-group">
-                              <label class="col-md-12 col-sm-12 col-xs-12 control-label">
-                                <!-- <p>ค่าส่งสินค้า {{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight -->
-                                <p>ค่าส่งสินค้า {{ shippingPrice | number:2 }} บาท</p>
-                                <p>ค่าธรรมเนียม COD {{ codAmount | number:2 }} บาท</p>
-                                <p>ค่าประกันสินค้า {{ insuranceAmount | number:2 }} บาท</p>
-                                <p>ภาษีมูลค่าเพิ่ม {{ (codAmount + insuranceAmount) * 0.07 | number:2 }} บาท</p>
-                                <strong>ยอดรวมชำระ {{ grandTotal | number:2}} บาท</strong>
-                              </label>
-                            </div>
-                          </div>
+                      <div class="form-group">
+                        <div class="dialog-demo-prerendered">
+                          <md-checkbox ng-model="cbCod" class="md-caption">COD เก็บเงินปลายทาง</md-checkbox>
                         </div>
-                        <div class="form-group">
-                          <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
-                            <!--<button class="btn btn-warning" type="submit" ng-disabled="myForm.$error.required" ng-click="showAddlist($event, selectedMains);">ยืนยัน</button>-->
-                            <button class="btn btn-warning" type="submit" ng-click="showAlert($event)">ยืนยัน</button>
-                            <button class="btn btn-primary" type="submit" data-ui-sref="mains.list">ชำระเงิน</button>
-                          </div>
+                        <input type="text" data-ng-model="productPrice" class="form-control" id="inputSuccess3" placeholder="ราคาที่เรียกเก็บ" ng-if="cbCod"
+                          ng-click="showPrerenderedDialog($event)" ng-blur="productPriceChanged(productPrice)">
+                      </div>
+                      <div class="form-group">
+                        <div class="dialog-demo-prerendered">
+                          <md-checkbox ng-model="cbWarranty" class="md-caption">ประกันสินค้า</md-checkbox>
                         </div>
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                          <alert type="danger" data-ng-show="error" class="text-center text-danger">
-                            <span data-ng-bind="error"></span>
-                          </alert>
+                        <select class="form-control" data-ng-model="selectedInsurance" ng-options="insurance.name for insurance in insurances" ng-if="cbWarranty"
+                          ng-click="showPrerenderedDialog($event)" ng-change="calInsurance(selectedInsurance)">
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-4 col-sm-9 col-xs-12 col-md-offset-0">
+                          <button class="btn btn-primary" type="text">น้ำหนักประมาณ {{ selectedOption.value }} กรัม</button>
+                          <!--<button class="btn btn-primary" type="reset" ng-click="reset()">รีเซ็ต</button>-->
                         </div>
                       </div>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                  <br />
+
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>ยอดค่าใช้จ่าย</h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <div layout="row">
+                          <img src="modules/core/img/brand/visa.png" alt="Visa">&nbsp
+                          <img src="modules/core/img/brand/mastercard.png" alt="Mastercard">&nbsp
+                          <img src="modules/core/img/brand/american-express.png" alt="American Express">&nbsp
+                          <img src="modules/core/img/brand/paypal.png" alt="Paypal">
+                        </div>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                      <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="tile-stats">
+                          <div class="icon">
+                            <i class="fa fa-money"></i>
+                          </div>
+                          <div class="count">{{ grandTotal | number:2}}
+                            <span>บาท</span>
+                          </div>
+                          <h3>ยอดเงินที่ต้องชำระ</h3>
+                          <p>แสดงรายละเอียดยอดเงินที่ต้องชำระ</p>
+                          <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12 control-label">
+                              <!-- <p>ค่าส่งสินค้า {{ selectedOption.price | provincePrice :s_country :r_country :selectedOption.weight -->
+                              <p>ค่าส่งสินค้า {{ shippingPrice | number:2 }} บาท</p>
+                              <p>ค่าธรรมเนียม COD {{ codAmount | number:2 }} บาท</p>
+                              <p>ค่าประกันสินค้า {{ insuranceAmount | number:2 }} บาท</p>
+                              <p>ภาษีมูลค่าเพิ่ม {{ (codAmount + insuranceAmount) * 0.07 | number:2 }} บาท</p>
+                              <strong>ยอดรวมชำระ {{ grandTotal | number:2}} บาท</strong>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
+                          <!--<button class="btn btn-warning" type="submit" ng-disabled="myForm.$error.required" ng-click="showAddlist($event, selectedMains);">ยืนยัน</button>-->
+                          <button class="btn btn-warning" type="submit" ng-click="showAlert($event)">ยืนยัน</button>
+                          <button class="btn btn-primary" type="submit" data-ui-sref="mains.list">ชำระเงิน</button>
+                        </div>
+                      </div>
+                      <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                        <alert type="danger" data-ng-show="error" class="text-center text-danger">
+                          <span data-ng-bind="error"></span>
+                        </alert>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </md-content>
   </div>
+  </md-content>
+</div>
 </div>

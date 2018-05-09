@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mainsPolicy = require('../policies/mains.server.policy'),
+  multer = require('multer'),
   mains = require('../controllers/mains.server.controller');
 
 module.exports = function (app) {
@@ -31,4 +32,7 @@ module.exports = function (app) {
   
   app.get('/print/all', mains.printAll);
   app.get('/print/bill', mains.printBill);
+
+  app.route('/api/upload/shipping')//.all(mainsPolicy.isAllowed)
+    .post(mains.uploadShipping);
 };
