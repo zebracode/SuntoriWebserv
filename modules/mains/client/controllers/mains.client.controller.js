@@ -1091,6 +1091,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			});
 		};
 
+		// Checked of Unckeck Insurance
+		$scope.insureChange = function() {
+			//console.log("Insurance checked or unchecked ..." + $scope.cbWarranty);
+			$scope.insuranceAmount = 0;
+			$scope.setGrandTotal();
+		};
+
 		/*************************************************/
 		/******      Dialog Zone     *********************/
 		/*************************************************/
