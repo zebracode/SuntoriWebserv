@@ -39,6 +39,11 @@ var StatementSchema = new Schema({
   owner: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  refNumber: {
+    type: String,
+    default: '',
+    trim: true
   }
 });
 

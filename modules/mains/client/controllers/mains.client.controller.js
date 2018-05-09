@@ -577,7 +577,24 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				}
 				return checkDigit;
 			}
-			saveStatement($scope.authentication.user, parseInt(selectedMain.total) * (-1), "ส่งสินค้า " + barcode);
+			// Shipping Amount
+			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), "ค่าส่งสินค้า " + barcode, barcode + '_1');
+			
+			// COD Amount
+			if(selectedMain.codAmnt >= 0) {
+				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), "ค่า COD " + barcode, barcode + '_2');
+			}
+
+			// Insurance Amount
+			if(selectedMain.insuranceAmnt >= 0) {
+				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), "ค่าประกัน " + barcode, barcode + '_3');
+			}
+
+			// VAT Amount
+			if(selectedMain.totalVatAmnt >= 0) {
+				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), "ค่าภาษีมูลค่าเพิ่ม " + barcode, barcode + '_4');
+			}
+
 		};
 
 		$scope.selectedInvoices = [];
@@ -987,13 +1004,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		}
 
 		//Add to statement
-		function saveStatement(item, amount, name) {
+		function saveStatement(item, amount, name, refNumber) {
 			var statement = new StatementsService({
 				name: name,
 				amountIn: amount > 0 ? Math.abs(amount) : 0,
 				amountOut: amount < 0 ? Math.abs(amount) : 0,
-				balanceAmount: parseInt($scope.balanceAmount),
-				owner: item
+				balanceAmount: Number($scope.balanceAmount),
+				owner: item,
+				refNumber: refNumber
 			});
 
 			statement.$save(function (response) {
