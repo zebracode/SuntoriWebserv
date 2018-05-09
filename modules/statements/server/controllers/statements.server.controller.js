@@ -6,12 +6,11 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Statement = mongoose.model('Statement'),
+  fecha = require('fecha'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash');
 
-/**
- * Create a Statement
- */
+
 exports.create = function (req, res) {
   var statement = new Statement(req.body);
   statement.user = req.user;
@@ -127,8 +126,11 @@ exports.excel = function (req, res, next) {
     } else {
       var jsonArr = [];
       var json = {};
+      console.log("Export Excel ....");
+      console.log(fecha.parse('February 3rd, 2014', 'MMMM Do, YYYY')); // new Date(2014, 1, 3)
+      console.log(fecha.format(new Date(2015, 10, 20), 'mediumDate')); // 'Nov 20, 2015')
       for (var i = 0; i < statements.length; i++) {
-        json.created = statements[i].created;
+        json.created = fecha.format(statements[i].created, 'mediumDate');
         json.owner = statements[i].owner.displayName;
         json.name = statements[i].name;
         json.amountIn = statements[i].amountIn;

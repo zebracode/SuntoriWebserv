@@ -1091,7 +1091,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			});
 		};
 
-		// Checked of Unckeck Insurance
+		// Checked or unckecked insurance
 		$scope.insureChange = function() {
 			//console.log("Insurance checked or unchecked ..." + $scope.cbWarranty);
 			$scope.insuranceAmount = 0;
