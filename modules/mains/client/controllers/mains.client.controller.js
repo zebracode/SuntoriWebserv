@@ -208,7 +208,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 						continue;
 					}
 					if (Authentication.user._id === result[i].user._id && result[i].status === 'ยังไม่ได้ชำระเงิน') {
-						firstTotalPrice += parseInt(result[i].total);
+						firstTotalPrice += Number(result[i].grandTotalAmnt);
 						$scope.selectedMains.push(result[i]);
 					}
 				}
