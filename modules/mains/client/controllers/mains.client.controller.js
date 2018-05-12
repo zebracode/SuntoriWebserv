@@ -918,6 +918,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					$scope.result_url_2 = response.data.resultUrl2;
 					$scope.default_lang = response.data.defaultLang;
 					$scope.hash_value = response.data.hashValue;
+				}, function (response){
+					console.log("Something went wrong!!!");
 				});
 
 			function formatAmount(amount, length) {
