@@ -124,7 +124,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				insurance: this.cbWarranty ? "Y" : "N",
 				barcode: this.barcode,
 				s_idNumber: this.s_idNumber,
-				total: total,
+				total: this.shippingPrice,
 				status: "ยังไม่ได้ชำระเงิน",
 				isCod: this.cbCod,
 				codAmnt: this.codAmount,
@@ -579,19 +579,19 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			}
 			// Shipping Amount
 			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), "ค่าส่งสินค้า " + barcode, barcode + '_1');
-			
+
 			// COD Amount
-			if(selectedMain.codAmnt >= 0) {
+			if (selectedMain.codAmnt >= 0) {
 				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), "ค่า COD " + barcode, barcode + '_2');
 			}
 
 			// Insurance Amount
-			if(selectedMain.insuranceAmnt >= 0) {
+			if (selectedMain.insuranceAmnt >= 0) {
 				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), "ค่าประกัน " + barcode, barcode + '_3');
 			}
 
 			// VAT Amount
-			if(selectedMain.totalVatAmnt >= 0) {
+			if (selectedMain.totalVatAmnt >= 0) {
 				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), "ค่าภาษีมูลค่าเพิ่ม " + barcode, barcode + '_4');
 			}
 
@@ -918,7 +918,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					$scope.result_url_2 = response.data.resultUrl2;
 					$scope.default_lang = response.data.defaultLang;
 					$scope.hash_value = response.data.hashValue;
-				}, function (response){
+				}, function (response) {
 					console.log("Something went wrong!!!");
 				});
 
@@ -948,15 +948,27 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		$scope.productPriceChanged = function (productPrice) {
 			$scope.codAmount = 0;
 			$scope.grandTotal = 0;
-
+			$scope.codAmount = calCodAmnt(productPrice);
 			// Product Price 1-4000, COD = 60
-			if (productPrice >= 1 && productPrice <= 4000) {
-				$scope.codAmount = 60;
-			} else {
-				$scope.codAmount = Math.floor(productPrice * 0.015);
-			}
+			// if (productPrice >= 1 && productPrice <= 4000) {
+			// 	$scope.codAmount = 60;
+			// } else {
+			// 	$scope.codAmount = Math.floor(productPrice * 0.015);
+			// }
 			$scope.setGrandTotal();
 		};
+
+		// COD Amount Calculation
+		function calCodAmnt(productPrice) {
+			var codAmount = 0;
+			// Product Price 1-4000, COD = 60
+			if (productPrice >= 1 && productPrice <= 4000) {
+				codAmount = 60;
+			} else {
+				codAmount = Math.floor(productPrice * 0.015);
+			}
+			return codAmount;
+		}
 
 		// Set Insurance Amount
 		$scope.calInsurance = function (selectedInsurance) {
@@ -986,7 +998,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					}
 				}
 
-				if(isSenderPerimeter && isReceiverPerimeter) {
+				if (isSenderPerimeter && isReceiverPerimeter) {
 					isPerimeter = true;
 				}
 
@@ -1007,7 +1019,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			$scope.grandTotal = Number($scope.shippingPrice) + Number($scope.codAmount * 1.07) + Number($scope.insuranceAmount * 1.07);
 		}
 		// End set grund total
-
 
 		$scope.manualEmsChanged = function () {
 			if ($scope.isManualEms) {
@@ -1072,10 +1083,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 							detail: excel.product_comment,
 							weight: excel.weight,
 							price: excel.price,
-							isCod: excel.cod ==="Y",
-							codAmnt: Number(excel.cod_price),
-							insurance: excel.insure ==="Y",
-							insuranceAmnt: Number(excel.insure_price),
+							isCod: Number(excel.cod) > 0,
+							codAmnt: calCodAmnt(Number(excel.cod)),
+							insurance: Number(excel.insure) > 0,
+							insuranceAmnt: Number(excel.insure),
 							total: excel.price,
 							status: "ยังไม่ได้ชำระเงิน",
 							codVatAmnt: Number(excel.cod_price) * 0.07,
@@ -1084,10 +1095,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 							grandTotalAmnt: Number(excel.price) + (Number(excel.cod_price) * 1.07) + (Number(excel.insure_price) * 1.07),
 							source: 'import'
 						});
-						shipping.$save(function(response){
+						shipping.$save(function (response) {
 							$scope.import = 'Success !!!';
 							$scope.error = null;
-						}, function(errResponse){
+						}, function (errResponse) {
 							$scope.error = errResponse.data.message;
 							$scope.import = null;
 						});
@@ -1107,7 +1118,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		};
 
 		// Checked or unckecked insurance
-		$scope.insureChange = function() {
+		$scope.insureChange = function () {
 			//console.log("Insurance checked or unchecked ..." + $scope.cbWarranty);
 			$scope.insuranceAmount = 0;
 			$scope.setGrandTotal();
