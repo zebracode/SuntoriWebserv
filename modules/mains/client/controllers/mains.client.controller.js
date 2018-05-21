@@ -967,14 +967,27 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		// Start set grand total
 		$scope.setGrandTotal = function () {
 			var isPerimeter = false;
+			var isSenderPerimeter = false;
+			var isReceiverPerimeter = false;
 
 			// Use shiping price from user prices
 			if (userPrices.length > 0) {
 				for (var i = 0; i < perimeter.length; i++) {
-					if ($scope.r_country === perimeter[i]) {
-						isPerimeter = true;
+					if ($scope.s_country === perimeter[i]) {
+						isSenderPerimeter = true;
 						break;
 					}
+				}
+
+				for (var i = 0; i < perimeter.length; i++) {
+					if ($scope.r_country === perimeter[i]) {
+						isReceiverPerimeter = true;
+						break;
+					}
+				}
+
+				if(isSenderPerimeter && isReceiverPerimeter) {
+					isPerimeter = true;
 				}
 
 				for (var i = 0; i <= userPrices.length; i++) {
