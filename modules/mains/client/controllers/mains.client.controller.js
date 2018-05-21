@@ -518,8 +518,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		};
 
 		$scope.minusPrice = function (total) {
-			$scope.totalPrice = Number($scope.totalPrice) | 0;
-			$scope.totalPrice = $scope.totalPrice - Number(total);
+			$scope.totalPrice = $scope.totalPrice - total;
 			setDisbled($scope.balanceAmount - $scope.totalPrice);
 		};
 
