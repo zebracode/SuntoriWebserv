@@ -90,6 +90,7 @@
                     <th class="md-caption">ค่าส่งหลัง </th>
                     <th class="md-caption">ส่วนต่าง </th>
                     <th class="md-caption">Comment </th>
+                    <th class="md-caption">COD </th>
                     <th class="md-caption">สถานะจัดส่ง </th>
                     <th class="md-caption">ใบเสร็จ </th>
                     <th class="md-caption">ลบ</th>
@@ -109,6 +110,7 @@
                     <td class="md-caption" ng-bind="main.total"></td>
                     <td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
                     <td class="md-caption" ng-bind="main.detail_Product"></td>
+                    <td class="md-caption" ng-bind="main.codAmnt"></td>
                     <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
                     <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                     <td>

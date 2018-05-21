@@ -77,6 +77,8 @@
                     <th class="md-caption">เบอร์โทร </th>
                     <th class="md-caption">นน.ก่อน </th>
                     <th class="md-caption">COD </th>
+                    <th class="md-caption">ค่าประกัน </th>
+                    <th class="md-caption">ภาษี </th>
                     <th class="md-caption">ค่าส่ง </th>
                     <th class="md-caption">สถานะจัดส่ง </th>
                     <th class="md-caption">ชำระเงิน</th>
@@ -90,6 +92,8 @@
                     <td class="md-caption" ng-bind="main.r_tel"></td>
                     <td class="md-caption" ng-bind="main.weight"></td>
                     <td class="md-caption" ng-bind="main.codAmnt"></td>
+                    <td class="md-caption" ng-bind="main.insuranceAmnt"></td>
+                    <td class="md-caption" ng-bind="main.totalVatAmnt | number: 2"></td>
                     <td class="md-caption" ng-bind="main.total"></td>
                     <td ng-init="disabled=true;">
                       <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
