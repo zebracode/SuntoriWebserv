@@ -533,7 +533,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			if (selectedMain.barcode) {
 				barcode = selectedMain.barcode;
 			} else {
-				number = parseInt(currentnumber) + inc + "";
+				number = Number(currentnumber) + inc + "";
 				checkDigit = getCheckDigit(number, weight);
 				barcode = prefix + number + checkDigit + suffix;
 			}
@@ -563,7 +563,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				var mod = 0;
 				var checkDigit = "";
 				for (var i = 0; i < number.length; i++) {
-					sum += parseInt(number.charAt(i)) * parseInt(weight.charAt(i));
+					sum += Number(number.charAt(i)) * Number(weight.charAt(i));
 				}
 
 				mod = sum % 11;
@@ -577,7 +577,24 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				}
 				return checkDigit;
 			}
-			saveStatement($scope.authentication.user, parseInt(selectedMain.total) * (-1), "ส่งสินค้า " + barcode);
+			// Shipping Amount
+			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), "ค่าส่งสินค้า " + barcode, barcode + '_1');
+			
+			// COD Amount
+			if(selectedMain.codAmnt >= 0) {
+				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), "ค่า COD " + barcode, barcode + '_2');
+			}
+
+			// Insurance Amount
+			if(selectedMain.insuranceAmnt >= 0) {
+				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), "ค่าประกัน " + barcode, barcode + '_3');
+			}
+
+			// VAT Amount
+			if(selectedMain.totalVatAmnt >= 0) {
+				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), "ค่าภาษีมูลค่าเพิ่ม " + barcode, barcode + '_4');
+			}
+
 		};
 
 		$scope.selectedInvoices = [];
@@ -754,7 +771,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				$scope.status = 'Confirm';
 
 				//update balance amount
-				$scope.updateBalance(parseInt($scope.balanceAmount) - parseInt($scope.totalPrice));
+				$scope.updateBalance(Number($scope.balanceAmount) - Number($scope.totalPrice));
 
 				// Get next document number of bill (RCP)
 				$http.get('/docno/RCP').then(function (response) {
@@ -772,7 +789,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 								'Content-Type': 'application/json'
 							},
 							data: {
-								number: parseInt(response.data.number) + inc + ""
+								number: Number(response.data.number) + inc + ""
 							}
 						};
 
@@ -827,7 +844,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 			$mdDialog.show(confirm).then(function () {
 				$scope.payment();
-				//saveStatement(Authentication.user, parseInt(amount), "เติมเงินผ่าน 2P2C");
+				//saveStatement(Authentication.user, Number(amount), "เติมเงินผ่าน 2P2C");
 			}, function () {
 				$scope.status = 'You decided to keep your debt.';
 			});
@@ -868,7 +885,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 						'Content-Type': 'application/json'
 					},
 					data: {
-						nextNumber: parseInt(nextNumber) + 1 + ""
+						nextNumber: Number(nextNumber) + 1 + ""
 					}
 				};
 
@@ -901,6 +918,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					$scope.result_url_2 = response.data.resultUrl2;
 					$scope.default_lang = response.data.defaultLang;
 					$scope.hash_value = response.data.hashValue;
+				}, function (response){
+					console.log("Something went wrong!!!");
 				});
 
 			function formatAmount(amount, length) {
@@ -948,14 +967,27 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		// Start set grand total
 		$scope.setGrandTotal = function () {
 			var isPerimeter = false;
+			var isSenderPerimeter = false;
+			var isReceiverPerimeter = false;
 
 			// Use shiping price from user prices
 			if (userPrices.length > 0) {
 				for (var i = 0; i < perimeter.length; i++) {
-					if ($scope.r_country === perimeter[i]) {
-						isPerimeter = true;
+					if ($scope.s_country === perimeter[i]) {
+						isSenderPerimeter = true;
 						break;
 					}
+				}
+
+				for (var i = 0; i < perimeter.length; i++) {
+					if ($scope.r_country === perimeter[i]) {
+						isReceiverPerimeter = true;
+						break;
+					}
+				}
+
+				if(isSenderPerimeter && isReceiverPerimeter) {
+					isPerimeter = true;
 				}
 
 				for (var i = 0; i <= userPrices.length; i++) {
@@ -987,13 +1019,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		}
 
 		//Add to statement
-		function saveStatement(item, amount, name) {
+		function saveStatement(item, amount, name, refNumber) {
 			var statement = new StatementsService({
 				name: name,
 				amountIn: amount > 0 ? Math.abs(amount) : 0,
 				amountOut: amount < 0 ? Math.abs(amount) : 0,
-				balanceAmount: parseInt($scope.balanceAmount),
-				owner: item
+				balanceAmount: Number($scope.balanceAmount),
+				owner: item,
+				refNumber: refNumber
 			});
 
 			statement.$save(function (response) {
@@ -1067,10 +1100,17 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				$window.alert('Error status: ' + resp.status);
 			}, function (evt) {
 				console.log(evt);
-				//var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+				//var progressPercentage = Number(100.0 * evt.loaded / evt.total);
 				//console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
 				//vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
 			});
+		};
+
+		// Checked or unckecked insurance
+		$scope.insureChange = function() {
+			//console.log("Insurance checked or unchecked ..." + $scope.cbWarranty);
+			$scope.insuranceAmount = 0;
+			$scope.setGrandTotal();
 		};
 
 		/*************************************************/

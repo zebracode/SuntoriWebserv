@@ -130,7 +130,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                       <md-input-container class="md-block" flex-gt-sm>
                         <label>จังหวัด</label>
-                        <md-select ng-model="s_country">
+                        <md-select ng-model="s_country" ng-change="setGrandTotal()">
                           <md-option ng-repeat="state in states" value="{{state.abbrev}}">
                             {{state.abbrev}}
                           </md-option>
@@ -217,7 +217,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                       <md-input-container class="md-block" flex-gt-sm>
                         <label>จังหวัด</label>
-                        <md-select ng-model="r_country">
+                        <md-select ng-model="r_country" ng-change="setGrandTotal()">
                           <md-option ng-repeat="state in states" value="{{state.abbrev}}">
                             {{state.abbrev}}
                           </md-option>
@@ -339,7 +339,7 @@
                       </div>
                       <div class="form-group">
                         <div class="dialog-demo-prerendered">
-                          <md-checkbox ng-model="cbWarranty" class="md-caption">ประกันสินค้า</md-checkbox>
+                          <md-checkbox class="md-caption" ng-model="cbWarranty" ng-change="insureChange()">ประกันสินค้า</md-checkbox>
                         </div>
                         <select class="form-control" data-ng-model="selectedInsurance" ng-options="insurance.name for insurance in insurances" ng-if="cbWarranty"
                           ng-click="showPrerenderedDialog($event)" ng-change="calInsurance(selectedInsurance)">
