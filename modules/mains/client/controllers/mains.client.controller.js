@@ -159,6 +159,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				$scope.insuranceAmount = 0;
 				$scope.selectedOption.price = 0;
 				$scope.grandTotal = 0;
+				$scope.shippingPrice = 0;
 				$scope.showAlert();
 			}, function (errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -517,8 +518,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		};
 
 		$scope.minusPrice = function (total) {
-			$scope.totalPrice = Number($scope.totalPrice) | 0;
-			$scope.totalPrice = $scope.totalPrice - Number(total);
+			$scope.totalPrice = $scope.totalPrice - total;
 			setDisbled($scope.balanceAmount - $scope.totalPrice);
 		};
 
@@ -1018,7 +1018,55 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			}
 			$scope.grandTotal = Number($scope.shippingPrice) + Number($scope.codAmount * 1.07) + Number($scope.insuranceAmount * 1.07);
 		}
-		// End set grund total
+		// End set grand total
+
+
+		// Shipping Price Calculation
+		function calShippingPrice(weight) {
+			var shippingPrice = 0;
+			if(userPrices.length > 0){
+				for (var i = 0; i <= userPrices.length; i++) {
+					if (userPrices[i].weight === weight) {
+						if (isPerimeter()) {
+							shippingPrice = userPrices[i].bkPrice;
+						} else {
+							shippingPrice = userPrices[i].ctPrice;
+						}
+						break;
+					}
+				}
+			} else {
+
+			}
+		}
+		// End Shipping Price Calculation
+
+		// Check Is Perimeter Or Not
+		function isPerimeter(senderProvince, receiverProvince) {
+			var isSenderPerimeter = false;
+			var isReceiverPerimeter = false;
+			var isPerimeter = false;
+
+			for (var i = 0; i < perimeter.length; i++) {
+				if (senderProvince === perimeter[i]) {
+					isSenderPerimeter = true;
+					break;
+				}
+			}
+
+			for (var i = 0; i < perimeter.length; i++) {
+				if (receiverProvince === perimeter[i]) {
+					isReceiverPerimeter = true;
+					break;
+				}
+			}
+
+			if (isSenderPerimeter && isReceiverPerimeter) {
+				isPerimeter = true;
+			}
+			return isPerimeter;
+		}
+		// End Check Is Perimeter Or Not
 
 		$scope.manualEmsChanged = function () {
 			if ($scope.isManualEms) {
