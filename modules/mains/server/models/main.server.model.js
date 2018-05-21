@@ -116,9 +116,8 @@ var MainSchema = new Schema({
 		unique: true
 	},
 	price: {
-		type: String,
-		default: '',
-		trim: true,
+		type: Number,
+		default: 0,
 		required: 'กรุณากรอกราคาที่ต้องการเรียกเก็บ'
 	},
 	weight: {
@@ -149,9 +148,8 @@ var MainSchema = new Schema({
 		trim: true
 	},
 	total: {
-		type: String,
-		default: '',
-		trim: true
+		type: Number,
+		default: 0
 	},
 	selectedOption: {
 		type: String,
@@ -177,7 +175,10 @@ var MainSchema = new Schema({
 		default: '',
 		trim: true
 	},
-	afterPrice: String,
+	afterPrice: {
+		type: Number,
+		default: 0
+	},
 	receiptDate: Date,
 	isCod: {
 		type: Boolean,
