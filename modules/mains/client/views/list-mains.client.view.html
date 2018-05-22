@@ -98,8 +98,8 @@
                     <td class="md-caption" ng-bind="main.totalVatAmnt | number: 2"></td>
                     <td class="md-caption" ng-bind="main.grandTotalAmnt"></td>
                     <td ng-init="disabled=true;">
-                      <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.total); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
-                      <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.total); addSelectMain(main);"><i class="fa fa-money"></i> ชำระเงิน </a>
+                      <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.grandTotalAmnt); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
+                      <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.grandTotalAmnt); addSelectMain(main);"><i class="fa fa-money"></i> ชำระเงิน </a>
                     </td>
                     <td>
                       <a class="btn btn-info btn-xs" data-ui-sref="mains.edit({mainId: main._id})"><i class="fa fa-pencil"></i> แก้ไข </a>
