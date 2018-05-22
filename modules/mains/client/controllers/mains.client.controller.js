@@ -519,13 +519,25 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			}
 		];
 
+		// Price List of Insurance
+		var insurePrices = [];
+		for (var i=0; i<$scope.insurances.length; i++){
+			if($scope.insurances[i].charge) {
+				insurePrices.push({
+					value: Number($scope.insurances[i].value),
+					charge: Number($scope.insurances[i].charge)
+				});
+			}
+		}
+		insurePrices.sort(function(a, b){return a.value - b.value}); // Sort by value
+
+
 		$scope.selectedInsurance = $scope.insurances[0];
 		$scope.selectedOption = $scope.options[0];
 		$scope.reset = function () {
 			$scope.options = { เลือกกล่องน้ำหนัก }
 			$scope.insurances = { มูลค่าสินค้า }
 		};
-
 
 		// Autocomplete
 		$scope.getSenderName = function (searchText) {
@@ -1032,6 +1044,20 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			return codAmount;
 		}
 
+		// Insurance Amount Calculation
+		function calInsureAmnt(limitAmnt){
+			var insureAmnt = 0;
+			for(var i=0; i<insurePrices.length; i++) {
+				if(insurePrices[i].value >= limitAmnt){
+					insureAmnt = insurePrices[i].charge;
+					return insureAmnt;
+				}
+			}
+			return insureAmnt;
+		}
+		// End Insurance Amount Calculation
+
+
 		// Set Insurance Amount
 		$scope.calInsurance = function (selectedInsurance) {
 			$scope.insuranceAmount = Number(selectedInsurance.charge);
@@ -1205,13 +1231,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 							isCod: Number(excel.cod) > 0,
 							codAmnt: calCodAmnt(Number(excel.cod)),
 							insurance: Number(excel.insure) > 0,
-							insuranceAmnt: Number(excel.insure),
+							insuranceAmnt: calInsureAmnt(Number(excel.insure)),
 							total: calShippingPrice(Number(excel.weight), excel.sender_province, excel.receiver_province),
 							status: "ยังไม่ได้ชำระเงิน",
 							codVatAmnt: calCodAmnt(Number(excel.cod)) * 0.07,
-							insuranceVatAmnt: Number(excel.insure_price) * 0.07,
-							totalVatAmnt: (Number(excel.cod_price) * 0.07) + (Number(excel.insure_price) * 0.07),
-							grandTotalAmnt: Number(excel.price) + (Number(excel.cod_price) * 1.07) + (Number(excel.insure_price) * 1.07),
+							insuranceVatAmnt: calInsureAmnt(Number(excel.insure)) * 0.07,
+							totalVatAmnt: (calCodAmnt(Number(excel.cod)) * 0.07) + (calInsureAmnt(Number(excel.insure)) * 0.07),
+							grandTotalAmnt: calShippingPrice(Number(excel.weight), excel.sender_province, excel.receiver_province) + (calCodAmnt(Number(excel.cod)) * 1.07) + (calInsureAmnt(Number(excel.insure)) * 1.07),
 							source: 'import'
 						});
 						shipping.$save(function (response) {
