@@ -14,7 +14,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		$scope.isManualEms = false;
 		$scope.shippingPrice = 0;
 		var userPrices = [];
-		var perimeter = ['กรุงเทพมหานคร', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ'];
+		var perimeter = ['กรุงเทพมหานคร', 'กรุงเทพฯ', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ'];
 
 
 		$scope.authentication = Authentication;
@@ -40,6 +40,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				userPrices.push({ weight: 10000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5 });
 				userPrices.push({ weight: 15000, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6 });
 				userPrices.push({ weight: 20000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7 });
+				userPrices.sort(function(a, b){return a.weight - b.weight}); // Sort by weight
 			});
 		}
 		// Eng get user prices
@@ -251,124 +252,165 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				name: '--น้ำหนัก/ขนาด--',
 				value: '',
 				price: '0'
+
 			},
 			{
 				name: 'น้ำหนักไม่เกิน 0.5 กก.',
 				value: '500',
 				price: '40',
+				bkPrice: 40,
+				ctPrice: 50,
 				weight: 500
 			},
 			{
 				name: '- กล่อง เบอร์ 0',
 				value: '0-500',
+				bkPrice: 40,
+				ctPrice: 50,
 				price: '40',
 				weight: 500
 			},
 			{
 				name: '- กล่อง เบอร์ AA',
 				value: '0-500',
+				bkPrice: 40,
+				ctPrice: 50,
 				price: '40',
 				weight: 500
 			},
 			{
 				name: 'น้ำหนัก 0.5 - 1 กก.',
 				value: '500-1,000',
+				bkPrice: 60,
+				ctPrice: 70,
 				price: '60',
 				weight: 1000
 			},
 			{
 				name: '- กล่อง เบอร์ AA+4',
 				value: '500-1,000',
+				bkPrice: 60,
+				ctPrice: 70,
 				price: '60',
 				weight: 1000
 			},
 			{
 				name: '- กล่อง เบอร์ A (ก)',
 				value: '500-1,000',
+				bkPrice: 60,
+				ctPrice: 70,
 				price: '60',
 				weight: 1000
 			},
 			{
 				name: 'น้ำหนัก 1 - 3 กก.',
 				value: '1,000-3,000',
+				bkPrice: 80,
+				ctPrice: 100,
 				price: '80',
 				weight: 3000
 			},
 			{
 				name: '- กล่อง เบอร์ CD',
 				value: '1,000-3,000',
+				bkPrice: 80,
+				ctPrice: 100,
 				price: '80',
 				weight: 3000
 			},
 			{
 				name: '- กล่อง เบอร์ 2A',
 				value: '1,000-3,000',
+				bkPrice: 80,
+				ctPrice: 100,
 				price: '80',
 				weight: 3000
 			},
 			{
 				name: '- กล่อง เบอร์ B (ข)',
 				value: '1,000-3,000',
+				bkPrice: 80,
+				ctPrice: 100,
 				price: '80',
 				weight: 3000
 			},
 			{
 				name: '- กล่อง เบอร์ BH',
 				value: '1,000-3,000',
+				bkPrice: 80,
+				ctPrice: 100,
 				price: '80',
 				weight: 3000
 			},
 			{
 				name: '- กล่อง เบอร์ 2B',
 				value: '1,000-3,000',
+				bkPrice: 80,
+				ctPrice: 100,
 				price: '80',
 				weight: 3000
 			},
 			{
 				name: 'น้ำหนัก 3 - 5 กก.',
 				value: '3,000-5,000',
+				bkPrice: 90,
+				ctPrice: 110,
 				price: '90',
 				weight: 5000
 			},
 			{
 				name: '- กล่อง เบอร์ C (ค)',
 				value: '3,000-5,000',
+				bkPrice: 90,
+				ctPrice: 110,
 				price: '90',
 				weight: 5000
 			},
 			{
 				name: '- กล่อง เบอร์ C+8',
 				value: '3,000-5,000',
+				bkPrice: 90,
+				ctPrice: 110,
 				price: '90',
 				weight: 5000
 			},
 			{
 				name: '- กล่อง เบอร์ D (ง)',
 				value: '3,000-5,000',
+				bkPrice: 90,
+				ctPrice: 110,
 				price: '90',
 				weight: 5000
 			},
 			{
 				name: 'น้ำหนัก 5 - 10 กก.',
 				value: '5,000-10,000',
+				bkPrice: 130,
+				ctPrice: 150,
 				price: '130',
 				weight: 10000
 			},
 			{
 				name: '- กล่อง เบอร์ F (สั้น)',
 				value: '5,000-10,000',
+				bkPrice: 130,
+				ctPrice: 150,
 				price: '130',
 				weight: 10000
 			},
 			{
 				name: '- กล่อง เบอร์ E (จ)',
 				value: '5,000-10,000',
+				bkPrice: 130,
+				ctPrice: 150,
 				price: '130',
 				weight: 10000
 			},
 			{
 				name: '- กล่อง เบอร์ F (ฉ)',
 				value: '5,000-10,000',
+				bkPrice: 130,
+				ctPrice: 150,
 				price: '130',
 				weight: 10000
 
@@ -376,28 +418,48 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			{
 				name: 'น้ำหนัก 10 - 15 กก.',
 				value: '10,000-15,000',
+				bkPrice: 220,
+				ctPrice: 240,
 				price: '220',
 				weight: 15000
 			},
 			{
 				name: '- กล่อง เบอร์ G (ยาว)',
 				value: '10,000-15,000',
+				bkPrice: 220,
+				ctPrice: 240,
 				price: '220',
 				weight: 15000
 			},
 			{
 				name: 'น้ำหนัก 15 - 20 กก.',
 				value: '15,000-20,000',
+				bkPrice: 260,
+				ctPrice: 280,
 				price: '260',
 				weight: 20000
 			},
 			{
 				name: '- 50*50*50 cm',
 				value: '15,000-20,000',
+				bkPrice: 260,
+				ctPrice: 280,
 				price: '260',
 				weight: 20000
 			}
 		];
+
+		var standardPrice = [];
+		for(var i=0; i<$scope.options.length; i++){
+			if($scope.options[i].weight) {
+				standardPrice.push({
+					weight: Number($scope.options[i].weight), 
+					bkPrice: $scope.options[i].bkPrice, 
+					ctPrice: $scope.options[i].ctPrice
+				});
+			}
+		}
+		standardPrice.sort(function(a, b){return a.weight - b.weight}); // Sort by weight
 
 		$scope.insurances = [
 			{
@@ -457,13 +519,25 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			}
 		];
 
+		// Price List of Insurance
+		var insurePrices = [];
+		for (var i=0; i<$scope.insurances.length; i++){
+			if($scope.insurances[i].charge) {
+				insurePrices.push({
+					value: Number($scope.insurances[i].value),
+					charge: Number($scope.insurances[i].charge)
+				});
+			}
+		}
+		insurePrices.sort(function(a, b){return a.value - b.value}); // Sort by value
+
+
 		$scope.selectedInsurance = $scope.insurances[0];
 		$scope.selectedOption = $scope.options[0];
 		$scope.reset = function () {
 			$scope.options = { เลือกกล่องน้ำหนัก }
 			$scope.insurances = { มูลค่าสินค้า }
 		};
-
 
 		// Autocomplete
 		$scope.getSenderName = function (searchText) {
@@ -970,6 +1044,20 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			return codAmount;
 		}
 
+		// Insurance Amount Calculation
+		function calInsureAmnt(limitAmnt){
+			var insureAmnt = 0;
+			for(var i=0; i<insurePrices.length; i++) {
+				if(insurePrices[i].value >= limitAmnt){
+					insureAmnt = insurePrices[i].charge;
+					return insureAmnt;
+				}
+			}
+			return insureAmnt;
+		}
+		// End Insurance Amount Calculation
+
+
 		// Set Insurance Amount
 		$scope.calInsurance = function (selectedInsurance) {
 			$scope.insuranceAmount = Number(selectedInsurance.charge);
@@ -1022,12 +1110,12 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 
 		// Shipping Price Calculation
-		function calShippingPrice(weight) {
+		function calShippingPrice(weight, senderProvince, receiverProvince) {
 			var shippingPrice = 0;
 			if(userPrices.length > 0){
-				for (var i = 0; i <= userPrices.length; i++) {
-					if (userPrices[i].weight === weight) {
-						if (isPerimeter()) {
+				for (var i = 0; i < userPrices.length; i++) {
+					if (userPrices[i].weight >= weight) {
+						if (isPerimeter(senderProvince, receiverProvince)) {
 							shippingPrice = userPrices[i].bkPrice;
 						} else {
 							shippingPrice = userPrices[i].ctPrice;
@@ -1036,8 +1124,17 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					}
 				}
 			} else {
-
+				for(var i=0; i<standardPrice.length; i++) {
+					if(standardPrice[i].weight >= weight) {
+						if(isPerimeter(senderProvince, receiverProvince)){
+							shippingPrice = standardPrice[i].bkPrice;
+						} else {
+							shippingPrice = standardPrice[i].ctPrice;
+						}
+					}
+				}
 			}
+			return shippingPrice;
 		}
 		// End Shipping Price Calculation
 
@@ -1105,7 +1202,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			}).then(function (resp) { //upload function returns a promise
 				if (resp.data.error_code === 0) { //validate success
 					//$window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
-					for (var i = 0; i <= resp.data.data.length; i++) {
+					for (var i = 0; i < resp.data.data.length; i++) {
 						var excel = resp.data.data[i];
 						var shipping = new Mains({
 							s_name: excel.sender,
@@ -1134,13 +1231,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 							isCod: Number(excel.cod) > 0,
 							codAmnt: calCodAmnt(Number(excel.cod)),
 							insurance: Number(excel.insure) > 0,
-							insuranceAmnt: Number(excel.insure),
-							total: excel.price,
+							insuranceAmnt: calInsureAmnt(Number(excel.insure)),
+							total: calShippingPrice(Number(excel.weight), excel.sender_province, excel.receiver_province),
 							status: "ยังไม่ได้ชำระเงิน",
-							codVatAmnt: Number(excel.cod_price) * 0.07,
-							insuranceVatAmnt: Number(excel.insure_price) * 0.07,
-							totalVatAmnt: (Number(excel.cod_price) * 0.07) + (Number(excel.insure_price) * 0.07),
-							grandTotalAmnt: Number(excel.price) + (Number(excel.cod_price) * 1.07) + (Number(excel.insure_price) * 1.07),
+							codVatAmnt: calCodAmnt(Number(excel.cod)) * 0.07,
+							insuranceVatAmnt: calInsureAmnt(Number(excel.insure)) * 0.07,
+							totalVatAmnt: (calCodAmnt(Number(excel.cod)) * 0.07) + (calInsureAmnt(Number(excel.insure)) * 0.07),
+							grandTotalAmnt: calShippingPrice(Number(excel.weight), excel.sender_province, excel.receiver_province) + (calCodAmnt(Number(excel.cod)) * 1.07) + (calInsureAmnt(Number(excel.insure)) * 1.07),
 							source: 'import'
 						});
 						shipping.$save(function (response) {
