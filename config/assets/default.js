@@ -27,7 +27,8 @@ module.exports = {
         'public/lib/ng-table/dist/ng-table.min.js',
         'public/lib/angular-file-upload/dist/angular-file-upload.js',
         'public/lib/ng-file-upload/ng-file-upload.js',
-        'public/lib/ng-file-upload/ng-file-upload-shim.js'
+        'public/lib/ng-file-upload/ng-file-upload-shim.js',
+        'public/lib/jquery/dist/jquery.js',
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },
