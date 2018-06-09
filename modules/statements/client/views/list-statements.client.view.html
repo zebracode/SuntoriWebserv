@@ -26,7 +26,7 @@
     <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
       <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
-          <md-button ng-disabled="true" class="md-primary" data-ng-show="authentication.user">
+          <md-button ng-disabled="true" class="md-primary" >
             <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image"/>
             <span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>
           </md-button>
