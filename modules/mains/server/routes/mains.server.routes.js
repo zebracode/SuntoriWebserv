@@ -25,6 +25,9 @@ module.exports = function (app) {
 
   // Finish by binding the main middleware
   app.param('mainId', mains.mainByID);
+
+  app.route('/api/main/findByName')
+      .get(mains.findByName);
   
   app.post('/api/update/mains', mains.updateByBarcode).all(mainsPolicy.isAllowed);
   

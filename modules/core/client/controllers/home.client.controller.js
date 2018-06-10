@@ -1,11 +1,34 @@
 'use strict';
 
 angular.module('core').controller('HomeController', ['$scope', 'Authentication',
-    'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains', '$filter',
-    function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, thailandPostStatus, $filter) {
+    'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains','$filter','StatementsService',
+    function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, thailandPostStatus, $filter, StatementsService) {
         $scope.totalItems = 0;
         $scope.currentPage = 1;
         $scope.itemsPerPage = 5;
+
+        // Autocomplete
+        $scope.getSenderName = function (searchText) {
+        			return $http
+        				.get('/api/send/findByName?searchText=' + searchText + '&userId=' + $scope.authentication.user._id)
+        				.then(function (response) {
+        					return response.data;
+        				});
+        		};
+
+        $scope.setSenderData = function () {
+        			if ($scope.selectedSender) {
+        				$scope.s_name = $scope.selectedSender.name;
+        				$scope.s_tel = $scope.selectedSender.tel;
+        				$scope.s_email = $scope.selectedSender.email;
+        				$scope.s_address = $scope.selectedSender.address;
+        				$scope.s_ampher = $scope.selectedSender.ampher;
+        				$scope.s_country = $scope.selectedSender.country;
+        				$scope.s_postcode = $scope.selectedSender.postcode;
+        				$scope.s_idNumber = $scope.selectedSender.idNumber;
+        				$scope.detail = $scope.selectedSender.product;
+        			}
+        		};
 
         $scope.toggleLeft = buildToggler('left');
         $scope.toggleRight = buildToggler('right');

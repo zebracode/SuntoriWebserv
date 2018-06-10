@@ -539,6 +539,21 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			$scope.insurances = { มูลค่าสินค้า }
 		};
 
+		// Autocomplete Main
+        $scope.getMainName = function (searchText) {
+        			return $http
+        				.get('/api/main/findByName?searchText=' + searchText + '&userId=' + $scope.authentication.user._id)
+        				.then(function (response) {
+        					return response.data;
+        				});
+        		};
+
+        $scope.setMainData = function () {
+        			if ($scope.selectedMain) {
+        				$scope.s_name = $scope.selectedMain.name;
+        			}
+        		};
+
 		// Autocomplete
 		$scope.getSenderName = function (searchText) {
 			return $http

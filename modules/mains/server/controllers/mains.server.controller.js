@@ -260,7 +260,6 @@ exports.printBill = function (req, res, next) {
 	});
 };
 
-
 exports.mainByUserAndStatus = function (req, res, next) {
 	Main.find({ "user": req.query.user, "status": req.query.status }, function (err, main) {
 		if (err) {
@@ -270,7 +269,6 @@ exports.mainByUserAndStatus = function (req, res, next) {
 		}
 	});
 };
-
 
 exports.totalMains = function (req, res, next) {
 	Main.count({}, function (err, count) {
@@ -339,4 +337,14 @@ exports.uploadShipping = function (req, res) {
 			res.json({ error_code: 1, err_desc: "Corupted excel file" });
 		}
 	})
+};
+
+exports.findByName = function(req, res, next) {
+    Main.find({name: { "$regex": req.query.searchText, "$options": "i" }, user: req.query.userId}, function(err, mains){
+        if (err) {
+            return next(err);
+        } else {
+            res.json(mains);
+        }
+    });
 };

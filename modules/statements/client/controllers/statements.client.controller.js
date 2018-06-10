@@ -9,6 +9,19 @@
   StatementsController.$inject = ['$scope', '$state', '$window', 'Authentication', 'statementResolve'];
 
   function StatementsController ($scope, $state, $window, Authentication, statement) {
+    //Pagination
+    		$scope.totalItems = 10;
+    		$scope.currentPage = 1
+    		;
+
+    		$scope.setPage = function (pageNo) {
+    			$scope.currentPage = pageNo;
+    		};
+
+    		$scope.pageChanged = function () {
+    			$log.log('Page changed to: ' + $scope.currentPage);
+    		};
+
     var vm = this;
 
     vm.authentication = Authentication;

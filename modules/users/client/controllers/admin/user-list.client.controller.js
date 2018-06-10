@@ -7,6 +7,8 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
     $scope.currentPage = 1;
     $scope.itemsPerPage = 5;
 
+//    $scope.isAdmin = someService.userHasRole('admin');
+
     Admin.query(function (data) {
       $scope.users = data;
       $scope.allUser = data;
