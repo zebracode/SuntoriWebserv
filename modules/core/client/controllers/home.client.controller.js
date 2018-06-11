@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication',
-    'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains','$filter','StatementsService',
-    function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, thailandPostStatus, $filter, StatementsService) {
+angular.module('core').controller('HomeController',
+    ['$scope', 'Authentication', 'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains','$filter', 'StatementsService',
+    function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, $filter, StatementsService) {
         $scope.totalItems = 0;
         $scope.currentPage = 1;
         $scope.itemsPerPage = 5;
@@ -190,6 +190,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.selectedUserId = null;
             $scope.find("listClient");
         };
+
+        // Start List Statements
+        $scope.statements = StatementsService.query();
+        // End List Statements
 
         /**
          * Main Controller for the Angular Material Starter App
