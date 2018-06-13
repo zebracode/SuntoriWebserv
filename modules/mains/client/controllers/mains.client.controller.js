@@ -468,55 +468,55 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				charge: '0'
 			},
 			{
-				name: '2,001 - 5,000 บาท',
+				name: '1,001 - 5,000 บาท',
 				value: '5000',
-				charge: '10'
+				charge: '20'
 			},
 			{
 				name: '5,001 - 10,000 บาท',
 				value: '10000',
-				charge: '20'
+				charge: '50'
 			},
 			{
 				name: '10,001 - 15,000 บาท',
 				value: '15000',
-				charge: '30'
+				charge: '120'
 			},
 			{
 				name: '15,001 - 20,000 บาท',
 				value: '20000',
-				charge: '40'
+				charge: '130'
 			},
 			{
 				name: '20,001 - 25,000 บาท',
 				value: '25000',
-				charge: '50'
+				charge: '140'
 			},
 			{
 				name: '25,001 - 30,000 บาท',
 				value: '30000',
-				charge: '60'
+				charge: '150'
 			},
 			{
 				name: '30,000 - 35,000 บาท',
 				value: '35000',
-				charge: '70'
+				charge: '150'
 			},
 			{
-				name: '35,001 - 40,000 บาท',
-				value: '40000',
-				charge: '80'
-			},
-			{
-				name: '40,001 - 45,000 บาท',
-				value: '45000',
-				charge: '90'
-			},
-			{
-				name: '45,001 - 50,000 บาท',
+				name: '35,001 - 50,000 บาท',
 				value: '50000',
-				charge: '100'
+				charge: '150'
 			}
+//			{
+//				name: '40,001 - 45,000 บาท',
+//				value: '45000',
+//				charge: '90'
+//			},
+//			{
+//				name: '45,001 - 50,000 บาท',
+//				value: '50000',
+//				charge: '100'
+//			}
 		];
 
 		// Price List of Insurance
