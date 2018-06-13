@@ -14,6 +14,7 @@ module.exports = function (app) {
   app.get('/print/formA5', core.printformA5);
   app.get('/print/formA4', core.printformA4);
   app.get('/print/formA6', core.printformA6);
+  app.get('/print/sticker', core.printsticker);
   
   // Define application route
   app.route('/*')
