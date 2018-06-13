@@ -84,9 +84,7 @@
           License: https://bootstrapmade.com/license/
         ======================================================= -->
       </head>
-
       <body>
-
       <!--==========================
         Header
       ============================-->
@@ -102,7 +100,6 @@
           <!-- #nav-menu-container -->
         </div>
       </header><!-- #header -->
-
       <!--==========================
         Intro Section
       ============================-->
@@ -161,227 +158,370 @@
 
       </section><!-- #intro -->
 
-  </body>
-  </html>
+      </body>
+      </html>
 
       <!--==========================
     Footer
   ============================-->
-      <footer id="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 text-lg-left text-center">
-              <div class="copyright">
-                &copy; Copyright ©2017 <strong>Suntori Express Co.,Ltd.</strong> All rights reserved
-              </div>
-              <div class="credits">
-                <!--
-                  All the links in the footer should remain intact.
-                  You can delete the links only if you purchased the pro version.
-                  Licensing information: https://bootstrapmade.com/license/
-                  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Avilon
-                -->
-                System by <a href="http://zebra-code.com/"> ZebraCode Co.,Ltd.</a>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-                <div class="copyright">
-                  <h2>ติดต่อลูกค้าสัมพันธ์ 062-9452422 | LINE ID : @suntorix</h2>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <!--<footer id="footer">-->
+        <!--<div class="container">-->
+          <!--<div class="row">-->
+            <!--<div class="col-lg-6 text-lg-left text-center">-->
+              <!--<div class="copyright">-->
+                <!--&copy; Copyright ©2017 <strong>Suntori Express Co.,Ltd.</strong> All rights reserved-->
+              <!--</div>-->
+              <!--<div class="credits">-->
+                <!--&lt;!&ndash;-->
+                  <!--All the links in the footer should remain intact.-->
+                  <!--You can delete the links only if you purchased the pro version.-->
+                  <!--Licensing information: https://bootstrapmade.com/license/-->
+                  <!--Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Avilon-->
+                <!--&ndash;&gt;-->
+                <!--System by <a href="http://zebra-code.com/"> ZebraCode Co.,Ltd.</a>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-lg-6">-->
+              <!--<nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">-->
+                <!--<div class="copyright">-->
+                  <!--<h2>ติดต่อลูกค้าสัมพันธ์ 062-9452422 | LINE ID : @suntorix</h2>-->
+                <!--</div>-->
+              <!--</nav>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</footer>-->
     </md-content>
   </div>
 
   <div data-ng-show="authentication.user">
-    <div layout="column" style="height: 600px;">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Suntori Express</title>
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <meta content="" name="keywords">
+      <meta content="" name="description">
 
-      <md-sidenav class="md-sidenav-left" md-component-id="left"
-                  md-disable-backdrop md-whiteframe="4">
-        <md-toolbar class="md-theme-indigo">
-          <div class="md-toolbar-tools">
-            <md-button ng-disabled="true" class="md-primary" data-ng-show="authentication.user">
-              <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />
-              <span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>
-            </md-button>
-          </div>
-        </md-toolbar>
+      <!-- Favicons -->
+      <link href="img/favicon.png" rel="icon">
+      <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        <md-content layout-margin>
-          <md-card-actions layout="row" layout-align="end center">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
 
-            <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
-              <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
-              <md-icon md-svg-icon="pencil"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
-              <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
-              <md-icon md-svg-icon="picture"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
-              <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
-              <md-icon md-svg-icon="key"></md-icon>
-            </md-button>
-            <md-button ng-click="toggleLeft()" class="md-accent">
-              ปิดแถบเมนู
-            </md-button>
-          </md-card-actions>
-          <ul class="nav side-menu">
-            <a class="list-group-item" data-ui-sref="home"><h6><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</h6></a>
-            <a class="list-group-item" data-ui-sref="mains.list"><h6><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</h6></a>
-            <a class="list-group-item" data-ui-sref="mains.create"><h6><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</h6></a>
-            <a class="list-group-item" data-ui-sref="recipients.list"><h6><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</h6></a>
-            <a class="list-group-item" data-ui-sref="sends.list"><h6><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</h6></a>
-            <a class="list-group-item" data-ui-sref="mains.summary"><h6><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</h6></a>
-            <a class="list-group-item" data-ui-sref="mains.payment"><h6><i class="fa fa-money fa-fw" aria-hidden="true"></i>&nbsp; การเงินย้อนหลัง</h6></a>
-          </ul>
-        </md-content>
+      <!--&lt;!&ndash; Bootstrap CSS File &ndash;&gt;-->
+      <!--<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
 
-      </md-sidenav>
+      <!--&lt;!&ndash; Libraries CSS Files &ndash;&gt;-->
+      <!--<link href="lib/animate/animate.min.css" rel="stylesheet">-->
+      <!--<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+      <!--<link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">-->
+      <!--<link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">-->
 
-      <md-content flex id="content">
+      <!-- Main Stylesheet File -->
+      <!-- <link href="css/style.css" rel="stylesheet" > -->
 
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_content">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel fixed_height_320">
-                  <div class="x_title">
-                    <h2>ค้นหาเลขพัสดุ <small>กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <div class="title_right">
-                        <ul class="nav navbar-right panel_toolbox">
-                          <div class="text-center mtop20">
-                            <!--<button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>-->
-                          </div>
-                        </ul>
-                      </div>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content" data-ng-controller="MainsController">
+      <!-- =======================================================
+        Theme Name: Avilon
+        Theme URL: https://bootstrapmade.com/avilon-bootstrap-landing-page-template/
+        Author: BootstrapMade.com
+        License: https://bootstrapmade.com/license/
+      ======================================================= -->
+    </head>
+    <body>
+    <!--==========================
+      Header
+    ============================-->
+    <header id="header">
+      <div class="container">
 
-                    <!-- start project list -->
-                    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                      <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedMain" md-search-text="searchText" md-items="item in getMainName(searchText)"
-                                       md-item-text="item.name" md-selected-item-change='setMainData()'>
-                        <span md-highlight-text="searchText">{{item.name}}</span>
-                      </md-autocomplete>
-                    </div>
+        <div id="logo" class="pull-left">
+          <h1><a href="#intro" class="scrollto"></a></h1>
+          <!-- Uncomment below if you prefer to use an image logo -->
+          <!--<a href="#intro"><img src="img/logo.png" alt="" title=""></a>-->
+        </div>
 
-                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                      <input name="s_name" type="text" data-ng-model="s_name" id="s_name" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล" required>
-                    </div>
+        <!-- #nav-menu-container -->
+      </div>
+    </header><!-- #header -->
+    <!--==========================
+      Intro Section
+    ============================-->
+    <section id="intro">
 
-                    <table class="table table-striped projects">
-                      <thead>
-                      <tr>
-                        <th class="md-caption" style="width: 20%">วันสมัคร</th>
-                        <th class="md-caption">ชื่อร้าน/ผู้ส่ง</th>
-                        <th class="md-caption">สินค้า</th>
-                        <th class="md-caption">เบอร์โทร</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr class="md-caption" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
-                        <td class="md-caption" ng-bind="send.created | date:'mediumDate'"></td>
-                        <td class="md-caption" ng-bind="send.name"></td>
-                        <td class="md-caption" ng-bind="send.product"></td>
-                        <td class="md-caption" ng-bind="send.tel"></td>
-                      </tr>
-                      </tbody>
-                    </table>
-                    <!-- end project list -->
+      <div class="intro-text" style="margin-top:80px">
+        <!--<h2>Suntori Express</h2>-->
+        <div class="row" data-ng-show="authentication.user">
+          <div class="col-md-offset-0 col-md-12 col-xs-offset-2 col-xs-8 login-form-bg">
+            <h3 class="text-center">ค้นหาเลขพัสดุ</h3>
 
-                  </div>
+
+            <div data-ng-controller="MainsController" data-ng-init="find();">
+              <form ng-submit="$event.preventDefault()">
+                <h6 class="md-caption">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
+                <md-autocomplete
+                        placeholder='ค้นหาผู้ส่ง'
+                        md-selected-item="selectedMain"
+                        md-search-text="searchText"
+                        md-items="item in getMainName(searchText)"
+                        md-item-text="item.name"
+                        md-selected-item-change='setMainData()'>
+
+                  <span md-highlight-text="searchText">{{item.name}}</span>
+                  <md-not-found>
+                    ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.
+                    <a data-ui-sref="mains.create">เพิ่มรายการ!</a>
+                  </md-not-found>
+                </md-autocomplete>
+
+                <!--<md-autocomplete-->
+                        <!--placeholder='ค้นหาผู้ส่ง'-->
+                        <!--md-selected-item="selectedSender"-->
+                        <!--md-search-text="searchText"-->
+                        <!--md-items="item in getSenderName(searchText)"-->
+                        <!--md-item-text="item.name"-->
+                        <!--md-selected-item-change='setSenderData()'>-->
+
+                  <!--<span md-highlight-text="searchText">{{item.name}}</span>-->
+                  <!--<md-not-found>-->
+                  <!--ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.-->
+                    <!--<a data-ui-sref="mains.create">เพิ่มรายการ!</a>-->
+                  <!--</md-not-found>-->
+                <!--</md-autocomplete>-->
+                <br />
+                <div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
+                  <input name="s_name" type="text" data-ng-model="s_name" disabled>
                 </div>
-              </div>
 
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="x_panel fixed_height_320">
-                  <div class="x_title">
-                    <h2>สรุปการใช้งานระบบ <small></small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <div class="title_right">
-                        <ul class="nav navbar-right panel_toolbox">
-                          <!--<md-button-->
-                                  <!--ng-click="toggleLeft()"-->
-                                  <!--class="md-fab md-primary"-->
-                                  <!--aria-label="Code"-->
-                                  <!--ng-click="ctrl.showContentMenu($event, ctrl.code)">-->
-                            <!--<md-icon md-svg-icon="assets/svg/list.svg"></md-icon>-->
-                          <!--</md-button>-->
-                        </ul>
-                      </div>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <!-- top tiles -->
-                  <div class="row tile_count">
-                    <div class="col-md-4 col-sm-6 col-xs-6 tile_stats_count">
-                      <span class="count_top"><i class="fa fa-user"></i> เงินคงเหลือ</span>
-                      <div class="count">2,500</div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6 tile_stats_count">
-                      <span class="count_top"><i class="fa fa-clock-o"></i> จำนวนการใช้งาน</span>
-                      <div class="count">123.50</div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6 tile_stats_count">
-                      <span class="count_top"><i class="fa fa-clock-o"></i> คลิกเพื่อเพิ่มรายการ</span>
-                      <div>
-                      <button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button></div>
-                    </div>
-                  </div>
-                  <div class="row tile_count">
-                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-                      <span class="count_top"><i class="fa fa-user"></i> ส่งสำเร็จ</span>
-                      <div class="count">2,500</div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-                      <span class="count_top"><i class="fa fa-clock-o"></i> ส่งค้าง</span>
-                      <div class="count">123.50</div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
-                      <span class="count_top"><i class="fa fa-user"></i> ส่งคืน</span>
-                      <div class="count green">2,500</div>
-                    </div>
-                  </div>
-                  <!-- /top tiles -->
-                  <!--<div class="x_content">-->
-                    <!--<a class="btn btn-app">-->
-                      <!--<span class="badge bg-green">6</span>-->
-                      <!--<i class="fa fa-bullhorn"></i> ยอดเงิน-->
-                    <!--</a>-->
-                    <!--<a class="btn btn-app">-->
-                      <!--<span class="badge bg-green">6</span>-->
-                      <!--<i class="fa fa-bullhorn"></i> การใช้งาน-->
-                    <!--</a>-->
-                    <!--<a class="btn btn-app">-->
-                      <!--<span class="badge bg-green">6</span>-->
-                      <!--<i class="fa fa-bullhorn"></i> ส่งสำเร็จ-->
-                    <!--</a>-->
-                    <!--<a class="btn btn-app">-->
-                      <!--<span class="badge bg-green">6</span>-->
-                      <!--<i class="fa fa-bullhorn"></i> พัสดุค้างส่ง-->
-                    <!--</a>-->
-                    <!--<a class="btn btn-app">-->
-                      <!--<span class="badge bg-green">6</span>-->
-                      <!--<i class="fa fa-bullhorn"></i> พัสดุส่งคืน-->
-                    <!--</a>-->
-                  <!--</div>-->
-                </div>
-              </div>
-              <!-- /page content -->
+                <!--<md-autocomplete-->
+                        <!--ng-disabled="ctrl.isDisabled"-->
+                        <!--md-no-cache="ctrl.noCache"-->
+                        <!--md-selected-item="ctrl.selectedItem"-->
+                        <!--md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"-->
+                        <!--md-search-text="ctrl.searchText"-->
+                        <!--md-selected-item-change="ctrl.selectedItemChange(item)"-->
+                        <!--md-items="item in ctrl.querySearch(ctrl.searchText)"-->
+                        <!--md-item-text="item.display"-->
+                        <!--md-min-length="0"-->
+                        <!--placeholder="ค้นหาเลขพัสดุ">-->
+                  <!--<md-item-template>-->
+                    <!--<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>-->
+                  <!--</md-item-template>-->
+                  <!--<md-not-found>-->
+                    <!--ไม่พบเลขพัสดุ "{{ctrl.searchText}}" ในระบบ.-->
+                    <!--<a ng-click="ctrl.newState(ctrl.searchText)">สมัครสมาชิก!</a>-->
+                  <!--</md-not-found>-->
+                <!--</md-autocomplete>-->
+                <br />
+              </form>
             </div>
           </div>
         </div>
+        <br />
 
-      </md-content>
-    </div>
+        <p>เรื่องเดลิเวอรี่ ซันโตริจัดให้</p>
+        <p class="section-description">
+          <small>ระบบส่งสินค้าทั่วประเทศไทยผ่านจุดไปรษณีย์ใกล้บ้านท่าน 230 แห่งทั่วประเทศ <br>
+            ไม่ต้องต่อคิวส่งพัสดุให้เสียเวลา คุ้มค่าทุกนาทีใช้ซันโตริ เอ็กซ์เพรส</small>
+        </p>
+        <div>
+          <a data-ui-sref="mains.create" class="btn-get-started scrollto">เพิ่มรายการ!</a>
+        </div>
+      </div>
+
+    </section><!-- #intro -->
+
+    </body>
+    </html>
+
+
+
+    <!--<div layout="column" style="height: 600px;">-->
+
+      <!--<md-sidenav class="md-sidenav-left" md-component-id="left"-->
+                  <!--md-disable-backdrop md-whiteframe="4">-->
+        <!--<md-toolbar class="md-theme-indigo">-->
+          <!--<div class="md-toolbar-tools">-->
+            <!--<md-button ng-disabled="true" class="md-primary" data-ng-show="authentication.user">-->
+              <!--<img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image" />-->
+              <!--<span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>-->
+            <!--</md-button>-->
+          <!--</div>-->
+        <!--</md-toolbar>-->
+
+        <!--<md-content layout-margin>-->
+          <!--<md-card-actions layout="row" layout-align="end center">-->
+
+            <!--<md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">-->
+              <!--<md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>-->
+              <!--<md-icon md-svg-icon="pencil"></md-icon>-->
+            <!--</md-button>-->
+            <!--<md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">-->
+              <!--<md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>-->
+              <!--<md-icon md-svg-icon="picture"></md-icon>-->
+            <!--</md-button>-->
+            <!--<md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">-->
+              <!--<md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>-->
+              <!--<md-icon md-svg-icon="key"></md-icon>-->
+            <!--</md-button>-->
+            <!--<md-button ng-click="toggleLeft()" class="md-accent">-->
+              <!--ปิดแถบเมนู-->
+            <!--</md-button>-->
+          <!--</md-card-actions>-->
+          <!--<ul class="nav side-menu">-->
+            <!--<a class="list-group-item" data-ui-sref="home"><h6><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</h6></a>-->
+            <!--<a class="list-group-item" data-ui-sref="mains.list"><h6><i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</h6></a>-->
+            <!--<a class="list-group-item" data-ui-sref="mains.create"><h6><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</h6></a>-->
+            <!--<a class="list-group-item" data-ui-sref="recipients.list"><h6><i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</h6></a>-->
+            <!--<a class="list-group-item" data-ui-sref="sends.list"><h6><i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</h6></a>-->
+            <!--<a class="list-group-item" data-ui-sref="mains.summary"><h6><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</h6></a>-->
+            <!--<a class="list-group-item" data-ui-sref="mains.payment"><h6><i class="fa fa-money fa-fw" aria-hidden="true"></i>&nbsp; การเงินย้อนหลัง</h6></a>-->
+          <!--</ul>-->
+        <!--</md-content>-->
+
+      <!--</md-sidenav>-->
+
+      <!--<md-content flex id="content">-->
+
+        <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+          <!--<div class="x_panel">-->
+            <!--<div class="x_content">-->
+              <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                <!--<div class="x_panel fixed_height_320">-->
+                  <!--<div class="x_title">-->
+                    <!--<h2>ค้นหาเลขพัสดุ <small>กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</small></h2>-->
+                    <!--<ul class="nav navbar-right panel_toolbox">-->
+                      <!--<div class="title_right">-->
+                        <!--<ul class="nav navbar-right panel_toolbox">-->
+                          <!--<div class="text-center mtop20">-->
+                            <!--&lt;!&ndash;<button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>&ndash;&gt;-->
+                          <!--</div>-->
+                        <!--</ul>-->
+                      <!--</div>-->
+                    <!--</ul>-->
+                    <!--<div class="clearfix"></div>-->
+                  <!--</div>-->
+                  <!--<div class="x_content" data-ng-controller="MainsController">-->
+
+                    <!--&lt;!&ndash; start project list &ndash;&gt;-->
+                    <!--<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">-->
+                      <!--<md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedMain" md-search-text="searchText" md-items="item in getMainName(searchText)"-->
+                                       <!--md-item-text="item.name" md-selected-item-change='setMainData()'>-->
+                        <!--<span md-highlight-text="searchText">{{item.name}}</span>-->
+                      <!--</md-autocomplete>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">-->
+                      <!--<input name="s_name" type="text" data-ng-model="s_name" id="s_name" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล" required>-->
+                    <!--</div>-->
+
+                    <!--<table class="table table-striped projects">-->
+                      <!--<thead>-->
+                      <!--<tr>-->
+                        <!--<th class="md-caption" style="width: 20%">วันสมัคร</th>-->
+                        <!--<th class="md-caption">ชื่อร้าน/ผู้ส่ง</th>-->
+                        <!--<th class="md-caption">สินค้า</th>-->
+                        <!--<th class="md-caption">เบอร์โทร</th>-->
+                      <!--</tr>-->
+                      <!--</thead>-->
+                      <!--<tbody>-->
+                      <!--<tr class="md-caption" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">-->
+                        <!--<td class="md-caption" ng-bind="send.created | date:'mediumDate'"></td>-->
+                        <!--<td class="md-caption" ng-bind="send.name"></td>-->
+                        <!--<td class="md-caption" ng-bind="send.product"></td>-->
+                        <!--<td class="md-caption" ng-bind="send.tel"></td>-->
+                      <!--</tr>-->
+                      <!--</tbody>-->
+                    <!--</table>-->
+                    <!--&lt;!&ndash; end project list &ndash;&gt;-->
+
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+
+              <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                <!--<div class="x_panel fixed_height_320">-->
+                  <!--<div class="x_title">-->
+                    <!--<h2>สรุปการใช้งานระบบ <small></small></h2>-->
+                    <!--<ul class="nav navbar-right panel_toolbox">-->
+                      <!--<div class="title_right">-->
+                        <!--<ul class="nav navbar-right panel_toolbox">-->
+                          <!--&lt;!&ndash;<md-button&ndash;&gt;-->
+                                  <!--&lt;!&ndash;ng-click="toggleLeft()"&ndash;&gt;-->
+                                  <!--&lt;!&ndash;class="md-fab md-primary"&ndash;&gt;-->
+                                  <!--&lt;!&ndash;aria-label="Code"&ndash;&gt;-->
+                                  <!--&lt;!&ndash;ng-click="ctrl.showContentMenu($event, ctrl.code)">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<md-icon md-svg-icon="assets/svg/list.svg"></md-icon>&ndash;&gt;-->
+                          <!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+                        <!--</ul>-->
+                      <!--</div>-->
+                    <!--</ul>-->
+                    <!--<div class="clearfix"></div>-->
+                  <!--</div>-->
+                  <!--&lt;!&ndash; top tiles &ndash;&gt;-->
+                  <!--<div class="row tile_count">-->
+                    <!--<div class="col-md-4 col-sm-6 col-xs-6 tile_stats_count">-->
+                      <!--<span class="count_top"><i class="fa fa-user"></i> เงินคงเหลือ</span>-->
+                      <!--<div class="count">2,500</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-4 col-sm-6 col-xs-6 tile_stats_count">-->
+                      <!--<span class="count_top"><i class="fa fa-clock-o"></i> จำนวนการใช้งาน</span>-->
+                      <!--<div class="count">{{totalMains}}</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-4 col-sm-6 col-xs-6 tile_stats_count">-->
+                      <!--<span class="count_top"><i class="fa fa-clock-o"></i> คลิกเพื่อเพิ่มรายการ</span>-->
+                      <!--<div>-->
+                      <!--<button type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">เพิ่มรายการ</button></div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="row tile_count">-->
+                    <!--<div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">-->
+                      <!--<span class="count_top"><i class="fa fa-user"></i> ส่งสำเร็จ</span>-->
+                      <!--<div class="count">2,500</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">-->
+                      <!--<span class="count_top"><i class="fa fa-clock-o"></i> ส่งค้าง</span>-->
+                      <!--<div class="count">123.50</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">-->
+                      <!--<span class="count_top"><i class="fa fa-user"></i> ส่งคืน</span>-->
+                      <!--<div class="count green">2,500</div>-->
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--&lt;!&ndash; /top tiles &ndash;&gt;-->
+                  <!--&lt;!&ndash;<div class="x_content">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a class="btn btn-app">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<span class="badge bg-green">6</span>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<i class="fa fa-bullhorn"></i> ยอดเงิน&ndash;&gt;-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a class="btn btn-app">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<span class="badge bg-green">6</span>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<i class="fa fa-bullhorn"></i> การใช้งาน&ndash;&gt;-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a class="btn btn-app">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<span class="badge bg-green">6</span>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<i class="fa fa-bullhorn"></i> ส่งสำเร็จ&ndash;&gt;-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a class="btn btn-app">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<span class="badge bg-green">6</span>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<i class="fa fa-bullhorn"></i> พัสดุค้างส่ง&ndash;&gt;-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a class="btn btn-app">&ndash;&gt;-->
+                      <!--&lt;!&ndash;<span class="badge bg-green">6</span>&ndash;&gt;-->
+                      <!--&lt;!&ndash;<i class="fa fa-bullhorn"></i> พัสดุส่งคืน&ndash;&gt;-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--&lt;!&ndash; /page content &ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+      <!--</md-content>-->
+    <!--</div>-->
   </div>
 
 </div>

@@ -549,8 +549,16 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         		};
 
         $scope.setMainData = function () {
-        			if ($scope.selectedMain) {
-        				$scope.s_name = $scope.selectedMain.name;
+        			if ($scope.selectedSender) {
+        				$scope.s_name = $scope.selectedSender.name;
+                        $scope.s_tel = $scope.selectedSender.tel;
+                        $scope.s_email = $scope.selectedSender.email;
+                      	$scope.s_address = $scope.selectedSender.address;
+                       	$scope.s_ampher = $scope.selectedSender.ampher;
+                       	$scope.s_country = $scope.selectedSender.country;
+                       	$scope.s_postcode = $scope.selectedSender.postcode;
+                       	$scope.s_idNumber = $scope.selectedSender.idNumber;
+                       	$scope.detail = $scope.selectedSender.product;
         			}
         		};
 

@@ -27,7 +27,7 @@ module.exports = function (app) {
   app.param('mainId', mains.mainByID);
 
   app.route('/api/main/findByName')
-      .get(mains.findByName);
+    .get(mains.findByName);
   
   app.post('/api/update/mains', mains.updateByBarcode).all(mainsPolicy.isAllowed);
   

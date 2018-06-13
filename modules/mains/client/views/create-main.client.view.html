@@ -86,8 +86,14 @@
                   <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
 
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                      <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedSender" md-search-text="searchText" md-items="item in getSenderName(searchText)"
-                        md-item-text="item.name" md-selected-item-change='setSenderData()'>
+                      <md-autocomplete
+                              placeholder='ค้นหาผู้ส่ง'
+                              md-selected-item="selectedSender"
+                              md-search-text="searchText"
+                              md-items="item in getSenderName(searchText)"
+                              md-item-text="item.name"
+                              md-selected-item-change='setSenderData()'>
+
                         <span md-highlight-text="searchText">{{item.name}}</span>
                       </md-autocomplete>
                     </div>
