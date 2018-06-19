@@ -229,6 +229,13 @@ angular.module('core').controller('HomeController',
         $scope.statements = StatementsService.query();
         // End List Statements
 
+        // Start Export Excel of Statements
+        // Export Excel
+        $scope.exportExcel = function() {
+            window.location.href = '/api/excel/statements'
+        };
+        // End Export Excel of Statements
+
         /**
          * Main Controller for the Angular Material Starter App
          * @param $scope

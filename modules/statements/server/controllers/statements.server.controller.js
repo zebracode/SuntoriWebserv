@@ -125,8 +125,9 @@ exports.excel = function (req, res, next) {
       });
     } else {
       var jsonArr = [];
-      var json = {};
-      for (var i = 0; i < statements.length; i++) {
+      
+      for (var i=0; i < statements.length; i++) {
+        var json = {};
         json.created = fecha.format(statements[i].created, 'mediumDate');
         json.owner = statements[i].owner.displayName;
         json.name = statements[i].name;
