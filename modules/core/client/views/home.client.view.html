@@ -258,7 +258,7 @@
             <h3 class="text-center">ค้นหาเลขพัสดุ</h3>
 
 
-            <div data-ng-controller="MainsController" data-ng-init="find();">
+            <div data-ng-controller="MainsController" data-ng-init="find('summary')">
               <form ng-submit="$event.preventDefault()">
                 <h6 class="md-caption">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
                 <md-autocomplete
@@ -290,10 +290,10 @@
                     <!--<a data-ui-sref="mains.create">เพิ่มรายการ!</a>-->
                   <!--</md-not-found>-->
                 <!--</md-autocomplete>-->
-                <br />
-                <div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">
-                  <input name="s_name" type="text" data-ng-model="s_name" disabled>
-                </div>
+                <!--<br />-->
+                <!--<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">-->
+                  <!--<input name="s_name" type="text" data-ng-model="s_name" disabled>-->
+                <!--</div>-->
 
                 <!--<md-autocomplete-->
                         <!--ng-disabled="ctrl.isDisabled"-->

@@ -11,8 +11,7 @@
   function StatementsController ($scope, $state, $window, Authentication, statement) {
     //Pagination
     		$scope.totalItems = 10;
-    		$scope.currentPage = 1
-    		;
+    		$scope.currentPage = 1;
 
     		$scope.setPage = function (pageNo) {
     			$scope.currentPage = pageNo;

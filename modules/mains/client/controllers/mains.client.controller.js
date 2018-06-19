@@ -40,6 +40,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				userPrices.push({ weight: 10000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5 });
 				userPrices.push({ weight: 15000, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6 });
 				userPrices.push({ weight: 20000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7 });
+				userPrices.push({ weight: 30000, bkPrice: userPrice.bkPrice8, ctPrice: userPrice.ctPrice8 });
 				userPrices.sort(function(a, b){return a.weight - b.weight}); // Sort by weight
 			});
 		}
@@ -250,9 +251,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		$scope.options = [
 			{
 				name: '--น้ำหนัก/ขนาด--',
-				value: '',
-				price: '0'
-
+				value: '0',
+				price: '0',
+				bkPrice: 40,
+                ctPrice: 50,
+                weight: 0
 			},
 			{
 				name: 'น้ำหนักไม่เกิน 0.5 กก.',
@@ -447,6 +450,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '260',
 				weight: 20000
 			}
+//			{
+//            	name: '- test cm',
+//                value: '20,000-30,000',
+//            	bkPrice: 260,
+//            	ctPrice: 280,
+//            	price: '260',
+//            	weight: 30000
+//            }
 		];
 
 		var standardPrice = [];

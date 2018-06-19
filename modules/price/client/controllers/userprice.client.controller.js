@@ -18,6 +18,7 @@ angular.module('userprices').controller('UserPriceController', ['$scope', '$loca
                 bkPrice5: $scope.userPrice.bkPrice5,
                 bkPrice6: $scope.userPrice.bkPrice6,
                 bkPrice7: $scope.userPrice.bkPrice7,
+                bkPrice8: $scope.userPrice.bkPrice8,
                 ctPrice1: $scope.userPrice.ctPrice1,
                 ctPrice2: $scope.userPrice.ctPrice2,
                 ctPrice3: $scope.userPrice.ctPrice3,
@@ -25,6 +26,7 @@ angular.module('userprices').controller('UserPriceController', ['$scope', '$loca
                 ctPrice5: $scope.userPrice.ctPrice5,
                 ctPrice6: $scope.userPrice.ctPrice6,
                 ctPrice7: $scope.userPrice.ctPrice7,
+                ctPrice8: $scope.userPrice.ctPrice8,
                 owner: $stateParams.userId
             });
 
