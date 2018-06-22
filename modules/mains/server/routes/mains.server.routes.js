@@ -35,6 +35,7 @@ module.exports = function (app) {
   
   app.get('/print/all', mains.printAll);
   app.get('/print/bill', mains.printBill);
+  app.get('/print/slip', mains.printSlip);
 
   app.route('/api/upload/shipping')//.all(mainsPolicy.isAllowed)
     .post(mains.uploadShipping);
