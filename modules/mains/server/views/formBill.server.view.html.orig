@@ -28,15 +28,15 @@
 #div1 {
     float:left;
     width:470px;
-    height:450px;
-    border:solid 0px red;
+    height:470px;
+    border:solid 1px red;
     text-align:left;
 }
 #div2 {	
     float:left;
     width:245px;
-    height:450px;
-    border:solid 0px green;
+    height:470px;
+    border:solid 1px green;
     text-align:center;
 }
 
@@ -47,27 +47,25 @@ table, th, td {
 </style>
 <!-- Each sheet element should have the class "sheet" -->
 <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-<section class="sheet padding-10mm">
+<section class="sheet padding-10mm" data-ng-controller="MainsController">
 
 	<!-- Write HTML just like a web page -->
-	<div style="background-image:url(/assets/img/Rev.png); position:absolute; left:37px; top:37px; width:730px; height:470px;" title="">
+	<div style="background-image:url(/assets/img/Rev.png); position:absolute; left:37px; top:37px; width:730px; height:230px;" title="">
 
-		<div class="row" style="margin-top:105px">
+		<div class="row" style="margin-top:160px">
 			<div class="col-md-3">
-			<h3>Date # {{dateString}}</h3>
-			<h3>Time # {{timeString}}</h3>
-<<<<<<< HEAD
+				<h5>Ref# {{mains[0].rcpDocNo}}</h5>
+			</div>
+
+			<div class="col-md-3">
+				<h5>วันที่ {{dateString}}</h5>
 			</div>
 			<div class="col-md-3">
-				<h5>วันที่ {{mains[0].rcpDocNo}}</h5>
+				<h5>เวลา {{timeString}}</h5>
 			</div>
 			<div class="col-md-3">
-				<h5>User {{mains[0].rcpDocNo}}</h5>
+				<h5>User {{user}}</h5>
 			</div>
-=======
-			<h3>User # {{user}}</h3>
-			<h2></h2>
->>>>>>> origin/zebracode
 		</div>
 
 		<div class="row" style="margin-left:2px">
@@ -79,6 +77,10 @@ table, th, td {
 					<th>ปณ. ปลายทาง</th>
 					<th>น้ำหนัก</th>
 					<th>ยอดเงิน</th>
+					<th>COD</th>
+					<th>ค่าประกัน</th>
+					<!--<th>Vat</th>-->
+					<th>รวม</th>
 				</tr>
 				{% for main in mains %}
 
@@ -88,14 +90,26 @@ table, th, td {
 					<td>{{main.barcode}}</td>
 					<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
 					<td>{{main.weight}}</td>
+<<<<<<< HEAD
+					<td>{{main.grandTotalAmnt.toFixed(2)}}</td>
+=======
 					<td>{{main.total}}</td>
+					<td>{{main.codAmnt}}</td>
+					<td>{{main.insuranceAmnt}}</td>
+					<!--<td>{{main.totalVatAmnt}}</td>-->
+					<td>{{main.grandTotalAmnt}}</td>
+>>>>>>> origin/zebracode
 				</tr>
 				{% endfor %}
 			</table>
 		</div>
 		<div style="margin-top:0px">
-			<div style="margin-left:500px">
-				<h5>รวมเป็นเงินทั้งหมด {{totalAmount}} บาท</h5>
+			<div style="margin-left:550px">
+<<<<<<< HEAD
+				<h5>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</h5>
+=======
+				<h5>รวมเป็นเงิน {{totalPrice}} บาท</h5>
+>>>>>>> origin/zebracode
 			</div>
 
 		</div>
