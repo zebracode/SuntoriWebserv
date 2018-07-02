@@ -18,7 +18,7 @@
                   <i class="fa fa-edit"></i> รายการ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.payments">
-                  <!--<span class="badge bg-red">{{totalMains}}</span>-->
+                  <span class="badge bg-red">{{totalPayment}}</span>
                   <i class="fa fa-edit"></i> ชำระเงิน
                 </a>
               </div>
@@ -54,7 +54,7 @@
               </div>
               <div class="nav navbar-right panel_toolbox">
                 <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
-                <button type="button" class="btn btn-mg btn-default">Export Excel</button>
+                <!--<button type="button" class="btn btn-mg btn-default">Export Excel</button>-->
               </div>
             </div>
 
@@ -90,10 +90,11 @@
                     <th class="md-caption">ค่าส่งหลัง </th>
                     <th class="md-caption">ส่วนต่าง </th>
                     <th class="md-caption">Comment </th>
-                    <th class="md-caption">COD </th>
                     <th class="md-caption">สถานะจัดส่ง </th>
                     <th class="md-caption">ใบเสร็จ </th>
-                    <th class="md-caption">ลบ</th>
+                    <th class="md-caption">สลิป </th>
+                    <!--<th class="md-caption">ลบ</th>-->
+                    <th class="md-caption">COD </th>
                   </tr>
                   </thead>
                   <tbody>
@@ -111,14 +112,18 @@
                     <td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
                     <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
                     <td class="md-caption" ng-bind="main.detail_Product"></td>
-                    <td class="md-caption" ng-bind="main.codAmnt"></td>
-
                     <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a></td>
                     <td>
-                      <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i> {{main.rcpDocNo}} </a>
+                      <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Bill {{main.rcpDocNo}} </a>
                     </td>
                     <td>
-                      <a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>
+                      <a class="btn btn-primary btn-xs" href="/print/slip?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Slip {{main.rcpDocNo}} </a>
+                    </td>
+                    <!--<td>-->
+                      <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                    <!--</td>-->
+                    <td class="md-caption">
+                      <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{main.codAmnt}} </a>
                     </td>
                   </tr>
                   </tbody>

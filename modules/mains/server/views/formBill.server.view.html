@@ -77,6 +77,10 @@ table, th, td {
 					<th>ปณ. ปลายทาง</th>
 					<th>น้ำหนัก</th>
 					<th>ยอดเงิน</th>
+					<th>COD</th>
+					<th>ค่าประกัน</th>
+					<!--<th>Vat</th>-->
+					<th>รวม</th>
 				</tr>
 				{% for main in mains %}
 
@@ -87,6 +91,10 @@ table, th, td {
 					<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
 					<td>{{main.weight}}</td>
 					<td>{{main.grandTotalAmnt.toFixed(2)}}</td>
+					<td>{{main.codAmnt}}</td>
+					<td>{{main.insuranceAmnt}}</td>
+					<!--<td>{{main.totalVatAmnt}}</td>-->
+					<td>{{main.grandTotalAmnt}}</td>
 				</tr>
 				{% endfor %}
 			</table>

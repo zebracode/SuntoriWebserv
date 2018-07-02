@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Sticker</title>
+
+	<!-- Normalize or reset CSS with your favorite library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+
+	<!-- Load paper.css for happy printing -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.2.3/paper.css">
+
+	<!-- Set page size here: A5, A4 or A3 -->
+	<!-- Set also "landscape" if you need -->
+	<style>@page { size: 80mm 100mm }</style>
+	<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
+</head>
+
+<!-- Set "A5", "A4" or "A3" for class name -->
+<!-- Set also "landscape" if you need -->
+<body class="receipt">
+<style type="text/css">
+#div1 {
+    float:left;
+    width:280px;
+    height:360px;
+    border:solid 0px black;
+    text-align:center;
+}
+#div2 {
+    float:left;
+    width:250px;
+    height:60px;
+    border:solid 2px black;
+    text-align:center;
+}
+#div3 {
+    float:left;
+    width:270px;
+    height:40px;
+    border:solid 2px black;
+    text-align:center;
+}
+
+    @page { size: 80mm 101mm } /* output size */
+    body.receipt .sheet { width: 80mm; height: 100mm } /* sheet size */
+    @media print { body.receipt { width: 80mm } } /* fix for Chrome */
+
+</style>
+<!-- Each sheet element should have the class "sheet" -->
+<!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+<section class="sheet padding-10mm">
+
+	<!-- Write HTML just like a web page -->
+	<div style="background-image:url(/assets/img/sticker.png); position:absolute; left:10px; top:10px; width:280px; height:360px;" title="">
+		<div id='div1'>
+			<div style="margin-top:-20px">
+				<h2>โทร 062-9452422</h2>
+			</div>
+			<div style="margin-top:50px">
+				<div id='div2' style="margin-left:15px">
+				<p style="margin-top:5px"><small>บริการจัดส่งสินค้า (e-commerce) ใบอนุญาตสำหรับธุรกิจ เลขที่ บธ.11/2560 ชำระค่าฝากส่งตามที่ ปณท. กำหนด</small></p>
+				</div>
+			</div>
+			<div style="margin-top:-50px">
+				<!--<div style="margin-top:200px">-->
+				<!--<svg class="barcode"-->
+				<!--jsbarcode-value="{{main.order}}"-->
+				<!--jsbarcode-textmargin="0"-->
+				<!--jsbarcode-fontoptions="bold">-->
+				<!--</svg>-->
+				<!--</div>-->
+				<!--<div style="margin-top:-25px">-->
+				<!--<h4>Order No: {{main.order}}</h4>-->
+				<!--</div>-->
+
+				<div style="margin-top:165px">
+					<p>ผู้รับ: {{main.r_name}}({{main.r_tel}}) {{main.r_country}} {{main.r_postcode}}</p>
+				</div>
+
+				<div style="margin-top:-20px">
+					<svg class="barcode"
+						 jsbarcode-value="{{main.barcode}}"
+						 jsbarcode-textmargin="0"
+						 jsbarcode-fontoptions="bold">
+					</svg>
+				</div>
+
+				<div>
+					<h2 style="margin-top:0px"><strong>{{main.barcode}}</strong></h2>
+				</div>
+				<!--<div style="margin-top:-3px">-->
+				<!--<h6>มูลค่า {{main.price}} บาท</h6>-->
+				<!--</div>-->
+			</div>
+
+			<div style="margin-top:-20px">
+				<div id='div3' style="margin-left:3px">
+					<h1 style="margin-top:0px"><strong>COD {{main.codAmnt}} บาท</strong></h1>
+				</div>
+			</div>
+			<!--<div style="margin-top:0px">-->
+				<!--<p><small>SuntoriExpress Co.,Ltd.</small></p>-->
+			<!--</div>-->
+			<div style="margin-top:-16px">
+				<p><small>**เปลี่ยนสินค้าติดต่อบริษัทที่ท่านสั่งซื้อโดยตรง**</small></p>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+   JsBarcode(".barcode", "Smallest width", {
+   width: 1.5,
+   height: 55,
+   fontSize: 0
+ }).init();
+   //JsBarcode("#barcode").init();
+  </script>
+
+</section>
+
+</body>
+
+</html>

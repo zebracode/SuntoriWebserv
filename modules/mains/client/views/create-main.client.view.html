@@ -86,8 +86,14 @@
                   <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
 
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                      <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedSender" md-search-text="searchText" md-items="item in getSenderName(searchText)"
-                        md-item-text="item.name" md-selected-item-change='setSenderData()'>
+                      <md-autocomplete
+                              placeholder='ค้นหาผู้ส่ง'
+                              md-selected-item="selectedSender"
+                              md-search-text="searchText"
+                              md-items="item in getSenderName(searchText)"
+                              md-item-text="item.name"
+                              md-selected-item-change='setSenderData()'>
+
                         <span md-highlight-text="searchText">{{item.name}}</span>
                       </md-autocomplete>
                     </div>
@@ -247,9 +253,14 @@
                   <h2>รายละเอียดสินค้า
                     <small>กรอกรายละเอียดสินค้า</small>
                   </h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <div layout="row">
+                      <!--<button class="btn btn-sm btn-default" href="https://www.w3schools.com" target="_blank">ตัวอย่าง Excel</button>-->
+                      <a href="http://suntoriexpress.com/Shipping.zip" target="_blank">โหลดตัวอย่าง Excel</a>
+                    </div>
+                  </ul>
                   <div class="clearfix"></div>
                 </div>
-                <!-- <ul class="nav navbar-right panel_toolbox"> -->
                 <div class="col-md-8">
                   <input class="btn btn-mg btn-default" type="file" ngf-select ng-model="excelFile" name="file"/>
                 </div>
@@ -326,7 +337,8 @@
 
                     <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
                       <div class="form-group">
-                        <select class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options" ng-change="setGrandTotal()">
+                        <input type="checkbox" ng-model="all"><br>
+                        <select ng-disabled="all" class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options" ng-change="setGrandTotal()">
                         </select>
                       </div>
                       <div class="form-group">

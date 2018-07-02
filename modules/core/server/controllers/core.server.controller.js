@@ -190,3 +190,17 @@ exports.printformA6 = function (req, res, next) {
 	});
 
 };
+
+exports.printsticker = function (req, res, next) {
+
+	Main.findById(req.query.mainId, function (err, main) {
+		if (err)
+			next(err);
+		else
+			res.render('modules/core/server/views/sticker', {
+				title: 'Sticker',
+				main: main
+			});
+	});
+
+};

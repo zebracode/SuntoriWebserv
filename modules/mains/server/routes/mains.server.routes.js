@@ -27,7 +27,7 @@ module.exports = function (app) {
   app.param('mainId', mains.mainByID);
 
   app.route('/api/main/findByName')
-      .get(mains.findByName);
+    .get(mains.findByName);
   
   app.post('/api/update/mains', mains.updateByBarcode).all(mainsPolicy.isAllowed);
   
@@ -35,6 +35,7 @@ module.exports = function (app) {
   
   app.get('/print/all', mains.printAll);
   app.get('/print/bill', mains.printBill);
+  app.get('/print/slip', mains.printSlip);
 
   app.route('/api/upload/shipping')//.all(mainsPolicy.isAllowed)
     .post(mains.uploadShipping);

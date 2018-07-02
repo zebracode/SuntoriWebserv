@@ -59,6 +59,7 @@ exports.update = function (req, res) {
 	main.order = req.body.order;
 	main.invoice = req.body.invoice;
 	main.price = req.body.price;
+	main.productPrice = req.body.productPrice;
 	main.weight = req.body.weight;
 	//  main.selectedOption = req.body.selectedOption;
 	main.detail = req.body.detail;
@@ -245,6 +246,59 @@ exports.printBill = function (req, res, next) {
 
 					res.render('modules/mains/server/views/formBill', {
 						title: 'Form Bill',
+						mains: mains,
+						totalAmount: totalAmount,
+						dateString: dateString,
+						timeString: timeString,
+						user: user.username
+					});
+
+				});
+			} else {
+				res.send("No data to print !!!");
+			}
+		}
+	});
+};
+
+exports.printSlip = function (req, res, next) {
+
+	Main.find({ rcpDocNo: req.query.rcpDocNo }, function (err, mains) {
+		if (err) {
+			return next(err);
+		} else {
+			if (mains.length > 0) {
+				var totalAmount = 0;
+				var dateString = "";
+				var timeString = "";
+
+				if (typeof mains[0].receiptDate !== 'undefined') {
+					var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
+					var month = (mains[0].receiptDate.getMonth() + 1) < 10 ? '0' + (mains[0].receiptDate.getMonth() + 1) : (mains[0].receiptDate.getMonth() + 1);
+					var hour = mains[0].receiptDate.getHours() < 10 ? '0' + mains[0].receiptDate.getHours() : mains[0].receiptDate.getHours();
+					var minute = mains[0].receiptDate.getMinutes() < 10 ? '0' + mains[0].receiptDate.getMinutes() : mains[0].receiptDate.getMinutes();
+					var second = mains[0].receiptDate.getSeconds() < 10 ? '0' + mains[0].receiptDate.getSeconds() : mains[0].receiptDate.getSeconds();
+					dateString = date + '/' + month + '/' + mains[0].receiptDate.getFullYear();
+					timeString = hour + ':' + minute + ':' + second;
+				}
+
+				for (var i = 0; i < mains.length; i++) {
+					var total = parseInt(mains[i].total);
+
+					if (!isNaN(total)) {
+						totalAmount += total;
+					}
+				}
+
+				User.findById(mains[0].user, '-salt -password').exec(function (err, user) {
+					if (err) {
+						return next(err);
+					} else if (!user) {
+						return next(new Error('Failed to load user ' + id));
+					}
+
+					res.render('modules/mains/server/views/formSlip', {
+						title: 'Form Slip',
 						mains: mains,
 						totalAmount: totalAmount,
 						dateString: dateString,

@@ -5,30 +5,9 @@ angular.module('core').controller('HomeController',
     function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, $filter, StatementsService) {
         $scope.totalItems = 0;
         $scope.currentPage = 1;
-        $scope.itemsPerPage = 5;
+        $scope.itemsPerPage = 10;
 
-        // Autocomplete
-        $scope.getSenderName = function (searchText) {
-        			return $http
-        				.get('/api/send/findByName?searchText=' + searchText + '&userId=' + $scope.authentication.user._id)
-        				.then(function (response) {
-        					return response.data;
-        				});
-        		};
 
-        $scope.setSenderData = function () {
-        			if ($scope.selectedSender) {
-        				$scope.s_name = $scope.selectedSender.name;
-        				$scope.s_tel = $scope.selectedSender.tel;
-        				$scope.s_email = $scope.selectedSender.email;
-        				$scope.s_address = $scope.selectedSender.address;
-        				$scope.s_ampher = $scope.selectedSender.ampher;
-        				$scope.s_country = $scope.selectedSender.country;
-        				$scope.s_postcode = $scope.selectedSender.postcode;
-        				$scope.s_idNumber = $scope.selectedSender.idNumber;
-        				$scope.detail = $scope.selectedSender.product;
-        			}
-        		};
 
         $scope.toggleLeft = buildToggler('left');
         $scope.toggleRight = buildToggler('right');
@@ -116,6 +95,61 @@ angular.module('core').controller('HomeController',
                     $scope.price = response.data;
                 });
         };
+
+        // Find a list of Statements
+        $scope.find = function (viewName) {
+                    $scope.totalItems = 0;
+                    var data = {}
+                    if (viewName === 'statements') {
+                        data = {
+                            user: Authentication.user._id
+                        };
+                    } else {
+                        data = {
+                            userId: $scope.selectedUserId,
+                            startDate: $scope.startDate,
+                            endDate: $scope.endDate
+                        };
+                    }
+
+                    $scope.mains = Mains.query(
+                        data,
+                        function (mains) {
+                            var tempMains = [];
+                            var pageMains = [];
+                            var pageIndex = 0;
+                            var itemCount = 0;
+                            for (var i = 0; i < mains.length; i++) {
+                                if (!mains[i].status) {
+                                    continue;
+                                }
+                                if (mains[i].status !== "ยังไม่ได้ชำระเงิน") {
+                                    itemCount++;
+                                    tempMains.push(mains[i]);
+                                    if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
+                                        pageIndex++;
+                                        pageMains[pageIndex] = tempMains;
+                                        tempMains = [];
+                                    }
+                                    $scope.totalItems += 1;
+                                }
+                            }
+
+                            if (tempMains.length > 0) {
+                                pageMains[pageIndex + 1] = tempMains;
+                            }
+
+                            $scope.allPage = pageMains;
+
+                            // Set first page
+                            $scope.mains = pageMains[1];
+                        });
+
+                    $http.get('/price')
+                        .then(function (response) {
+                            $scope.price = response.data;
+                        });
+                };
 
         $scope.printformA6 = function (main) {
             console.log("Print AW FormA6");

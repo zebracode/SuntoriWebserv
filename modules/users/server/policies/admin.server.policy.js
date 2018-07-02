@@ -21,8 +21,17 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/users/:userId',
       permissions: '*'
     }]
-  }]);
-};
+  },{
+      roles: ['account'],
+      allows: [{
+      resources: '/api/users',
+      permissions: ['*']
+    }, {
+      resources: '/api/users/:userId',
+      permissions: ['*']
+    }]
+   }]);
+  };
 
 /**
  * Check If Admin Policy Allows

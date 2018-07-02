@@ -40,6 +40,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				userPrices.push({ weight: 10000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5 });
 				userPrices.push({ weight: 15000, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6 });
 				userPrices.push({ weight: 20000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7 });
+				userPrices.push({ weight: 30000, bkPrice: userPrice.bkPrice8, ctPrice: userPrice.ctPrice8 });
 				userPrices.sort(function(a, b){return a.weight - b.weight}); // Sort by weight
 			});
 		}
@@ -119,6 +120,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				order: this.order,
 				invoice: this.invoice,
 				price: this.price,
+				productPrice: this.productPrice,
 				weight: this.selectedOption.value,
 				detail: this.detail,
 				detail_Product: this.detail_Product,
@@ -151,6 +153,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				$scope.order = Date.now();
 				$scope.invoice = Date.now();
 				$scope.price = 0;
+				$scope.productPrice = 0;
 				$scope.detail_Product = '';
 				$scope.insurance = '';
 				$scope.weight = '';
@@ -251,9 +254,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		$scope.options = [
 			{
 				name: '--น้ำหนัก/ขนาด--',
-				value: '',
-				price: '0'
-
+				value: '0',
+				price: '0',
+				bkPrice: 40,
+                ctPrice: 50,
+                weight: 0
 			},
 			{
 				name: 'น้ำหนักไม่เกิน 0.5 กก.',
@@ -448,6 +453,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '260',
 				weight: 20000
 			}
+//			{
+//            	name: '- test cm',
+//                value: '20,000-30,000',
+//            	bkPrice: 260,
+//            	ctPrice: 280,
+//            	price: '260',
+//            	weight: 30000
+//            }
 		];
 
 		var standardPrice = [];
@@ -469,55 +482,55 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				charge: '0'
 			},
 			{
-				name: '2,001 - 5,000 บาท',
+				name: '1,001 - 5,000 บาท',
 				value: '5000',
-				charge: '10'
+				charge: '20'
 			},
 			{
 				name: '5,001 - 10,000 บาท',
 				value: '10000',
-				charge: '20'
+				charge: '50'
 			},
 			{
 				name: '10,001 - 15,000 บาท',
 				value: '15000',
-				charge: '30'
+				charge: '120'
 			},
 			{
 				name: '15,001 - 20,000 บาท',
 				value: '20000',
-				charge: '40'
+				charge: '130'
 			},
 			{
 				name: '20,001 - 25,000 บาท',
 				value: '25000',
-				charge: '50'
+				charge: '140'
 			},
 			{
 				name: '25,001 - 30,000 บาท',
 				value: '30000',
-				charge: '60'
+				charge: '150'
 			},
 			{
 				name: '30,000 - 35,000 บาท',
 				value: '35000',
-				charge: '70'
+				charge: '150'
 			},
 			{
-				name: '35,001 - 40,000 บาท',
-				value: '40000',
-				charge: '80'
-			},
-			{
-				name: '40,001 - 45,000 บาท',
-				value: '45000',
-				charge: '90'
-			},
-			{
-				name: '45,001 - 50,000 บาท',
+				name: '35,001 - 50,000 บาท',
 				value: '50000',
-				charge: '100'
+				charge: '150'
 			}
+//			{
+//				name: '40,001 - 45,000 บาท',
+//				value: '45000',
+//				charge: '90'
+//			},
+//			{
+//				name: '45,001 - 50,000 บาท',
+//				value: '50000',
+//				charge: '100'
+//			}
 		];
 
 		// Price List of Insurance
@@ -550,8 +563,16 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
         		};
 
         $scope.setMainData = function () {
-        			if ($scope.selectedMain) {
-        				$scope.s_name = $scope.selectedMain.name;
+        			if ($scope.selectedSender) {
+        				$scope.s_name = $scope.selectedSender.name;
+                        $scope.s_tel = $scope.selectedSender.tel;
+                        $scope.s_email = $scope.selectedSender.email;
+                      	$scope.s_address = $scope.selectedSender.address;
+                       	$scope.s_ampher = $scope.selectedSender.ampher;
+                       	$scope.s_country = $scope.selectedSender.country;
+                       	$scope.s_postcode = $scope.selectedSender.postcode;
+                       	$scope.s_idNumber = $scope.selectedSender.idNumber;
+                       	$scope.detail = $scope.selectedSender.product;
         			}
         		};
 

@@ -21,8 +21,8 @@
   </div>
 </section> -->
 
-<div data-ng-controller="HomeController" data-ng-init="find('summary')">
-  <div layout="column" style="height: 1000px;">
+<div data-ng-controller="HomeController" data-ng-init="find('statements')">
+  <div layout="column" style="height: 1200px;">
     <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
       <md-toolbar class="md-theme-indigo">
         <div class="md-toolbar-tools">
@@ -150,8 +150,8 @@
                   </tbody>
                 </table>
 
-                <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
-                  <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+                <div class="alert alert-warning text-center" data-ng-if="statements.$resolved && !statements.length">
+                  <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg">ยังไม่มีรายการในระบบ... </button>
                 </div>
 
               </div>

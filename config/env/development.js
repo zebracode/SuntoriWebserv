@@ -22,7 +22,7 @@ module.exports = {
     }
   },
   app: {
-    title: defaultEnvConfig.app.title + ' - Development Environment'
+    title: defaultEnvConfig.app.title + ' - เรื่องเดลิเวอรี่ ซันโตริจัดให้'
   },
   facebook: {
     clientID: process.env.FACEBOOK_ID || '1879899495671563',

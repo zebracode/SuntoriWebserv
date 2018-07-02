@@ -72,6 +72,7 @@ exports.update = function(req, res) {
     userPrice.bkPrice5 = req.body.bkPrice5;
     userPrice.bkPrice6 = req.body.bkPrice6;
     userPrice.bkPrice7 = req.body.bkPrice7;
+    userPrice.bkPrice8 = req.body.bkPrice8;
     userPrice.ctPrice1 = req.body.ctPrice1;
     userPrice.ctPrice2 = req.body.ctPrice2;
     userPrice.ctPrice3 = req.body.ctPrice3;
@@ -79,6 +80,7 @@ exports.update = function(req, res) {
     userPrice.ctPrice5 = req.body.ctPrice5;
     userPrice.ctPrice6 = req.body.ctPrice6;
     userPrice.ctPrice7 = req.body.ctPrice7;
+    userPrice.ctPrice8 = req.body.ctPrice8;
 
     userPrice.save(function(err){
         if(err){

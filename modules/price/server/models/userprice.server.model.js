@@ -42,6 +42,10 @@ var UserPriceSchema = new Schema({
         type: Number,
         default: 0
     },
+    bkPrice8: {
+        type: Number,
+        default: 0
+    },
     ctPrice1: {
         type: Number,
         default: 0
@@ -67,6 +71,10 @@ var UserPriceSchema = new Schema({
         default: 0
     },
     ctPrice7: {
+        type: Number,
+        default: 0
+    },
+    ctPrice8: {
         type: Number,
         default: 0
     }
