@@ -86,14 +86,14 @@ table, th, td {
 					<td>{{main.barcode}}</td>
 					<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
 					<td>{{main.weight}}</td>
-					<td>{{main.total}}</td>
+					<td>{{main.grandTotalAmnt.toFixed(2)}}</td>
 				</tr>
 				{% endfor %}
 			</table>
 		</div>
 		<div style="margin-top:0px">
 			<div style="margin-left:550px">
-				<h5>รวมเป็นเงิน {{totalAmount}} บาท</h5>
+				<h5>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</h5>
 			</div>
 
 		</div>

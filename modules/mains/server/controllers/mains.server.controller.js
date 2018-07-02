@@ -229,7 +229,7 @@ exports.printBill = function (req, res, next) {
 				}
 
 				for (var i = 0; i < mains.length; i++) {
-					var total = parseInt(mains[i].total);
+					var total = Number(mains[i].grandTotalAmnt);
 
 					if (!isNaN(total)) {
 						totalAmount += total;

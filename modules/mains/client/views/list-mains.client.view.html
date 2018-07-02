@@ -96,7 +96,7 @@
                     <td class="md-caption" ng-bind="main.codAmnt"></td>
                     <td class="md-caption" ng-bind="main.insuranceAmnt"></td>
                     <td class="md-caption" ng-bind="main.totalVatAmnt | number: 2"></td>
-                    <td class="md-caption" ng-bind="main.grandTotalAmnt"></td>
+                    <td class="md-caption" ng-bind="main.grandTotalAmnt  | number: 2"></td>
                     <td ng-init="disabled=true;">
                       <a ng-show="disabled" class="btn btn-default btn-xs" ng-click="disabled=false; removeSelectInvoice(main.invoice); minusPrice(main.grandTotalAmnt); removeSelectMain(main);"><i class="fa fa-money"></i> ยกเลิก </a>
                       <a ng-show="!disabled" class="btn btn-warning btn-xs" ng-click="disabled=true; addSelectInvoice(main.invoice); addPrice(main.grandTotalAmnt); addSelectMain(main);"><i class="fa fa-money"></i> ชำระเงิน </a>
