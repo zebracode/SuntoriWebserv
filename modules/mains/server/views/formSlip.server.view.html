@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>{{title}}</title>
+	<title>Transaction Slip</title>
 
 	<!-- Normalize or reset CSS with your favorite library -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
@@ -11,95 +11,114 @@
 	<!-- Load paper.css for happy printing -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.2.3/paper.css">
 
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-
 	<!-- Set page size here: A5, A4 or A3 -->
 	<!-- Set also "landscape" if you need -->
-	<style>@page { size: A4 }</style>
+	<style>@page { size: 80mm 100mm }</style>
 	<script src="https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js"></script>
 </head>
 
 <!-- Set "A5", "A4" or "A3" for class name -->
 <!-- Set also "landscape" if you need -->
-<body class="A4">
+<body class="receipt">
 <style type="text/css">
 #div1 {
     float:left;
-    width:470px;
-    height:470px;
-    border:solid 1px red;
-    text-align:left;
+    width:280px;
+    height:360px;
+    border:solid 0px black;
+    text-align:center;
 }
-#div2 {	
+#div2 {
     float:left;
-    width:245px;
-    height:470px;
-    border:solid 1px green;
+    width:250px;
+    height:60px;
+    border:solid 2px black;
+    text-align:center;
+}
+#div3 {
+    float:left;
+    width:270px;
+    height:40px;
+    border:solid 2px black;
     text-align:center;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
+th{font-family: Arial; font-size: 8pt;}
+td{font-family: Arial; font-size: 8pt;}
+p{font-family: Arial; font-size: 10pt;}
+    @page { size: 80mm 101mm } /* output size */
+    body.receipt .sheet { width: 80mm; height: 500mm } /* sheet size */
+    @media print { body.receipt { width: 80mm } } /* fix for Chrome */
+
 </style>
 <!-- Each sheet element should have the class "sheet" -->
 <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
 <section class="sheet padding-10mm" data-ng-controller="MainsController">
 
 	<!-- Write HTML just like a web page -->
-	<div style="background-image:url(/assets/img/Rev.png); position:absolute; left:37px; top:37px; width:730px; height:230px;" title="">
-
-		<div class="row" style="margin-top:160px">
-			<div class="col-md-3">
-				<h5>Ref# {{mains[0].rcpDocNo}}</h5>
-			</div>
-
-			<div class="col-md-3">
-				<h5>วันที่ {{dateString}}</h5>
-			</div>
-			<div class="col-md-3">
-				<h5>เวลา {{timeString}}</h5>
-			</div>
-			<div class="col-md-3">
-				<h5>User {{user}}</h5>
-			</div>
+	<!--<div style="background-image:url(/assets/img/Rev.png); position:absolute; left:37px; top:37px; width:730px; height:230px;" title="">-->
+	<div>
+		<div style="text-align:center">
+			<p style="margin-top:0px"><strong>SUNTORI EXPRESS</strong></p>
+			<p style="margin-top:-10px"><small>1360 3<sup>rd</sup> Floor, Sutthisanvinijchai Road,</small></p>
+			<p style="margin-top:-10px"><small>Kwaeng Huaykwang, Khet Huaykwang,</small></p>
+			<p style="margin-top:-10px"><small>Bangkok 10310 Thailand.</small></p>
+			<p style="margin-top:-10px"><small>TEL:02-2755489 Hot Line:062-9452422</small></p>
+			<p style="margin-top:-10px"><small>TAX ID: 0105557018939</small></p>
+			<p style="margin-top:-10px"><strong>ใบทำรายการ / Transaction</strong></p>
+		</div>
+		<div class="row" style="margin-top:-10px">
+			<table style="width:100%">
+				<tr>
+					<td><strong>User {{user}}</strong></td>
+					<td style="text-align:right"><strong>วันที่ {{dateString}}</strong></td>
+				</tr>
+			</table>
+		</div>
+		<div class="row" style="margin-top:0px">
+			<table style="width:100%">
+				<tr>
+					<td><strong>Ref# {{mains[0].rcpDocNo}}</strong></td>
+					<td style="text-align:right"><strong>เวลา {{timeString}}</strong></td>
+				</tr>
+			</table>
 		</div>
 
-		<div class="row" style="margin-left:2px">
-			<table style="width:98%">
-				<tr>
-					<th>ชื่อผู้รับ</th>
-					<th>ชื่อผู้ส่ง</th>
-					<th>EMS No.</th>
-					<th>ปณ. ปลายทาง</th>
-					<th>น้ำหนัก</th>
-					<th>ยอดเงิน</th>
-					<th>ค่าประกัน</th>
+		<div class="row" style="margin-top:10px">
+			<table>
+				<tr style="text-align:center">
+					<th>ที่</th>
+					<th>รายการ</th>
+					<th>ค่าส่ง</th>
 					<th>COD</th>
+					<th>ประกัน</th>
+					<!--<th>Vat</th>-->
+					<th>รวม</th>
 				</tr>
 				{% for main in mains %}
 
 				<tr>
-					<td>{{main.r_name}}</td>
-					<td>{{main.s_name}}</td>
-					<td>{{main.barcode}}</td>
-					<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
-					<td>{{main.weight}}</td>
-					<td>{{main.total}}</td>
-					<td>{{main.insuranceAmnt}}</td>
-					<td>{{main.codAmnt}}</td>
+					<td>{{ $index + 1 }}</td>
+					<td>{{main.barcode}} <br />{{main.s_name}} <br />{{ main.r_country }}<br />น.น.{{main.weight}}กรัม </td>
+					<td style="text-align:center">{{main.total}}</td>
+					<td style="text-align:center">{{main.codAmnt}}</td>
+					<td style="text-align:center">{{main.insuranceAmnt}}</td>
+					<!--<td style="text-align:center">{{main.totalVatAmnt}}</td>-->
+					<td style="text-align:center">{{main.grandTotalAmnt}}</td>
 				</tr>
 				{% endfor %}
 			</table>
 		</div>
-		<div style="margin-top:0px">
-			<div style="margin-left:550px">
-				<h5>รวมเป็นเงิน {{totalAmount}} บาท</h5>
-			</div>
-
+		<div style="text-align:right">
+			<h5>จำนวน {{data.length}} รายการ</h5>
+			<h5 style="margin-top:-20px">รวมเป็นเงิน {{totalAmount}} บาท</h5>
+		</div>
+		<div style="text-align:center">
+			<p style="margin-top:0px"><strong>THANK YOU & ENJOY</strong></p>
+			<p style="margin-top:-10px"><small>LINE: @suntoriexpress</small></p>
+			<p style="margin-top:-10px"><small>Facebook: Suntoriexpress</small></p>
+			<p style="margin-top:-10px"><small>IG: suntoriexpress</small></p>
+			<p style="margin-top:-10px"><small>*ติดตามสถานะพัสดุได้ที่ www.suntoriexpress.com*</small></p>
 		</div>
 	</div>
 

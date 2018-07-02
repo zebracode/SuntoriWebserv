@@ -120,6 +120,11 @@ var MainSchema = new Schema({
 		default: 0,
 		required: 'กรุณากรอกราคาที่ต้องการเรียกเก็บ'
 	},
+	productPrice: {
+        type: Number,
+    	default: 0,
+    	required: 'กรุณากรอกราคาที่ต้องการเรียกเก็บ'
+    },
 	weight: {
 		type: String,
 		default: '',
@@ -185,6 +190,10 @@ var MainSchema = new Schema({
 		default: false
 	},
 	codAmnt: {
+    		type: Number,
+    		default: 0
+    	},
+	cbCod: {
 		type: Number,
 		default: 0
 	},
@@ -204,6 +213,10 @@ var MainSchema = new Schema({
 		type: Number,
 		default: 0
 	},
+	totalPrice: {
+    	type: Number,
+    	default: 0
+    },
 	grandTotalAmnt: {
 		type: Number,
 		default: 0

@@ -255,7 +255,8 @@
                   </h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <div layout="row">
-                      <button class="btn btn-sm btn-default">ตัวอย่าง Excel</button>
+                      <!--<button class="btn btn-sm btn-default" href="https://www.w3schools.com" target="_blank">ตัวอย่าง Excel</button>-->
+                      <a href="http://suntoriexpress.com/Shipping.zip" target="_blank">โหลดตัวอย่าง Excel</a>
                     </div>
                   </ul>
                   <div class="clearfix"></div>
@@ -336,7 +337,8 @@
 
                     <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
                       <div class="form-group">
-                        <select class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options" ng-change="setGrandTotal()">
+                        <input type="checkbox" ng-model="all"><br>
+                        <select ng-disabled="all" class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options" ng-change="setGrandTotal()">
                         </select>
                       </div>
                       <div class="form-group">

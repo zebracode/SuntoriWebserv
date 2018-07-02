@@ -32,14 +32,14 @@
     float:left;
     width:250px;
     height:60px;
-    border:solid 0px black;
+    border:solid 2px black;
     text-align:center;
 }
 #div3 {
     float:left;
     width:270px;
     height:40px;
-    border:solid 0px black;
+    border:solid 2px black;
     text-align:center;
 }
 
@@ -58,8 +58,10 @@
 			<div style="margin-top:-20px">
 				<h2>โทร 062-9452422</h2>
 			</div>
-			<div id='div2' style="margin-left:15px">
-				<p style="margin-top:35px"><small>บริการจัดส่งสินค้า (e-commerce) ใบอนุญาตสำหรับธุรกิจ เลขที่ บธ.11/2560 ชำระค่าฝากส่งตามที่ ปณท. กำหนด</small></p>
+			<div style="margin-top:50px">
+				<div id='div2' style="margin-left:15px">
+				<p style="margin-top:5px"><small>บริการจัดส่งสินค้า (e-commerce) ใบอนุญาตสำหรับธุรกิจ เลขที่ บธ.11/2560 ชำระค่าฝากส่งตามที่ ปณท. กำหนด</small></p>
+				</div>
 			</div>
 			<div style="margin-top:-50px">
 				<!--<div style="margin-top:200px">-->
@@ -74,25 +76,29 @@
 				<!--</div>-->
 
 				<div style="margin-top:165px">
+					<p>ผู้รับ: {{main.r_name}}({{main.r_tel}}) {{main.r_country}} {{main.r_postcode}}</p>
+				</div>
+
+				<div style="margin-top:-20px">
 					<svg class="barcode"
 						 jsbarcode-value="{{main.barcode}}"
 						 jsbarcode-textmargin="0"
 						 jsbarcode-fontoptions="bold">
 					</svg>
 				</div>
-				<div style="margin-top:-20px">
-					<p>ผู้รับ: {{main.r_name}}({{main.r_tel}}) {{main.r_country}} {{main.r_postcode}}</p>
-				</div>
-				<div style="margin-left:70px">
-					<h4 style="margin-top:-10px">{{main.barcode}}</h4>
+
+				<div>
+					<h2 style="margin-top:0px"><strong>{{main.barcode}}</strong></h2>
 				</div>
 				<!--<div style="margin-top:-3px">-->
 				<!--<h6>มูลค่า {{main.price}} บาท</h6>-->
 				<!--</div>-->
 			</div>
 
-			<div id='div3' style="margin-left:3px">
-				<h1 style="margin-top:-12px"><strong>COD {{main.codAmnt}} บาท</strong></h1>
+			<div style="margin-top:-20px">
+				<div id='div3' style="margin-left:3px">
+					<h1 style="margin-top:0px"><strong>COD {{main.codAmnt}} บาท</strong></h1>
+				</div>
 			</div>
 			<!--<div style="margin-top:0px">-->
 				<!--<p><small>SuntoriExpress Co.,Ltd.</small></p>-->

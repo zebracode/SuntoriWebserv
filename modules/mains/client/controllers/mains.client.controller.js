@@ -120,6 +120,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				order: this.order,
 				invoice: this.invoice,
 				price: this.price,
+				productPrice: this.productPrice,
 				weight: this.selectedOption.value,
 				detail: this.detail,
 				detail_Product: this.detail_Product,
@@ -151,6 +152,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				$scope.order = Date.now();
 				$scope.invoice = Date.now();
 				$scope.price = 0;
+				$scope.productPrice = 0;
 				$scope.detail_Product = '';
 				$scope.insurance = '';
 				$scope.weight = '';
