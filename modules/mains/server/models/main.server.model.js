@@ -189,6 +189,10 @@ var MainSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+	productPrice: {
+		type: Number,
+		default: 0
+	},
 	codAmnt: {
     		type: Number,
     		default: 0

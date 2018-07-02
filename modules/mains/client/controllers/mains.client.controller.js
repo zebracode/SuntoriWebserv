@@ -130,6 +130,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				total: this.shippingPrice,
 				status: "ยังไม่ได้ชำระเงิน",
 				isCod: this.cbCod,
+				productPrice: this.productPrice,
 				codAmnt: this.codAmount,
 				insuranceAmnt: this.insuranceAmount,
 				codVatAmnt: this.codAmount * 0.07,
@@ -1058,6 +1059,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			$scope.codAmount = 0;
 			$scope.grandTotal = 0;
 			$scope.codAmount = calCodAmnt(productPrice);
+			$scope.productPrice = productPrice;
 			// Product Price 1-4000, COD = 60
 			// if (productPrice >= 1 && productPrice <= 4000) {
 			// 	$scope.codAmount = 60;
