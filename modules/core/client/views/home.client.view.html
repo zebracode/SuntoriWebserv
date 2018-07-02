@@ -194,146 +194,6 @@
   </div>
 
   <div data-ng-show="authentication.user">
-    <!--<!DOCTYPE html>-->
-    <!--<html lang="en">-->
-    <!--<head>-->
-      <!--<meta charset="utf-8">-->
-      <!--<title>Suntori Express</title>-->
-      <!--<meta content="width=device-width, initial-scale=1.0" name="viewport">-->
-      <!--<meta content="" name="keywords">-->
-      <!--<meta content="" name="description">-->
-
-      <!--&lt;!&ndash; Favicons &ndash;&gt;-->
-      <!--<link href="img/favicon.png" rel="icon">-->
-      <!--<link href="img/apple-touch-icon.png" rel="apple-touch-icon">-->
-
-      <!--&lt;!&ndash; Google Fonts &ndash;&gt;-->
-      <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">-->
-
-      <!--&lt;!&ndash;&lt;!&ndash; Bootstrap CSS File &ndash;&gt;&ndash;&gt;-->
-      <!--&lt;!&ndash;<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">&ndash;&gt;-->
-
-      <!--&lt;!&ndash;&lt;!&ndash; Libraries CSS Files &ndash;&gt;&ndash;&gt;-->
-      <!--&lt;!&ndash;<link href="lib/animate/animate.min.css" rel="stylesheet">&ndash;&gt;-->
-      <!--&lt;!&ndash;<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">&ndash;&gt;-->
-      <!--&lt;!&ndash;<link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">&ndash;&gt;-->
-      <!--&lt;!&ndash;<link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">&ndash;&gt;-->
-
-      <!--&lt;!&ndash; Main Stylesheet File &ndash;&gt;-->
-      <!--&lt;!&ndash; <link href="css/style.css" rel="stylesheet" > &ndash;&gt;-->
-
-      <!--&lt;!&ndash; =======================================================-->
-        <!--Theme Name: Avilon-->
-        <!--Theme URL: https://bootstrapmade.com/avilon-bootstrap-landing-page-template/-->
-        <!--Author: BootstrapMade.com-->
-        <!--License: https://bootstrapmade.com/license/-->
-      <!--======================================================= &ndash;&gt;-->
-    <!--</head>-->
-    <!--<body>-->
-    <!--&lt;!&ndash;==========================-->
-      <!--Header-->
-    <!--============================&ndash;&gt;-->
-    <!--<header id="header">-->
-      <!--<div class="container">-->
-
-        <!--<div id="logo" class="pull-left">-->
-          <!--<h1><a href="#intro" class="scrollto"></a></h1>-->
-          <!--&lt;!&ndash; Uncomment below if you prefer to use an image logo &ndash;&gt;-->
-          <!--&lt;!&ndash;<a href="#intro"><img src="img/logo.png" alt="" title=""></a>&ndash;&gt;-->
-        <!--</div>-->
-
-        <!--&lt;!&ndash; #nav-menu-container &ndash;&gt;-->
-      <!--</div>-->
-    <!--</header>&lt;!&ndash; #header &ndash;&gt;-->
-    <!--&lt;!&ndash;==========================-->
-      <!--Intro Section-->
-    <!--============================&ndash;&gt;-->
-    <!--<section id="intro">-->
-
-      <!--<div class="intro-text" style="margin-top:80px">-->
-        <!--&lt;!&ndash;<h2>Suntori Express</h2>&ndash;&gt;-->
-        <!--<div class="row" data-ng-show="authentication.user">-->
-          <!--<div class="col-md-offset-0 col-md-12 col-xs-offset-2 col-xs-8 login-form-bg">-->
-            <!--<h3 class="text-center">ค้นหาเลขพัสดุ</h3>-->
-
-
-            <!--<div data-ng-controller="MainsController" data-ng-init="find('summary')">-->
-              <!--<form ng-submit="$event.preventDefault()">-->
-                <!--<h6 class="md-caption">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>-->
-                <!--<md-autocomplete-->
-                        <!--placeholder='ค้นหาผู้ส่ง'-->
-                        <!--md-selected-item="selectedMain"-->
-                        <!--md-search-text="searchText"-->
-                        <!--md-items="item in getMainName(searchText)"-->
-                        <!--md-item-text="item.name"-->
-                        <!--md-selected-item-change='setMainData()'>-->
-
-                  <!--<span md-highlight-text="searchText">{{item.name}}</span>-->
-                  <!--<md-not-found>-->
-                    <!--ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.-->
-                    <!--<a data-ui-sref="mains.create">เพิ่มรายการ!</a>-->
-                  <!--</md-not-found>-->
-                <!--</md-autocomplete>-->
-
-                <!--&lt;!&ndash;<md-autocomplete&ndash;&gt;-->
-                        <!--&lt;!&ndash;placeholder='ค้นหาผู้ส่ง'&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-selected-item="selectedSender"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-search-text="searchText"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-items="item in getSenderName(searchText)"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-item-text="item.name"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-selected-item-change='setSenderData()'>&ndash;&gt;-->
-
-                  <!--&lt;!&ndash;<span md-highlight-text="searchText">{{item.name}}</span>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<md-not-found>&ndash;&gt;-->
-                  <!--&lt;!&ndash;ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a data-ui-sref="mains.create">เพิ่มรายการ!</a>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</md-not-found>&ndash;&gt;-->
-                <!--&lt;!&ndash;</md-autocomplete>&ndash;&gt;-->
-                <!--&lt;!&ndash;<br />&ndash;&gt;-->
-                <!--&lt;!&ndash;<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<input name="s_name" type="text" data-ng-model="s_name" disabled>&ndash;&gt;-->
-                <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;<md-autocomplete&ndash;&gt;-->
-                        <!--&lt;!&ndash;ng-disabled="ctrl.isDisabled"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-no-cache="ctrl.noCache"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-selected-item="ctrl.selectedItem"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-search-text="ctrl.searchText"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-selected-item-change="ctrl.selectedItemChange(item)"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-items="item in ctrl.querySearch(ctrl.searchText)"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-item-text="item.display"&ndash;&gt;-->
-                        <!--&lt;!&ndash;md-min-length="0"&ndash;&gt;-->
-                        <!--&lt;!&ndash;placeholder="ค้นหาเลขพัสดุ">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<md-item-template>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</md-item-template>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<md-not-found>&ndash;&gt;-->
-                    <!--&lt;!&ndash;ไม่พบเลขพัสดุ "{{ctrl.searchText}}" ในระบบ.&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a ng-click="ctrl.newState(ctrl.searchText)">สมัครสมาชิก!</a>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</md-not-found>&ndash;&gt;-->
-                <!--&lt;!&ndash;</md-autocomplete>&ndash;&gt;-->
-                <!--<br />-->
-              <!--</form>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<br />-->
-
-        <!--<p>เรื่องเดลิเวอรี่ ซันโตริจัดให้</p>-->
-        <!--<p class="section-description">-->
-          <!--<small>ระบบส่งสินค้าทั่วประเทศไทยผ่านจุดไปรษณีย์ใกล้บ้านท่าน 230 แห่งทั่วประเทศ <br>-->
-            <!--ไม่ต้องต่อคิวส่งพัสดุให้เสียเวลา คุ้มค่าทุกนาทีใช้ซันโตริ เอ็กซ์เพรส</small>-->
-        <!--</p>-->
-        <!--<div>-->
-          <!--<a data-ui-sref="mains.create" class="btn-get-started scrollto">เพิ่มรายการ!</a>-->
-        <!--</div>-->
-      <!--</div>-->
-
-    <!--</section>&lt;!&ndash; #intro &ndash;&gt;-->
-
-    <!--</body>-->
-    <!--</html>-->
 
     <div layout="column" style="height: 600px;">
 
@@ -387,20 +247,6 @@
             <div class="x_content">
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel fixed_height_320">
-                  <!--<div class="x_title">-->
-                    <!--<h2>ค้นหาเลขพัสดุ <small>กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</small></h2>-->
-                    <!--<ul class="nav navbar-right panel_toolbox">-->
-                      <!--<div class="title_right">-->
-                        <!--<ul class="nav navbar-right panel_toolbox">-->
-                          <!--<div class="text-center mtop20">-->
-                            <!--&lt;!&ndash;<button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="sends.create">เพิ่มรายชื่อผู้ส่ง</button>&ndash;&gt;-->
-                          <!--</div>-->
-                        <!--</ul>-->
-                      <!--</div>-->
-                    <!--</ul>-->
-                    <!--<div class="clearfix"></div>-->
-                  <!--</div>-->
-
                   <div class="row" data-ng-hide="authentication.user">
                     <div class="col-md-offset-0 col-md-12 col-xs-offset-2 col-xs-8 login-form-bg">
                       <h3 class="text-center">ค้นหาเลขพัสดุ</h3>
@@ -422,68 +268,18 @@
                             </md-not-found>
                           </md-autocomplete>
 
-                          <!--<md-autocomplete-->
-                          <!--placeholder='ค้นหาผู้ส่ง'-->
-                          <!--md-selected-item="selectedSender"-->
-                          <!--md-search-text="searchText"-->
-                          <!--md-items="item in getSenderName(searchText)"-->
-                          <!--md-item-text="item.name"-->
-                          <!--md-selected-item-change='setSenderData()'>-->
-
-                          <!--<span md-highlight-text="searchText">{{item.name}}</span>-->
-                          <!--<md-not-found>-->
-                          <!--ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.-->
-                          <!--<a data-ui-sref="mains.create">เพิ่มรายการ!</a>-->
-                          <!--</md-not-found>-->
-                          <!--</md-autocomplete>-->
-                          <!--<br />-->
-                          <!--<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">-->
-                          <!--<input name="s_name" type="text" data-ng-model="s_name" disabled>-->
-                          <!--</div>-->
-
-                          <!--<md-autocomplete-->
-                          <!--ng-disabled="ctrl.isDisabled"-->
-                          <!--md-no-cache="ctrl.noCache"-->
-                          <!--md-selected-item="ctrl.selectedItem"-->
-                          <!--md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"-->
-                          <!--md-search-text="ctrl.searchText"-->
-                          <!--md-selected-item-change="ctrl.selectedItemChange(item)"-->
-                          <!--md-items="item in ctrl.querySearch(ctrl.searchText)"-->
-                          <!--md-item-text="item.display"-->
-                          <!--md-min-length="0"-->
-                          <!--placeholder="ค้นหาเลขพัสดุ">-->
-                          <!--<md-item-template>-->
-                          <!--<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>-->
-                          <!--</md-item-template>-->
-                          <!--<md-not-found>-->
-                          <!--ไม่พบเลขพัสดุ "{{ctrl.searchText}}" ในระบบ.-->
-                          <!--<a ng-click="ctrl.newState(ctrl.searchText)">สมัครสมาชิก!</a>-->
-                          <!--</md-not-found>-->
-                          <!--</md-autocomplete>-->
                           <br />
                         </form>
                       </div>
                     </div>
                   </div>
-                  <div class="x_content" data-ng-controller="MainsController">
 
-
+                  <div class="x_content" data-ng-controller="SendsController">
                     <!-- start project list -->
-                    <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                      <!--<md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedMain" md-search-text="searchText" md-items="item in getMainName(searchText)"-->
-                                       <!--md-item-text="item.name" md-selected-item-change='setMainData()'>-->
-                        <!--<span md-highlight-text="searchText">{{item.name}}</span>-->
-                      <!--</md-autocomplete>-->
-                    </div>
-
-                    <!--<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">-->
-                      <!--<input name="s_name" type="text" data-ng-model="s_name" id="s_name" class="form-control has-feedback-left" id="inputSuccess5" placeholder="ชื่อ-นามสกุล" required>-->
-                    <!--</div>-->
-
                     <table class="table table-striped projects">
                       <thead>
                       <tr>
-                        <th class="md-caption" style="width: 20%">วันสมัคร</th>
+                        <th class="md-caption" style="width: 20%">วันสมsัคร</th>
                         <th class="md-caption">ชื่อร้าน/ผู้ส่ง</th>
                         <th class="md-caption">สินค้า</th>
                         <th class="md-caption">เบอร์โทร</th>
@@ -498,9 +294,12 @@
                       </tr>
                       </tbody>
                     </table>
+
+
                     <!-- end project list -->
 
                   </div>
+
                 </div>
               </div>
 
