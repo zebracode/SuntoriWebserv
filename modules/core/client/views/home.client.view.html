@@ -247,14 +247,14 @@
             <div class="x_content">
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="x_panel fixed_height_320">
-                  <div class="row" data-ng-hide="authentication.user">
+                  <div class="row" data-ng-show="authentication.user">
                     <div class="col-md-offset-0 col-md-12 col-xs-offset-2 col-xs-8 login-form-bg">
                       <h3 class="text-center">ค้นหาเลขพัสดุ</h3>
                       <div data-ng-controller="MainsController" data-ng-init="find('summary')">
                         <form ng-submit="$event.preventDefault()">
-                          <h6 class="md-caption">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
+                          <h6 class="text-center">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
                           <md-autocomplete
-                                  placeholder='ค้นหาผู้ส่ง'
+                                  placeholder='กรอกเลขพัสดุ'
                                   md-selected-item="selectedMain"
                                   md-search-text="searchText"
                                   md-items="item in getMainName(searchText)"
@@ -274,31 +274,31 @@
                     </div>
                   </div>
 
-                  <div class="x_content" data-ng-controller="SendsController">
-                    <!-- start project list -->
-                    <table class="table table-striped projects">
-                      <thead>
-                      <tr>
-                        <th class="md-caption" style="width: 20%">วันสมsัคร</th>
-                        <th class="md-caption">ชื่อร้าน/ผู้ส่ง</th>
-                        <th class="md-caption">สินค้า</th>
-                        <th class="md-caption">เบอร์โทร</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr class="md-caption" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">
-                        <td class="md-caption" ng-bind="send.created | date:'mediumDate'"></td>
-                        <td class="md-caption" ng-bind="send.name"></td>
-                        <td class="md-caption" ng-bind="send.product"></td>
-                        <td class="md-caption" ng-bind="send.tel"></td>
-                      </tr>
-                      </tbody>
-                    </table>
+                  <!--<div class="x_content" data-ng-controller="SendsController">-->
+                    <!--&lt;!&ndash; start project list &ndash;&gt;-->
+                    <!--<table class="table table-striped projects">-->
+                      <!--<thead>-->
+                      <!--<tr>-->
+                        <!--<th class="md-caption" style="width: 20%">วันสมัคร</th>-->
+                        <!--<th class="md-caption">ชื่อร้าน/ผู้ส่ง</th>-->
+                        <!--<th class="md-caption">สินค้า</th>-->
+                        <!--<th class="md-caption">เบอร์โทร</th>-->
+                      <!--</tr>-->
+                      <!--</thead>-->
+                      <!--<tbody>-->
+                      <!--<tr class="md-caption" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">-->
+                        <!--<td class="md-caption" ng-bind="send.created | date:'mediumDate'"></td>-->
+                        <!--<td class="md-caption" ng-bind="send.name"></td>-->
+                        <!--<td class="md-caption" ng-bind="send.product"></td>-->
+                        <!--<td class="md-caption" ng-bind="send.tel"></td>-->
+                      <!--</tr>-->
+                      <!--</tbody>-->
+                    <!--</table>-->
 
 
-                    <!-- end project list -->
+                    <!--&lt;!&ndash; end project list &ndash;&gt;-->
 
-                  </div>
+                  <!--</div>-->
 
                 </div>
               </div>
