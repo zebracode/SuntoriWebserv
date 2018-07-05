@@ -87,7 +87,7 @@ p{font-family: Arial; font-size: 10pt;}
 		<div class="row" style="margin-top:10px">
 			<table>
 				<tr style="text-align:center">
-					<th>ที่</th>
+					<!--<th>ที่</th>-->
 					<th>รายการ</th>
 					<th>ค่าส่ง</th>
 					<th>COD</th>
@@ -98,20 +98,27 @@ p{font-family: Arial; font-size: 10pt;}
 				{% for main in mains %}
 
 				<tr>
-					<td>{{ $index + 1 }}</td>
-					<td>{{main.barcode}} <br />{{main.s_name}} <br />{{ main.r_country }}<br />น.น.{{main.weight}}กรัม </td>
+					<!--<td>{{ $index + 1 }}</td>-->
+					<td>{{main.barcode}}
+						<br />{{main.s_name}}
+						<br />{{ main.r_country }}
+						<br />น.น.{{main.weight}}กรัม
+						<br /> COD {{main.productPrice}} บาท
+					</td>
 					<td style="text-align:center">{{main.total}}</td>
 					<td style="text-align:center">{{main.codAmnt}}</td>
 					<td style="text-align:center">{{main.insuranceAmnt}}</td>
 					<!--<td style="text-align:center">{{main.totalVatAmnt}}</td>-->
-					<td style="text-align:center">{{main.grandTotalAmnt}}</td>
+					<td style="text-align:center">{{main.grandTotalAmnt.toFixed(2)}}</td>
 				</tr>
 				{% endfor %}
 			</table>
 		</div>
 		<div style="text-align:right">
-			<h5>จำนวน {{data.length}} รายการ</h5>
-			<h5 style="margin-top:-20px">รวมเป็นเงิน {{totalAmount}} บาท</h5>
+			<p>จำนวน {{data.length}} รายการ</p>
+			<p style="margin-top:-10px">จำนวนเงิน {{(totalAmount - totalVatAmnt).toFixed(2)}} บาท</p>
+			<p style="margin-top:-10px">VAT {{totalVatAmnt.toFixed(2)}} บาท</p>
+			<p style="margin-top:-10px"><strong>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</strong></p>
 		</div>
 		<div style="text-align:center">
 			<p style="margin-top:0px"><strong>THANK YOU & ENJOY</strong></p>

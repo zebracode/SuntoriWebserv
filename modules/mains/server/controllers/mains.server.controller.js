@@ -279,6 +279,7 @@ exports.printSlip = function (req, res, next) {
 				var totalAmount = 0;
 				var dateString = "";
 				var timeString = "";
+				var totalVatAmnt = 0;
 
 				if (typeof mains[0].receiptDate !== 'undefined') {
 					var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
@@ -296,6 +297,10 @@ exports.printSlip = function (req, res, next) {
 					if (!isNaN(total)) {
 						totalAmount += total;
 					}
+					var vatAmt = Number(mains[i].totalVatAmnt);
+                    if(!isNaN(vatAmt)){
+                    totalVatAmnt += vatAmt;
+                  	}
 				}
 
 				User.findById(mains[0].user, '-salt -password').exec(function (err, user) {
@@ -308,12 +313,12 @@ exports.printSlip = function (req, res, next) {
 					res.render('modules/mains/server/views/formSlip', {
 						title: 'Form Slip',
 						mains: mains,
-						totalAmount: totalAmount,
-						dateString: dateString,
-						timeString: timeString,
-						user: user.username
-					});
-
+                        totalVatAmnt: totalVatAmnt,
+                        totalAmount: totalAmount,
+                        dateString: dateString,
+                        timeString: timeString,
+                        user: user.username
+                    });
 				});
 			} else {
 				res.send("No data to print !!!");

@@ -78,8 +78,8 @@ table, th, td {
 					<th>น้ำหนัก</th>
 					<th>ยอดเงิน</th>
 					<th>COD</th>
-					<th>ค่าประกัน</th>
-					<!--<th>Vat</th>-->
+					<th>ประกัน</th>
+					<th>Vat</th>
 					<th>รวม</th>
 				</tr>
 				{% for main in mains %}
@@ -90,22 +90,19 @@ table, th, td {
 					<td>{{main.barcode}}</td>
 					<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
 					<td>{{main.weight}}</td>
-					<td>{{main.grandTotalAmnt.toFixed(2)}}</td>
+					<td>{{main.total}}</td>
 					<td>{{main.codAmnt}}</td>
 					<td>{{main.insuranceAmnt}}</td>
-					<!--<td>{{main.totalVatAmnt}}</td>-->
+					<td>{{main.totalVatAmnt.toFixed(2)}}</td>
 					<td>{{main.grandTotalAmnt.toFixed(2)}}</td>
 				</tr>
 				{% endfor %}
 			</table>
 		</div>
-		<div style="margin-top:0px">
-			<div style="margin-left:550px">
-				<h5>จำนวนเงิน {{(totalAmount - totalVatAmnt).toFixed(2)}} บาท</h5>
-				<h5>VAT {{totalVatAmnt.toFixed(2)}} บาท</h5>
-				<h5>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</h5>
-			</div>
-
+		<div style="text-align:right">
+			<h6>จำนวนเงิน {{(totalAmount - totalVatAmnt).toFixed(2)}} บาท</h6>
+			<h6>VAT {{totalVatAmnt.toFixed(2)}} บาท</h6>
+			<h6>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</h6>
 		</div>
 	</div>
 
