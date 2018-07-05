@@ -11,7 +11,7 @@ angular.module('mains').factory('ThailandPost', ['$resource',
     {
       save: {
         method:'POST',
-        isArray:true
+        isArray:false
       },
       update: {
         method: 'PUT',
