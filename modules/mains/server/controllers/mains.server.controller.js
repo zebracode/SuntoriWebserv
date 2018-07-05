@@ -218,6 +218,7 @@ exports.printBill = function (req, res, next) {
 				var totalAmount = 0;
 				var dateString = "";
 				var timeString = "";
+				var totalVatAmnt = 0;
 
 				if (typeof mains[0].receiptDate !== 'undefined') {
 					var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
@@ -235,6 +236,12 @@ exports.printBill = function (req, res, next) {
 					if (!isNaN(total)) {
 						totalAmount += total;
 					}
+
+					var vatAmt = Number(mains[i].totalVatAmnt);
+					if(!isNaN(vatAmt)){
+						totalVatAmnt += vatAmt;
+					}
+
 				}
 
 				User.findById(mains[0].user, '-salt -password').exec(function (err, user) {
@@ -247,6 +254,7 @@ exports.printBill = function (req, res, next) {
 					res.render('modules/mains/server/views/formBill', {
 						title: 'Form Bill',
 						mains: mains,
+						totalVatAmnt: totalVatAmnt,
 						totalAmount: totalAmount,
 						dateString: dateString,
 						timeString: timeString,
