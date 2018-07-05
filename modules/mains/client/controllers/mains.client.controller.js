@@ -910,9 +910,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 							}
 						});
 					});
-
+					
+					//Show dialog for print all and bill
+					$scope.showPrintAllAndBill(ev);	
 
 				});
+
+				
 
 			}, function () {
 				$scope.status = 'Cancel';
