@@ -71,133 +71,426 @@
               <div class="x_content">
                 <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="save()" novalidate>
                   <div class="row">
-                    <div class="form-group">
-                      <label class="col-md-4 col-sm-2 col-xs-12 control-label">
-                        <small class="text-navy">ไม่เกิน 0.5 กก. </small>
-                      </label>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.bkPrice1" class="form-control" placeholder="ราคา กทม.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">ไม่มีน้ำหนัก</small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice0" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice0" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
                       </div>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.ctPrice1" class="form-control" placeholder="ราคา ตจว.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">ไม่เกิน 1-250 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice1" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice1" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
                       </div>
-                      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
-                      <!--</div>-->
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">251-500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice2" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice2" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">501-1,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice3" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice3" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">1,001-1,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice4" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice4" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">1,501-2,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice5" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice5" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">2,001-2,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice6" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice6" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">2,501-3,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice7" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice7" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">3,001-3,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice8" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice8" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">3,501-4,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice9" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice9" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">4,001-4,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice10" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice10" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">4,501-5,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice11" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice11" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">5,001-5,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice12" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice12" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">5,501-6,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice13" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice13" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">6,001-6,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice14" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice14" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">6,501-7,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice15" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice15" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label class="col-md-4 col-sm-2 col-xs-12 control-label">
-                        <small class="text-navy">น้ำหนัก 0.5-1 กก. </small>
-                      </label>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.bkPrice2" class="form-control" placeholder="ราคา กทม.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">7,001-7,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice16" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice16" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
                       </div>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.ctPrice2" class="form-control" placeholder="ราคา ตจว.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">7,501-8,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice17" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice17" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
                       </div>
-                      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
-                      <!--</div>-->
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">8,001-8,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice18" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice18" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">8,501-9,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice19" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice19" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">9,001-9,500 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice20" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice20" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">9,501-10,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice21" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice21" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">10,001-11,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice22" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice22" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">11,001-12,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice23" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice23" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">12,001-13,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice24" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice24" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">13,001-14,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice25" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice25" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">14,001-15,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice26" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice26" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">15,001-16,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice27" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice27" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">16,001-17,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice28" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice28" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">17,001-18,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice29" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice29" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">18,001-19,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice30" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice30" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 col-sm-2 col-xs-12 control-label">
+                          <small class="text-navy">19,001-20,000 กรัม </small>
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.bkPrice31" class="form-control" placeholder="ราคา กทม.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                          <input type="text" data-ng-model="userPrice.ctPrice31" class="form-control" placeholder="ราคา ตจว.">
+                          <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label class="col-md-4 col-sm-2 col-xs-12 control-label">
-                        <small class="text-navy">น้ำหนัก 1-3 กก. </small>
-                      </label>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.bkPrice3" class="form-control" placeholder="ราคา กทม.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.ctPrice3" class="form-control" placeholder="ราคา ตจว.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
-                      <!--</div>-->
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-4 col-sm-2 col-xs-12 control-label">
-                        <small class="text-navy">น้ำหนัก 3-5 กก. </small>
-                      </label>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.bkPrice4" class="form-control" placeholder="ราคา กทม.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.ctPrice4" class="form-control" placeholder="ราคา ตจว.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
-                      <!--</div>-->
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-4 col-sm-2 col-xs-12 control-label">
-                        <small class="text-navy">น้ำหนัก 5-10 กก. </small>
-                      </label>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.bkPrice5" class="form-control" placeholder="ราคา กทม.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.ctPrice5" class="form-control" placeholder="ราคา ตจว.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
-                      <!--</div>-->
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-4 col-sm-2 col-xs-12 control-label">
-                        <small class="text-navy">น้ำหนัก 10-15 กก. </small>
-                      </label>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.bkPrice6" class="form-control" placeholder="ราคา กทม.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.ctPrice6" class="form-control" placeholder="ราคา ตจว.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
-                      <!--</div>-->
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-4 col-sm-2 col-xs-12 control-label">
-                        <small class="text-navy">น้ำหนัก 15-20 กก. </small>
-                      </label>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.bkPrice7" class="form-control" placeholder="ราคา กทม.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <div class="col-md-2 col-sm-4 col-xs-12">
-                        <input type="text" data-ng-model="userPrice.ctPrice7" class="form-control" placeholder="ราคา ตจว.">
-                        <span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>
-                      </div>
-                      <!--<div class="col-md-2 col-sm-2 col-xs-12">-->
-                      <!--<button class="btn btn-primary" type="text">บันทึก</button>-->
-                      <!--</div>-->
-                    </div>
-
-                    <!--<div class="form-group">-->
-                      <!--<label class="col-md-4 col-sm-2 col-xs-12 control-label">-->
-                        <!--<small class="text-navy">น้ำหนัก 15-200 กก. </small>-->
-                      <!--</label>-->
-                      <!--<div class="col-md-2 col-sm-4 col-xs-12">-->
-                        <!--<input type="text" data-ng-model="userPrice.bkPrice8" class="form-control" placeholder="ราคา กทม.">-->
-                        <!--<span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>-->
-                      <!--</div>-->
-                      <!--<div class="col-md-2 col-sm-4 col-xs-12">-->
-                        <!--<input type="text" data-ng-model="userPrice.ctPrice8" class="form-control" placeholder="ราคา ตจว.">-->
-                        <!--<span class="fa fa-money form-control-feedback right" aria-hidden="true"></span>-->
-                      <!--</div>-->
-                    <!--</div>-->
-
 
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-4">
                       <input type="submit" class="btn btn-lg btn-primary" value="บันทึก"/>

@@ -33,14 +33,38 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			UserPricesService.get({
 				userId: Authentication.user._id
 			}, function (userPrice) {
-				userPrices.push({ weight: 500, bkPrice: userPrice.bkPrice1, ctPrice: userPrice.ctPrice1 });
-				userPrices.push({ weight: 1000, bkPrice: userPrice.bkPrice2, ctPrice: userPrice.ctPrice2 });
-				userPrices.push({ weight: 3000, bkPrice: userPrice.bkPrice3, ctPrice: userPrice.ctPrice3 });
-				userPrices.push({ weight: 5000, bkPrice: userPrice.bkPrice4, ctPrice: userPrice.ctPrice4 });
-				userPrices.push({ weight: 10000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5 });
-				userPrices.push({ weight: 15000, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6 });
-				userPrices.push({ weight: 20000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7 });
-				userPrices.push({ weight: 30000, bkPrice: userPrice.bkPrice8, ctPrice: userPrice.ctPrice8 });
+			    userPrices.push({ weight: 0, bkPrice: userPrice.bkPrice0, ctPrice: userPrice.ctPrice0 });
+				userPrices.push({ weight: 250, bkPrice: userPrice.bkPrice1, ctPrice: userPrice.ctPrice1 });
+				userPrices.push({ weight: 500, bkPrice: userPrice.bkPrice2, ctPrice: userPrice.ctPrice2 });
+				userPrices.push({ weight: 1000, bkPrice: userPrice.bkPrice3, ctPrice: userPrice.ctPrice3 });
+				userPrices.push({ weight: 1500, bkPrice: userPrice.bkPrice4, ctPrice: userPrice.ctPrice4 });
+				userPrices.push({ weight: 2000, bkPrice: userPrice.bkPrice5, ctPrice: userPrice.ctPrice5 });
+				userPrices.push({ weight: 2500, bkPrice: userPrice.bkPrice6, ctPrice: userPrice.ctPrice6 });
+				userPrices.push({ weight: 3000, bkPrice: userPrice.bkPrice7, ctPrice: userPrice.ctPrice7 });
+				userPrices.push({ weight: 3500, bkPrice: userPrice.bkPrice8, ctPrice: userPrice.ctPrice8 });
+				userPrices.push({ weight: 4000, bkPrice: userPrice.bkPrice9, ctPrice: userPrice.ctPrice9 });
+				userPrices.push({ weight: 4500, bkPrice: userPrice.bkPrice10, ctPrice: userPrice.ctPrice10 });
+				userPrices.push({ weight: 5000, bkPrice: userPrice.bkPrice11, ctPrice: userPrice.ctPrice11 });
+				userPrices.push({ weight: 5500, bkPrice: userPrice.bkPrice12, ctPrice: userPrice.ctPrice12 });
+				userPrices.push({ weight: 6000, bkPrice: userPrice.bkPrice13, ctPrice: userPrice.ctPrice13 });
+				userPrices.push({ weight: 6500, bkPrice: userPrice.bkPrice14, ctPrice: userPrice.ctPrice14 });
+				userPrices.push({ weight: 7000, bkPrice: userPrice.bkPrice15, ctPrice: userPrice.ctPrice15 });
+				userPrices.push({ weight: 7500, bkPrice: userPrice.bkPrice16, ctPrice: userPrice.ctPrice16 });
+				userPrices.push({ weight: 8000, bkPrice: userPrice.bkPrice17, ctPrice: userPrice.ctPrice17 });
+				userPrices.push({ weight: 8500, bkPrice: userPrice.bkPrice18, ctPrice: userPrice.ctPrice18 });
+				userPrices.push({ weight: 9000, bkPrice: userPrice.bkPrice19, ctPrice: userPrice.ctPrice19 });
+				userPrices.push({ weight: 9500, bkPrice: userPrice.bkPrice20, ctPrice: userPrice.ctPrice20 });
+				userPrices.push({ weight: 10000, bkPrice: userPrice.bkPrice21, ctPrice: userPrice.ctPrice21 });
+				userPrices.push({ weight: 11000, bkPrice: userPrice.bkPrice22, ctPrice: userPrice.ctPrice22 });
+				userPrices.push({ weight: 12000, bkPrice: userPrice.bkPrice23, ctPrice: userPrice.ctPrice23 });
+				userPrices.push({ weight: 13000, bkPrice: userPrice.bkPrice24, ctPrice: userPrice.ctPrice24 });
+				userPrices.push({ weight: 14000, bkPrice: userPrice.bkPrice25, ctPrice: userPrice.ctPrice25 });
+				userPrices.push({ weight: 15000, bkPrice: userPrice.bkPrice26, ctPrice: userPrice.ctPrice26 });
+				userPrices.push({ weight: 16000, bkPrice: userPrice.bkPrice27, ctPrice: userPrice.ctPrice27 });
+				userPrices.push({ weight: 17000, bkPrice: userPrice.bkPrice28, ctPrice: userPrice.ctPrice28 });
+				userPrices.push({ weight: 18000, bkPrice: userPrice.bkPrice29, ctPrice: userPrice.ctPrice29 });
+				userPrices.push({ weight: 19000, bkPrice: userPrice.bkPrice30, ctPrice: userPrice.ctPrice30 });
+				userPrices.push({ weight: 20000, bkPrice: userPrice.bkPrice31, ctPrice: userPrice.ctPrice31 });
 				userPrices.sort(function(a, b){return a.weight - b.weight}); // Sort by weight
 			});
 		}
@@ -253,214 +277,261 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 		$scope.options = [
 			{
-				name: '--น้ำหนัก/ขนาด--',
+				name: '--น้ำหนัก--',
 				value: '0',
-				price: '0',
 				bkPrice: 40,
                 ctPrice: 50,
+                price: '0',
                 weight: 0
 			},
 			{
-				name: 'น้ำหนักไม่เกิน 0.5 กก.',
-				value: '500',
-				price: '40',
+				name: 'น้ำหนัก 1-250 กรัม',
+				value: '1-250',
 				bkPrice: 40,
 				ctPrice: 50,
+				price: '42',
+				weight: 250
+			},
+			{
+				name: 'น้ำหนัก 251-500 กรัม',
+				value: '251-500',
+				bkPrice: 40,
+				ctPrice: 50,
+				price: '52',
 				weight: 500
 			},
 			{
-				name: '- กล่อง เบอร์ 0',
-				value: '0-500',
-				bkPrice: 40,
-				ctPrice: 50,
-				price: '40',
-				weight: 500
-			},
-			{
-				name: '- กล่อง เบอร์ AA',
-				value: '0-500',
-				bkPrice: 40,
-				ctPrice: 50,
-				price: '40',
-				weight: 500
-			},
-			{
-				name: 'น้ำหนัก 0.5 - 1 กก.',
-				value: '500-1,000',
+				name: 'น้ำหนัก 501-1,000 กรัม',
+				value: '501-1,000',
 				bkPrice: 60,
 				ctPrice: 70,
-				price: '60',
+				price: '67',
 				weight: 1000
 			},
 			{
-				name: '- กล่อง เบอร์ AA+4',
-				value: '500-1,000',
+				name: 'น้ำหนัก 1,001-1,500 กรัม',
+				value: '1,001-1,500',
 				bkPrice: 60,
 				ctPrice: 70,
-				price: '60',
-				weight: 1000
+				price: '82',
+				weight: 1500
 			},
 			{
-				name: '- กล่อง เบอร์ A (ก)',
-				value: '500-1,000',
+				name: 'น้ำหนัก 1,501-2,000 กรัม',
+				value: '1,501-2,000',
 				bkPrice: 60,
 				ctPrice: 70,
-				price: '60',
-				weight: 1000
+				price: '97',
+				weight: 2000
 			},
 			{
-				name: 'น้ำหนัก 1 - 3 กก.',
-				value: '1,000-3,000',
+				name: 'น้ำหนัก 2,001-2,500 กรัม',
+				value: '2,001-2,500',
 				bkPrice: 80,
 				ctPrice: 100,
-				price: '80',
+				price: '122',
+				weight: 2500
+			},
+			{
+				name: 'น้ำหนัก 2,501-3,000 กรัม',
+				value: '2,501-3,000',
+				bkPrice: 80,
+				ctPrice: 100,
+				price: '132',
 				weight: 3000
 			},
 			{
-				name: '- กล่อง เบอร์ CD',
-				value: '1,000-3,000',
+				name: 'น้ำหนัก 3,001-3,500 กรัม',
+				value: '3,001-3,500',
 				bkPrice: 80,
 				ctPrice: 100,
-				price: '80',
-				weight: 3000
+				price: '142',
+				weight: 3500
 			},
 			{
-				name: '- กล่อง เบอร์ 2A',
-				value: '1,000-3,000',
+				name: 'น้ำหนัก 3,501-4,000 กรัม',
+				value: '3,501-4,000',
 				bkPrice: 80,
 				ctPrice: 100,
-				price: '80',
-				weight: 3000
+				price: '152',
+				weight: 4000
 			},
 			{
-				name: '- กล่อง เบอร์ B (ข)',
-				value: '1,000-3,000',
+				name: 'น้ำหนัก 4,001-4,500 กรัม',
+				value: '4,001-4,500',
 				bkPrice: 80,
 				ctPrice: 100,
-				price: '80',
-				weight: 3000
+				price: '162',
+				weight: 4500
 			},
 			{
-				name: '- กล่อง เบอร์ BH',
-				value: '1,000-3,000',
+				name: 'น้ำหนัก 4,501-5,000 กรัม',
+				value: '4,501-5,000',
 				bkPrice: 80,
 				ctPrice: 100,
-				price: '80',
-				weight: 3000
-			},
-			{
-				name: '- กล่อง เบอร์ 2B',
-				value: '1,000-3,000',
-				bkPrice: 80,
-				ctPrice: 100,
-				price: '80',
-				weight: 3000
-			},
-			{
-				name: 'น้ำหนัก 3 - 5 กก.',
-				value: '3,000-5,000',
-				bkPrice: 90,
-				ctPrice: 110,
-				price: '90',
+				price: '172',
 				weight: 5000
 			},
 			{
-				name: '- กล่อง เบอร์ C (ค)',
-				value: '3,000-5,000',
+				name: 'น้ำหนัก 5,001-5,500 กรัม',
+				value: '5,001-5,500',
 				bkPrice: 90,
 				ctPrice: 110,
-				price: '90',
-				weight: 5000
+				price: '192',
+				weight: 5500
 			},
 			{
-				name: '- กล่อง เบอร์ C+8',
-				value: '3,000-5,000',
+				name: 'น้ำหนัก 5,501-6,000 กรัม',
+				value: '5,501-6,000',
 				bkPrice: 90,
 				ctPrice: 110,
-				price: '90',
-				weight: 5000
+				price: '212',
+				weight: 6000
 			},
 			{
-				name: '- กล่อง เบอร์ D (ง)',
-				value: '3,000-5,000',
+				name: 'น้ำหนัก 6,001-6,500 กรัม',
+				value: '6,001-6,500',
 				bkPrice: 90,
 				ctPrice: 110,
-				price: '90',
-				weight: 5000
+				price: '232',
+				weight: 6500
 			},
 			{
-				name: 'น้ำหนัก 5 - 10 กก.',
-				value: '5,000-10,000',
+				name: 'น้ำหนัก 6,501-7,000 กรัม',
+				value: '6,501-7,000',
+				bkPrice: 90,
+				ctPrice: 110,
+				price: '252',
+				weight: 7000
+			},
+			{
+				name: 'น้ำหนัก 7,001-7,500 กรัม',
+				value: '7,001-7,500',
 				bkPrice: 130,
 				ctPrice: 150,
-				price: '130',
-				weight: 10000
+				price: '272',
+				weight: 7500
 			},
 			{
-				name: '- กล่อง เบอร์ F (สั้น)',
-				value: '5,000-10,000',
+				name: 'น้ำหนัก 7,501-8,000 กรัม',
+				value: '7,501-8,000',
 				bkPrice: 130,
 				ctPrice: 150,
-				price: '130',
-				weight: 10000
+				price: '292',
+				weight: 8000
 			},
 			{
-				name: '- กล่อง เบอร์ E (จ)',
-				value: '5,000-10,000',
+				name: 'น้ำหนัก 8,001-8,500 กรัม',
+				value: '8,001-8,500',
 				bkPrice: 130,
 				ctPrice: 150,
-				price: '130',
-				weight: 10000
+				price: '312',
+				weight: 8500
 			},
 			{
-				name: '- กล่อง เบอร์ F (ฉ)',
-				value: '5,000-10,000',
+				name: 'น้ำหนัก 8,501-9,000 กรัม',
+				value: '8,501-9,000',
 				bkPrice: 130,
 				ctPrice: 150,
-				price: '130',
-				weight: 10000
-
+				price: '332',
+				weight: 9000
 			},
 			{
-				name: 'น้ำหนัก 10 - 15 กก.',
-				value: '10,000-15,000',
+				name: 'น้ำหนัก 9,001-9,500 กรัม',
+				value: '9,001-9,500',
 				bkPrice: 220,
 				ctPrice: 240,
-				price: '220',
-				weight: 15000
+				price: '352',
+				weight: 9500
 			},
 			{
-				name: '- กล่อง เบอร์ G (ยาว)',
-				value: '10,000-15,000',
+				name: 'น้ำหนัก 9,501-10,000 กรัม',
+				value: '9,501-10,000',
 				bkPrice: 220,
 				ctPrice: 240,
-				price: '220',
+				price: '372',
+				weight: 10000
+			},
+			{
+				name: 'น้ำหนัก 10,001-11,000 กรัม',
+				value: '0,001-11,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '452',
+				weight: 11000
+			},
+			{
+				name: 'น้ำหนัก 11,001-12,000 กรัม',
+				value: '11,001-12,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '492',
+				weight: 12000
+			},
+            {
+				name: 'น้ำหนัก 12,001-13,000 กรัม',
+				value: '12,001-13,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '502',
+				weight: 13000
+			},
+            {
+				name: 'น้ำหนัก 13,001-14,000 กรัม',
+				value: '13,001-14,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '522',
+				weight: 14000
+			},
+            {
+				name: 'น้ำหนัก 14,001-15,000 กรัม',
+				value: '14,001-15,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '537',
 				weight: 15000
 			},
-			{
-				name: 'น้ำหนัก 15 - 20 กก.',
-				value: '15,000-20,000',
+            {
+				name: 'น้ำหนัก 15,001-16,000 กรัม',
+				value: '15,001-16,000',
 				bkPrice: 260,
 				ctPrice: 280,
-				price: '260',
-				weight: 20000
+				price: '552',
+				weight: 16000
 			},
-			{
-				name: '- 50*50*50 cm',
-				value: '15,000-20,000',
+            {
+				name: 'น้ำหนัก 16,001-17,000 กรัม',
+				value: '16,001-17,000',
 				bkPrice: 260,
 				ctPrice: 280,
-				price: '260',
+				price: '562',
+				weight: 17000
+			},
+            {
+				name: 'น้ำหนัก 17,001-18,000 กรัม',
+				value: '17,001-18,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '582',
+				weight: 18000
+			},
+            {
+				name: 'น้ำหนัก 18,001-19,000 กรัม',
+				value: '18,001-19,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '597',
+				weight: 19000
+			},
+            {
+				name: 'น้ำหนัก 19,001-20,000 กรัม',
+				value: '19,001-20,000',
+				bkPrice: 260,
+				ctPrice: 280,
+				price: '612',
 				weight: 20000
 			}
-//			{
-//            	name: '- test cm',
-//                value: '20,000-30,000',
-//            	bkPrice: 260,
-//            	ctPrice: 280,
-//            	price: '260',
-//            	weight: 30000
-//            }
 		];
 
 		var standardPrice = [];
@@ -982,6 +1053,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					'    <md-button class="md-primary" href="/print/bill?rcpDocNo={{items}}" target="_blank">' +
 					'      พิมพ์ใบเสร็จ' +
 					'    </md-button>' +
+					'    <md-button class="md-primary" href="/print/slip?rcpDocNo={{items}}" target="_blank">' +
+                    '      พิมพ์สลิป' +
+                   	'    </md-button>' +
 					'  </md-dialog-actions>' +
 					'</md-dialog>',
 				locals: {

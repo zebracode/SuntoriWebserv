@@ -28,7 +28,7 @@
     border:solid 0px red;
     text-align:left;
 }
-#div2 {	
+#div2 {
     float:left;
     width:245px;
     height:450px;
@@ -48,39 +48,65 @@ table, th, td {
 	<!-- Write HTML just like a web page -->
 	<div style="background-image:url(/assets/img/formA5.png); position:absolute; left:37px; top:{{main.position}}px; width:730px; height:450px;" title="">
 		<div id='div1'>
-			<div style="margin-left:3em">
-				<div style="margin-top:60px">
-					<h3>{{main.s_name}}</h3>
-				</div>
-				<div style="margin-top:-10px">
-					<span>{{main.s_address}}</span>
-				</div>
-				<div style="margin-top: 10px">
-					<span>{{main.s_ampher}}</span>
-				</div>
-				<div style="margin-top:10px">
-					<span>{{main.s_country}}</span>
-				</div>
-				<br><br>
-				<div style="margin-left:10em">
-					<h1 style="margin-top:-20px">{{main.s_postcode}}</h1>
-				</div>
+			{% if main.isCod %}
+			<div style="margin-left: 350px;
+				margin-right: 30px;
+				padding-left:10px;
+				background-color: red">
+				<h1>COD</h1>
 			</div>
-			<div style="margin-left:11em">
-				<div style="margin-top:50px">
-					<h3>{{main.r_name}} ({{main.r_tel}})</h3>
+			{% endif %}
+
+			{% if !main.isCod %}
+			<div style="margin-left: 350px;
+				margin-right: 30px;
+				padding-left:10px;
+				background-color: white">
+				<h1 style="color: white">COD</h1>
+			</div>
+			{% endif %}
+
+			<div style="margin-left: 270px;
+					margin-right: 0px;
+					padding-left:10px;
+					background-color: white">
+				<h1>ระวังแตก!!!</h1>
+			</div>
+			<div style="margin-top:-90px">
+				<div style="margin-left:3em">
+					<div style="margin-top:0px">
+						<h3>{{main.s_name}}</h3>
+					</div>
+					<div style="margin-top:-10px">
+						<span>{{main.s_address}}</span>
+					</div>
+					<div style="margin-top: 10px">
+						<span>{{main.s_ampher}}</span>
+					</div>
+					<div style="margin-top:10px">
+						<span>{{main.s_country}}</span>
+					</div>
+					<br><br>
+					<div style="margin-left:10em">
+						<h1 style="margin-top:-20px">{{main.s_postcode}}</h1>
+					</div>
 				</div>
-				<div style="margin-top:-10px">
-					<span>{{main.r_address}}</span>
-				</div>
-				<div style="margin-top:10px">
-					<span>{{main.r_ampher}}</span>
-				</div>
-				<div style="margin-top:10px">
-					<span>{{main.r_country}}</span>
-				</div>
-				<div style="margin-left:10em">
-					<h1 style="margin-top:10px">{{main.r_postcode}}</h1>
+				<div style="margin-left:11em">
+					<div style="margin-top:50px">
+						<h3>{{main.r_name}} ({{main.r_tel}})</h3>
+					</div>
+					<div style="margin-top:-10px">
+						<span>{{main.r_address}}</span>
+					</div>
+					<div style="margin-top:10px">
+						<span>{{main.r_ampher}}</span>
+					</div>
+					<div style="margin-top:10px">
+						<span>{{main.r_country}}</span>
+					</div>
+					<div style="margin-left:10em">
+						<h1 style="margin-top:10px">{{main.r_postcode}}</h1>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -108,7 +134,7 @@ table, th, td {
 			</div>
 
 			<div class="text-danger" style="margin-top:35px">
-				<h1 style="color:#FF0000">COD {{main.price}} บาท</h1>
+				<h1 style="color:#FF0000">COD {{main.codAmnt}} บาท</h1>
 			</div>
 		</div>
 	</div>
