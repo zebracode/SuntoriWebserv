@@ -80,10 +80,10 @@ angular.module('userprices').controller('UserPriceController', ['$scope', '$loca
 
             userPrice.$save(function (response) {
                 //$location.path('userprices/' + response._id);
-                console.log("save success ...");
+                //console.log("save success ...");
             }, function (errorResponse) {
                 //$scope.error = errorResponse.data.message;con
-                console.log("error respose ...");
+                //console.log("error respose ...");
             });
         }
         

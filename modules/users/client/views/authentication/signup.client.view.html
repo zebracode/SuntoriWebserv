@@ -10,71 +10,66 @@
         <div class="row">
           <div class="col-md-6">
             <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="basic-addon1">
-              <i class="glyphicon glyphicon-star"></i>
-            </span>
-              <input type="text" required id="firstName" name="firstName" class="form-control"
-                     data-ng-model="credentials.firstName" placeholder="ชื่อ">
+              <span class="input-group-addon" id="basic-addon1">
+                <i class="glyphicon glyphicon-star"></i>
+              </span>
+              <input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="ชื่อ">
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-group input-group-lg">
-              <input type="text" required id="lastName" name="lastName" class="form-control"
-                     data-ng-model="credentials.lastName" placeholder="นามสกุล">
+              <input type="text" required id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="นามสกุล">
               <span class="input-group-addon" id="basic-addon1">
-              <i class="glyphicon glyphicon-star"></i>
-            </span>
+                <i class="glyphicon glyphicon-star"></i>
+              </span>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="basic-addon1">
-              <i class="glyphicon glyphicon-star"></i>
-            </span>
-              <input type="text" required id="email" name="email" class="form-control"
-                     data-ng-model="credentials.email" placeholder="อีเมลล์">
+              <span class="input-group-addon" id="basic-addon1">
+                <i class="glyphicon glyphicon-star"></i>
+              </span>
+              <input type="text" required id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="อีเมลล์">
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-group input-group-lg">
-              <input type="text" required id="tel" name="tel" class="form-control"
-                     data-ng-model="credentials.tel" placeholder="เบอร์โทรศัพท์">
+              <input type="text" required id="tel" name="tel" class="form-control" data-ng-model="credentials.tel" placeholder="เบอร์โทรศัพท์">
               <span class="input-group-addon" id="basic-addon1">
-              <i class="glyphicon glyphicon-phone"></i>
-            </span>
+                <i class="glyphicon glyphicon-phone"></i>
+              </span>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="basic-addon1">
-              <i class="glyphicon glyphicon-star"></i>
-            </span>
-              <input type="text" required id="username" name="username" class="form-control"
-                     data-ng-model="credentials.username" placeholder="ชื่อผู้ใช้">
+              <span class="input-group-addon" id="basic-addon1">
+                <i class="glyphicon glyphicon-star"></i>
+              </span>
+              <input type="text" required id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="ชื่อผู้ใช้">
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-group input-group-lg">
 
-              <input type="text" required id="password" name="password" class="form-control"
-                     data-ng-model="credentials.password" placeholder="รหัสผ่าน">
+              <input type="text" required id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="รหัสผ่าน">
               <span class="input-group-addon" id="basic-addon1">
-              <i class="glyphicon glyphicon-star"></i>
-            </span>
+                <i class="glyphicon glyphicon-star"></i>
+              </span>
             </div>
 
           </div>
         </div>
 
         <!--<alert type="danger" data-ng-show="error" class="text-center text-danger">-->
-          <!--<span data-ng-bind="error"></span>-->
+        <!--<span data-ng-bind="error"></span>-->
         <!--</alert>-->
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-success btn-lg btn-block">สมัครสมาชิก</button><br />
+          <button type="submit" class="btn btn-success btn-lg btn-block">สมัครสมาชิก</button>
+          <br />
           <button class="loginBtn loginBtn--facebook" ng-click="callOauthProvider('/api/auth/facebook')">
             Login with Facebook
           </button>
