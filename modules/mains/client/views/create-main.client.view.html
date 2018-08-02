@@ -86,13 +86,8 @@
                   <form class="form-horizontal form-label-left input_mask" name="mainForm" data-ng-submit="create()" novalidate>
 
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                      <md-autocomplete
-                              placeholder='ค้นหาผู้ส่ง'
-                              md-selected-item="selectedSender"
-                              md-search-text="searchText"
-                              md-items="item in getSenderName(searchText)"
-                              md-item-text="item.name"
-                              md-selected-item-change='setSenderData()'>
+                      <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedSender" md-search-text="searchText" md-items="item in getSenderName(searchText)"
+                        md-item-text="item.name" md-selected-item-change='setSenderData()'>
 
                         <span md-highlight-text="searchText">{{item.name}}</span>
                       </md-autocomplete>
@@ -262,7 +257,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="col-md-8">
-                  <input class="btn btn-mg btn-default" type="file" ngf-select ng-model="excelFile" name="file"/>
+                  <input class="btn btn-mg btn-default" type="file" ngf-select ng-model="excelFile" name="file" />
                 </div>
                 <div class="col-md-4">
                   <button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="importExcel()">Import Excel</button>
@@ -338,7 +333,8 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                       <div class="form-group">
                         <!--<input type="checkbox" ng-model="all"><br>-->
-                        <select ng-disabled="all" class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options" ng-change="setGrandTotal()">
+                        <select ng-disabled="all" class="form-control" data-ng-model="selectedOption" ng-options="option.name for option in options"
+                          ng-change="setGrandTotal()">
                         </select>
                       </div>
                       <div class="form-group">
@@ -425,4 +421,3 @@
     </md-content>
   </div>
 </div>
-

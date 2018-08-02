@@ -39,4 +39,8 @@ module.exports = function (app) {
 
   app.route('/api/upload/shipping')//.all(mainsPolicy.isAllowed)
     .post(mains.uploadShipping);
+
+  // Boonchuay 2 August 2018
+  app.get('/api/mainByBarcode', mains.findByBarcode);
+  // Boonchuay 2 August 2018
 };

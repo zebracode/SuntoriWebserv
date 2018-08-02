@@ -33,7 +33,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			UserPricesService.get({
 				userId: Authentication.user._id
 			}, function (userPrice) {
-			    userPrices.push({ weight: 0, bkPrice: userPrice.bkPrice0, ctPrice: userPrice.ctPrice0 });
+				userPrices.push({ weight: 0, bkPrice: userPrice.bkPrice0, ctPrice: userPrice.ctPrice0 });
 				userPrices.push({ weight: 250, bkPrice: userPrice.bkPrice1, ctPrice: userPrice.ctPrice1 });
 				userPrices.push({ weight: 500, bkPrice: userPrice.bkPrice2, ctPrice: userPrice.ctPrice2 });
 				userPrices.push({ weight: 1000, bkPrice: userPrice.bkPrice3, ctPrice: userPrice.ctPrice3 });
@@ -65,7 +65,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				userPrices.push({ weight: 18000, bkPrice: userPrice.bkPrice29, ctPrice: userPrice.ctPrice29 });
 				userPrices.push({ weight: 19000, bkPrice: userPrice.bkPrice30, ctPrice: userPrice.ctPrice30 });
 				userPrices.push({ weight: 20000, bkPrice: userPrice.bkPrice31, ctPrice: userPrice.ctPrice31 });
-				userPrices.sort(function(a, b){return a.weight - b.weight}); // Sort by weight
+				userPrices.sort(function (a, b) { return a.weight - b.weight }); // Sort by weight
 			});
 		}
 		// Eng get user prices
@@ -280,9 +280,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				name: '--น้ำหนัก--',
 				value: '0',
 				bkPrice: 40,
-                ctPrice: 50,
-                price: '0',
-                weight: 0
+				ctPrice: 50,
+				price: '0',
+				weight: 0
 			},
 			{
 				name: 'น้ำหนัก 1-250 กรัม',
@@ -468,7 +468,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '492',
 				weight: 12000
 			},
-            {
+			{
 				name: 'น้ำหนัก 12,001-13,000 กรัม',
 				value: '12,001-13,000',
 				bkPrice: 260,
@@ -476,7 +476,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '502',
 				weight: 13000
 			},
-            {
+			{
 				name: 'น้ำหนัก 13,001-14,000 กรัม',
 				value: '13,001-14,000',
 				bkPrice: 260,
@@ -484,7 +484,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '522',
 				weight: 14000
 			},
-            {
+			{
 				name: 'น้ำหนัก 14,001-15,000 กรัม',
 				value: '14,001-15,000',
 				bkPrice: 260,
@@ -492,7 +492,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '537',
 				weight: 15000
 			},
-            {
+			{
 				name: 'น้ำหนัก 15,001-16,000 กรัม',
 				value: '15,001-16,000',
 				bkPrice: 260,
@@ -500,7 +500,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '552',
 				weight: 16000
 			},
-            {
+			{
 				name: 'น้ำหนัก 16,001-17,000 กรัม',
 				value: '16,001-17,000',
 				bkPrice: 260,
@@ -508,7 +508,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '562',
 				weight: 17000
 			},
-            {
+			{
 				name: 'น้ำหนัก 17,001-18,000 กรัม',
 				value: '17,001-18,000',
 				bkPrice: 260,
@@ -516,7 +516,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '582',
 				weight: 18000
 			},
-            {
+			{
 				name: 'น้ำหนัก 18,001-19,000 กรัม',
 				value: '18,001-19,000',
 				bkPrice: 260,
@@ -524,7 +524,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				price: '597',
 				weight: 19000
 			},
-            {
+			{
 				name: 'น้ำหนัก 19,001-20,000 กรัม',
 				value: '19,001-20,000',
 				bkPrice: 260,
@@ -535,16 +535,16 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		];
 
 		var standardPrice = [];
-		for(var i=0; i<$scope.options.length; i++){
-			if($scope.options[i].weight) {
+		for (var i = 0; i < $scope.options.length; i++) {
+			if ($scope.options[i].weight) {
 				standardPrice.push({
-					weight: Number($scope.options[i].weight), 
-					bkPrice: $scope.options[i].bkPrice, 
+					weight: Number($scope.options[i].weight),
+					bkPrice: $scope.options[i].bkPrice,
 					ctPrice: $scope.options[i].ctPrice
 				});
 			}
 		}
-		standardPrice.sort(function(a, b){return a.weight - b.weight}); // Sort by weight
+		standardPrice.sort(function (a, b) { return a.weight - b.weight }); // Sort by weight
 
 		$scope.insurances = [
 			{
@@ -592,29 +592,29 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				value: '50000',
 				charge: '150'
 			}
-//			{
-//				name: '40,001 - 45,000 บาท',
-//				value: '45000',
-//				charge: '90'
-//			},
-//			{
-//				name: '45,001 - 50,000 บาท',
-//				value: '50000',
-//				charge: '100'
-//			}
+			//			{
+			//				name: '40,001 - 45,000 บาท',
+			//				value: '45000',
+			//				charge: '90'
+			//			},
+			//			{
+			//				name: '45,001 - 50,000 บาท',
+			//				value: '50000',
+			//				charge: '100'
+			//			}
 		];
 
 		// Price List of Insurance
 		var insurePrices = [];
-		for (var i=0; i<$scope.insurances.length; i++){
-			if($scope.insurances[i].charge) {
+		for (var i = 0; i < $scope.insurances.length; i++) {
+			if ($scope.insurances[i].charge) {
 				insurePrices.push({
 					value: Number($scope.insurances[i].value),
 					charge: Number($scope.insurances[i].charge)
 				});
 			}
 		}
-		insurePrices.sort(function(a, b){return a.value - b.value}); // Sort by value
+		insurePrices.sort(function (a, b) { return a.value - b.value }); // Sort by value
 
 
 		$scope.selectedInsurance = $scope.insurances[0];
@@ -625,27 +625,27 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		};
 
 		// Autocomplete Main
-        $scope.getMainName = function (searchText) {
-        			return $http
-        				.get('/api/main/findByName?searchText=' + searchText + '&userId=' + $scope.authentication.user._id)
-        				.then(function (response) {
-        					return response.data;
-        				});
-        		};
+		$scope.getMainName = function (searchText) {
+			return $http
+				.get('/api/main/findByName?searchText=' + searchText + '&userId=' + $scope.authentication.user._id)
+				.then(function (response) {
+					return response.data;
+				});
+		};
 
-        $scope.setMainData = function () {
-        			if ($scope.selectedSender) {
-        				$scope.s_name = $scope.selectedSender.name;
-                        $scope.s_tel = $scope.selectedSender.tel;
-                        $scope.s_email = $scope.selectedSender.email;
-                      	$scope.s_address = $scope.selectedSender.address;
-                       	$scope.s_ampher = $scope.selectedSender.ampher;
-                       	$scope.s_country = $scope.selectedSender.country;
-                       	$scope.s_postcode = $scope.selectedSender.postcode;
-                       	$scope.s_idNumber = $scope.selectedSender.idNumber;
-                       	$scope.detail = $scope.selectedSender.product;
-        			}
-        		};
+		$scope.setMainData = function () {
+			if ($scope.selectedSender) {
+				$scope.s_name = $scope.selectedSender.name;
+				$scope.s_tel = $scope.selectedSender.tel;
+				$scope.s_email = $scope.selectedSender.email;
+				$scope.s_address = $scope.selectedSender.address;
+				$scope.s_ampher = $scope.selectedSender.ampher;
+				$scope.s_country = $scope.selectedSender.country;
+				$scope.s_postcode = $scope.selectedSender.postcode;
+				$scope.s_idNumber = $scope.selectedSender.idNumber;
+				$scope.detail = $scope.selectedSender.product;
+			}
+		};
 
 		// Autocomplete
 		$scope.getSenderName = function (searchText) {
@@ -862,6 +862,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		};
 
 		$scope.showAlert = function (ev) {
+
+			// Boonchuay 2 August 2018 Start
+			if($scope.selectedOption.weight === 0) {
+				$scope.error = "กรุณาเลือกน้ำหนัก";
+				return;
+			}
+			// Boonchuay 2 August 2018 End
+
 			// Appending dialog to document.body to cover sidenav in docs app
 			// Modal dialogs should fully cover application
 			// to prevent interaction outside of dialog
@@ -981,13 +989,13 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 							}
 						});
 					});
-					
+
 					//Show dialog for print all and bill
-					$scope.showPrintAllAndBill(ev);	
+					$scope.showPrintAllAndBill(ev);
 
 				});
 
-				
+
 
 			}, function () {
 				$scope.status = 'Cancel';
@@ -1054,8 +1062,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					'      พิมพ์ใบเสร็จ' +
 					'    </md-button>' +
 					'    <md-button class="md-primary" href="/print/slip?rcpDocNo={{items}}" target="_blank">' +
-                    '      พิมพ์สลิป' +
-                   	'    </md-button>' +
+					'      พิมพ์สลิป' +
+					'    </md-button>' +
 					'  </md-dialog-actions>' +
 					'</md-dialog>',
 				locals: {
@@ -1160,10 +1168,10 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		}
 
 		// Insurance Amount Calculation
-		function calInsureAmnt(limitAmnt){
+		function calInsureAmnt(limitAmnt) {
 			var insureAmnt = 0;
-			for(var i=0; i<insurePrices.length; i++) {
-				if(insurePrices[i].value >= limitAmnt){
+			for (var i = 0; i < insurePrices.length; i++) {
+				if (insurePrices[i].value >= limitAmnt) {
 					insureAmnt = insurePrices[i].charge;
 					return insureAmnt;
 				}
@@ -1227,7 +1235,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		// Shipping Price Calculation
 		function calShippingPrice(weight, senderProvince, receiverProvince) {
 			var shippingPrice = 0;
-			if(userPrices.length > 0){
+			if (userPrices.length > 0) {
 				for (var i = 0; i < userPrices.length; i++) {
 					if (userPrices[i].weight >= weight) {
 						if (isPerimeter(senderProvince, receiverProvince)) {
@@ -1239,9 +1247,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					}
 				}
 			} else {
-				for(var i=0; i<standardPrice.length; i++) {
-					if(standardPrice[i].weight >= weight) {
-						if(isPerimeter(senderProvince, receiverProvince)){
+				for (var i = 0; i < standardPrice.length; i++) {
+					if (standardPrice[i].weight >= weight) {
+						if (isPerimeter(senderProvince, receiverProvince)) {
 							shippingPrice = standardPrice[i].bkPrice;
 						} else {
 							shippingPrice = standardPrice[i].ctPrice;
@@ -1388,6 +1396,14 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		/******      Dialog Zone     *********************/
 		/*************************************************/
 		$scope.showAlert = function (ev) {
+
+			// Boonchuay 2 August 2018 Start
+			if($scope.selectedOption.weight === 0) {
+				$scope.error = "กรุณาเลือกน้ำหนัก";
+				return;
+			}
+			// Boonchuay 2 August 2018 End
+
 			var confirm = $mdDialog.confirm()
 				.title($scope.error ? 'ส่งข้อมูลไม่สำเร็จ' : 'ส่งข้อมูลสำเร็จ')
 				.textContent($scope.error ? $scope.error : 'ข้อมูลถูกส่งไปในรายการค้างชำระเพื่อรอชำระเงินเรียบร้อยแล้ว')

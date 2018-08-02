@@ -475,3 +475,30 @@ exports.findByName = function(req, res, next) {
         }
     });
 };
+
+// Boonchuay 2 August 2018 Start
+exports.findByBarcode = function(req, res, next) {
+	// When already login
+	if(req.query.userId) {
+		console.log("Found user.....");
+		Main.find({barcode: { "$regex": req.query.searchText, "$options": "i" }, user: req.query.userId}, function(err, mains){
+			if (err) {
+				return next(err);
+			} else {
+				res.json(mains);
+			}
+		});
+	// When not login
+	} else {
+		console.log("Not found user.....");
+		Main.find({barcode: { "$regex": req.query.searchText, "$options": "i" }}, function(err, mains){
+			if (err) {
+				return next(err);
+			} else {
+				res.json(mains);
+			}
+		});
+	}
+    
+};
+// Boonchuay 2 August 2018 End
