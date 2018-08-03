@@ -124,9 +124,23 @@
                 <div data-ng-controller="MainsController" data-ng-init="find('summary')">
                   <form ng-submit="$event.preventDefault()">
                     <h6 class="md-caption">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
-                    <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedMain" md-search-text="searchText" md-items="item in getBarcode(searchText)"
-                      md-item-text="item.barcode" md-selected-item-change='setMainData()'>
+                    
+                    <!-- <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedMain" md-search-text="searchText" md-items="item in getBarcode(searchText)"
+                      md-item-text="item.barcode" md-selected-item-change='setBarcodeData(selectedMain)' md-no-cache=true>
+                      <span md-highlight-text="searchText">{{item.barcode}}</span>
+                      <md-not-found>
+                        ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.
+                        <a data-ui-sref="mains.create">เพิ่มรายการ!</a>
+                      </md-not-found>
+                    </md-autocomplete> -->
 
+                    <md-autocomplete placeholder='ค้นหาผู้ส่ง' 
+                      md-selected-item="selectedBarcode" 
+                      md-search-text="searchText" 
+                      md-items="item in getBarcode(searchText)"
+                      md-item-text="item.barcode" 
+                      md-selected-item-change="setBarcodeData(selectedBarcode)" 
+                      md-clear-button = false>
                       <span md-highlight-text="searchText">{{item.barcode}}</span>
                       <md-not-found>
                         ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.
@@ -173,6 +187,48 @@
                     <!--</md-not-found>-->
                     <!--</md-autocomplete>-->
                     <br />
+
+                     <div class="table-responsive" ng-show="barcodes">
+                            <table class="table table-striped jambo_table bulk_action" >
+                              <thead>
+                                <tr class="headings">
+                                  <th class="md-caption">วันที่ </th>
+                                  <th class="md-caption">Tracking No.</th>
+                                  <th class="md-caption">ผู้ส่ง </th>
+                                  <th class="md-caption">ผู้รับ </th>
+                                  <th class="md-caption">เบอร์โทร </th>
+                                  <th class="md-caption">นน.ก่อน </th>
+                                  <th class="md-caption">นน.หลัง </th>
+                                  <th class="md-caption">ค่าส่งก่อน </th>
+                                  <th class="md-caption">ค่าส่งหลัง </th>
+                                  <th class="md-caption">ส่วนต่าง </th>
+                                  <th class="md-caption">ค่าประกัน </th>
+                                  <th class="md-caption">Comment </th>
+                                  <th class="md-caption">สถานะจัดส่ง </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="even pointer" data-ng-repeat="barcode in barcodes">
+                                  <td class="md-caption" ng-bind="barcode.created | date:'mediumDate'"></td>
+                                  <td class="md-caption" ng-bind="barcode.barcode"></td>
+                                  <td class="md-caption" ng-bind="barcode.s_name"></td>
+                                  <td class="md-caption" ng-bind="barcode.r_name"></td>
+                                  <td class="md-caption" ng-bind="barcode.r_tel"></td>
+                                  <td class="md-caption" ng-bind="barcode.weight"></td>
+                                  <td class="md-caption" ng-bind="barcode.tpWeight"></td>
+                                  <td class="md-caption" ng-bind="barcode.total"></td>
+                                  <td class="md-caption">{{ barcode.tpWeight | afterPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
+                                  <td class="md-caption">{{ barcode.tpWeight | diffPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
+                                  <td class="md-caption" ng-bind="barcode.insuranceAmnt"></td>
+                                  <td class="md-caption" ng-bind="barcode.detail_Product"></td>
+                                  <td>
+                                    <a class="btn btn-info btn-xs">
+                                      <i class="fa fa-money"></i> {{ barcode.barcode | updateStatus}} {{barcode.status}}</a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>            
+                          </div>
                   </form>
                 </div>
               </div>
@@ -282,8 +338,13 @@
                       <div data-ng-controller="MainsController" data-ng-init="find('summary')">
                         <form ng-submit="$event.preventDefault()">
                           <h6 class="text-center">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
-                          <md-autocomplete placeholder='กรอกเลขพัสดุ' md-selected-item="selectedMain" md-search-text="searchText" md-items="item in getBarcode(searchText)"
-                            md-item-text="item.barcode" md-selected-item-change='setMainData()'>
+                          <md-autocomplete placeholder='กรอกเลขพัสดุ' 
+                            md-selected-item="selectedMain" 
+                            md-search-text="s" 
+                            md-items="item in getBarcode(s)"
+                            md-item-text="item.barcode" 
+                            md-no-cache=true
+                            md-selected-item-change="setBarcodeData(selectedMain)">
 
                             <span md-highlight-text="searchText">{{item.barcode}}</span>
                             <md-not-found>
@@ -293,6 +354,48 @@
                           </md-autocomplete>
 
                           <br />
+
+                          <div class="table-responsive" ng-show="barcodes">
+                            <table class="table table-striped jambo_table bulk_action" >
+                              <thead>
+                                <tr class="headings">
+                                  <th class="md-caption">วันที่ </th>
+                                  <th class="md-caption">Tracking No.</th>
+                                  <th class="md-caption">ผู้ส่ง </th>
+                                  <th class="md-caption">ผู้รับ </th>
+                                  <th class="md-caption">เบอร์โทร </th>
+                                  <th class="md-caption">นน.ก่อน </th>
+                                  <th class="md-caption">นน.หลัง </th>
+                                  <th class="md-caption">ค่าส่งก่อน </th>
+                                  <th class="md-caption">ค่าส่งหลัง </th>
+                                  <th class="md-caption">ส่วนต่าง </th>
+                                  <th class="md-caption">ค่าประกัน </th>
+                                  <th class="md-caption">Comment </th>
+                                  <th class="md-caption">สถานะจัดส่ง </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="even pointer" data-ng-repeat="barcode in barcodes">
+                                  <td class="md-caption" ng-bind="barcode.created | date:'mediumDate'"></td>
+                                  <td class="md-caption" ng-bind="barcode.barcode"></td>
+                                  <td class="md-caption" ng-bind="barcode.s_name"></td>
+                                  <td class="md-caption" ng-bind="barcode.r_name"></td>
+                                  <td class="md-caption" ng-bind="barcode.r_tel"></td>
+                                  <td class="md-caption" ng-bind="barcode.weight"></td>
+                                  <td class="md-caption" ng-bind="barcode.tpWeight"></td>
+                                  <td class="md-caption" ng-bind="barcode.total"></td>
+                                  <td class="md-caption">{{ barcode.tpWeight | afterPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
+                                  <td class="md-caption">{{ barcode.tpWeight | diffPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
+                                  <td class="md-caption" ng-bind="barcode.insuranceAmnt"></td>
+                                  <td class="md-caption" ng-bind="barcode.detail_Product"></td>
+                                  <td>
+                                    <a class="btn btn-info btn-xs">
+                                      <i class="fa fa-money"></i> {{ barcode.barcode | updateStatus}} {{barcode.status}}</a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>            
+                          </div>
                         </form>
                       </div>
                     </div>

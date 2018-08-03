@@ -250,9 +250,20 @@ angular.module('core').controller('HomeController',
                 return $http
                     .get('/api/mainByBarcode?searchText=' + searchText + '&userId=' + userId)
                     .then(function (response) {
+                        //$scope.barcodes = response.data;
                         return response.data;
                     });
             };
+
+            $scope.setBarcodeData = function(selectedMain){
+                if(selectedMain){
+                    $scope.barcodes = [];
+                    $scope.barcodes[0] = selectedMain;
+                }else{
+                    $scope.barcodes = null;
+                }
+                
+            }
             // Boonchuay 2 August 2018 End
 
             /**
