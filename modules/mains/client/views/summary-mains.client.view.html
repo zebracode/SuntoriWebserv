@@ -142,10 +142,11 @@
                       <th class="md-caption">ค่าส่งหลัง </th>
                       <th class="md-caption">ส่วนต่าง </th>
                       <th class="md-caption">ค่าประกัน </th>
-                      <th class="md-caption">Comment </th>
+                      <th class="md-caption">COD </th>
+                      <th class="md-caption">ค่า COD </th>
                       <th class="md-caption">สถานะจัดส่ง </th>
                       <th class="md-caption">ปริ้น</th>
-                      <th class="md-caption">COD</th>
+                      <th class="md-caption">Comment</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -161,7 +162,10 @@
                       <td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price}}</td>
                       <td class="md-caption">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price}}</td>
                       <td class="md-caption" ng-bind="main.insuranceAmnt"></td>
-                      <td class="md-caption" ng-bind="main.detail_Product"></td>
+                      <td class="md-caption" ng-bind="main.codAmnt"></td>
+                      <td>
+                        <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{ main.productPrice }}</a>
+                      </td>
                       <td>
                         <a class="btn btn-info btn-xs">
                           <i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a>
@@ -176,9 +180,7 @@
                         <a class="btn btn-warning btn-xs" href="/print/sticker?mainId={{main._id}}" target="_blank">
                           <i class="fa fa-print"></i> Sticker </a>
                       </td>
-                      <td>
-                        <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{ main.codAmnt }}</a>
-                      </td>
+                      <td class="md-caption" ng-bind="main.detail_Product"></td>
                       <!--<td>-->
                       <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
                       <!--</td>-->
