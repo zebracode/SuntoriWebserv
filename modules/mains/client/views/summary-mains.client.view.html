@@ -150,7 +150,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText">
+                    <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
                       <td class="md-caption" ng-bind="main.created | date:'mediumDate'"></td>
                       <td class="md-caption" ng-bind="main.barcode"></td>
                       <td class="md-caption" ng-bind="main.s_name"></td>
