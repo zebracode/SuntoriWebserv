@@ -94,7 +94,7 @@
             <h2>ประวัติการชำระเงิน
               <small>ตรวจสอบประวัติการชำระเงิน</small>
             </h2>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="input-group">
                 <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
@@ -112,6 +112,10 @@
             <div class="nav navbar-right panel_toolbox">
               <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
               <button type="button" class="btn btn-mg btn-default" ng-click="vm.exportExcel()">Export Excel</button>
+              <a class="btn btn-app" data-ng-controller="MainsController" data-ng-init="find(); setBalanceAmt();">
+                <span class="badge bg-red">{{balanceAmount | number:2}} บาท</span>
+                <i class="fa fa-money"></i> เงินคงเหลือ
+              </a>
             </div>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
