@@ -10,6 +10,7 @@ var path = require('path'),
 	multer = require('multer'),
 	xlstojson = require("xls-to-json-lc"),
 	xlsxtojson = require("xlsx-to-json-lc"),
+	fecha = require('fecha'),
 	TpLastNumber = require('mongoose').model('TpLastNumber'),
 	errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
@@ -502,3 +503,38 @@ exports.findByBarcode = function(req, res, next) {
     
 };
 // Boonchuay 2 August 2018 End
+
+
+// Boonchuay 6 August 2018 S
+// Export Summary as Excel
+exports.exportSummary = function (req, res, next) {
+	Main.find().sort('-created')
+	.exec(function (err, mains) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			var jsonArr = [];
+
+			for (var i = 0; i < mains.length; i++) {
+				var json = {};
+				json.created_date = fecha.format(mains[i].created, 'mediumDate');
+				json.tracking_number = mains[i].barcode;
+				json.sender_name = mains[i].s_name;
+				json.reciver_name = mains[i].r_name;
+				json.receiver_tel = mains[i].r_tel;
+				json.weight = mains[i].weight;
+				json.actual_weigth = mains[i].tpWeight;
+				json.amount = mains[i].total;
+				json.actual_amount = mains[i].afterPrice;
+				json.diff_amount = mains[i].total - mains[i].afterPrice;
+				json.insurance = mains[i].insuranceAmnt;
+				json.comment = mains[i].detail_Product;
+				json.status = mains[i].status;
+				jsonArr.push(json);
+			}
+			res.xls('summary.xlsx', jsonArr);
+		}
+	});
+};
