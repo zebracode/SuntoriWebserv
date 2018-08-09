@@ -1,0 +1,212 @@
+<div data-ng-controller="HomeController" data-ng-init="find('summary')">
+  <div layout="column">
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+      <md-toolbar class="md-theme-indigo">
+        <div class="md-toolbar-tools">
+          <md-button ng-disabled="true" class="md-primary" data-ng-show="authentication.user">
+            <img data-ng-src="{{authentication.user.profileImageURL}}" alt="{{authentication.user.displayName}}" class="header-profile-image"
+            />
+            <span md-is-locked-open="$mdMedia('gt-sm')" class="md-body-2" data-ng-bind="authentication.user.displayName"></span>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <md-content layout-margin>
+        <md-card-actions layout="row" layout-align="end center">
+
+          <md-button class="md-icon-button md-primary" aria-label="Settings" data-ui-sref="settings.profile">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">แก้ไขข้อมูล</md-tooltip>
+            <md-icon md-svg-icon="pencil"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button md-accent" aria-label="Favorite" data-ui-sref="settings.picture">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรูปภาพ</md-tooltip>
+            <md-icon md-svg-icon="picture"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button md-warning" aria-label="More" data-ui-sref="settings.password">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">เปลี่ยนรหัสผ่าน</md-tooltip>
+            <md-icon md-svg-icon="key"></md-icon>
+          </md-button>
+          <md-button ng-click="toggleLeft()" class="md-accent">
+            ปิดแถบเมนู
+          </md-button>
+        </md-card-actions>
+        <ul class="nav side-menu">
+          <a class="list-group-item" data-ui-sref="home">
+            <h6>
+              <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; หน้าหลัก</h6>
+          </a>
+          <a class="list-group-item" data-ui-sref="mains.list">
+            <h6>
+              <i class="fa fa-book fa-fw" aria-hidden="true"></i>&nbsp; ค้างชำระ</h6>
+          </a>
+          <a class="list-group-item" data-ui-sref="mains.create">
+            <h6>
+              <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; เพิ่มรายการ</h6>
+          </a>
+          <a class="list-group-item" data-ui-sref="recipients.list">
+            <h6>
+              <i class="fa fa-street-view fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้รับ</h6>
+          </a>
+          <a class="list-group-item" data-ui-sref="sends.list">
+            <h6>
+              <i class="fa fa-child fa-fw" aria-hidden="true"></i>&nbsp; รายชื่อผู้ส่ง</h6>
+          </a>
+          <a class="list-group-item" data-ui-sref="mains.summary">
+            <h6>
+              <i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; ประวัติการใช้งาน</h6>
+          </a>
+          <a class="list-group-item" data-ui-sref="mains.payment">
+            <h6>
+              <i class="fa fa-money fa-fw" aria-hidden="true"></i>&nbsp; การเงินย้อนหลัง</h6>
+          </a>
+        </ul>
+      </md-content>
+
+    </md-sidenav>
+
+    <!-- Container #4 Right -->
+    <md-content flex id="content">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <!--User Login -->
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>ประวัติการใช้งาน
+              <small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small>
+            </h2>
+            <div class="col-md-3">
+              <div class="input-group">
+                <input ng-model="searchText" type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Go!</button>
+                </span>
+              </div>
+              <!-- /input-group -->
+            </div>
+            <div class="col-md-2">
+              <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
+            </div>
+            <div class="col-md-2">
+              <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
+            </div>
+            <div class="nav navbar-right panel_toolbox">
+              <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
+              <button type="button" class="btn btn-mg btn-default" ng-click="exportSummary()">Export Excel</button>
+
+              <!--<button type="button" class="btn btn-danger btn-xs"-->
+              <!--[hasPermission]="['admin']"-->
+              <!--onAuthorizedPermission="enable"-->
+              <!--onUnauthorizedPermission="disable">-->
+              <!--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>-->
+              <!--Delete-->
+              <!--</button>-->
+
+            </div>
+            <ul class="nav navbar-right panel_toolbox">
+              <div class="text-center mtop20">
+
+                <!--<ul class="nav navbar-right panel_toolbox">-->
+                <!--<button type="button" class="btn btn-mg btn-default" ng-click="toggleLeft()">เปิดแถบเมนู</button>-->
+                <!--</ul>-->
+                <!--<button type="button" class="btn btn-mg btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Export Excel</button>-->
+              </div>
+            </ul>
+
+            <div class="clearfix"></div>
+            <div class="x_content">
+              <br />
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="md-caption alert">
+                    <strong class="text-danger">ค่าส่วนต่างติดลบ (-)</strong> ระบบจะหักเงินจากบัญชีลูกค้าเพิ่มเติมตามค่าใช้จ่ายจริง.
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="md-caption alert">
+                    <strong class="text-success">ค่าส่วนต่างไม่ติดลบ (+)</strong> ระบบจะคืนเงินเข้าบัญชีลูกค้าเนื่องจากชำระเกินจำนวน.
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action">
+                  <thead>
+                    <tr class="headings">
+                      <th class="md-caption">วันที่ </th>
+                      <th class="md-caption">Tracking No.</th>
+                      <th class="md-caption">ผู้ส่ง </th>
+                      <th class="md-caption">ผู้รับ </th>
+                      <th class="md-caption">เบอร์โทร </th>
+                      <th class="md-caption">นน.ก่อน </th>
+                      <th class="md-caption">นน.หลัง </th>
+                      <th class="md-caption">ค่าส่งก่อน </th>
+                      <th class="md-caption">ค่าส่งหลัง </th>
+                      <th class="md-caption">ส่วนต่าง </th>
+                      <th class="md-caption">ค่าประกัน </th>
+                      <th class="md-caption">COD charge</th>
+                      <th class="md-caption">COD </th>
+                      <th class="md-caption">สถานะจัดส่ง </th>
+                      <th class="md-caption">ปริ้น</th>
+                      <th class="md-caption">Comment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText" data-ng-show="authentication.user._id == main.user._id">
+                      <td class="md-caption" ng-bind="main.created | date:'mediumDate'"></td>
+                      <td class="md-caption" ng-bind="main.barcode"></td>
+                      <td class="md-caption" ng-bind="main.s_name"></td>
+                      <td class="md-caption" ng-bind="main.r_name"></td>
+                      <td class="md-caption" ng-bind="main.r_tel"></td>
+                      <td class="md-caption" ng-bind="main.weight"></td>
+                      <td class="md-caption" ng-bind="main.tpWeight"></td>
+                      <td class="md-caption" ng-bind="main.total"></td>
+                      <td class="md-caption" ng-bind="main.afterPrice"></td>
+                      <td class="md-caption">{{ main.total - main.afterPrice}}</td>
+                      <td class="md-caption" ng-bind="main.insuranceAmnt"></td>
+                      <td class="md-caption" ng-bind="main.codAmnt"></td>
+                      <td>
+                        <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{ main.productPrice }}</a>
+                      </td>
+                      <td>
+                        <a class="btn btn-info btn-xs">
+                          <i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a>
+                      </td>
+                      <td>
+                        <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank">
+                          <i class="fa fa-print"></i> A4 </a>
+                        <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank">
+                          <i class="fa fa-print"></i> A5 </a>
+                        <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank">
+                          <i class="fa fa-print"></i> A6 </a>
+                        <a class="btn btn-warning btn-xs" href="/print/sticker?mainId={{main._id}}" target="_blank">
+                          <i class="fa fa-print"></i> Sticker </a>
+                      </td>
+<<<<<<< HEAD
+                      <td class="md-caption" ng-bind="main.detail_Product"></td>
+                      <!--<td>-->
+                      <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                      <!--</td>-->
+=======
+                      <td>
+                        <a class="btn btn-danger btn-xs">
+                          <i class="fa fa-money"></i> {{ main.codAmnt }}</a>
+                      </td>
+>>>>>>> origin/develop
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="alert alert-warning text-center" data-ng-if="mains.$resolved && !mains.length">
+                  <button type="button" class="btn btn-mg btn-warning" data-toggle="modal" data-target=".bs-example-modal-lg" data-ui-sref="mains.create">ยังไม่มีรายการในระบบ... คลิกเพื่อเพิ่มรายการ</button>
+                </div>
+
+              </div>
+              <div class="text-center form-group">
+                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-content>
+  </div>
+</div>
