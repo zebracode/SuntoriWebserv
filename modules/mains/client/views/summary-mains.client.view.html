@@ -90,14 +90,14 @@
             </div>
             <div class="nav navbar-right panel_toolbox">
               <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
-              <button type="button" class="btn btn-mg btn-default">Export Excel</button>
+              <button type="button" class="btn btn-mg btn-default" ng-click="exportSummary()">Export Excel</button>
 
               <!--<button type="button" class="btn btn-danger btn-xs"-->
-                      <!--[hasPermission]="['admin']"-->
-                      <!--onAuthorizedPermission="enable"-->
-                      <!--onUnauthorizedPermission="disable">-->
-                <!--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>-->
-                <!--Delete-->
+              <!--[hasPermission]="['admin']"-->
+              <!--onAuthorizedPermission="enable"-->
+              <!--onUnauthorizedPermission="disable">-->
+              <!--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>-->
+              <!--Delete-->
               <!--</button>-->
 
             </div>
@@ -159,8 +159,8 @@
                       <td class="md-caption" ng-bind="main.weight"></td>
                       <td class="md-caption" ng-bind="main.tpWeight"></td>
                       <td class="md-caption" ng-bind="main.total"></td>
-                      <td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price}}</td>
-                      <td class="md-caption">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price}}</td>
+                      <td class="md-caption" ng-bind="main.afterPrice"></td>
+                      <td class="md-caption">{{ main.total - main.afterPrice}}</td>
                       <td class="md-caption" ng-bind="main.insuranceAmnt"></td>
                       <td class="md-caption" ng-bind="main.codAmnt"></td>
                       <td>
@@ -181,9 +181,8 @@
                           <i class="fa fa-print"></i> Sticker </a>
                       </td>
                       <td class="md-caption" ng-bind="main.detail_Product"></td>
-                      <!--<td>-->
-                      <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
-                      <!--</td>-->
+                        <a class="btn btn-danger btn-xs">
+                          <i class="fa fa-money"></i> {{ main.codAmnt }}</a>
                     </tr>
                   </tbody>
                 </table>
