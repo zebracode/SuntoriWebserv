@@ -218,6 +218,7 @@ exports.printBill = function (req, res, next) {
   				var dateString = "";
   				var timeString = "";
   				var totalVatAmnt = 0;
+  				var totalafterPrice = 0;
 
   				if (typeof mains[0].receiptDate !== 'undefined') {
   					var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
@@ -231,7 +232,6 @@ exports.printBill = function (req, res, next) {
 
   				for (var i = 0; i < mains.length; i++) {
   					var total = Number(mains[i].grandTotalAmnt);
-
   					if (!isNaN(total)) {
   						totalAmount += total;
   					}
@@ -241,6 +241,10 @@ exports.printBill = function (req, res, next) {
   						totalVatAmnt += vatAmt;
   					}
 
+  					var afterPrice = Number(mains[i].totalafterPrice);
+                    if(!isNaN(afterPrice)){
+                      	totalafterPrice += afterPrice;
+                    }
   				}
 
   				User.findById(mains[0].user, '-salt -password').exec(function (err, user) {

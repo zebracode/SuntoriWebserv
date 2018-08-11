@@ -88,6 +88,8 @@
                     <th class="md-caption">นน.หลัง </th>
                     <th class="md-caption">ค่าส่งก่อน </th>
                     <th class="md-caption">ค่าส่งหลัง </th>
+                    <!--<th class="md-caption">ค่าส่งก่อน </th>-->
+                    <!--<th class="md-caption">ค่าส่งหลัง </th>-->
                     <th class="md-caption">ส่วนต่าง </th>
                     <th class="md-caption">COD charge</th>
                     <th class="md-caption">COD</th>
@@ -110,8 +112,10 @@
                     <td class="md-caption" ng-bind="main.weight"></td>
                     <td class="md-caption" ng-bind="main.tpWeight"></td>
                     <td class="md-caption" ng-bind="main.total"></td>
-                    <td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>
-                    <td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>
+                    <td class="md-caption" ng-bind="main.afterPrice"></td>
+                    <td class="md-caption">{{ main.total - main.afterPrice}}</td>
+                    <!--<td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>-->
+                    <!--<td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>-->
                     <td class="md-caption" ng-bind="main.codAmnt"></td>
                     <td class="md-caption">
                       <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{main.productPrice}} </a>

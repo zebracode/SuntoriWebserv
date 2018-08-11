@@ -89,7 +89,9 @@ p{font-family: Arial; font-size: 10pt;}
 				<tr style="text-align:center">
 					<!--<th>ที่</th>-->
 					<th>รายการ</th>
-					<th>ค่าส่ง</th>
+					<th>ก่อน</th>
+					<th>หลัง</th>
+					<th>ต่าง</th>
 					<th>COD</th>
 					<th>ประกัน</th>
 					<!--<th>Vat</th>-->
@@ -106,6 +108,8 @@ p{font-family: Arial; font-size: 10pt;}
 						<br /> COD {{main.productPrice}} บาท
 					</td>
 					<td style="text-align:center">{{main.total}}</td>
+					<td style="text-align:center">{{main.afterPrice}}</td>
+					<td style="text-align:center">{{ main.total - main.afterPrice}}</td>
 					<td style="text-align:center">{{main.codAmnt}}</td>
 					<td style="text-align:center">{{main.insuranceAmnt}}</td>
 					<!--<td style="text-align:center">{{main.totalVatAmnt}}</td>-->
