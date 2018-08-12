@@ -8,4 +8,3 @@ var PriceSchema = new Schema({
 });
 
 mongoose.model('Price', PriceSchema);
-
