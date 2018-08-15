@@ -240,11 +240,6 @@ exports.printBill = function (req, res, next) {
   					if(!isNaN(vatAmt)){
   						totalVatAmnt += vatAmt;
   					}
-
-  					var afterPrice = Number(mains[i].totalafterPrice);
-                    if(!isNaN(afterPrice)){
-                      	totalafterPrice += afterPrice;
-                    }
   				}
 
   				User.findById(mains[0].user, '-salt -password').exec(function (err, user) {
