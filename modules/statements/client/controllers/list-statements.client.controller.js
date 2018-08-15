@@ -43,7 +43,7 @@
 
     // Export Excel
     function exportExcel() {
-      window.location.href = '/api/excel/statements'
+      window.location.href = '/api/excel/statements';
     }
 
   }

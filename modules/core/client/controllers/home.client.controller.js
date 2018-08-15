@@ -7,8 +7,6 @@ angular.module('core').controller('HomeController',
             $scope.currentPage = 1;
             $scope.itemsPerPage = 10;
 
-
-
             $scope.toggleLeft = buildToggler('left');
             $scope.toggleRight = buildToggler('right');
 
@@ -56,7 +54,7 @@ angular.module('core').controller('HomeController',
                         endDate: $scope.endDate
                     };
                 }
-
+                
                 $scope.mains = Mains.query(
                     data,
                     function (mains) {
@@ -265,6 +263,13 @@ angular.module('core').controller('HomeController',
                 
             }
             // Boonchuay 2 August 2018 End
+
+            // Boonchuay 6 August 2018 Start
+            // Export summary as Excel
+            $scope.exportSummary = function () {
+                window.location.href = '/api/excel/summary';
+            };
+		    // Boonchuay 6 August 2018 End
 
             /**
              * Main Controller for the Angular Material Starter App
