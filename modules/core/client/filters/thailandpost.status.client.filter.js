@@ -1,12 +1,13 @@
 angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentication', 'UserPricesService',
     function ($http, $location, Authentication, UserPricesService) {
-        return function (barcode) {
+        return function (barcode, status, userId) {
             var perimeter = ['กรุงเทพมหานคร', 'กรุงเทพฯ', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ'];
             var userPrices = [];
 
             if (barcode.length < 1) {
                 return "";
             }
+
             $http.get("/getOrderStatus?barcode=" + barcode)
                 .then(function (response) {
                     var status = response.data.statusDescription;
@@ -18,7 +19,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
 
                     // Get prices of user
                     UserPricesService.get({
-                        userId: Authentication.user._id
+                        userId: userId
                     }, function (userPrice) {
                         userPrices.push({ weight: 0, bkPrice: userPrice.bkPrice0, ctPrice: userPrice.ctPrice0 });
                         userPrices.push({ weight: 250, bkPrice: userPrice.bkPrice1, ctPrice: userPrice.ctPrice1 });
