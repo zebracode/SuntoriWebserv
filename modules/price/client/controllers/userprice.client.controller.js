@@ -79,11 +79,8 @@ angular.module('userprices').controller('UserPriceController', ['$scope', '$loca
             });
 
             userPrice.$save(function (response) {
-                //$location.path('userprices/' + response._id);
-                //console.log("save success ...");
+                window.alert("User prices have been saved.");
             }, function (errorResponse) {
-                //$scope.error = errorResponse.data.message;con
-                //console.log("error respose ...");
             });
         }
         
@@ -103,8 +100,8 @@ angular.module('userprices').controller('UserPriceController', ['$scope', '$loca
         $scope.update = function () {
             $scope.userPrice.$update({
                 userId: $stateParams.userId
-            },function () {
-                //$location.path('userprices/' + $scope.userPrice._id);
+            },function (response) {
+                window.alert("User prices have been saved.");
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });

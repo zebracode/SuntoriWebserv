@@ -496,31 +496,45 @@ exports.exportSummary = function (req, res, next) {
 
 // Boonchuay 19 August 2018 Start
 exports.findMains = function(req, res, next){
+	var startDate = new Date(req.query.startDate);//.toISOString();
+	var endDate = new Date(req.query.endDate);//.toISOString();
+
+	console.log("start date: " + startDate);
+	console.log("end date: " + endDate);
+	//console.log("end ISO date: " + startIsoDate);
+
 	var criteria = {};
 
 	if(req.query.userId){
-		criteria.user = req.query.userId;
+		criteria.userId = req.query.userId;
 	}
 
 	if(req.query.startDate){
-		criteria.created =  {$gte: req.query.startDate};
+		criteria.startDate =  startDate;
 	}
 
 	if(req.query.endDate){
-		criteria.created = {$lte: req.query.endDate};
+		criteria.endDate = endDate;
 	}
 
 	if(req.query.status){
 		criteria.status = req.query.status;
 	}
 
-	Main.find(criteria).sort('-created')
+	Main.find({
+		user:criteria.userId, 
+		created: {"$gte": criteria.startDate, "$lt": criteria.endDate}
+	}).sort('-created') 
 	.exec(function(err, mains){
 		if(err){
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			for(var i=0; i<mains.length; i++){
+				console.log("created: " + mains[i].created);
+			}
+			//console.log("created: " + mains.created:);
 			res.json(mains);
 		}
 	});
