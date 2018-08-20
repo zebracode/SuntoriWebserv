@@ -481,7 +481,6 @@ exports.findByName = function(req, res, next) {
 exports.findByBarcode = function(req, res, next) {
 	// When already login
 	if(req.query.userId) {
-		console.log("Found user.....");
 		Main.find({barcode: { "$regex": req.query.searchText, "$options": "i" }, user: req.query.userId}, function(err, mains){
 			if (err) {
 				return next(err);
@@ -491,7 +490,6 @@ exports.findByBarcode = function(req, res, next) {
 		});
 	// When not login
 	} else {
-		console.log("Not found user.....");
 		Main.find({barcode: { "$regex": req.query.searchText, "$options": "i" }}, function(err, mains){
 			if (err) {
 				return next(err);
@@ -538,3 +536,21 @@ exports.exportSummary = function (req, res, next) {
 		}
 	});
 };
+
+
+// Boonchuay 19 August 2018 Start
+exports.findByUserAndDate = function(req, res, next){
+	Main.find({user:req.query.userId, 
+		created: {$gte: req.query.startDate}, 
+		created: {$lte: req.query.endDate}}).sort('-created')
+	.exec(function(err, mains){
+		if(err){
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(mains);
+		}
+	});
+};
+// Boonchuay 19 August 2018 End

@@ -49,4 +49,7 @@ module.exports = function (app) {
   app.get('/api/excel/summary', mains.exportSummary);
   // Boonchuay 6 August 2018 End
 
+  // Boonchuay 19 August 2018 Start
+  app.get('/app/mainsByUserAndDate', mains.findByUserAndDate);
+  // Boonchuay 19 August 2018 End
 };

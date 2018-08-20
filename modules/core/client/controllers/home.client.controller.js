@@ -54,7 +54,16 @@ angular.module('core').controller('HomeController',
                         endDate: $scope.endDate
                     };
                 }
-                
+
+                $http({
+                    method: "GET",
+                    url: "/api/mainByUserAndStatus"
+                }).then(function mySuccess(response) {
+                    $scope.myWelcome = response.data;
+                }, function myError(response) {
+                    $scope.myWelcome = response.statusText;
+                });
+
                 $scope.mains = Mains.query(
                     data,
                     function (mains) {
@@ -102,17 +111,47 @@ angular.module('core').controller('HomeController',
                     data = {
                         user: Authentication.user._id
                     };
-                } else {
-                    data = {
-                        userId: $scope.selectedUserId,
-                        startDate: $scope.startDate,
-                        endDate: $scope.endDate
-                    };
-                }
 
-                $scope.mains = Mains.query(
-                    data,
-                    function (mains) {
+                    $scope.mains = Mains.query(
+                        data,
+                        function (mains) {
+                            var tempMains = [];
+                            var pageMains = [];
+                            var pageIndex = 0;
+                            var itemCount = 0;
+                            for (var i = 0; i < mains.length; i++) {
+                                if (!mains[i].status) {
+                                    continue;
+                                }
+                                if (mains[i].status !== "ยังไม่ได้ชำระเงิน") {
+                                    itemCount++;
+                                    tempMains.push(mains[i]);
+                                    if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
+                                        pageIndex++;
+                                        pageMains[pageIndex] = tempMains;
+                                        tempMains = [];
+                                    }
+                                    $scope.totalItems += 1;
+                                }
+                            }
+
+                            if (tempMains.length > 0) {
+                                pageMains[pageIndex + 1] = tempMains;
+                            }
+
+                            $scope.allPage = pageMains;
+
+                            // Set first page
+                            $scope.mains = pageMains[1];
+                        });
+                } else {
+                    $http({
+                        method: "GET",
+                        url: "/app/mainsByUserAndDate?userId="
+                            + Authentication.user._id + "&startDate="
+                            + $scope.startDate + "&endDate=" + $scope.endDate
+                    }).then(function mySuccess(response) {
+                        var mains = response.data;
                         var tempMains = [];
                         var pageMains = [];
                         var pageIndex = 0;
@@ -141,7 +180,15 @@ angular.module('core').controller('HomeController',
 
                         // Set first page
                         $scope.mains = pageMains[1];
+
+                    }, function myError(response) {
+
                     });
+                }
+
+
+
+
 
                 $http.get('/price')
                     .then(function (response) {
@@ -238,9 +285,9 @@ angular.module('core').controller('HomeController',
             // Barcode autocomplete
             $scope.getBarcode = function (searchText) {
                 var userId = "";
-                if($scope.authentication) {
-                    if($scope.authentication.user){
-                        if($scope.authentication.user._id) {
+                if ($scope.authentication) {
+                    if ($scope.authentication.user) {
+                        if ($scope.authentication.user._id) {
                             userId = $scope.authentication.user._id;
                         }
                     }
@@ -253,14 +300,14 @@ angular.module('core').controller('HomeController',
                     });
             };
 
-            $scope.setBarcodeData = function(selectedMain){
-                if(selectedMain){
+            $scope.setBarcodeData = function (selectedMain) {
+                if (selectedMain) {
                     $scope.barcodes = [];
                     $scope.barcodes[0] = selectedMain;
-                }else{
+                } else {
                     $scope.barcodes = null;
                 }
-                
+
             }
             // Boonchuay 2 August 2018 End
 
@@ -269,7 +316,7 @@ angular.module('core').controller('HomeController',
             $scope.exportSummary = function () {
                 window.location.href = '/api/excel/summary';
             };
-		    // Boonchuay 6 August 2018 End
+            // Boonchuay 6 August 2018 End
 
             /**
              * Main Controller for the Angular Material Starter App

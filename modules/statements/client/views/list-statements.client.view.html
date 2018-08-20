@@ -1,26 +1,3 @@
-<!-- <section>
-  <div class="page-header">
-    <h1>Statements</h1>
-  </div>
-  <div class="list-group">
-    <a ng-repeat="statement in vm.statements"
-       ui-sref="statements.view({ statementId: statement._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="statement.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="statement.user" ng-bind="statement.user.displayName"></span>
-        <span ng-if="!statement.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" ng-bind="statement.name"></h4>
-    </a>
-  </div>
-  <div class="alert alert-warning text-center" ng-if="vm.statements.$resolved && !vm.statements.length">
-    No Statements yet, why don't you <a ui-sref="statements.create">create one</a>?
-  </div>
-</section> -->
-
 <div data-ng-controller="HomeController" data-ng-init="find('statements')">
   <div layout="column">
     <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
