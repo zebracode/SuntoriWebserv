@@ -330,64 +330,6 @@ exports.printSlip = function (req, res, next) {
 	});
 };
 
-//exports.printSlip = function (req, res, next) {
-//
-//	Main.find({ rcpDocNo: req.query.rcpDocNo }, function (err, mains) {
-//		if (err) {
-//			return next(err);
-//		} else {
-//			if (mains.length > 0) {
-//				var totalAmount = 0;
-//				var dateString = "";
-//				var timeString = "";
-//				var totalVatAmnt = 0;
-//
-//				if (typeof mains[0].receiptDate !== 'undefined') {
-//					var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
-//					var month = (mains[0].receiptDate.getMonth() + 1) < 10 ? '0' + (mains[0].receiptDate.getMonth() + 1) : (mains[0].receiptDate.getMonth() + 1);
-//					var hour = mains[0].receiptDate.getHours() < 10 ? '0' + mains[0].receiptDate.getHours() : mains[0].receiptDate.getHours();
-//					var minute = mains[0].receiptDate.getMinutes() < 10 ? '0' + mains[0].receiptDate.getMinutes() : mains[0].receiptDate.getMinutes();
-//					var second = mains[0].receiptDate.getSeconds() < 10 ? '0' + mains[0].receiptDate.getSeconds() : mains[0].receiptDate.getSeconds();
-//					dateString = date + '/' + month + '/' + mains[0].receiptDate.getFullYear();
-//					timeString = hour + ':' + minute + ':' + second;
-//				}
-//
-//				for (var i = 0; i < mains.length; i++) {
-//					var total = parseInt(mains[i].grandTotalAmnt);
-//
-//					if (!isNaN(total)) {
-//						totalAmount += total;
-//					}
-//					var vatAmt = Number(mains[i].totalVatAmnt);
-//                    if(!isNaN(vatAmt)){
-//                    totalVatAmnt += vatAmt;
-//                  	}
-//				}
-//
-//				User.findById(mains[0].user, '-salt -password').exec(function (err, user) {
-//					if (err) {
-//						return next(err);
-//					} else if (!user) {
-//						return next(new Error('Failed to load user ' + id));
-//					}
-//
-//					res.render('modules/mains/server/views/formSlip', {
-//						title: 'Form Slip',
-//						mains: mains,
-//                        totalVatAmnt: totalVatAmnt,
-//                        totalAmount: totalAmount,
-//                        dateString: dateString,
-//                        timeString: timeString,
-//                        user: user.username
-//                    });
-//				});
-//			} else {
-//				res.send("No data to print !!!");
-//			}
-//		}
-//	});
-//};
-
 exports.mainByUserAndStatus = function (req, res, next) {
 	Main.find({ "user": req.query.user, "status": req.query.status }, function (err, main) {
 		if (err) {
@@ -506,7 +448,21 @@ exports.findByBarcode = function(req, res, next) {
 // Boonchuay 6 August 2018 S
 // Export Summary as Excel
 exports.exportSummary = function (req, res, next) {
-	Main.find().sort('-created')
+	var criteria = {};
+
+	if(req.query.userId){
+		criteria.user = req.query.userId;
+	}
+
+	if(req.query.startDate){
+		criteria.created =  {$gte: req.query.startDate};
+	}
+
+	if(req.query.endDate){
+		criteria.created = {$lte: req.query.endDate};
+	}
+
+	Main.find(criteria).sort('-created')
 	.exec(function (err, mains) {
 		if (err) {
 			return res.status(400).send({
@@ -539,10 +495,26 @@ exports.exportSummary = function (req, res, next) {
 
 
 // Boonchuay 19 August 2018 Start
-exports.findByUserAndDate = function(req, res, next){
-	Main.find({user:req.query.userId, 
-		created: {$gte: req.query.startDate}, 
-		created: {$lte: req.query.endDate}}).sort('-created')
+exports.findMains = function(req, res, next){
+	var criteria = {};
+
+	if(req.query.userId){
+		criteria.user = req.query.userId;
+	}
+
+	if(req.query.startDate){
+		criteria.created =  {$gte: req.query.startDate};
+	}
+
+	if(req.query.endDate){
+		criteria.created = {$lte: req.query.endDate};
+	}
+
+	if(req.query.status){
+		criteria.status = req.query.status;
+	}
+
+	Main.find(criteria).sort('-created')
 	.exec(function(err, mains){
 		if(err){
 			return res.status(400).send({

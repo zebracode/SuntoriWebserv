@@ -50,6 +50,6 @@ module.exports = function (app) {
   // Boonchuay 6 August 2018 End
 
   // Boonchuay 19 August 2018 Start
-  app.get('/app/mainsByUserAndDate', mains.findByUserAndDate);
+  app.get('/api/findMains', mains.findMains);
   // Boonchuay 19 August 2018 End
 };

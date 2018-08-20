@@ -58,24 +58,20 @@ angular.module('core').controller('HomeController',
                 else if (viewName === 'mainsSummary') {
                     $http({
                         method: "GET",
-                        url: "/app/mainsByUserAndDate?userId="
-                            + Authentication.user._id + "&startDate="
-                            + $scope.startDate + "&endDate=" + $scope.endDate
+                        url: "/api/findMains?userId=" + Authentication.user._id 
+                        + "&startDate=" + $scope.startDate
+                        + "&endDate=" + $scope.endDate
                     }).then(function mySuccess(response) {
                         setPaging(response.data);
                     }, function myError(response) {
-                        
+                        $scope.error = errorResponse.data.message;
                     });
                 }
 
                 // Statements 
                 else if (viewName === 'statementsList') {
-                    data = {
-                        user: Authentication.user._id
-                    };
+                    
                 }
-
-                
 
                 // Other cases
                 else {
@@ -244,7 +240,9 @@ angular.module('core').controller('HomeController',
             // Boonchuay 6 August 2018 Start
             // Export summary as Excel
             $scope.exportSummary = function () {
-                window.location.href = '/api/excel/summary';
+                window.location.href = "/api/excel/summary?userId=" + Authentication.user._id
+                    + "&startDate=" + $scope.startDate
+                    + "&endDate=" + $scope.endDate;
             };
             // Boonchuay 6 August 2018 End
 
@@ -331,16 +329,14 @@ angular.module('core').controller('HomeController',
                     if (!data[i].status) {
                         continue;
                     }
-                    if (data[i].status !== "ยังไม่ได้ชำระเงิน") {
-                        itemCount++;
-                        tempData.push(data[i]);
-                        if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
-                            pageIndex++;
-                            pageData[pageIndex] = tempData;
-                            tempData = [];
-                        }
-                        $scope.totalItems += 1;
+                    itemCount++;
+                    tempData.push(data[i]);
+                    if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
+                        pageIndex++;
+                        pageData[pageIndex] = tempData;
+                        tempData = [];
                     }
+                    $scope.totalItems += 1;
                 }
 
                 if (tempData.length > 0) {
