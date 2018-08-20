@@ -137,7 +137,6 @@ exports.list = function (req, res) {
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				//console.log("user: ", mains[0].user._id);
 				res.json(mains);
 			}
 		});
@@ -496,12 +495,8 @@ exports.exportSummary = function (req, res, next) {
 
 // Boonchuay 19 August 2018 Start
 exports.findMains = function(req, res, next){
-	var startDate = new Date(req.query.startDate);//.toISOString();
-	var endDate = new Date(req.query.endDate);//.toISOString();
-
-	console.log("start date: " + startDate);
-	console.log("end date: " + endDate);
-	//console.log("end ISO date: " + startIsoDate);
+	var startDate = new Date(req.query.startDate);
+	var endDate = new Date(req.query.endDate);
 
 	var criteria = {};
 
@@ -531,10 +526,6 @@ exports.findMains = function(req, res, next){
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			for(var i=0; i<mains.length; i++){
-				console.log("created: " + mains[i].created);
-			}
-			//console.log("created: " + mains.created:);
 			res.json(mains);
 		}
 	});
