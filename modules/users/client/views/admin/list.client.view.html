@@ -95,8 +95,8 @@
                     <th class="md-caption">COD</th>
                     <th class="md-caption">สถานะจัดส่ง </th>
                     <th class="md-caption">ใบเสร็จ </th>
-                    <!--<th class="md-caption">ลบ</th>-->
-
+                    <th class="md-caption">ปริ้น </th>
+                    <th class="md-caption">ลบ</th>
                     <th class="md-caption">Comment </th>
                   </tr>
                   </thead>
@@ -126,11 +126,19 @@
                       <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Bill {{main.rcpDocNo}} </a>
                       <a class="btn btn-primary btn-xs" href="/print/slip?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Slip {{main.rcpDocNo}} </a>
                     </td>
-
-                    <!--<td>-->
-                      <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
-                    <!--</td>-->
-
+                    <td>
+                      <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank">
+                        <i class="fa fa-print"></i> A4 </a>
+                      <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank">
+                        <i class="fa fa-print"></i> A5 </a>
+                      <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank">
+                        <i class="fa fa-print"></i> A6 </a>
+                      <a class="btn btn-warning btn-xs" href="/print/sticker?mainId={{main._id}}" target="_blank">
+                        <i class="fa fa-print"></i> Sticker </a>
+                    </td>
+                    <td>
+                      <a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>
+                    </td>
                     <td class="md-caption" ng-bind="main.detail_Product"></td>
                   </tr>
                   </tbody>

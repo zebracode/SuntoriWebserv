@@ -1,5 +1,5 @@
 <div data-ui-view flex layout="row" data-ng-controller="MainsController" data-ng-init="find(); setBalanceAmt();">
-  <div layout="column" style="height: 1000px;">
+  <div layout="column">
     <md-sidenav class="md-sidenav-left" md-component-id="left"
                 md-disable-backdrop md-whiteframe="4">
       <md-toolbar class="md-theme-indigo">
@@ -95,7 +95,10 @@
                     <td class="md-caption" ng-bind="main.weight"></td>
                     <td class="md-caption" ng-bind="main.total"></td>
                     <td class="md-caption" ng-bind="main.codAmnt"></td>
-                    <td class="md-caption" ng-bind="main.productPrice"></td>
+                    <!--<td class="md-caption" ng-bind="main.productPrice"></td>-->
+                    <td>
+                      <a class="btn btn-warning btn-xs"><i class="fa fa-money"></i> {{ main.productPrice }}</a>
+                    </td>
                     <td class="md-caption" ng-bind="main.insuranceAmnt"></td>
                     <td class="md-caption" ng-bind="main.totalVatAmnt | number: 2"></td>
                     <td class="md-caption" ng-bind="main.grandTotalAmnt  | number: 2"></td>
