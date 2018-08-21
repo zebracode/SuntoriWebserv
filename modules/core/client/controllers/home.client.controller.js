@@ -42,107 +42,93 @@ angular.module('core').controller('HomeController',
             // Find a list of Mains
             $scope.find = function (viewName) {
                 $scope.totalItems = 0;
-                var data = {}
-                if (viewName === 'summary') {
-                    data = {
-                        user: Authentication.user._id
-                    };
-                } else {
+                var data = {};
+
+                // Home
+                if (viewName === 'coreHome') {
+                    console.log("Home...");
+                }
+
+                // Payment
+                else if (viewName === 'mainsPayment') {
+                    
+                }
+
+                // Summary
+                else if (viewName === 'mainsSummary') {
+                    $http({
+                        method: "GET",
+                        url: "/api/findMains?userId=" + Authentication.user._id 
+                        + "&startDate=" + $scope.startDate
+                        + "&endDate=" + $scope.endDate
+                    }).then(function mySuccess(response) {
+                        setPaging(response.data);
+                    }, function myError(response) {
+                        $scope.error = errorResponse.data.message;
+                    });
+                }
+
+                // Admin User List
+                else if(viewName === "userList"){
+                    $http({
+                        method: "GET",
+                        url: "/api/findMains?startDate=" + $scope.startDate
+                        + "&endDate=" + $scope.endDate
+                    }).then(function mySuccess(response) {
+                        setPaging(response.data);
+                    }, function myError(response) {
+                        $scope.error = errorResponse.data.message;
+                    });
+                }
+
+                // Statements 
+                else if (viewName === 'statementsList') {
+                    
+                }
+
+                // Other cases
+                else {
                     data = {
                         userId: $scope.selectedUserId,
                         startDate: $scope.startDate,
                         endDate: $scope.endDate
                     };
-                }
-                
-                $scope.mains = Mains.query(
-                    data,
-                    function (mains) {
-                        var tempMains = [];
-                        var pageMains = [];
-                        var pageIndex = 0;
-                        var itemCount = 0;
-                        for (var i = 0; i < mains.length; i++) {
-                            if (!mains[i].status) {
-                                continue;
-                            }
-                            if (mains[i].status !== "ยังไม่ได้ชำระเงิน") {
-                                itemCount++;
-                                tempMains.push(mains[i]);
-                                if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
-                                    pageIndex++;
-                                    pageMains[pageIndex] = tempMains;
-                                    tempMains = [];
+
+                    $scope.mains = Mains.query(
+                        data,
+                        function (mains) {
+                            var tempMains = [];
+                            var pageMains = [];
+                            var pageIndex = 0;
+                            var itemCount = 0;
+                            for (var i = 0; i < mains.length; i++) {
+                                if (!mains[i].status) {
+                                    continue;
                                 }
-                                $scope.totalItems += 1;
+                                if (mains[i].status !== "ยังไม่ได้ชำระเงิน") {
+                                    itemCount++;
+                                    tempMains.push(mains[i]);
+                                    if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
+                                        pageIndex++;
+                                        pageMains[pageIndex] = tempMains;
+                                        tempMains = [];
+                                    }
+                                    $scope.totalItems += 1;
+                                }
                             }
-                        }
 
-                        if (tempMains.length > 0) {
-                            pageMains[pageIndex + 1] = tempMains;
-                        }
+                            if (tempMains.length > 0) {
+                                pageMains[pageIndex + 1] = tempMains;
+                            }
 
-                        $scope.allPage = pageMains;
+                            $scope.allPage = pageMains;
 
-                        // Set first page
-                        $scope.mains = pageMains[1];
-                    });
-
-                $http.get('/price')
-                    .then(function (response) {
-                        $scope.price = response.data;
-                    });
-            };
-
-            // Find a list of Statements
-            $scope.find = function (viewName) {
-                $scope.totalItems = 0;
-                var data = {}
-                if (viewName === 'statements') {
-                    data = {
-                        user: Authentication.user._id
-                    };
-                } else {
-                    data = {
-                        userId: $scope.selectedUserId,
-                        startDate: $scope.startDate,
-                        endDate: $scope.endDate
-                    };
+                            // Set first page
+                            $scope.mains = pageMains[1];
+                        });
                 }
 
-                $scope.mains = Mains.query(
-                    data,
-                    function (mains) {
-                        var tempMains = [];
-                        var pageMains = [];
-                        var pageIndex = 0;
-                        var itemCount = 0;
-                        for (var i = 0; i < mains.length; i++) {
-                            if (!mains[i].status) {
-                                continue;
-                            }
-                            if (mains[i].status !== "ยังไม่ได้ชำระเงิน") {
-                                itemCount++;
-                                tempMains.push(mains[i]);
-                                if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
-                                    pageIndex++;
-                                    pageMains[pageIndex] = tempMains;
-                                    tempMains = [];
-                                }
-                                $scope.totalItems += 1;
-                            }
-                        }
-
-                        if (tempMains.length > 0) {
-                            pageMains[pageIndex + 1] = tempMains;
-                        }
-
-                        $scope.allPage = pageMains;
-
-                        // Set first page
-                        $scope.mains = pageMains[1];
-                    });
-
+                // Get price list
                 $http.get('/price')
                     .then(function (response) {
                         $scope.price = response.data;
@@ -238,9 +224,9 @@ angular.module('core').controller('HomeController',
             // Barcode autocomplete
             $scope.getBarcode = function (searchText) {
                 var userId = "";
-                if($scope.authentication) {
-                    if($scope.authentication.user){
-                        if($scope.authentication.user._id) {
+                if ($scope.authentication) {
+                    if ($scope.authentication.user) {
+                        if ($scope.authentication.user._id) {
                             userId = $scope.authentication.user._id;
                         }
                     }
@@ -253,23 +239,35 @@ angular.module('core').controller('HomeController',
                     });
             };
 
-            $scope.setBarcodeData = function(selectedMain){
-                if(selectedMain){
+            $scope.setBarcodeData = function (selectedMain) {
+                if (selectedMain) {
                     $scope.barcodes = [];
                     $scope.barcodes[0] = selectedMain;
-                }else{
+                } else {
                     $scope.barcodes = null;
                 }
-                
+
             }
             // Boonchuay 2 August 2018 End
 
             // Boonchuay 6 August 2018 Start
             // Export summary as Excel
-            $scope.exportSummary = function () {
-                window.location.href = '/api/excel/summary';
+            $scope.exportSummary = function (viewName) {
+                // Summmary
+                if(viewName === 'mainsSummary'){
+                    window.location.href = "/api/excel/summary?userId=" + Authentication.user._id
+                    + "&startDate=" + $scope.startDate
+                    + "&endDate=" + $scope.endDate;
+                }
+
+                // Admin User List
+                else if(viewName === 'userList'){
+                    window.location.href = "/api/excel/summary?startDate=" + $scope.startDate
+                    + "&endDate=" + $scope.endDate;
+                }
+                
             };
-		    // Boonchuay 6 August 2018 End
+            // Boonchuay 6 August 2018 End
 
             /**
              * Main Controller for the Angular Material Starter App
@@ -342,6 +340,36 @@ angular.module('core').controller('HomeController',
                     $log.debug(clickedItem.name + ' clicked!');
                 });
 
+            }
+
+            // Page rendering
+            function setPaging(data) {
+                var tempData = [];
+                var pageData = [];
+                var pageIndex = 0;
+                var itemCount = 0;
+                for (var i = 0; i < data.length; i++) {
+                    if (!data[i].status) {
+                        continue;
+                    }
+                    itemCount++;
+                    tempData.push(data[i]);
+                    if ((itemCount % $scope.itemsPerPage === 0) && (itemCount !== 0)) {
+                        pageIndex++;
+                        pageData[pageIndex] = tempData;
+                        tempData = [];
+                    }
+                    $scope.totalItems += 1;
+                }
+
+                if (tempData.length > 0) {
+                    pageData[pageIndex + 1] = tempData;
+                }
+
+                $scope.allPage = pageData;
+
+                // Set first page
+                $scope.mains = pageData[1];
             }
 
             var self = this;
