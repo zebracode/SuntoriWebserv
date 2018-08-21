@@ -447,21 +447,31 @@ exports.findByBarcode = function(req, res, next) {
 // Boonchuay 6 August 2018 S
 // Export Summary as Excel
 exports.exportSummary = function (req, res, next) {
+	var startDate = new Date(req.query.startDate);
+	var endDate = new Date(req.query.endDate);
+
 	var criteria = {};
 
 	if(req.query.userId){
-		criteria.user = req.query.userId;
+		criteria.userId = req.query.userId;
 	}
 
 	if(req.query.startDate){
-		criteria.created =  {$gte: req.query.startDate};
+		criteria.startDate =  startDate;
 	}
 
 	if(req.query.endDate){
-		criteria.created = {$lte: req.query.endDate};
+		criteria.endDate = endDate;
 	}
 
-	Main.find(criteria).sort('-created')
+	if(req.query.status){
+		criteria.status = req.query.status;
+	}
+
+	Main.find({
+		user:criteria.userId, 
+		created: {"$gte": criteria.startDate, "$lt": criteria.endDate}
+	}).sort('-created')
 	.exec(function (err, mains) {
 		if (err) {
 			return res.status(400).send({
