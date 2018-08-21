@@ -68,6 +68,19 @@ angular.module('core').controller('HomeController',
                     });
                 }
 
+                // Admin User List
+                else if(viewName === "userList"){
+                    $http({
+                        method: "GET",
+                        url: "/api/findMains?startDate=" + $scope.startDate
+                        + "&endDate=" + $scope.endDate
+                    }).then(function mySuccess(response) {
+                        setPaging(response.data);
+                    }, function myError(response) {
+                        $scope.error = errorResponse.data.message;
+                    });
+                }
+
                 // Statements 
                 else if (viewName === 'statementsList') {
                     
@@ -239,10 +252,20 @@ angular.module('core').controller('HomeController',
 
             // Boonchuay 6 August 2018 Start
             // Export summary as Excel
-            $scope.exportSummary = function () {
-                window.location.href = "/api/excel/summary?userId=" + Authentication.user._id
+            $scope.exportSummary = function (viewName) {
+                // Summmary
+                if(viewName === 'mainsSummary'){
+                    window.location.href = "/api/excel/summary?userId=" + Authentication.user._id
                     + "&startDate=" + $scope.startDate
                     + "&endDate=" + $scope.endDate;
+                }
+
+                // Admin User List
+                else if(viewName === 'userList'){
+                    window.location.href = "/api/excel/summary?startDate=" + $scope.startDate
+                    + "&endDate=" + $scope.endDate;
+                }
+                
             };
             // Boonchuay 6 August 2018 End
 
