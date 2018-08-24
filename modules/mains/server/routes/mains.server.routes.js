@@ -43,4 +43,13 @@ module.exports = function (app) {
   // Boonchuay 2 August 2018
   app.get('/api/mainByBarcode', mains.findByBarcode);
   // Boonchuay 2 August 2018
+
+  // Boonchuay 6 August 2018 Start
+  // Export Summary as Excel
+  app.get('/api/excel/summary', mains.exportSummary);
+  // Boonchuay 6 August 2018 End
+
+  // Boonchuay 19 August 2018 Start
+  app.get('/api/findMains', mains.findMains);
+  // Boonchuay 19 August 2018 End
 };

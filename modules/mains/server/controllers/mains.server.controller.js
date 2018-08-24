@@ -10,6 +10,7 @@ var path = require('path'),
 	multer = require('multer'),
 	xlstojson = require("xls-to-json-lc"),
 	xlsxtojson = require("xlsx-to-json-lc"),
+	fecha = require('fecha'),
 	TpLastNumber = require('mongoose').model('TpLastNumber'),
 	errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
@@ -136,7 +137,6 @@ exports.list = function (req, res) {
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
-				//console.log("user: ", mains[0].user._id);
 				res.json(mains);
 			}
 		});
@@ -329,64 +329,6 @@ exports.printSlip = function (req, res, next) {
 	});
 };
 
-//exports.printSlip = function (req, res, next) {
-//
-//	Main.find({ rcpDocNo: req.query.rcpDocNo }, function (err, mains) {
-//		if (err) {
-//			return next(err);
-//		} else {
-//			if (mains.length > 0) {
-//				var totalAmount = 0;
-//				var dateString = "";
-//				var timeString = "";
-//				var totalVatAmnt = 0;
-//
-//				if (typeof mains[0].receiptDate !== 'undefined') {
-//					var date = mains[0].receiptDate.getDate() < 10 ? '0' + mains[0].receiptDate.getDate() : mains[0].receiptDate.getDate();
-//					var month = (mains[0].receiptDate.getMonth() + 1) < 10 ? '0' + (mains[0].receiptDate.getMonth() + 1) : (mains[0].receiptDate.getMonth() + 1);
-//					var hour = mains[0].receiptDate.getHours() < 10 ? '0' + mains[0].receiptDate.getHours() : mains[0].receiptDate.getHours();
-//					var minute = mains[0].receiptDate.getMinutes() < 10 ? '0' + mains[0].receiptDate.getMinutes() : mains[0].receiptDate.getMinutes();
-//					var second = mains[0].receiptDate.getSeconds() < 10 ? '0' + mains[0].receiptDate.getSeconds() : mains[0].receiptDate.getSeconds();
-//					dateString = date + '/' + month + '/' + mains[0].receiptDate.getFullYear();
-//					timeString = hour + ':' + minute + ':' + second;
-//				}
-//
-//				for (var i = 0; i < mains.length; i++) {
-//					var total = parseInt(mains[i].grandTotalAmnt);
-//
-//					if (!isNaN(total)) {
-//						totalAmount += total;
-//					}
-//					var vatAmt = Number(mains[i].totalVatAmnt);
-//                    if(!isNaN(vatAmt)){
-//                    totalVatAmnt += vatAmt;
-//                  	}
-//				}
-//
-//				User.findById(mains[0].user, '-salt -password').exec(function (err, user) {
-//					if (err) {
-//						return next(err);
-//					} else if (!user) {
-//						return next(new Error('Failed to load user ' + id));
-//					}
-//
-//					res.render('modules/mains/server/views/formSlip', {
-//						title: 'Form Slip',
-//						mains: mains,
-//                        totalVatAmnt: totalVatAmnt,
-//                        totalAmount: totalAmount,
-//                        dateString: dateString,
-//                        timeString: timeString,
-//                        user: user.username
-//                    });
-//				});
-//			} else {
-//				res.send("No data to print !!!");
-//			}
-//		}
-//	});
-//};
-
 exports.mainByUserAndStatus = function (req, res, next) {
 	Main.find({ "user": req.query.user, "status": req.query.status }, function (err, main) {
 		if (err) {
@@ -480,7 +422,6 @@ exports.findByName = function(req, res, next) {
 exports.findByBarcode = function(req, res, next) {
 	// When already login
 	if(req.query.userId) {
-		console.log("Found user.....");
 		Main.find({barcode: { "$regex": req.query.searchText, "$options": "i" }, user: req.query.userId}, function(err, mains){
 			if (err) {
 				return next(err);
@@ -490,7 +431,6 @@ exports.findByBarcode = function(req, res, next) {
 		});
 	// When not login
 	} else {
-		console.log("Not found user.....");
 		Main.find({barcode: { "$regex": req.query.searchText, "$options": "i" }}, function(err, mains){
 			if (err) {
 				return next(err);
@@ -502,3 +442,101 @@ exports.findByBarcode = function(req, res, next) {
     
 };
 // Boonchuay 2 August 2018 End
+
+
+// Boonchuay 6 August 2018 S
+// Export Summary as Excel
+exports.exportSummary = function (req, res, next) {
+	var criteria = {};
+
+	var startDate = null;
+	var endDate = null;
+
+	// User Condition
+	if(req.query.userId){
+		criteria.user = req.query.userId;
+	}
+
+	// Date Condition
+	if(req.query.startDate && req.query.endDate){
+		startDate = new Date(req.query.startDate);
+		endDate = new Date(req.query.endDate);
+		criteria.created = {"$gte": startDate, "$lt": endDate};
+	} else if(req.query.startDate){
+		startDate = new Date(req.query.startDate);
+		criteria.created = {"$gte": startDate};
+	} else if(req.query.endDate){
+		endDate = new Date(req.query.endDate);
+		criteria.created = {"$lt": endDate};
+	}
+
+	Main.find(criteria).sort('-created')
+	.exec(function (err, mains) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			var jsonArr = [];
+
+			for (var i = 0; i < mains.length; i++) {
+				var json = {};
+				json.created_date = fecha.format(mains[i].created, 'mediumDate');
+				json.tracking_number = mains[i].barcode;
+				json.sender_name = mains[i].s_name;
+				json.reciver_name = mains[i].r_name;
+				json.receiver_tel = mains[i].r_tel;
+				json.weight = mains[i].weight;
+				json.actual_weigth = mains[i].tpWeight;
+				json.amount = mains[i].total;
+				json.actual_amount = mains[i].afterPrice;
+				json.diff_amount = mains[i].total - mains[i].afterPrice;
+				json.insurance = mains[i].insuranceAmnt;
+				json.comment = mains[i].detail_Product;
+				json.status = mains[i].status;
+				jsonArr.push(json);
+			}
+			res.xls('summary.xlsx', jsonArr);
+		}
+	});
+};
+
+
+// Boonchuay 19 August 2018 Start
+exports.findMains = function(req, res, next){
+
+	var criteria = {};
+
+	var startDate = null;
+	var endDate = null;
+
+	// User Condition
+	if(req.query.userId){
+		criteria.user = req.query.userId;
+	}
+
+	// Date Condition
+	if(req.query.startDate && req.query.endDate){
+		startDate = new Date(req.query.startDate);
+		endDate = new Date(req.query.endDate);
+		criteria.created = {"$gte": startDate, "$lt": endDate};
+	} else if(req.query.startDate){
+		startDate = new Date(req.query.startDate);
+		criteria.created = {"$gte": startDate};
+	} else if(req.query.endDate){
+		endDate = new Date(req.query.endDate);
+		criteria.created = {"$lt": endDate};
+	}
+
+	Main.find(criteria).sort('-created') 
+	.exec(function(err, mains){
+		if(err){
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(mains);
+		}
+	});
+};
+// Boonchuay 19 August 2018 End

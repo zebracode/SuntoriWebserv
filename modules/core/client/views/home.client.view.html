@@ -1,4 +1,4 @@
-<div data-ng-controller="HomeController" data-ng-init="find('') ; setBalanceAmt();">
+<div data-ng-controller="HomeController" data-ng-init="find('coreHome') ; setBalanceAmt();">
   <!-- HomePage -->
   <div flex layout="column" data-ng-hide="authentication.user">
     <md-content>
@@ -124,111 +124,57 @@
                 <div data-ng-controller="MainsController" data-ng-init="find('summary')">
                   <form ng-submit="$event.preventDefault()">
                     <h6 class="md-caption">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
-                    
-                    <!-- <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedMain" md-search-text="searchText" md-items="item in getBarcode(searchText)"
-                      md-item-text="item.barcode" md-selected-item-change='setBarcodeData(selectedMain)' md-no-cache=true>
-                      <span md-highlight-text="searchText">{{item.barcode}}</span>
-                      <md-not-found>
-                        ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.
-                        <a data-ui-sref="mains.create">เพิ่มรายการ!</a>
-                      </md-not-found>
-                    </md-autocomplete> -->
-
-                    <md-autocomplete placeholder='ค้นหาผู้ส่ง' 
-                      md-selected-item="selectedBarcode" 
-                      md-search-text="searchText" 
-                      md-items="item in getBarcode(searchText)"
-                      md-item-text="item.barcode" 
-                      md-selected-item-change="setBarcodeData(selectedBarcode)" 
-                      md-clear-button = false>
+                    <md-autocomplete placeholder='ค้นหาผู้ส่ง' md-selected-item="selectedBarcode" md-search-text="searchText" md-items="item in getBarcode(searchText)"
+                      md-item-text="item.barcode" md-selected-item-change="setBarcodeData(selectedBarcode)" md-clear-button=f
+                      alse>
                       <span md-highlight-text="searchText">{{item.barcode}}</span>
                       <md-not-found>
                         ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.
                         <a data-ui-sref="mains.create">เพิ่มรายการ!</a>
                       </md-not-found>
                     </md-autocomplete>
-
-                    <!--<md-autocomplete-->
-                    <!--placeholder='ค้นหาผู้ส่ง'-->
-                    <!--md-selected-item="selectedSender"-->
-                    <!--md-search-text="searchText"-->
-                    <!--md-items="item in getSenderName(searchText)"-->
-                    <!--md-item-text="item.name"-->
-                    <!--md-selected-item-change='setSenderData()'>-->
-
-                    <!--<span md-highlight-text="searchText">{{item.name}}</span>-->
-                    <!--<md-not-found>-->
-                    <!--ไม่พบเลขพัสดุ "{{searchText}}" ในระบบ.-->
-                    <!--<a data-ui-sref="mains.create">เพิ่มรายการ!</a>-->
-                    <!--</md-not-found>-->
-                    <!--</md-autocomplete>-->
-                    <!--<br />-->
-                    <!--<div class="col-md-3 col-sm-6 col-xs-12 form-group has-feedback">-->
-                    <!--<input name="s_name" type="text" data-ng-model="s_name" disabled>-->
-                    <!--</div>-->
-
-                    <!--<md-autocomplete-->
-                    <!--ng-disabled="ctrl.isDisabled"-->
-                    <!--md-no-cache="ctrl.noCache"-->
-                    <!--md-selected-item="ctrl.selectedItem"-->
-                    <!--md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"-->
-                    <!--md-search-text="ctrl.searchText"-->
-                    <!--md-selected-item-change="ctrl.selectedItemChange(item)"-->
-                    <!--md-items="item in ctrl.querySearch(ctrl.searchText)"-->
-                    <!--md-item-text="item.display"-->
-                    <!--md-min-length="0"-->
-                    <!--placeholder="ค้นหาเลขพัสดุ">-->
-                    <!--<md-item-template>-->
-                    <!--<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>-->
-                    <!--</md-item-template>-->
-                    <!--<md-not-found>-->
-                    <!--ไม่พบเลขพัสดุ "{{ctrl.searchText}}" ในระบบ.-->
-                    <!--<a ng-click="ctrl.newState(ctrl.searchText)">สมัครสมาชิก!</a>-->
-                    <!--</md-not-found>-->
-                    <!--</md-autocomplete>-->
                     <br />
-
-                     <div class="table-responsive" ng-show="barcodes">
-                            <table class="table table-striped jambo_table bulk_action" >
-                              <thead>
-                                <tr class="headings">
-                                  <th class="md-caption">วันที่ </th>
-                                  <th class="md-caption">Tracking No.</th>
-                                  <th class="md-caption">ผู้ส่ง </th>
-                                  <th class="md-caption">ผู้รับ </th>
-                                  <th class="md-caption">เบอร์โทร </th>
-                                  <th class="md-caption">นน.ก่อน </th>
-                                  <th class="md-caption">นน.หลัง </th>
-                                  <th class="md-caption">ค่าส่งก่อน </th>
-                                  <th class="md-caption">ค่าส่งหลัง </th>
-                                  <th class="md-caption">ส่วนต่าง </th>
-                                  <th class="md-caption">ค่าประกัน </th>
-                                  <th class="md-caption">Comment </th>
-                                  <th class="md-caption">สถานะจัดส่ง </th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr class="even pointer" data-ng-repeat="barcode in barcodes">
-                                  <td class="md-caption" ng-bind="barcode.created | date:'mediumDate'"></td>
-                                  <td class="md-caption" ng-bind="barcode.barcode"></td>
-                                  <td class="md-caption" ng-bind="barcode.s_name"></td>
-                                  <td class="md-caption" ng-bind="barcode.r_name"></td>
-                                  <td class="md-caption" ng-bind="barcode.r_tel"></td>
-                                  <td class="md-caption" ng-bind="barcode.weight"></td>
-                                  <td class="md-caption" ng-bind="barcode.tpWeight"></td>
-                                  <td class="md-caption" ng-bind="barcode.total"></td>
-                                  <td class="md-caption">{{ barcode.tpWeight | afterPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
-                                  <td class="md-caption">{{ barcode.tpWeight | diffPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
-                                  <td class="md-caption" ng-bind="barcode.insuranceAmnt"></td>
-                                  <td class="md-caption" ng-bind="barcode.detail_Product"></td>
-                                  <td>
-                                    <a class="btn btn-info btn-xs">
-                                      <i class="fa fa-money"></i> {{ barcode.barcode | updateStatus}} {{barcode.status}}</a>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>            
-                          </div>
+                    <div class="table-responsive" ng-show="barcodes">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="md-caption">วันที่ </th>
+                            <th class="md-caption">Tracking No.</th>
+                            <th class="md-caption">ผู้ส่ง </th>
+                            <th class="md-caption">ผู้รับ </th>
+                            <th class="md-caption">เบอร์โทร </th>
+                            <th class="md-caption">นน.ก่อน </th>
+                            <th class="md-caption">นน.หลัง </th>
+                            <th class="md-caption">ค่าส่งก่อน </th>
+                            <th class="md-caption">ค่าส่งหลัง </th>
+                            <th class="md-caption">ส่วนต่าง </th>
+                            <th class="md-caption">ค่าประกัน </th>
+                            <th class="md-caption">Comment </th>
+                            <th class="md-caption">สถานะจัดส่ง </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="even pointer" data-ng-repeat="barcode in barcodes">
+                            <td class="md-caption" ng-bind="barcode.created | date:'mediumDate'"></td>
+                            <td class="md-caption" ng-bind="barcode.barcode"></td>
+                            <td class="md-caption" ng-bind="barcode.s_name"></td>
+                            <td class="md-caption" ng-bind="barcode.r_name"></td>
+                            <td class="md-caption" ng-bind="barcode.r_tel"></td>
+                            <td class="md-caption" ng-bind="barcode.weight"></td>
+                            <td class="md-caption" ng-bind="barcode.tpWeight"></td>
+                            <td class="md-caption" ng-bind="barcode.total"></td>
+                            <td class="md-caption">{{ barcode.tpWeight | afterPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
+                            <td class="md-caption">{{ barcode.tpWeight | diffPrice :barcode.total :barcode.s_country :barcode.r_country :price}}</td>
+                            <td class="md-caption" ng-bind="barcode.insuranceAmnt"></td>
+                            <td class="md-caption" ng-bind="barcode.detail_Product"></td>
+                            <td>
+                              <a class="btn btn-info btn-xs">
+                                <i class="fa fa-money"></i> {{ barcode.barcode | updateStatus}} {{barcode.status}}</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -338,13 +284,8 @@
                       <div data-ng-controller="MainsController" data-ng-init="find('summary')">
                         <form ng-submit="$event.preventDefault()">
                           <h6 class="text-center">กรุณาพิมพ์หมายเลขพัสดุ 13 หลัก โดยไม่ต้องเว้นวรรค (เช่น EY640000001TH)</h6>
-                          <md-autocomplete placeholder='กรอกเลขพัสดุ' 
-                            md-selected-item="selectedMain" 
-                            md-search-text="s" 
-                            md-items="item in getBarcode(s)"
-                            md-item-text="item.barcode" 
-                            md-no-cache=true
-                            md-selected-item-change="setBarcodeData(selectedMain)">
+                          <md-autocomplete placeholder='กรอกเลขพัสดุ' md-selected-item="selectedMain" md-search-text="s" md-items="item in getBarcode(s)"
+                            md-item-text="item.barcode" md-no-cache=true md-selected-item-change="setBarcodeData(selectedMain)">
 
                             <span md-highlight-text="searchText">{{item.barcode}}</span>
                             <md-not-found>
@@ -356,7 +297,7 @@
                           <br />
 
                           <div class="table-responsive" ng-show="barcodes">
-                            <table class="table table-striped jambo_table bulk_action" >
+                            <table class="table table-striped jambo_table bulk_action">
                               <thead>
                                 <tr class="headings">
                                   <th class="md-caption">วันที่ </th>
@@ -394,39 +335,12 @@
                                   </td>
                                 </tr>
                               </tbody>
-                            </table>            
+                            </table>
                           </div>
                         </form>
                       </div>
                     </div>
                   </div>
-
-                  <!--<div class="x_content" data-ng-controller="SendsController">-->
-                  <!--&lt;!&ndash; start project list &ndash;&gt;-->
-                  <!--<table class="table table-striped projects">-->
-                  <!--<thead>-->
-                  <!--<tr>-->
-                  <!--<th class="md-caption" style="width: 20%">วันสมัคร</th>-->
-                  <!--<th class="md-caption">ชื่อร้าน/ผู้ส่ง</th>-->
-                  <!--<th class="md-caption">สินค้า</th>-->
-                  <!--<th class="md-caption">เบอร์โทร</th>-->
-                  <!--</tr>-->
-                  <!--</thead>-->
-                  <!--<tbody>-->
-                  <!--<tr class="md-caption" data-ng-repeat="send in sends | filter:searchText" data-ng-show="authentication.user._id == send.user._id">-->
-                  <!--<td class="md-caption" ng-bind="send.created | date:'mediumDate'"></td>-->
-                  <!--<td class="md-caption" ng-bind="send.name"></td>-->
-                  <!--<td class="md-caption" ng-bind="send.product"></td>-->
-                  <!--<td class="md-caption" ng-bind="send.tel"></td>-->
-                  <!--</tr>-->
-                  <!--</tbody>-->
-                  <!--</table>-->
-
-
-                  <!--&lt;!&ndash; end project list &ndash;&gt;-->
-
-                  <!--</div>-->
-
                 </div>
               </div>
 
@@ -439,13 +353,6 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <div class="title_right">
                         <ul class="nav navbar-right panel_toolbox">
-                          <!--<md-button-->
-                          <!--ng-click="toggleLeft()"-->
-                          <!--class="md-fab md-primary"-->
-                          <!--aria-label="Code"-->
-                          <!--ng-click="ctrl.showContentMenu($event, ctrl.code)">-->
-                          <!--<md-icon md-svg-icon="assets/svg/list.svg"></md-icon>-->
-                          <!--</md-button>-->
                         </ul>
                       </div>
                     </ul>
@@ -487,29 +394,6 @@
                       <!--<div class="count green">2,500</div>-->
                     </div>
                   </div>
-                  <!-- /top tiles -->
-                  <!--<div class="x_content">-->
-                  <!--<a class="btn btn-app">-->
-                  <!--<span class="badge bg-green">6</span>-->
-                  <!--<i class="fa fa-bullhorn"></i> ยอดเงิน-->
-                  <!--</a>-->
-                  <!--<a class="btn btn-app">-->
-                  <!--<span class="badge bg-green">6</span>-->
-                  <!--<i class="fa fa-bullhorn"></i> การใช้งาน-->
-                  <!--</a>-->
-                  <!--<a class="btn btn-app">-->
-                  <!--<span class="badge bg-green">6</span>-->
-                  <!--<i class="fa fa-bullhorn"></i> ส่งสำเร็จ-->
-                  <!--</a>-->
-                  <!--<a class="btn btn-app">-->
-                  <!--<span class="badge bg-green">6</span>-->
-                  <!--<i class="fa fa-bullhorn"></i> พัสดุค้างส่ง-->
-                  <!--</a>-->
-                  <!--<a class="btn btn-app">-->
-                  <!--<span class="badge bg-green">6</span>-->
-                  <!--<i class="fa fa-bullhorn"></i> พัสดุส่งคืน-->
-                  <!--</a>-->
-                  <!--</div>-->
                 </div>
               </div>
               <!-- /page content -->
