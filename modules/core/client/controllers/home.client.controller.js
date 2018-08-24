@@ -169,14 +169,11 @@ angular.module('core').controller('HomeController',
 
             // When change start date
             $scope.startDateChanged = function () {
-                console.log("start date change: ", $scope.startDate);
                 $scope.find("listClient");
-
             };
 
             // When change end date
             $scope.endDateChanged = function () {
-                console.log("end date change: ", $scope.endDate);
                 $scope.find("listClient");
             };
 

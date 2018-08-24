@@ -83,10 +83,10 @@
               <!-- /input-group -->
             </div>
             <div class="col-md-2">
-              <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
+              <md-datepicker ng-model="startDate" ng-change="find('mainsSummary')"></md-datepicker>
             </div>
             <div class="col-md-2">
-              <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
+              <md-datepicker ng-model="endDate" ng-change="find('mainsSummary');"></md-datepicker>
             </div>
             <div class="nav navbar-right panel_toolbox">
               <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
