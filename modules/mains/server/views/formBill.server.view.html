@@ -76,7 +76,9 @@ table, th, td {
 					<th>EMS No.</th>
 					<th>ปณ. ปลายทาง</th>
 					<th>น้ำหนัก</th>
-					<th>ยอดเงิน</th>
+					<th>ยอดก่อน</th>
+					<th>ยอดหลัง</th>
+					<th>ส่วนต่าง</th>
 					<th>COD</th>
 					<th>ประกัน</th>
 					<th>Vat</th>
@@ -91,6 +93,8 @@ table, th, td {
 					<td>{{main.r_postcode + ' ' + main.r_ampher}}</td>
 					<td>{{main.weight}}</td>
 					<td>{{main.total}}</td>
+					<td>{{main.afterPrice}}</td>
+					<td>{{ main.total - main.afterPrice}}</td>
 					<td>{{main.codAmnt}}</td>
 					<td>{{main.insuranceAmnt}}</td>
 					<td>{{main.totalVatAmnt.toFixed(2)}}</td>
@@ -103,6 +107,7 @@ table, th, td {
 			<h6>จำนวนเงิน {{(totalAmount - totalVatAmnt).toFixed(2)}} บาท</h6>
 			<h6>VAT {{totalVatAmnt.toFixed(2)}} บาท</h6>
 			<h6>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</h6>
+			<!--<h6>ส่วนต่าง {{totalafterPrice.toFixed(2)}} บาท</h6>-->
 		</div>
 	</div>
 

@@ -1,4 +1,4 @@
-<div data-ng-controller="HomeController" data-ng-init="find('mainsSummary')">
+<div data-ng-controller="HomeController" data-ng-init="find('summary')">
   <div layout="column">
     <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
       <md-toolbar class="md-theme-indigo">
@@ -90,7 +90,7 @@
             </div>
             <div class="nav navbar-right panel_toolbox">
               <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
-              <button type="button" class="btn btn-mg btn-default" ng-click="exportSummary('mainsSummary')">Export Excel</button>
+              <button type="button" class="btn btn-mg btn-default" ng-click="exportSummary()">Export Excel</button>
 
               <!--<button type="button" class="btn btn-danger btn-xs"-->
               <!--[hasPermission]="['admin']"-->
@@ -160,7 +160,7 @@
                       <td class="md-caption" ng-bind="main.tpWeight"></td>
                       <td class="md-caption" ng-bind="main.total"></td>
                       <td class="md-caption" ng-bind="main.afterPrice"></td>
-                      <td class="md-caption">{{main.total - main.afterPrice}}</td>
+                      <td class="md-caption">{{ main.total - main.afterPrice}}</td>
                       <td class="md-caption" ng-bind="main.insuranceAmnt"></td>
                       <td class="md-caption" ng-bind="main.codAmnt"></td>
                       <td>
@@ -168,7 +168,7 @@
                       </td>
                       <td>
                         <a class="btn btn-info btn-xs">
-                          <i class="fa fa-money"></i> {{ main.barcode | updateStatus : main.status : main.user._id}} {{main.status}}</a>
+                          <i class="fa fa-money"></i> {{ main.barcode | updateStatus}} {{main.status}}</a>
                       </td>
                       <td>
                         <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank">
@@ -180,7 +180,17 @@
                         <a class="btn btn-warning btn-xs" href="/print/sticker?mainId={{main._id}}" target="_blank">
                           <i class="fa fa-print"></i> Sticker </a>
                       </td>
+<<<<<<< HEAD
                       <td class="md-caption" ng-bind="main.detail_Product"></td>
+                      <!--<td>-->
+                      <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                      <!--</td>-->
+=======
+                      <td>
+                        <a class="btn btn-danger btn-xs">
+                          <i class="fa fa-money"></i> {{ main.codAmnt }}</a>
+                      </td>
+>>>>>>> origin/develop
                     </tr>
                   </tbody>
                 </table>

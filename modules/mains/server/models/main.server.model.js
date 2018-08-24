@@ -225,6 +225,10 @@ var MainSchema = new Schema({
 		type: Number,
 		default: 0
 	},
+	totalafterPrice: {
+    	type: Number,
+   		default: 0
+   	},
 	source: {
 		type: String,
 		default: 'manual',
