@@ -469,6 +469,10 @@ exports.exportSummary = function (req, res, next) {
 		criteria.created = {"$lt": endDate};
 	}
 
+	// Status
+	criteria.status = {$ne:"ยังไม่ได้ชำระเงิน"};
+
+
 	Main.find(criteria).sort('-created')
 	.populate('user', 'displayName')
 	.exec(function (err, mains) {
