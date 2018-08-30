@@ -233,6 +233,10 @@ var MainSchema = new Schema({
 		type: String,
 		default: 'manual',
 		trim: true
+	},
+	isCreateDiffStatment: {
+		type: Boolean,
+		default: false
 	}
 });
 

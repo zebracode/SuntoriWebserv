@@ -75,6 +75,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
 
                         $http.post("/api/update/mains", data)
                             .then(function (response) {
+                                console.log("Update status successfully!!!");
                             });
 
                     });
