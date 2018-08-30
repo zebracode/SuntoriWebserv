@@ -21,7 +21,7 @@ var task = cron.schedule('* * * * *', function () {
     Main.find({
         $expr: { $ne: ["$total", "$afterPrice"] },
         $or: [{ status: "นำจ่าย/ชำระเงินเรียบร้อย" }, { status: "นำจ่ายถึงผู้รับแล้ว" }],
-        isCreateDiffStatment: { $ne: true }
+        isCreateDiffStatment: { $eq: false }
     })
         .sort('-created').populate('user').exec(function (err, mains) {
             if (!err) {
