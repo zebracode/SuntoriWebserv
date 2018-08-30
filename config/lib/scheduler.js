@@ -20,7 +20,7 @@ var task = cron.schedule('* * * * *', function () {
     var Main = mongoose.model('Main');
     Main.find({
         $expr: { $ne: ["$total", "$afterPrice"] },
-        $or: [{ status: "นำจ่าย/ชำระเงินเรียบร้อย" }, { status: "นำจ่ายถึงผู้รับแล้ว" }],
+        status: "ปณ.ต้นทางรับฝากแล้ว" ,
         isCreateDiffStatment: { $eq: false }
     })
         .sort('-created').populate('user').exec(function (err, mains) {
@@ -45,6 +45,7 @@ var task = cron.schedule('* * * * *', function () {
                             {balanceAmt: newBalanceAmt},
                             function(err, balance){
                                 if(!err){
+                                    console.log("Update balance successfully!!!");
                                     createStatement(mains, i, newBalanceAmt);
                                 }
                             }
@@ -71,7 +72,9 @@ var task = cron.schedule('* * * * *', function () {
             var statement = new Statement(data);
             statement.save(function (err) {
                 if (!err) {
+                    console.log("Create statement successfully!!!")
                     updateDiffStatement(mains, i);
+
                 }
             });
         }
@@ -83,6 +86,7 @@ var task = cron.schedule('* * * * *', function () {
                 {isCreateDiffStatment: true},
                 function(err, main){
                     if(!err){
+                        console.log("Update mains successfully!!!")
                     }
                 }
             );
