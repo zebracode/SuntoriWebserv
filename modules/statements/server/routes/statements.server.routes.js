@@ -23,5 +23,7 @@ module.exports = function(app) {
   // Export Excel
   app.route('/api/excel/statements')
   .get(statements.excel);
+
+  app.get('/api/findStatements', statements.findStatements);
   
 };

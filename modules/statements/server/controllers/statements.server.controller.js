@@ -80,16 +80,16 @@ exports.delete = function (req, res) {
  * List of Statements
  */
 exports.list = function (req, res) {
-  Statement.find().sort({created: 1, refNumber: -1})
-  .populate('user', 'displayName').populate('owner', 'displayName').exec(function (err, statements) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(statements);
-    }
-  });
+  Statement.find().sort({ created: 1, refNumber: -1 })
+    .populate('user', 'displayName').populate('owner', 'displayName').exec(function (err, statements) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(statements);
+      }
+    });
 };
 
 /**
@@ -125,8 +125,8 @@ exports.excel = function (req, res, next) {
       });
     } else {
       var jsonArr = [];
-      
-      for (var i=0; i < statements.length; i++) {
+
+      for (var i = 0; i < statements.length; i++) {
         var json = {};
         json.created = fecha.format(statements[i].created, 'mediumDate');
         json.owner = statements[i].owner.displayName;
@@ -139,4 +139,44 @@ exports.excel = function (req, res, next) {
       res.xls('statements.xlsx', jsonArr);
     }
   });
+};
+
+exports.findStatements = function (req, res) {
+
+  var criteria = {};
+
+  var startDate = null;
+  var endDate = null;
+
+  // User Condition
+  if (req.query.ownerId) {
+    criteria.owner = req.query.ownerId;
+  }
+
+  // Date Condition
+  if (req.query.startDate && req.query.endDate) {
+    startDate = new Date(req.query.startDate);
+    startDate.setHours(0,0,0,0);
+    endDate = new Date(req.query.endDate);
+    endDate.setHours(23,59,59, 999);
+    criteria.created = { "$gte": startDate, "$lt": endDate };
+  } else if (req.query.startDate) {
+    startDate = new Date(req.query.startDate);
+    criteria.created = { "$gte": startDate };
+  } else if (req.query.endDate) {
+    endDate = new Date(req.query.endDate);
+    criteria.created = { "$lt": endDate };
+  }
+
+  Statement.find(criteria).sort('-created')
+    .populate('onwer', 'displayName')
+    .exec(function (err, statements) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.json(statements);
+      }
+    });
 };
