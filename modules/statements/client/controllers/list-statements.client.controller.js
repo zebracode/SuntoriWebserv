@@ -71,6 +71,10 @@
       var pageData = [];
       var pageIndex = 0;
       var itemCount = 0;
+
+      // Clear totalItems
+      $scope.totalItems = 0;
+
       for (var i = 0; i < data.length; i++) {
         itemCount++;
         tempData.push(data[i]);
