@@ -6,7 +6,8 @@
 var config = require('../config'),
 	mongoose = require('./mongoose'),
 	express = require('./express'),
-	chalk = require('chalk');
+	chalk = require('chalk'),
+	scheduler = require('./scheduler');
 
 // Initialize Models
 mongoose.loadModels();
@@ -27,6 +28,9 @@ module.exports.init = function init(callback) {
 
 module.exports.start = function start(callback) {
 	var _this = this;
+
+	// Start batch job schedule
+	scheduler.start();
 
 	_this.init(function(app, db, config) {
 

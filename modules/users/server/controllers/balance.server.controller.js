@@ -27,7 +27,6 @@ exports.create = function (req, res, next) {
 };
 
 exports.getBalance = function (req, res, next) {
-   console.log(req.query.userId);
    Balance.findOne({userId: req.query.userId}, function(err, balance) {
         if (err) {
             return next(err);

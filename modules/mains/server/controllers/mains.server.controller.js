@@ -469,7 +469,12 @@ exports.exportSummary = function (req, res, next) {
 		criteria.created = {"$lt": endDate};
 	}
 
+	// Status
+	criteria.status = {$ne:"ยังไม่ได้ชำระเงิน"};
+
+
 	Main.find(criteria).sort('-created')
+	.populate('user', 'displayName')
 	.exec(function (err, mains) {
 		if (err) {
 			return res.status(400).send({
@@ -527,7 +532,11 @@ exports.findMains = function(req, res, next){
 		criteria.created = {"$lt": endDate};
 	}
 
-	Main.find(criteria).sort('-created') 
+	// Status
+	criteria.status = {$ne:"ยังไม่ได้ชำระเงิน"};
+
+	Main.find(criteria).sort('-created')
+	.populate('user', 'displayName')
 	.exec(function(err, mains){
 		if(err){
 			return res.status(400).send({
