@@ -17,6 +17,7 @@ var cron = require('node-cron'),
  */
 
 var task = cron.schedule('* * * * *', function () {
+    console.log("Schedule has been executed!!!");
     var Main = mongoose.model('Main');
     Main.find({
         $expr: { $ne: ["$total", "$afterPrice"] },
