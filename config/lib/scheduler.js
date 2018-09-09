@@ -17,15 +17,20 @@ var cron = require('node-cron'),
  */
 
 var task = cron.schedule('* * * * *', function () {
+    console.log("Schedule has been executed!!!");
     var Main = mongoose.model('Main');
     Main.find({
-        $expr: { $ne: ["$total", "$afterPrice"] },
+        //$expr: { $ne: ["$total", "$afterPrice"] },
         status: "ปณ.ต้นทางรับฝากแล้ว" ,
         isCreateDiffStatment: { $eq: false }
     })
         .sort('-created').populate('user').exec(function (err, mains) {
             if (!err) {
                 for(var i=0; i<mains.length; i++){
+                    if(mains[i].total === mains[i].afterPrice){
+                        console.log("Continue...");
+                        continue;
+                    }
                     updateUserBalace(mains, i);
                 }
             }
@@ -63,7 +68,7 @@ var task = cron.schedule('* * * * *', function () {
             data.refNumber = mains[i].barcode + '_5';
             data.name = 'ค่าส่วนต่างค่าส่งสินค้า';
             if (mains[i].total > mains[i].afterPrice) {
-                data.mountIn = mains[i].total - mains[i].afterPrice;
+                data.amountIn = mains[i].total - mains[i].afterPrice;
             } else {
                 data.amountOut = mains[i].afterPrice - mains[i].total;
             }
@@ -75,6 +80,9 @@ var task = cron.schedule('* * * * *', function () {
                     console.log("Create statement successfully!!!")
                     updateDiffStatement(mains, i);
 
+                } else {
+                    console.log("Create statement error!!");
+                    console.log(err);
                 }
             });
         }
