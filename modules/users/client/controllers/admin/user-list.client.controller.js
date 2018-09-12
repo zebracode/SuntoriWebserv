@@ -109,12 +109,18 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 
     //Add to statement
     function saveStatement(item, amount) {
+      var createdDate = new Date();
+			var year = "" + createdDate.getFullYear();
+			var month = (createdDate.getMonth() + 1 >= 10) ? "" + (createdDate.getMonth()+ 1) : "0" + (createdDate.getMonth() + 1);
+			var date = (createdDate.getDate() >= 10) ? "" + createdDate.getDate() : "0" + createdDate.getDate();
+			var strDate = year + month + date;
       var statement = new StatementsService({
         name: "เติมเงินผ่าน Admin",
         amountIn: amount > 0 ? Math.abs(amount) : 0,
         amountOut: amount < 0 ? Math.abs(amount) : 0,
         balanceAmount: item.balanceAmt,
-        owner: item
+        owner: item,
+        sortDate: strDate
       });
 
       statement.$save(function(response){
