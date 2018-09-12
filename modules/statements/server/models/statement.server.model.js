@@ -44,6 +44,10 @@ var StatementSchema = new Schema({
     type: String,
     default: '',
     trim: true
+  },
+  sortDate: {
+    type: String,
+    default: ''
   }
 });
 

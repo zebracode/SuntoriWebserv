@@ -759,21 +759,21 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				return checkDigit;
 			}
 			// Shipping Amount
-			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), "ค่าส่งสินค้า " + barcode, barcode + '_1');
+			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), barcode + " ค่าส่งสินค้า", barcode + '_1');
 
 			// COD Amount
 			if (selectedMain.codAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), "ค่า COD " + barcode, barcode + '_2');
+				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), barcode + " ค่า COD", barcode + '_2');
 			}
 
 			// Insurance Amount
 			if (selectedMain.insuranceAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), "ค่าประกัน " + barcode, barcode + '_3');
+				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1),  barcode + " ค่าประกัน", barcode + '_3');
 			}
 
 			// VAT Amount
 			if (selectedMain.totalVatAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), "ค่าภาษีมูลค่าเพิ่ม " + barcode, barcode + '_4');
+				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), barcode + " ค่าภาษีมูลค่าเพิ่ม", barcode + '_4');
 			}
 
 		};
@@ -1299,13 +1299,19 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 		//Add to statement
 		function saveStatement(item, amount, name, refNumber) {
+			var createdDate = new Date();
+			var year = "" + createdDate.getFullYear();
+			var month = (createdDate.getMonth() + 1 >= 10) ? "" + (createdDate.getMonth()+ 1) : "0" + (createdDate.getMonth() + 1);
+			var date = (createdDate.getDate() >= 10) ? "" + createdDate.getDate() : "0" + createdDate.getDate();
+			var strDate = year + month + date;
 			var statement = new StatementsService({
 				name: name,
 				amountIn: amount > 0 ? Math.abs(amount) : 0,
 				amountOut: amount < 0 ? Math.abs(amount) : 0,
 				balanceAmount: Number($scope.balanceAmount),
 				owner: item,
-				refNumber: refNumber
+				refNumber: refNumber,
+				sortDate: strDate
 			});
 
 			statement.$save(function (response) {
