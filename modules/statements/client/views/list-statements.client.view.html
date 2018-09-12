@@ -112,6 +112,7 @@
                 <table class="table table-striped jambo_table bulk_action">
                   <thead>
                     <tr class="headings">
+                      <th class="md-caption">ลำดับ </th>
                       <th class="md-caption">วันที่ </th>
                       <th class="md-caption">เจ้าของบัญชี </th>
                       <th class="md-caption">รายการการใช้งาน</th>
@@ -122,6 +123,7 @@
                   </thead>
                   <tbody>
                     <tr class="even pointer" ng-repeat="statement in vm.statements">
+                      <td class="md-caption" ng-bind="{{$index + 1}}"></td>
                       <td class="md-caption" ng-bind="statement.created | date:'mediumDate'"></td>
                       <td class="md-caption" ng-bind="statement.owner.displayName"></td>
                       <td class="md-caption" ng-bind="statement.name"></td>
