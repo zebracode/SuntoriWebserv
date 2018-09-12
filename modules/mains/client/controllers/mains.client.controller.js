@@ -768,7 +768,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 			// Insurance Amount
 			if (selectedMain.insuranceAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1),  barcode + " ค่าประกัน", barcode + '_3');
+				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), barcode + " ค่าประกัน", barcode + '_3');
 			}
 
 			// VAT Amount
@@ -864,7 +864,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		$scope.showAlert = function (ev) {
 
 			// Boonchuay 2 August 2018 Start
-			if($scope.selectedOption.weight === 0) {
+			if ($scope.selectedOption.weight === 0) {
 				$scope.error = "กรุณาเลือกน้ำหนัก";
 				return;
 			}
@@ -1299,26 +1299,29 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 		//Add to statement
 		function saveStatement(item, amount, name, refNumber) {
-			var createdDate = new Date();
-			var year = "" + createdDate.getFullYear();
-			var month = (createdDate.getMonth() + 1 >= 10) ? "" + (createdDate.getMonth()+ 1) : "0" + (createdDate.getMonth() + 1);
-			var date = (createdDate.getDate() >= 10) ? "" + createdDate.getDate() : "0" + createdDate.getDate();
-			var strDate = year + month + date;
-			var statement = new StatementsService({
-				name: name,
-				amountIn: amount > 0 ? Math.abs(amount) : 0,
-				amountOut: amount < 0 ? Math.abs(amount) : 0,
-				balanceAmount: Number($scope.balanceAmount),
-				owner: item,
-				refNumber: refNumber,
-				sortDate: strDate
-			});
+			if (amount !== 0) {
+				var createdDate = new Date();
+				var year = "" + createdDate.getFullYear();
+				var month = (createdDate.getMonth() + 1 >= 10) ? "" + (createdDate.getMonth() + 1) : "0" + (createdDate.getMonth() + 1);
+				var date = (createdDate.getDate() >= 10) ? "" + createdDate.getDate() : "0" + createdDate.getDate();
+				var strDate = year + month + date;
+				var statement = new StatementsService({
+					name: name,
+					amountIn: amount > 0 ? Math.abs(amount) : 0,
+					amountOut: amount < 0 ? Math.abs(amount) : 0,
+					balanceAmount: Number($scope.balanceAmount),
+					owner: item,
+					refNumber: refNumber,
+					sortDate: strDate
+				});
 
-			statement.$save(function (response) {
+				statement.$save(function (response) {
 
-			}, function (errorResponse) {
+				}, function (errorResponse) {
 
-			});
+				});
+			}
+
 		}
 
 		/****************************************************************************************
@@ -1405,7 +1408,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		$scope.showAlert = function (ev) {
 
 			// Boonchuay 2 August 2018 Start
-			if($scope.selectedOption.weight === 0) {
+			if ($scope.selectedOption.weight === 0) {
 				$scope.error = "กรุณาเลือกน้ำหนัก";
 				return;
 			}
