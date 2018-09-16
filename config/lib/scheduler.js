@@ -7,7 +7,7 @@ var cron = require('node-cron'),
 /**
  * 1. Retrieve เฉพาะข้อมูลที่
  *    1.1 ยอดก่อนส่ง และหลังส่งไม่ได้เท่ากัน 
- *    1.2 สถานะเป็น "นำจ่ายถึงผู้รับแล้ว" และ "นำจ่าย/ชำระเงินเรียบร้อย"
+ *    1.2 สถานะเป็น "ปณ.ต้นทางรับฝากแล้ว"
  *    1.3 ยังไม่ได้สร้าง Statment ที่เกิดจากยอดส่วนต่าง (isCreateDiffStatment != true)
  * 2. Update ยอดเงินคงเหลือของ User
  *    3.1 ถ้าค่าส่งก่อน > ค่าส่งหลัง เพิ่มยอดคงเหลือ
@@ -20,13 +20,17 @@ var task = cron.schedule('* * * * *', function () {
     console.log("Schedule has been executed!!!");
     var Main = mongoose.model('Main');
     Main.find({
-        $expr: { $ne: ["$total", "$afterPrice"] },
+        //$expr: { $ne: ["$total", "$afterPrice"] },
         status: "ปณ.ต้นทางรับฝากแล้ว" ,
         isCreateDiffStatment: { $eq: false }
     })
         .sort('-created').populate('user').exec(function (err, mains) {
             if (!err) {
                 for(var i=0; i<mains.length; i++){
+                    if(mains[i].total === mains[i].afterPrice){
+                        console.log("Continue...");
+                        continue;
+                    }
                     updateUserBalace(mains, i);
                 }
             }
@@ -58,13 +62,20 @@ var task = cron.schedule('* * * * *', function () {
 
         // Create statement
         function createStatement(mains, i, balanceAmt){
+            //var createdDate = new Date();
+			var year = "" + mains[i].created.getFullYear();
+			var month = (mains[i].created.getMonth() + 1 >= 10) ? "" + (mains[i].created.getMonth()+ 1) : "0" + (mains[i].created.getMonth() + 1);
+			var date = (mains[i].created.getDate() >= 10) ? "" + mains[i].created.getDate() : "0" + mains[i].created.getDate();
+			var strDate = year + month + date;
             var data = {};
             data.user = mains[i].user;
             data.owner = mains[i].user;
             data.refNumber = mains[i].barcode + '_5';
-            data.name = 'ค่าส่วนต่างค่าส่งสินค้า';
+            data.name = mains[i].barcode + ' ค่าส่วนต่างค่าส่งสินค้า';
+            data.created = mains[i].created;
+            data.sortDate = strDate;
             if (mains[i].total > mains[i].afterPrice) {
-                data.mountIn = mains[i].total - mains[i].afterPrice;
+                data.amountIn = mains[i].total - mains[i].afterPrice;
             } else {
                 data.amountOut = mains[i].afterPrice - mains[i].total;
             }
@@ -76,6 +87,9 @@ var task = cron.schedule('* * * * *', function () {
                     console.log("Create statement successfully!!!")
                     updateDiffStatement(mains, i);
 
+                } else {
+                    console.log("Create statement error!!");
+                    console.log(err);
                 }
             });
         }

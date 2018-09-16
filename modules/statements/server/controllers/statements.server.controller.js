@@ -80,7 +80,7 @@ exports.delete = function (req, res) {
  * List of Statements
  */
 exports.list = function (req, res) {
-  Statement.find().sort({ created: 1, refNumber: -1 })
+  Statement.find().sort({ created: -1, refNumber: -1 })
     .populate('user', 'displayName').populate('owner', 'displayName').exec(function (err, statements) {
       if (err) {
         return res.status(400).send({
@@ -168,8 +168,8 @@ exports.findStatements = function (req, res) {
     criteria.created = { "$lt": endDate };
   }
 
-  Statement.find(criteria).sort('-created')
-    .populate('onwer', 'displayName')
+  Statement.find(criteria).sort({sortDate: -1, refNumber: 1})
+    .populate('owner', 'displayName')
     .exec(function (err, statements) {
       if (err) {
         return res.status(400).send({
