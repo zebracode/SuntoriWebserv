@@ -41,11 +41,13 @@
                       <th class="md-caption">อีเมลล์ </th>
                       <th class="md-caption">เบอร์โทร </th>
                       <th class="md-caption">ยอดเงิน</th>
-                      <th class="md-caption">เติมเงิน</th>
+                      <th class="md-caption"  data-ng-if="username==='account'" >เติมเงิน</th>
+                      <th class="md-caption"  data-ng-if="username!=='account'" >แก้ไข</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="even pointer" data-ng-repeat="user in users |filter:searchText" class="list-group-item" ng-init="setBalanceAmt($index);">
+                    <tr class="even pointer" data-ng-repeat="user in users |filter:searchText" class="list-group-item"
+                      ng-init="setBalanceAmt($index);">
                       <td class="md-caption" ng-bind="user.created | date:'mediumDate'"></td>
                       <td class="md-caption" ng-bind="user.username"></td>
                       <td class="md-caption" ng-bind="user.displayName"></td>
@@ -53,7 +55,7 @@
                       <td class="md-caption" ng-bind="user.tel"></td>
                       <td class="md-caption" ng-bind="user.balanceAmt"></td>
                       <td>
-                        <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)">
+                        <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)"  data-ng-if="username==='account'">
                           <i class="fa fa-pencil"></i> เติมเงิน </a>
                         <a class="btn btn-danger btn-xs" data-ui-sref="admin.user({userId: user._id})">
                           <i class="fa fa-pencil"></i> แก้ไข </a>
@@ -63,7 +65,8 @@
                 </table>
               </div>
               <div class="text-center form-group">
-                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
+                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage"
+                  ng-change="pageChanged()"></ul>
               </div>
             </div>
           </div>
