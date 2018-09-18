@@ -3,6 +3,13 @@
 angular.module('core').controller('HomeController',
     ['$scope', 'Authentication', 'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains', '$filter', 'StatementsService',
         function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, $filter, StatementsService) {
+            
+            if(Authentication){
+                if(Authentication.user){
+                    $scope.username = Authentication.user.username;
+                }
+            }
+            
             $scope.totalItems = 0;
             $scope.currentPage = 1;
             $scope.itemsPerPage = 10;
