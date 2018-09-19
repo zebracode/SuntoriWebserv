@@ -118,27 +118,60 @@ exports.statementByID = function (req, res, next, id) {
 
 // Excel Export
 exports.excel = function (req, res, next) {
-  Statement.find().sort('-created').populate('user', 'displayName').populate('owner', 'displayName').exec(function (err, statements) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      var jsonArr = [];
 
-      for (var i = 0; i < statements.length; i++) {
-        var json = {};
-        json.created = fecha.format(statements[i].created, 'mediumDate');
-        json.owner = statements[i].owner.displayName;
-        json.name = statements[i].name;
-        json.amountIn = statements[i].amountIn;
-        json.amountOut = statements[i].amountOut;
-        json.balanceAmount = statements[i].balanceAmount;
-        jsonArr.push(json);
+  console.log(req.query);
+  
+  var criteria = {};
+
+  var startDate = null;
+  var endDate = null;
+
+  // User Condition
+  if (req.query.ownerId) {
+    criteria.owner = req.query.ownerId;
+  }
+
+  // Date Condition
+  if (req.query.startDate && req.query.endDate) {
+    startDate = new Date(req.query.startDate);
+    startDate.setHours(0, 0, 0, 0);
+    endDate = new Date(req.query.endDate);
+    endDate.setHours(23, 59, 59, 999);
+    criteria.created = { "$gte": startDate, "$lt": endDate };
+  } else if (req.query.startDate) {
+    startDate = new Date(req.query.startDate);
+    criteria.created = { "$gte": startDate };
+  } else if (req.query.endDate) {
+    endDate = new Date(req.query.endDate);
+    criteria.created = { "$lt": endDate };
+  }
+
+  console.log("Criteria: ");
+  console.log(criteria);
+
+  Statement.find(criteria).sort({ sortDate: -1, refNumber: 1 })
+    .populate('owner', 'displayName')
+    .exec(function (err, statements) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        var jsonArr = [];
+
+        for (var i = 0; i < statements.length; i++) {
+          var json = {};
+          json.created = fecha.format(statements[i].created, 'mediumDate');
+          json.owner = statements[i].owner.displayName;
+          json.name = statements[i].name;
+          json.amountIn = statements[i].amountIn;
+          json.amountOut = statements[i].amountOut;
+          json.balanceAmount = statements[i].balanceAmount;
+          jsonArr.push(json);
+        }
+        res.xls('statements.xlsx', jsonArr);
       }
-      res.xls('statements.xlsx', jsonArr);
-    }
-  });
+    });
 };
 
 exports.findStatements = function (req, res) {
@@ -156,9 +189,9 @@ exports.findStatements = function (req, res) {
   // Date Condition
   if (req.query.startDate && req.query.endDate) {
     startDate = new Date(req.query.startDate);
-    startDate.setHours(0,0,0,0);
+    startDate.setHours(0, 0, 0, 0);
     endDate = new Date(req.query.endDate);
-    endDate.setHours(23,59,59, 999);
+    endDate.setHours(23, 59, 59, 999);
     criteria.created = { "$gte": startDate, "$lt": endDate };
   } else if (req.query.startDate) {
     startDate = new Date(req.query.startDate);
@@ -168,7 +201,7 @@ exports.findStatements = function (req, res) {
     criteria.created = { "$lt": endDate };
   }
 
-  Statement.find(criteria).sort({sortDate: -1, refNumber: 1})
+  Statement.find(criteria).sort({ sortDate: -1, refNumber: 1 })
     .populate('owner', 'displayName')
     .exec(function (err, statements) {
       if (err) {
