@@ -118,8 +118,6 @@ exports.statementByID = function (req, res, next, id) {
 
 // Excel Export
 exports.excel = function (req, res, next) {
-
-  console.log(req.query);
   
   var criteria = {};
 
@@ -145,9 +143,6 @@ exports.excel = function (req, res, next) {
     endDate = new Date(req.query.endDate);
     criteria.created = { "$lt": endDate };
   }
-
-  console.log("Criteria: ");
-  console.log(criteria);
 
   Statement.find(criteria).sort({ sortDate: -1, refNumber: 1 })
     .populate('owner', 'displayName')
