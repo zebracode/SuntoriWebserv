@@ -339,7 +339,11 @@ exports.mainByUserAndStatus = function (req, res, next) {
 };
 
 exports.totalMains = function (req, res, next) {
-	Main.count({}, function (err, count) {
+	var criteria = {};
+	if(req.query.user){
+		criteria.user = req.query.user;
+	}
+	Main.count(criteria, function (err, count) {
 		if (err) {
 			return next(err);
 		} else {

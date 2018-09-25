@@ -46,10 +46,13 @@ angular.module('core').controller('HomeController',
             };
 
             $scope.setTotalMains = function () {
-                $http.get("/api/mainsTotal")
-                    .then(function (response) {
-                        $scope.totalMains = response.data;
-                    });
+                if (Authentication.user) {
+                    $http.get("/api/mainsTotal?user=" + Authentication.user._id)
+                        .then(function (response) {
+                            $scope.totalMains = response.data;
+                        });
+                }
+
             }
 
             // This provides Authentication context.
