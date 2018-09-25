@@ -70,7 +70,8 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                             "barcode": barcode,
                             "status": status,
                             tpWeight: tpWeight,
-                            afterPrice: afterPrice
+                            afterPrice: afterPrice,
+                            isUpdateAfterPrice: true
                         };
 
                         $http.post("/api/update/mains", data)

@@ -168,7 +168,7 @@ exports.mainByID = function (req, res, next, id) {
 };
 
 exports.updateByBarcode = function (req, res, next) {
-	Main.findOneAndUpdate({ barcode: req.body.barcode }, req.body,
+	Main.findOneAndUpdate({ barcode: req.body.barcode , isUpdateAfterPrice: false}, req.body,
 		function (err, main) {
 			if (err) {
 				return next(err);
