@@ -65,7 +65,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                                 break;
                             }
                         }
-                        if (status !== 'นำจ่ายถึงผู้รับแล้ว') {
+                        if (status !== 'นำจ่ายถึงผู้รับแล้ว' && status !== 'นำจ่าย/ชำระเงินเรียบร้อย') {
                             data = {
                                 "barcode": barcode,
                                 "status": status,
