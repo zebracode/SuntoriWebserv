@@ -51,6 +51,11 @@ angular.module('core').controller('HomeController',
                         .then(function (response) {
                             $scope.totalMains = response.data;
                         });
+
+                        $http.get("/api/mainsTotal")
+                        .then(function (res) {
+                            $scope.allMains = res.data;
+                        });
                 }
 
             }
