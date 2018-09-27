@@ -12,8 +12,8 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                 .then(function (response) {
                     var status = response.data.statusDescription;
                     var tpWeight = response.data.productWeight;
-                    var senderProvice = response.data.provinceName ;
-                    var receiverProvince = response.data.customerProvince ;
+                    var senderProvice = response.data.provinceName;
+                    var receiverProvince = response.data.customerProvince;
                     var afterPrice = 0;
                     var data = {};
 
@@ -65,19 +65,20 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                                 break;
                             }
                         }
+                        if (status !== 'นำจ่ายถึงผู้รับแล้ว') {
+                            data = {
+                                "barcode": barcode,
+                                "status": status,
+                                tpWeight: tpWeight,
+                                afterPrice: afterPrice
+                            };
 
-                        data = {
-                            "barcode": barcode,
-                            "status": status,
-                            tpWeight: tpWeight,
-                            afterPrice: afterPrice,
-                            isUpdateAfterPrice: true
-                        };
+                            $http.post("/api/update/mains", data)
+                                .then(function (response) {
+                                    console.log("Update status successfully!!!");
+                                });
 
-                        $http.post("/api/update/mains", data)
-                            .then(function (response) {
-                                console.log("Update status successfully!!!");
-                            });
+                        }
 
                     });
 

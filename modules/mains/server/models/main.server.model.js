@@ -237,11 +237,6 @@ var MainSchema = new Schema({
 	isCreateDiffStatment: {
 		type: Boolean,
 		default: false
-	},
-	
-	isUpdateAfterPrice: {
-		type: Boolean,
-		default: false
 	}
 });
 
