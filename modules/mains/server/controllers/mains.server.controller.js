@@ -463,7 +463,9 @@ exports.exportSummary = function (req, res, next) {
 	// Date Condition
 	if(req.query.startDate && req.query.endDate){
 		startDate = new Date(req.query.startDate);
+		startDate.setHours(0, 0, 0, 0);
 		endDate = new Date(req.query.endDate);
+		endDate.setHours(23, 59, 59, 999);
 		criteria.created = {"$gte": startDate, "$lt": endDate};
 	} else if(req.query.startDate){
 		startDate = new Date(req.query.startDate);
