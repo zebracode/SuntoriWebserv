@@ -168,7 +168,7 @@ exports.mainByID = function (req, res, next, id) {
 };
 
 exports.updateByBarcode = function (req, res, next) {
-	Main.findOneAndUpdate({ barcode: req.body.barcode }, req.body,
+	Main.findOneAndUpdate({ barcode: req.body.barcode}, req.body,
 		function (err, main) {
 			if (err) {
 				return next(err);
@@ -339,7 +339,11 @@ exports.mainByUserAndStatus = function (req, res, next) {
 };
 
 exports.totalMains = function (req, res, next) {
-	Main.count({}, function (err, count) {
+	var criteria = {};
+	if(req.query.user){
+		criteria.user = req.query.user;
+	}
+	Main.count(criteria, function (err, count) {
 		if (err) {
 			return next(err);
 		} else {
@@ -459,7 +463,9 @@ exports.exportSummary = function (req, res, next) {
 	// Date Condition
 	if(req.query.startDate && req.query.endDate){
 		startDate = new Date(req.query.startDate);
+		startDate.setHours(0, 0, 0, 0);
 		endDate = new Date(req.query.endDate);
+		endDate.setHours(23, 59, 59, 999);
 		criteria.created = {"$gte": startDate, "$lt": endDate};
 	} else if(req.query.startDate){
 		startDate = new Date(req.query.startDate);
@@ -522,7 +528,9 @@ exports.findMains = function(req, res, next){
 	// Date Condition
 	if(req.query.startDate && req.query.endDate){
 		startDate = new Date(req.query.startDate);
+		startDate.setHours(0, 0, 0, 0);
 		endDate = new Date(req.query.endDate);
+		endDate.setHours(23, 59, 59, 999);
 		criteria.created = {"$gte": startDate, "$lt": endDate};
 	} else if(req.query.startDate){
 		startDate = new Date(req.query.startDate);

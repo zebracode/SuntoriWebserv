@@ -39,7 +39,9 @@
 
     // Export Excel
     function exportExcel() {
-      window.location.href = '/api/excel/statements';
+      window.location.href = "/api/excel/statements?ownerId=" + Authentication.user._id
+      + "&startDate=" + $scope.startDate
+      + "&endDate=" + $scope.endDate;
     }
 
     $scope.pageChanged = function () {
@@ -94,6 +96,7 @@
 
       // Set first page
       vm.statements = pageData[1];
+      
     }
   }
 }());

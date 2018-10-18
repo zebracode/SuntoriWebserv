@@ -3,16 +3,21 @@
 angular.module('core').controller('HomeController',
     ['$scope', 'Authentication', 'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains', '$filter', 'StatementsService',
         function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, $filter, StatementsService) {
-            
-            if(Authentication){
-                if(Authentication.user){
+
+            if (Authentication) {
+                if (Authentication.user) {
                     $scope.username = Authentication.user.username;
                 }
             }
-            
+
             $scope.totalItems = 0;
             $scope.currentPage = 1;
             $scope.itemsPerPage = 10;
+
+            // Statement Items
+            $scope.totalStatementItems = 0;
+            $scope.currentStatementPage = 1;
+            $scope.statementItemsPerpage = 10;
 
             $scope.toggleLeft = buildToggler('left');
             $scope.toggleRight = buildToggler('right');
@@ -36,11 +41,23 @@ angular.module('core').controller('HomeController',
                 $scope.mains = $scope.allPage[$scope.currentPage];
             };
 
+            $scope.pageStatementChanged = function(){
+                $scope.statements = $scope.allStatementPage[$scope.currentStatementPage];
+            };
+
             $scope.setTotalMains = function () {
-                $http.get("/api/mainsTotal")
-                    .then(function (response) {
-                        $scope.totalMains = response.data;
-                    });
+                if (Authentication.user) {
+                    $http.get("/api/mainsTotal?user=" + Authentication.user._id)
+                        .then(function (response) {
+                            $scope.totalMains = response.data;
+                        });
+
+                        $http.get("/api/mainsTotal")
+                        .then(function (res) {
+                            $scope.allMains = res.data;
+                        });
+                }
+
             }
 
             // This provides Authentication context.
@@ -58,16 +75,16 @@ angular.module('core').controller('HomeController',
 
                 // Payment
                 else if (viewName === 'mainsPayment') {
-                    
+
                 }
 
                 // Summary
                 else if (viewName === 'mainsSummary') {
                     $http({
                         method: "GET",
-                        url: "/api/findMains?userId=" + Authentication.user._id 
-                        + "&startDate=" + $scope.startDate
-                        + "&endDate=" + $scope.endDate
+                        url: "/api/findMains?userId=" + Authentication.user._id
+                            + "&startDate=" + $scope.startDate
+                            + "&endDate=" + $scope.endDate
                     }).then(function mySuccess(response) {
                         setPaging(response.data);
                     }, function myError(response) {
@@ -76,11 +93,11 @@ angular.module('core').controller('HomeController',
                 }
 
                 // Admin User List
-                else if(viewName === "userList"){
+                else if (viewName === "userList") {
                     $http({
                         method: "GET",
                         url: "/api/findMains?startDate=" + $scope.startDate
-                        + "&endDate=" + $scope.endDate
+                            + "&endDate=" + $scope.endDate
                     }).then(function mySuccess(response) {
                         setPaging(response.data);
                     }, function myError(response) {
@@ -90,7 +107,20 @@ angular.module('core').controller('HomeController',
 
                 // Statements 
                 else if (viewName === 'statementsList') {
-                    
+
+                }
+
+                // Admin -> User's statements
+                else if (viewName === 'userPaymentList') {
+                    $http({
+                        method: "GET",
+                        url: "/api/findStatements?startDate=" + $scope.startDate
+                            + "&endDate=" + $scope.endDate
+                    }).then(function mySuccess(response) {
+                        setStatementPaging(response.data);
+                    }, function myError(errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
                 }
 
                 // Other cases
@@ -179,11 +209,20 @@ angular.module('core').controller('HomeController',
                 $scope.find("listClient");
             };
 
+            // When statement start date changed
+            $scope.statementStartDateChanged = function(){
+                $scope.find("userPaymentList");
+            };
+
             // When change end date
             $scope.endDateChanged = function () {
                 $scope.find("listClient");
             };
 
+            // When statment end date changed
+            $scope.statementEndDateChanged = function(){
+                $scope.find("userPaymentList");
+            };
 
             // Set to Today
             $scope.todaySet = function () {
@@ -214,13 +253,14 @@ angular.module('core').controller('HomeController',
             };
 
             // Start List Statements
-            $scope.statements = StatementsService.query();
+            // $scope.statements = StatementsService.query();
             // End List Statements
 
             // Start Export Excel of Statements
             // Export Excel
             $scope.exportExcel = function () {
-                window.location.href = '/api/excel/statements'
+                window.location.href = "/api/excel/statements?startDate=" + $scope.startDate
+                    + "&endDate=" + $scope.endDate;
             };
             // End Export Excel of Statements
 
@@ -258,18 +298,18 @@ angular.module('core').controller('HomeController',
             // Export summary as Excel
             $scope.exportSummary = function (viewName) {
                 // Summmary
-                if(viewName === 'mainsSummary'){
+                if (viewName === 'mainsSummary') {
                     window.location.href = "/api/excel/summary?userId=" + Authentication.user._id
-                    + "&startDate=" + $scope.startDate
-                    + "&endDate=" + $scope.endDate;
+                        + "&startDate=" + $scope.startDate
+                        + "&endDate=" + $scope.endDate;
                 }
 
                 // Admin User List
-                else if(viewName === 'userList'){
+                else if (viewName === 'userList') {
                     window.location.href = "/api/excel/summary?startDate=" + $scope.startDate
-                    + "&endDate=" + $scope.endDate;
+                        + "&endDate=" + $scope.endDate;
                 }
-                
+
             };
             // Boonchuay 6 August 2018 End
 
@@ -374,6 +414,38 @@ angular.module('core').controller('HomeController',
 
                 // Set first page
                 $scope.mains = pageData[1];
+            }
+
+            // Page rendering of statement
+            function setStatementPaging(data) {
+                var tempData = [];
+                var pageData = [];
+                var pageIndex = 0;
+                var itemCount = 0;
+
+                // Clear totalItems
+                $scope.totalStatementItems = 0;
+
+                for (var i = 0; i < data.length; i++) {
+                    itemCount++;
+                    tempData.push(data[i]);
+                    if ((itemCount % $scope.statementItemsPerpage === 0) && (itemCount !== 0)) {
+                        pageIndex++;
+                        pageData[pageIndex] = tempData;
+                        tempData = [];
+                    }
+                    $scope.totalStatementItems += 1;
+                }
+
+                if (tempData.length > 0) {
+                    pageData[pageIndex + 1] = tempData;
+                }
+
+                $scope.allStatementPage = pageData;
+
+                // Set first page
+                $scope.statements = pageData[1];
+
             }
 
             var self = this;

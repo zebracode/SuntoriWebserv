@@ -76,7 +76,7 @@
                   <i class="fa fa-edit"></i> ผู้ใช้ระบบ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.lists">
-                  <span class="badge bg-red">{{totalMains}}</span>
+                  <span class="badge bg-red">{{allMains}}</span>
                   <i class="fa fa-edit"></i> รายการ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.payments">
@@ -107,10 +107,10 @@
                 <md-button ng-click="userSelectClear()" ng-disabled="!(user.displayName)">Clear</md-button>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
+                <md-datepicker ng-model="startDate" ng-change="statementStartDateChanged()"></md-datepicker>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
+                <md-datepicker ng-model="endDate" ng-change="statementEndDateChanged();"></md-datepicker>
               </div>
               <div class="nav navbar-right panel_toolbox">
                 <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
@@ -149,7 +149,7 @@
 
               </div>
               <div class="text-center form-group">
-                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
+                <ul uib-pagination total-items="totalStatementItems" items-per-page="statementItemsPerpage" ng-model="currentStatementPage" ng-change="pageStatementChanged()"></ul>
               </div>
             </div>
             <!-- End x_content -->
