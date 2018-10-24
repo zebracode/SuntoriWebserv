@@ -235,7 +235,7 @@ angular.module('core').controller('HomeController',
                 $scope.startDate = new Date();
                 $scope.startDate.setHours(0, 0, 0, 0);
                 $scope.endDate = new Date();
-                $scope.find("listClient");
+                $scope.find("userPaymentList");
             };
 
 
