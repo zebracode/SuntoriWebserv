@@ -112,10 +112,16 @@ angular.module('core').controller('HomeController',
 
                 // Admin -> User's statements
                 else if (viewName === 'userPaymentList') {
+
+                    var queryString = "?startDate=" + $scope.startDate + "&endDate=" + $scope.endDate;
+                    
+                    if($scope.selectedUserId){
+                        queryString += "&ownerId=" + $scope.selectedUserId;
+                    }
+
                     $http({
                         method: "GET",
-                        url: "/api/findStatements?startDate=" + $scope.startDate
-                            + "&endDate=" + $scope.endDate
+                        url: "/api/findStatements" + queryString
                     }).then(function mySuccess(response) {
                         setStatementPaging(response.data);
                     }, function myError(errorResponse) {
@@ -234,15 +240,10 @@ angular.module('core').controller('HomeController',
 
 
             // Select user
-            $scope.userSelectChanged = function (users) {
-                for (var i = 0; i < users.length; i++) {
-                    if (users[i].displayName === $scope.user.displayName) {
-                        $scope.selectedUserId = users[i]._id;
-                        $scope.find("listClient");
-                    }
-
-                }
-
+            $scope.userSelectChanged = function (user) {
+                $scope.selectedUserId = user._id;
+                $scope.selectedUser = user;
+                $scope.find("userPaymentList");
             };
 
             // Select user
