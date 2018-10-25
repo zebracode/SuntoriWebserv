@@ -54,6 +54,22 @@
                     </div>
                   </md-input-container>
                 </div>
+
+                <div layout-gt-sm="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>ธนาคาร</label>
+                    <input ng-model="user.bank" required>
+                    <div ng-messages="userForm.user.bank.$error" role="alert" multiple>
+                      <div ng-message="required" class="my-message">กรุณากรอกชื่อธนาคาร</div>
+                    </div>
+                  </md-input-container>
+
+                  <md-input-container class="md-block" flex-gt-sm>
+                    <label>เลขที่บัญชี</label>
+                    <input ng-model="user.bookbank">
+                  </md-input-container>
+                </div>
+
                 <div class="text-center form-group">
                   <button class="btn btn-default" type="submit" value="Update" >อัพเดท</button>
                 </div>
