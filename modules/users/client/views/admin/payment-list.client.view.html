@@ -97,10 +97,10 @@
             <div class="row">
               <div class="col-md-4">
                 <div style="margin-top:-15px">
-                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(allUser);">
-                    <md-option ng-value="user.displayName" ng-repeat="user in allUser">{{user.displayName}}</md-option>
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(user.displayName)">
+                    <md-option ng-value="user" ng-repeat="user in allUser">{{user.displayName}}</md-option>
                   </md-select>
-                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
+                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ selectedUserId ? selectedUser.displayName : 'ยังไม่ได้เลือก' }}</p>
                 </div>
               </div>
               <div class="col-md-2">
