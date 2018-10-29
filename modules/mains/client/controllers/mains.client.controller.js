@@ -703,7 +703,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			setDisbled($scope.balanceAmount - $scope.totalPrice);
 		};
 
-		function setBarcode(selectedMain, rcpDocNo, inc, currentnumber, weight) {
+		function setBarcode(selectedMain, rcpDocNo, inc, currentnumber, weight, balanceAmt) {
 			var barcode = "";
 			var prefix = "EY";
 			var suffix = "TH";
@@ -758,22 +758,31 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				}
 				return checkDigit;
 			}
+
+			var balanceAfterShippment = balanceAmt - Number(selectedMain.total);
+			balanceAmt -= Number(selectedMain.total);
+			var balanctAfterCod = balanceAmt - Number(selectedMain.codAmnt);
+			balanceAmt -= Number(selectedMain.codAmnt);
+			var balanceAfterInsurance = balanceAmt - Number(selectedMain.insuranceAmnt);
+			balanceAmt -= Number(selectedMain.insuranceAmnt);
+			var balanceAfterVat = balanceAmt - Number(selectedMain.totalVatAmnt);
+
 			// Shipping Amount
-			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), barcode + " ค่าส่งสินค้า", barcode + '_1');
+			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), barcode + " ค่าส่งสินค้า", barcode + '_1', balanceAfterShippment);
 
 			// COD Amount
 			if (selectedMain.codAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), barcode + " ค่า COD", barcode + '_2');
+				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), barcode + " ค่า COD", barcode + '_2', balanctAfterCod);
 			}
 
 			// Insurance Amount
 			if (selectedMain.insuranceAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), barcode + " ค่าประกัน", barcode + '_3');
+				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), barcode + " ค่าประกัน", barcode + '_3', balanceAfterInsurance);
 			}
 
 			// VAT Amount
 			if (selectedMain.totalVatAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), barcode + " ค่าภาษีมูลค่าเพิ่ม", barcode + '_4');
+				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), barcode + " ค่าภาษีมูลค่าเพิ่ม", barcode + '_4', balanceAfterVat);
 			}
 
 		};
@@ -837,13 +846,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 						$scope.balanceAmount = '0';
 					}
 				});
-		};
-
-		$scope.updateBalance = function (balanceAmt) {
-			var data = { userId: $scope.authentication.user._id, balanceAmt: balanceAmt };
-			$scope.balanceAmount = balanceAmt;
-			$http.put('/api/balance', data).then(function () {
-			});
 		};
 
 		$scope.showAddlist = function (ev, selectedMains) {
@@ -941,7 +943,6 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 		$scope.updateBalance = function (balanceAmt) {
 			var data = { userId: $scope.authentication.user._id, balanceAmt: balanceAmt };
-			$scope.balanceAmount = balanceAmt;
 			$http.put('/api/balance', data).then(function () {
 			});
 		};
@@ -985,7 +986,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 						$http(req).then(function (response) {
 							selectedMains.sort();
 							for (var i = 0; i < selectedMains.length; i++) {
-								setBarcode(selectedMains[i], rcpDocNo, i, response.data.number, response.data.weight);
+								setBarcode(selectedMains[i], rcpDocNo, i, response.data.number, response.data.weight, $scope.balanceAmount);
+								$scope.balanceAmount = $scope.balanceAmount - (Number(selectedMains[i].total) +   Number(selectedMains[i].codAmnt) + Number(selectedMains[i].insuranceAmnt) + Number(selectedMains[i].totalVatAmnt));
 							}
 						});
 					});
@@ -1298,7 +1300,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		}
 
 		//Add to statement
-		function saveStatement(item, amount, name, refNumber) {
+		function saveStatement(item, amount, name, refNumber, balanceAmt) {
 			if (amount !== 0) {
 				var createdDate = new Date();
 				var year = "" + createdDate.getFullYear();
@@ -1309,7 +1311,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					name: name,
 					amountIn: amount > 0 ? Math.abs(amount) : 0,
 					amountOut: amount < 0 ? Math.abs(amount) : 0,
-					balanceAmount: Number($scope.balanceAmount),
+					balanceAmount: Number(balanceAmt),
 					owner: item,
 					refNumber: refNumber,
 					sortDate: strDate

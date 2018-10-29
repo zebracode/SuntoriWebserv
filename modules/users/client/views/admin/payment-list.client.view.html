@@ -76,7 +76,7 @@
                   <i class="fa fa-edit"></i> ผู้ใช้ระบบ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.lists">
-                  <span class="badge bg-red">{{totalMains}}</span>
+                  <span class="badge bg-red">{{allMains}}</span>
                   <i class="fa fa-edit"></i> รายการ
                 </a>
                 <a class="btn btn-app" data-ui-sref="admin.payments">
@@ -97,20 +97,20 @@
             <div class="row">
               <div class="col-md-4">
                 <div style="margin-top:-15px">
-                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(allUser);">
-                    <md-option ng-value="user.displayName" ng-repeat="user in allUser">{{user.displayName}}</md-option>
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(user.displayName)">
+                    <md-option ng-value="user" ng-repeat="user in allUser">{{user.displayName}}</md-option>
                   </md-select>
-                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
+                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ selectedUserId ? selectedUser.displayName : 'ยังไม่ได้เลือก' }}</p>
                 </div>
               </div>
               <div class="col-md-2">
                 <md-button ng-click="userSelectClear()" ng-disabled="!(user.displayName)">Clear</md-button>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="startDate" ng-change="startDateChanged()"></md-datepicker>
+                <md-datepicker ng-model="startDate" ng-change="statementStartDateChanged()"></md-datepicker>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="endDate" ng-change="endDateChanged();"></md-datepicker>
+                <md-datepicker ng-model="endDate" ng-change="statementEndDateChanged();"></md-datepicker>
               </div>
               <div class="nav navbar-right panel_toolbox">
                 <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
@@ -149,7 +149,7 @@
 
               </div>
               <div class="text-center form-group">
-                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
+                <ul uib-pagination total-items="totalStatementItems" items-per-page="statementItemsPerpage" ng-model="currentStatementPage" ng-change="pageStatementChanged()"></ul>
               </div>
             </div>
             <!-- End x_content -->

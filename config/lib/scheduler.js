@@ -62,10 +62,10 @@ var task = cron.schedule('* * * * *', function () {
 
         // Create statement
         function createStatement(mains, i, balanceAmt){
-            //var createdDate = new Date();
-			var year = "" + mains[i].created.getFullYear();
-			var month = (mains[i].created.getMonth() + 1 >= 10) ? "" + (mains[i].created.getMonth()+ 1) : "0" + (mains[i].created.getMonth() + 1);
-			var date = (mains[i].created.getDate() >= 10) ? "" + mains[i].created.getDate() : "0" + mains[i].created.getDate();
+            var createdDate = new Date();
+			var year = "" + createdDate.getFullYear();
+			var month = (createdDate.getMonth() + 1 >= 10) ? "" + (createdDate.getMonth()+ 1) : "0" + (createdDate.getMonth() + 1);
+			var date = (createdDate.getDate() >= 10) ? "" + createdDate.getDate() : "0" + createdDate.getDate();
 			var strDate = year + month + date;
             var data = {};
             data.user = mains[i].user;
