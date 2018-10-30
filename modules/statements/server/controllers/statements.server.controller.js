@@ -144,7 +144,7 @@ exports.excel = function (req, res, next) {
     criteria.created = { "$lt": endDate };
   }
 
-  Statement.find(criteria).sort({ sortDate: -1, refNumber: 1 })
+  Statement.find(criteria).sort({ sortDate: -1, refNumber: -1 })
     .populate('owner', 'displayName')
     .exec(function (err, statements) {
       if (err) {
