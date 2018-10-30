@@ -41,8 +41,9 @@
                       <th class="md-caption">อีเมลล์ </th>
                       <th class="md-caption">เบอร์โทร </th>
                       <th class="md-caption">ยอดเงิน</th>
-                      <th class="md-caption"  data-ng-if="username==='account'" >เติมเงิน</th>
-                      <th class="md-caption"  data-ng-if="username!=='account'" >แก้ไข</th>
+                      <th class="md-caption" data-ng-if="username!=='account'"></th>
+                      <th class="md-caption" data-ng-if="username=='account'" >เติมเงิน</th>
+                      <!--<th class="md-caption" data-ng-if="username=='account'" >แก้ไข</th>-->
                     </tr>
                   </thead>
                   <tbody>
@@ -57,7 +58,7 @@
                       <td>
                         <a class="btn btn-warning btn-xs" ng-click="showTopUpPromt($event, user, $index)"  data-ng-if="username==='account'">
                           <i class="fa fa-pencil"></i> เติมเงิน </a>
-                        <a class="btn btn-danger btn-xs" data-ui-sref="admin.user({userId: user._id})">
+                        <a class="btn btn-danger btn-xs" data-ui-sref="admin.user({userId: user._id})" data-ng-if="username==='account'">
                           <i class="fa fa-pencil"></i> แก้ไข </a>
                       </td>
                     </tr>
