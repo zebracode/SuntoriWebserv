@@ -1,4 +1,4 @@
-<div data-ng-controller="HomeController" data-ng-init="find('userList'); setTotalMains();">
+<div data-ng-controller="HomeController" data-ng-init="find('userShipmentList'); setTotalMains();">
   <div flex layout="row" data-ng-show="authentication.user">
     <!-- Container #4 Right -->
     <md-content flex id="content">
@@ -6,7 +6,7 @@
         <!--User Login -->
         <div class="x_panel">
           <div class="x_title">
-            <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
+            <h2>ประวัติการจัดส่งสินค้า<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
                 <a class="btn btn-app" data-ui-sref="admin.users">
@@ -37,10 +37,10 @@
             <div class="row">
               <div class="col-md-4">
                 <div style="margin-top:-15px">
-                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(allUser);">
-                    <md-option ng-value="user.displayName" ng-repeat="user in allUser">{{user.displayName}}</md-option>
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(user.displayName, 'shipment');">
+                    <md-option ng-value="user" ng-repeat="user in allUser">{{user.displayName}}</md-option>
                   </md-select>
-                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ user ? user.displayName : 'ยังไม่ได้เลือก' }}</p>
+                  <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ selectedUserId ? selectedUser.displayName : 'ยังไม่ได้เลือก' }}</p>
                 </div>
               </div>
               <div class="col-md-2">
@@ -101,51 +101,51 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="even pointer" data-ng-repeat="main in mains | filter:searchText">
-                    <td class="md-caption" ng-bind="main.created | date:'mediumDate'"></td>
-                    <td class="md-caption" ng-bind="main.barcode"></td>
-                    <td class="md-caption" ng-bind="main.user.displayName"></td>
-                    <td class="md-caption" ng-bind="main.r_name"></td>
-                    <td class="md-caption" ng-bind="main.r_tel"></td>
-                    <td class="md-caption" ng-bind="main.s_country"></td>
-                    <td class="md-caption" ng-bind="main.r_country"></td>
-                    <td class="md-caption" ng-bind="main.weight"></td>
-                    <td class="md-caption" ng-bind="main.tpWeight"></td>
-                    <td class="md-caption" ng-bind="main.total"></td>
-                    <td class="md-caption" ng-bind="main.afterPrice"></td>
-                    <td class="md-caption">{{ main.total - main.afterPrice}}</td>
+                  <tr class="even pointer" data-ng-repeat="shipment in shipments">
+                    <td class="md-caption" ng-bind="shipment.created | date:'mediumDate'"></td>
+                    <td class="md-caption" ng-bind="shipment.barcode"></td>
+                    <td class="md-caption" ng-bind="shipment.user.displayName"></td>
+                    <td class="md-caption" ng-bind="shipment.r_name"></td>
+                    <td class="md-caption" ng-bind="shipment.r_tel"></td>
+                    <td class="md-caption" ng-bind="shipment.s_country"></td>
+                    <td class="md-caption" ng-bind="shipment.r_country"></td>
+                    <td class="md-caption" ng-bind="shipment.weight"></td>
+                    <td class="md-caption" ng-bind="shipment.tpWeight"></td>
+                    <td class="md-caption" ng-bind="shipment.total"></td>
+                    <td class="md-caption" ng-bind="shipment.afterPrice"></td>
+                    <td class="md-caption">{{ shipment.total - shipment.afterPrice}}</td>
                     <!--<td class="md-caption">{{ main.tpWeight | afterPrice :main.total :main.s_country :main.r_country :price }}</td>-->
                     <!--<td class="md-caption {{ main.tpWeight | color :main.total :main.s_country :main.r_country :price }}">{{ main.tpWeight | diffPrice :main.total :main.s_country :main.r_country :price }}</td>-->
-                    <td class="md-caption" ng-bind="main.codAmnt"></td>
+                    <td class="md-caption" ng-bind="shipment.codAmnt"></td>
                     <td class="md-caption">
-                      <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{main.productPrice}} </a>
+                      <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{shipment.productPrice}} </a>
                     </td>
 
-                    <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ main.barcode | updateStatus :main.status :main.user._id}} {{main.status}}</a></td>
+                    <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ shipment.barcode | updateStatus :shipment.status :shipment.user._id}} {{shipment.status}}</a></td>
                     <td>
-                      <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Bill {{main.rcpDocNo}} </a>
-                      <a class="btn btn-primary btn-xs" href="/print/slip?rcpDocNo={{main.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Slip {{main.rcpDocNo}} </a>
+                      <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{shipment.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Bill {{shipment.rcpDocNo}} </a>
+                      <a class="btn btn-primary btn-xs" href="/print/slip?rcpDocNo={{shipment.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Slip {{shipment.rcpDocNo}} </a>
                     </td>
                     <td>
-                      <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank">
+                      <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{shipment._id}}" target="_blank">
                         <i class="fa fa-print"></i> A4 </a>
-                      <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{main._id}}" target="_blank">
+                      <a class="btn btn-warning btn-xs" href="/print/formA5?mainId={{shipment._id}}" target="_blank">
                         <i class="fa fa-print"></i> A5 </a>
-                      <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{main._id}}" target="_blank">
+                      <a class="btn btn-warning btn-xs" href="/print/formA6?mainId={{shipment._id}}" target="_blank">
                         <i class="fa fa-print"></i> A6 </a>
-                      <a class="btn btn-warning btn-xs" href="/print/sticker?mainId={{main._id}}" target="_blank">
+                      <a class="btn btn-warning btn-xs" href="/print/sticker?mainId={{shipment._id}}" target="_blank">
                         <i class="fa fa-print"></i> Sticker </a>
                     </td>
                     <td>
-                      <a class="btn btn-danger btn-xs" data-ng-click="remove(main)"><i class="fa fa-trash-o"></i> ลบ </a>
+                      <a class="btn btn-danger btn-xs" data-ng-click="remove(shipment)"><i class="fa fa-trash-o"></i> ลบ </a>
                     </td>
-                    <td class="md-caption" ng-bind="main.detail_Product"></td>
+                    <td class="md-caption" ng-bind="shipment.detail_Product"></td>
                   </tr>
                   </tbody>
                 </table>
               </div>
               <div class="text-center form-group">
-                <ul uib-pagination total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></ul>
+                <ul uib-pagination total-items="totalShipmentItems" items-per-page="shipmentItemsPerPage" ng-model="currentShipmentPage" ng-change="pageShipmentChanged()"></ul>
               </div>
             </div>
           </div>
