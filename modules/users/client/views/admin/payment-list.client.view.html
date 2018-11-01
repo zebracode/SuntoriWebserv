@@ -68,7 +68,7 @@
         <!--User Login -->
         <div class="x_panel">
           <div class="x_title">
-            <h2>ประวัติการใช้งาน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
+            <h2>ประวัติการชำระเงิน<small>ตรวจสอบประวัติและแก้ไขข้อมูลได้</small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <div class="text-center mtop20">
                 <a class="btn btn-app" data-ui-sref="admin.users">
@@ -97,7 +97,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div style="margin-top:-15px">
-                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(user.displayName)">
+                  <md-select placeholder="เลือกเจ้าของบัญชี" ng-model="user.displayName" style="min-width: 400px;" ng-change="userSelectChanged(user.displayName, 'payment')">
                     <md-option ng-value="user" ng-repeat="user in allUser">{{user.displayName}}</md-option>
                   </md-select>
                   <p class="md-caption">แสดงรายการส่งสินค้าจากเจ้าของบัญชี: {{ selectedUserId ? selectedUser.displayName : 'ยังไม่ได้เลือก' }}</p>
