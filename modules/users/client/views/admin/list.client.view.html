@@ -47,10 +47,10 @@
                 <md-button ng-click="userSelectClear()" ng-disabled="!(user.displayName)">Clear</md-button>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="startDate" ng-change="find('userList')"></md-datepicker>
+                <md-datepicker ng-model="startDate" ng-change="find('userShipmentList')"></md-datepicker>
               </div>
               <div class="col-md-2">
-                <md-datepicker ng-model="endDate" ng-change="find('userList');"></md-datepicker>
+                <md-datepicker ng-model="endDate" ng-change="find('userShipmentList');"></md-datepicker>
               </div>
               <div class="nav navbar-right panel_toolbox">
                 <button type="button" class="btn btn-mg btn-primary" ng-click="todaySet()">วันนี้</button>
