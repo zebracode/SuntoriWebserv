@@ -10,8 +10,22 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
 //    $scope.isAdmin = someService.userHasRole('admin');
 
     Admin.query(function (data) {
+      data.sort(
+        function(a,b){
+          var x = a.displayName.toLowerCase();
+          var y = b.displayName.toLowerCase();
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        }
+      );
       $scope.users = data;
       $scope.allUser = data;
+      console.log($scope.allUser);     
       $scope.buildPager(data);
     });
 
