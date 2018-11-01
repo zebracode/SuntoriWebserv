@@ -19,11 +19,6 @@ angular.module('core').controller('HomeController',
             $scope.currentStatementPage = 1;
             $scope.statementItemsPerpage = 10;
 
-            // Shipment Items
-            $scope.totalShipmentItems = 0;
-            $scope.currentShipmentPage = 1;
-            $scope.shipmentItemsPerPage = 10;
-
             $scope.toggleLeft = buildToggler('left');
             $scope.toggleRight = buildToggler('right');
 
@@ -39,16 +34,6 @@ angular.module('core').controller('HomeController',
 
             $scope.setPage = function (pageNo) {
                 $scope.currentPage = pageNo;
-                $scope.currentStatementPage = pageNo;
-                $scope.currentShipmentPage = pageNo;
-            };
-
-            $scope.setStatementPage = function(){
-                $scope.currentStatementPage = pageNo;
-            };
-
-            $scope.setShipmentPage = function(){
-                $scope.currentShipmentPage = pageNo;
             };
 
             $scope.pageChanged = function () {
@@ -59,11 +44,6 @@ angular.module('core').controller('HomeController',
             $scope.pageStatementChanged = function(){
                 $scope.statements = $scope.allStatementPage[$scope.currentStatementPage];
             };
-
-            $scope.pageShipmentChanged = function(){
-                $scope.shipments = $scope.allShipmentPage[$scope.currentShipmentPage];
-            };
-
 
             $scope.setTotalMains = function () {
                 if (Authentication.user) {
@@ -90,18 +70,16 @@ angular.module('core').controller('HomeController',
 
                 // Home
                 if (viewName === 'coreHome') {
-                    console.log("View is coreHome...");
+                    console.log("Home...");
                 }
 
                 // Payment
                 else if (viewName === 'mainsPayment') {
-                    console.log("View is mainPayment...");
+
                 }
 
                 // Summary
                 else if (viewName === 'mainsSummary') {
-                    console.log("View is mainSummary...");
-
                     $http({
                         method: "GET",
                         url: "/api/findMains?userId=" + Authentication.user._id
@@ -116,7 +94,6 @@ angular.module('core').controller('HomeController',
 
                 // Admin User List
                 else if (viewName === "userList") {
-                    console.log("View is userList...");
                     $http({
                         method: "GET",
                         url: "/api/findMains?startDate=" + $scope.startDate
@@ -130,31 +107,12 @@ angular.module('core').controller('HomeController',
 
                 // Statements 
                 else if (viewName === 'statementsList') {
-                    console.log("View is statementsList...");
-                }
 
-                // Admin -> User's shipments
-                else if (viewName === "userShipmentList") {
-                    console.log("View is userShipmentList...");
-                    var queryString = "?startDate=" + $scope.startDate + "&endDate=" + $scope.endDate;
-
-                    if($scope.selectedUserId){
-                        queryString += "&userId=" + $scope.selectedUserId;
-                    }
-
-                    $http({
-                        method: "GET",
-                        url: "/api/findMains" + queryString
-                    }).then(function mySuccess(response) {
-                        setShipmentPaging(response.data);
-                    }, function myError(response) {
-                        $scope.error = errorResponse.data.message;
-                    });
                 }
 
                 // Admin -> User's statements
                 else if (viewName === 'userPaymentList') {
-                    console.log("View is userPaymentList...");
+
                     var queryString = "?startDate=" + $scope.startDate + "&endDate=" + $scope.endDate;
                     
                     if($scope.selectedUserId){
@@ -173,7 +131,6 @@ angular.module('core').controller('HomeController',
 
                 // Other cases
                 else {
-                    console.log("View is others...");
                     data = {
                         userId: $scope.selectedUserId,
                         startDate: $scope.startDate,
@@ -283,27 +240,17 @@ angular.module('core').controller('HomeController',
 
 
             // Select user
-            $scope.userSelectChanged = function (user, view) {
+            $scope.userSelectChanged = function (user) {
                 $scope.selectedUserId = user._id;
                 $scope.selectedUser = user;
-                if(view === "shipment"){
-                    $scope.find("userShipmentList");
-                } else if(view === "payment"){
-                    $scope.find("userPaymentList");
-                }
-                
+                $scope.find("userPaymentList");
             };
 
             // Select user
-            $scope.userSelectClear = function (users,view) {
+            $scope.userSelectClear = function (users) {
                 $scope.user.displayName = null;
                 $scope.selectedUserId = null;
-                if(view === 'userShipmentList'){
-                    $scope.find("userShipmentList");
-                } else {
-                    $scope.find("listClient");
-                }
-                
+                $scope.find("listClient");
             };
 
             // Start List Statements
@@ -499,38 +446,6 @@ angular.module('core').controller('HomeController',
 
                 // Set first page
                 $scope.statements = pageData[1];
-
-            }
-
-            // Page rendering of statement
-            function setShipmentPaging(data) {
-                var tempData = [];
-                var pageData = [];
-                var pageIndex = 0;
-                var itemCount = 0;
-
-                // Clear totalItems
-                $scope.totalShipmentItems = 0;
-
-                for (var i = 0; i < data.length; i++) {
-                    itemCount++;
-                    tempData.push(data[i]);
-                    if ((itemCount % $scope.shipmentItemsPerPage === 0) && (itemCount !== 0)) {
-                        pageIndex++;
-                        pageData[pageIndex] = tempData;
-                        tempData = [];
-                    }
-                    $scope.totalShipmentItems += 1;
-                }
-
-                if (tempData.length > 0) {
-                    pageData[pageIndex + 1] = tempData;
-                }
-
-                $scope.allShipmentPage = pageData;
-
-                // Set first page
-                $scope.shipments = pageData[1];
 
             }
 
