@@ -274,13 +274,18 @@ angular.module('core').controller('HomeController',
             };
 
             // Set to Today
-            $scope.todaySet = function () {
+            $scope.todaySet = function (view) {
                 $scope.startDate = new Date();
                 $scope.startDate.setHours(0, 0, 0, 0);
                 $scope.endDate = new Date();
-                $scope.find("userPaymentList");
+                if (view === 'shipments'){
+                    $scope.find("userShipmentList");
+                }else{
+                    $scope.find("userPaymentList");
+                }
+                
+                
             };
-
 
             // Select user
             $scope.userSelectChanged = function (user, view) {

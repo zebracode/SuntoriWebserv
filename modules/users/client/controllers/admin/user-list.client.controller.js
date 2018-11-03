@@ -25,7 +25,6 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
       );
       $scope.users = data;
       $scope.allUser = data;
-      console.log($scope.allUser);     
       $scope.buildPager(data);
     });
 
