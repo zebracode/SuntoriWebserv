@@ -299,7 +299,7 @@ angular.module('core').controller('HomeController',
             };
 
             // Select user
-            $scope.userSelectClear = function (users,view) {
+            $scope.userSelectClear = function (view) {
                 $scope.user.displayName = null;
                 $scope.selectedUserId = null;
                 if(view === 'userShipmentList'){
