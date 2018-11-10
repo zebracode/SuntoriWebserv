@@ -20,14 +20,15 @@ var task = cron.schedule('* * * * *', function () {
     console.log("Schedule has been executed!!!");
     var Main = mongoose.model('Main');
     Main.find({
-        //$expr: { $ne: ["$total", "$afterPrice"] },
-        status: "ปณ.ต้นทางรับฝากแล้ว" ,
+        barcode:{$ne:""},
+        afterPrice: { $ne: 0 },
+        status: {$ne: "ยังไม่ได้ชำระเงิน"},
         isCreateDiffStatment: { $eq: false }
     })
         .sort('-created').populate('user').exec(function (err, mains) {
             if (!err) {
                 for(var i=0; i<mains.length; i++){
-                    if(mains[i].total === mains[i].afterPrice){
+                    if(mains[i].total === mains[i].afterPrice || mains[i].afterPrice === 0){
                         console.log("Continue...");
                         continue;
                     }
@@ -44,7 +45,13 @@ var task = cron.schedule('* * * * *', function () {
                 { userId: mains[i].user._id },
                 function (err, balance) {
                     if (!err) {
-                        var newBalanceAmt = (Number(balance.balanceAmt) + diffAmount) + "";
+                        var newBalanceAmt = "";
+                        if(balance){
+                            newBalanceAmt = (Number(balance.balanceAmt) + diffAmount) + "";
+                        } else {
+                            newBalanceAmt = (0 + diffAmount) + "";
+                        }
+                        
                         Balance.findOneAndUpdate(
                             {userId: mains[i].user._id},
                             {balanceAmt: newBalanceAmt},
@@ -72,7 +79,7 @@ var task = cron.schedule('* * * * *', function () {
             data.owner = mains[i].user;
             data.refNumber = mains[i].barcode + '_5';
             data.name = mains[i].barcode + ' ค่าส่วนต่างค่าส่งสินค้า';
-            data.created = mains[i].created;
+            data.created = createdDate;
             data.sortDate = strDate;
             if (mains[i].total > mains[i].afterPrice) {
                 data.amountIn = mains[i].total - mains[i].afterPrice;
@@ -101,7 +108,9 @@ var task = cron.schedule('* * * * *', function () {
                 {isCreateDiffStatment: true},
                 function(err, main){
                     if(!err){
-                        console.log("Update mains successfully!!!")
+                        console.log("main: ");
+                        console.log(main);
+                        console.log("Update mains successfully!!!");
                     }
                 }
             );

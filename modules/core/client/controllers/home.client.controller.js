@@ -101,7 +101,6 @@ angular.module('core').controller('HomeController',
                 // Summary
                 else if (viewName === 'mainsSummary') {
                     console.log("View is mainSummary...");
-
                     $http({
                         method: "GET",
                         url: "/api/findMains?userId=" + Authentication.user._id
@@ -300,11 +299,13 @@ angular.module('core').controller('HomeController',
             };
 
             // Select user
-            $scope.userSelectClear = function (users,view) {
+            $scope.userSelectClear = function (view) {
                 $scope.user.displayName = null;
                 $scope.selectedUserId = null;
                 if(view === 'userShipmentList'){
                     $scope.find("userShipmentList");
+                } else if(view === 'userPaymentList'){
+                    $scope.find("userPaymentList");
                 } else {
                     $scope.find("listClient");
                 }
