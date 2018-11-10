@@ -163,26 +163,27 @@
                        </div>
                      </div>
                      <div class="form-group">
-                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ราคาสินค้า<span class="required">*</span></label>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">รายละเอียด<span class="required">*</span></label>
                        <div class="col-md-4 col-sm-4 col-xs-12">
-                         <input name="price" type="text" data-ng-model="main.productPrice" id="price" class="form-control" placeholder="จำนวนเงินที่เรียกเก็บ">
+                         <input name="detail_Product" type="text" data-ng-model="main.detail_Product" id="detail_Product" class="form-control" placeholder="รายละเอียดพัสดุ">
                        </div>
 
                        <label class="control-label col-md-2 col-sm-2 col-xs-12">พัสดุที่ส่ง<span class="required">*</span></label>
                        <div class="col-md-4 col-sm-4 col-xs-12">
                          <input name="detail" type="text" data-ng-model="main.detail" id="detail" class="form-control" placeholder="รายละเอียดสิ่งของ">
                        </div>
+                     </div>
 
-                       <label class="control-label col-md-2 col-sm-2 col-xs-12">รายละเอียดพัสดุ<span class="required">*</span></label>
+                     <div class="form-group">
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ค่า COD<span class="required">*</span></label>
                        <div class="col-md-4 col-sm-4 col-xs-12">
-                         <input name="detail_Product" type="text" data-ng-model="main.detail_Product" id="detail_Product" class="form-control" placeholder="รายละเอียดพัสดุ">
+                         <input name="price" type="text" data-ng-model="main.codAmnt" id="price" class="form-control" placeholder="จำนวนเงินที่เรียกเก็บ" disabled>
                        </div>
 
-                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ประกัน<span class="required">*</span></label>
+                       <label class="control-label col-md-2 col-sm-2 col-xs-12">ค่าประกัน<span class="required">*</span></label>
                        <div class="col-md-4 col-sm-4 col-xs-12">
-                         <input name="insurance" type="text" data-ng-model="main.insurance" id="insurance" class="form-control" placeholder="ประกัน">
+                         <input name="insurance" type="text" data-ng-model="main.insuranceAmnt" id="insurance" class="form-control" placeholder="ประกัน" disabled>
                        </div>
-
                      </div>
 
                      <div data-ng-show="error" class="text-danger">
@@ -190,6 +191,7 @@
                      </div>
                      <br />
                    </div>
+
                    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-5">
                      <!--<button class="btn btn-primary" type="reset">Reset</button>-->
                      <input class="btn btn-success" type="submit" value="Update">

@@ -142,6 +142,8 @@
                             <th class="md-caption">Tracking No.</th>
                             <!--<th class="md-caption">ผู้ส่ง </th>-->
                             <th class="md-caption">ผู้รับ </th>
+							<th class="md-caption">จว.ต้นทาง </th>
+                            <th class="md-caption">จว.ปลายทาง </th>
                             <!--<th class="md-caption">เบอร์โทร </th>-->
                             <!--<th class="md-caption">นน.ก่อน </th>-->
                             <!--<th class="md-caption">นน.หลัง </th>-->
@@ -159,6 +161,8 @@
                             <td class="md-caption" ng-bind="barcode.barcode"></td>
                             <!--<td class="md-caption" ng-bind="barcode.s_name"></td>-->
                             <td class="md-caption" ng-bind="barcode.r_name"></td>
+							<td class="md-caption" ng-bind="barcode.s_country"></td>
+                            <td class="md-caption" ng-bind="barcode.r_country"></td>
                             <!--<td class="md-caption" ng-bind="barcode.r_tel"></td>-->
                             <!--<td class="md-caption" ng-bind="barcode.weight"></td>-->
                             <!--<td class="md-caption" ng-bind="barcode.tpWeight"></td>-->
@@ -183,14 +187,15 @@
 
             <p>เรื่องเดลิเวอรี่ ซันโตริจัดให้</p>
             <p class="section-description">
-              <small>ระบบส่งสินค้าทั่วประเทศไทยผ่านจุดไปรษณีย์ใกล้บ้านท่าน 230 แห่งทั่วประเทศ
-                <br> ไม่ต้องต่อคิวส่งพัสดุให้เสียเวลา คุ้มค่าทุกนาทีใช้ซันโตริ เอ็กซ์เพรส</small>
+              <small>ระบบขนส่งพัสดุทั่วประเทศไทยผ่านจุดบริการไปรษณีย์ใกล้บ้านท่านทั่วประเทศไทย
+                <br> ไม่ต้องต่อคิวส่งพัสดุให้เสียเวลา คุ้มค่าทุกนาทีใช้ซันโตริ เอ็กซ์เพรส </small>
             </p>
 
             <div>
               <a data-ui-sref="authentication.signin" class="btn-get-started scrollto">เข้าสู่ระบบ</a>
               <a data-ui-sref="authentication.signup" class="btn-get-started scrollto">สมัครสมาชิก</a>
             </div>
+            <br><h6> ข้อมูลบริการและตรวจสอบจุดส่งพัสดุไปรษณีย์ได้ที่ www.suntoriexpress.com </h6>
           </div>
 
         </section>
@@ -304,6 +309,8 @@
                                   <th class="md-caption">Tracking No.</th>
                                   <!--<th class="md-caption">ผู้ส่ง </th>-->
                                   <th class="md-caption">ผู้รับ </th>
+								  <th class="md-caption">จว.ต้นทาง </th>
+								  <th class="md-caption">จว.ปลายทาง </th>
                                   <!--<th class="md-caption">เบอร์โทร </th>-->
                                   <!--<th class="md-caption">นน.ก่อน </th>-->
                                   <!--<th class="md-caption">นน.หลัง </th>-->
@@ -321,6 +328,8 @@
                                   <td class="md-caption" ng-bind="barcode.barcode"></td>
                                   <!--<td class="md-caption" ng-bind="barcode.s_name"></td>-->
                                   <td class="md-caption" ng-bind="barcode.r_name"></td>
+								  <td class="md-caption" ng-bind="barcode.s_country"></td>
+                                  <td class="md-caption" ng-bind="barcode.r_country"></td>
                                   <!--<td class="md-caption" ng-bind="barcode.r_tel"></td>-->
                                   <!--<td class="md-caption" ng-bind="barcode.weight"></td>-->
                                   <!--<td class="md-caption" ng-bind="barcode.tpWeight"></td>-->
