@@ -1054,11 +1054,11 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 				template:
 					'<md-dialog>' +
 					'  <md-dialog-content class="md-dialog-content">' +
-					'    <h2 class="md-title ng-bi55nding">พิมพ์รายการ และใบเสร็จรับเงิน</h2>' +
+					'    <h2 class="md-title ng-bi55nding">พิมพ์ใบปะหน้า และใบเสร็จรับเงิน</h2>' +
 					'  </md-dialog-content>' +
 					'  <md-dialog-actions>' +
 					'    <md-button class="md-primary" href="/print/all?rcpDocNo={{items}}" target="_blank">' +
-					'      พิมพ์รายการ' +
+					'      พิมพ์ใบปะหน้า' +
 					'    </md-button>' +
 					'    <md-button class="md-primary" href="/print/bill?rcpDocNo={{items}}" target="_blank">' +
 					'      พิมพ์ใบเสร็จ' +
