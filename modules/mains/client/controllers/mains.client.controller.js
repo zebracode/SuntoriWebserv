@@ -703,7 +703,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			setDisbled($scope.balanceAmount - $scope.totalPrice);
 		};
 
-		function setBarcode(selectedMain, rcpDocNo, inc, currentnumber, weight, balanceAmt) {
+		function setBarcode(selectedMain, rcpDocNo, inc, currentnumber, weight, balanceAmt, createdDate) {
 			var barcode = "";
 			var prefix = "EY";
 			var suffix = "TH";
@@ -768,21 +768,21 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 			var balanceAfterVat = balanceAmt - Number(selectedMain.totalVatAmnt);
 
 			// Shipping Amount
-			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), barcode + " ค่าส่งสินค้า", barcode + '_1', balanceAfterShippment);
+			saveStatement($scope.authentication.user, Number(selectedMain.total) * (-1), barcode + " ค่าส่งสินค้า", barcode + '_1', balanceAfterShippment, createdDate);
 
 			// COD Amount
 			if (selectedMain.codAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), barcode + " ค่า COD", barcode + '_2', balanctAfterCod);
+				saveStatement($scope.authentication.user, Number(selectedMain.codAmnt) * (-1), barcode + " ค่า COD", barcode + '_2', balanctAfterCod, createdDate);
 			}
 
 			// Insurance Amount
 			if (selectedMain.insuranceAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), barcode + " ค่าประกัน", barcode + '_3', balanceAfterInsurance);
+				saveStatement($scope.authentication.user, Number(selectedMain.insuranceAmnt) * (-1), barcode + " ค่าประกัน", barcode + '_3', balanceAfterInsurance, createdDate);
 			}
 
 			// VAT Amount
 			if (selectedMain.totalVatAmnt >= 0) {
-				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), barcode + " ค่าภาษีมูลค่าเพิ่ม", barcode + '_4', balanceAfterVat);
+				saveStatement($scope.authentication.user, Number(selectedMain.totalVatAmnt) * (-1), barcode + " ค่าภาษีมูลค่าเพิ่ม", barcode + '_4', balanceAfterVat, createdDate);
 			}
 
 		};
@@ -985,8 +985,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 
 						$http(req).then(function (response) {
 							selectedMains.sort();
+							var createdDate = new Date();
 							for (var i = 0; i < selectedMains.length; i++) {
-								setBarcode(selectedMains[i], rcpDocNo, i, response.data.number, response.data.weight, $scope.balanceAmount);
+								setBarcode(selectedMains[i], rcpDocNo, i, response.data.number, response.data.weight, $scope.balanceAmount, createdDate);
 								$scope.balanceAmount = $scope.balanceAmount - (Number(selectedMains[i].total) +   Number(selectedMains[i].codAmnt) + Number(selectedMains[i].insuranceAmnt) + Number(selectedMains[i].totalVatAmnt));
 							}
 						});
@@ -1300,7 +1301,7 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		}
 
 		//Add to statement
-		function saveStatement(item, amount, name, refNumber, balanceAmt) {
+		function saveStatement(item, amount, name, refNumber, balanceAmt, argDate) {
 			if (amount !== 0) {
 				var createdDate = new Date();
 				var year = "" + createdDate.getFullYear();
@@ -1314,7 +1315,8 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 					balanceAmount: Number(balanceAmt),
 					owner: item,
 					refNumber: refNumber,
-					sortDate: strDate
+					sortDate: strDate,
+					created: argDate
 				});
 
 				statement.$save(function (response) {
