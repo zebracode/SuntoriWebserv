@@ -89,16 +89,16 @@ angular.module('users.admin').controller('UserListController', ['$scope', '$filt
           $mdDialog.show(confirm).then(function(result) {
             $scope.status = 'You decided to name your dog ' + result + '.';
             $scope.updateBalance(user, index, result);
-            saveStatement($scope.pagedItems[index], parseInt(result));
+            saveStatement($scope.pagedItems[index], Number(result));
           }, function() {
             $scope.status = 'You didn\'t name your dog.';
         });
     };
     
     $scope.updateBalance = function (user, index, amt) {
-      var balanceAmt = parseInt($scope.pagedItems[index].balanceAmt);
+      var balanceAmt = Number($scope.pagedItems[index].balanceAmt);
       if (!isNaN(balanceAmt)){
-        balanceAmt += parseInt(amt);
+        balanceAmt += Number(amt);
         var data = { userId: user._id, balanceAmt: balanceAmt};
         $scope.pagedItems[index].balanceAmt = balanceAmt;
         $http.put('/api/balance',data).then(function(){
