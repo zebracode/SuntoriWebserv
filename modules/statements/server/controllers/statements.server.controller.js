@@ -144,7 +144,7 @@ exports.excel = function (req, res, next) {
     criteria.created = { "$lt": endDate };
   }
 
-  Statement.find(criteria).sort({ created: -1, refNumber: -1 })
+  Statement.find(criteria).sort({ created: -1, order: -1 })
     .populate('owner', 'displayName')
     .exec(function (err, statements) {
       if (err) {
@@ -170,6 +170,7 @@ exports.excel = function (req, res, next) {
 };
 
 exports.findStatements = function (req, res) {
+  console.log("finc statement has been executed!!!");
 
   var criteria = {};
 
@@ -196,7 +197,7 @@ exports.findStatements = function (req, res) {
     criteria.created = { "$lt": endDate };
   }
 
-  Statement.find(criteria).sort({ created: -1, refNumber: -1})
+  Statement.find(criteria).sort({created:-1, order: -1})
     .populate('owner', 'displayName')
     .exec(function (err, statements) {
       if (err) {
