@@ -168,7 +168,7 @@
                       </td>
                       <td>
                         <a class="btn btn-info btn-xs">
-                          <i class="fa fa-money"></i> {{ main.barcode | updateStatus : main.status : main.user._id}} {{main.status}}</a>
+                          <i class="fa fa-money"></i> {{ main.barcode | updateStatus : main.status : main.user._id :main.isUpdateAfterPrice}} {{main.status}}</a>
                       </td>
                       <td>
                         <a class="btn btn-warning btn-xs" href="/print/formA4?mainId={{main._id}}" target="_blank">
