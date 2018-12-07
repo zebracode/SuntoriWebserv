@@ -1,6 +1,6 @@
 angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentication', 'UserPricesService',
     function ($http, $location, Authentication, UserPricesService) {
-        return function (barcode, status, userId) {
+        return function (barcode, mainsStatus, userId, isUpdateAfterPrice) {
             var perimeter = ['กรุงเทพมหานคร', 'กรุงเทพฯ', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ'];
             var userPrices = [];
 
@@ -65,12 +65,14 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                                 break;
                             }
                         }
-                        if (status !== 'นำจ่ายถึงผู้รับแล้ว' && status !== 'นำจ่าย/ชำระเงินเรียบร้อย') {
+                        
+                        if (tpWeight !== '' && !isUpdateAfterPrice) {
                             data = {
                                 "barcode": barcode,
                                 "status": status,
                                 tpWeight: tpWeight,
-                                afterPrice: afterPrice
+                                afterPrice: afterPrice,
+                                isUpdateAfterPrice: true
                             };
 
                             $http.post("/api/update/mains", data)
