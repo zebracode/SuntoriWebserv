@@ -66,6 +66,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                             }
                         }
                         
+                        weight = weight.substring(weight.lastIndexOf('-') + 1, weight.length).replace(/,/g, "");
                         if ((Number(weight) !== Number(tpWeight)) && !isUpdateAfterPrice){
                             data = {
                                 "barcode": barcode,
