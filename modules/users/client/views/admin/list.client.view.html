@@ -121,7 +121,7 @@
                       <a class="btn btn-danger btn-xs"><i class="fa fa-money"></i> {{shipment.productPrice}} </a>
                     </td>
 
-                    <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ shipment.barcode | updateStatus :shipment.status :shipment.user._id :shipment.isUpdateAfterPrice}} {{shipment.status}}</a></td>
+                    <td><a class="btn btn-info btn-xs"><i class="fa fa-money"></i> {{ shipment.barcode | updateStatus :shipment.status :shipment.user._id :shipment.isUpdateAfterPrice :shipment.weight}} {{shipment.status}}</a></td>
                     <td>
                       <a class="btn btn-warning btn-xs" href="/print/bill?rcpDocNo={{shipment.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Bill {{shipment.rcpDocNo}} </a>
                       <a class="btn btn-primary btn-xs" href="/print/slip?rcpDocNo={{shipment.rcpDocNo}}" target="_blank"><i class="fa fa-print"></i>Slip {{shipment.rcpDocNo}} </a>
