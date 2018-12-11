@@ -1,6 +1,6 @@
 angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentication', 'UserPricesService',
     function ($http, $location, Authentication, UserPricesService) {
-        return function (barcode, mainsStatus, userId, isUpdateAfterPrice) {
+        return function (barcode, mainsStatus, userId, isUpdateAfterPrice, weight) {
             var perimeter = ['กรุงเทพมหานคร', 'กรุงเทพฯ', 'นนทบุรี', 'ปทุมธานี', 'สมุทรปราการ'];
             var userPrices = [];
 
@@ -66,10 +66,9 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                             }
                         }
                         
-                        if (tpWeight !== '' && !isUpdateAfterPrice) {
+                        if (Number(weight) !== Number(tpWeight)){
                             data = {
                                 "barcode": barcode,
-                                "status": status,
                                 tpWeight: tpWeight,
                                 afterPrice: afterPrice,
                                 isUpdateAfterPrice: true
@@ -77,10 +76,21 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
 
                             $http.post("/api/update/mains", data)
                                 .then(function (response) {
-                                    console.log("Update status successfully!!!");
-                                });
+                                    console.log("Update price successfully!!!");
+                            });
 
                         }
+
+                        var data2 = {
+                            "barcode": barcode,
+                            "status": status,
+                            isUpdateAfterPrice: true
+                        };
+
+                        $http.post("/api/update/mains", data2)
+                            .then(function (response) {
+                                console.log("Update status successfully!!!");
+                        });
 
                     });
 
