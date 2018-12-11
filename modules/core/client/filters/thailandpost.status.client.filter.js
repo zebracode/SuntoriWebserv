@@ -84,8 +84,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
 
                         var data2 = {
                             "barcode": barcode,
-                            "status": status,
-                            isUpdateAfterPrice: true
+                            "status": status
                         };
 
                         $http.post("/api/update/mains", data2)
