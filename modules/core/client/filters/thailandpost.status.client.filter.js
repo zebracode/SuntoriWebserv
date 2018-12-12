@@ -15,7 +15,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                     var senderProvice = response.data.provinceName;
                     var receiverProvince = response.data.customerProvince;
                     var afterPrice = 0;
-                    var data = {};
+                    //var data = {};
 
                     // Get prices of user
                     UserPricesService.get({
@@ -68,7 +68,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                         
                         weight = weight.substring(weight.lastIndexOf('-') + 1, weight.length).replace(/,/g, "");
                         if ((Number(weight) !== Number(tpWeight)) && !isUpdateAfterPrice){
-                            data = {
+                            var data = {
                                 "barcode": barcode,
                                 tpWeight: tpWeight,
                                 afterPrice: afterPrice,
