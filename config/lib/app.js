@@ -30,7 +30,7 @@ module.exports.start = function start(callback) {
 	var _this = this;
 
 	// Start batch job schedule
-	// scheduler.start();
+	scheduler.start();
 
 	_this.init(function(app, db, config) {
 
