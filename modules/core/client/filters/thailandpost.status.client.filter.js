@@ -66,6 +66,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
                             }
                         }
                         
+                        weight = weight.substring(weight.lastIndexOf('-') + 1, weight.length).replace(/,/g, "");
                         if ((Number(weight) !== Number(tpWeight)) && !isUpdateAfterPrice){
                             data = {
                                 "barcode": barcode,
@@ -83,8 +84,7 @@ angular.module('core').filter('updateStatus', ['$http', '$location', 'Authentica
 
                         var data2 = {
                             "barcode": barcode,
-                            "status": status,
-                            isUpdateAfterPrice: true
+                            "status": status
                         };
 
                         $http.post("/api/update/mains", data2)
