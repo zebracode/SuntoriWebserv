@@ -24,6 +24,9 @@ angular.module('mains').controller('MainsController', ['$scope', '$stateParams',
 		$scope.price = 0;
 		$scope.order = Date.now();
 		$scope.invoice = Date.now();
+		$scope.data = {
+            cb: true
+          };
 
 		$scope.toggleLeft = buildToggler('left');
 		$scope.toggleRight = buildToggler('right');
