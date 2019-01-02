@@ -95,15 +95,25 @@
                     <th class="md-caption">COD</th>
                     <th class="md-caption">สถานะจัดส่ง </th>
                     <th class="md-caption">ใบเสร็จ </th>
-                    <th class="md-caption">ปริ้น </th>
-                    <th class="md-caption">ลบ</th>
+                    <th class="md-caption">พิมพ์ใบปะหน้า </th>
+                    <!--<th class="md-caption">ลบ</th>-->
                     <th class="md-caption">Comment </th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr class="even pointer" data-ng-repeat="shipment in shipments">
                     <td class="md-caption" ng-bind="shipment.created | date:'mediumDate'"></td>
-                    <td class="md-caption" ng-bind="shipment.barcode"></td>
+                    <td class="md-caption">
+                      <a>
+                        {{ shipment.barcode }}
+                      </a>
+                      <a>
+                        {{ cb }}
+                      </a>
+                      <a>
+                        <md-switch ng-model="cb" aria-label="Switch 2" ng-true-value="'ยกเลิกรายการ'" ng-false-value="''" class="md-warn">
+                      </a>
+                    </td>
                     <td class="md-caption" ng-bind="shipment.user.displayName"></td>
                     <td class="md-caption" ng-bind="shipment.r_name"></td>
                     <td class="md-caption" ng-bind="shipment.r_tel"></td>
@@ -136,9 +146,9 @@
                       <a class="btn btn-warning btn-xs" href="/print/sticker?mainId={{shipment._id}}" target="_blank">
                         <i class="fa fa-print"></i> Sticker </a>
                     </td>
-                    <td>
-                      <a class="btn btn-danger btn-xs" data-ng-click="remove(shipment)"><i class="fa fa-trash-o"></i> ลบ </a>
-                    </td>
+                    <!--<td>-->
+                      <!--<a class="btn btn-danger btn-xs" data-ng-click="remove(shipment)"><i class="fa fa-trash-o"></i> ลบ </a>-->
+                    <!--</td>-->
                     <td class="md-caption" ng-bind="shipment.detail_Product"></td>
                   </tr>
                   </tbody>

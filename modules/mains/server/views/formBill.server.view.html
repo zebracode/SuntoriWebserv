@@ -103,7 +103,9 @@ table, th, td {
 				{% endfor %}
 			</table>
 		</div>
+		<p style="margin-top:0px"><small>หมายเหตุ : ยอดค่าขนส่งก่อนเข้าระบบไม่ถือเป็นยอดค่าขนส่งที่แท้จริง บริษัทฯอาจมีการเก็บค่าขนส่งเพิ่ม/ลดลง ขึ้นอยู่กับน้ำหนักหลังเข้าสู่ระบบชั่งตามมาตรฐานจริง</small></p>
 		<div style="text-align:right">
+
 			<h6>จำนวนเงิน {{(totalAmount - totalVatAmnt).toFixed(2)}} บาท</h6>
 			<h6>VAT {{totalVatAmnt.toFixed(2)}} บาท</h6>
 			<h6>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</h6>

@@ -47,7 +47,7 @@ th{font-family: Arial; font-size: 8pt;}
 td{font-family: Arial; font-size: 8pt;}
 p{font-family: Arial; font-size: 10pt;}
     @page { size: 80mm 101mm } /* output size */
-    body.receipt .sheet { width: 80mm; height: 500mm } /* sheet size */
+    body.receipt .sheet { width: 80mm } /* sheet size */
     @media print { body.receipt { width: 80mm } } /* fix for Chrome */
 
 </style>
@@ -102,7 +102,8 @@ p{font-family: Arial; font-size: 10pt;}
 				<tr>
 					<!--<td>{{ $index + 1 }}</td>-->
 					<td>{{main.barcode}}
-						<br />{{main.s_name}}
+						<br />ผู้ส่ง : {{main.s_name}}
+						<br />ผู้รับ : {{main.r_name}}
 						<br />{{ main.r_country }}
 						<br />น.น.{{main.weight}}กรัม
 						<br /> COD {{main.productPrice}} บาท
@@ -124,8 +125,9 @@ p{font-family: Arial; font-size: 10pt;}
 			<p style="margin-top:-10px">จำนวนเงิน {{(totalAmount - totalVatAmnt).toFixed(2)}} บาท</p>
 			<p style="margin-top:-10px">VAT {{totalVatAmnt.toFixed(2)}} บาท</p>
 			<p style="margin-top:-10px"><strong>รวมเป็นเงิน {{totalAmount.toFixed(2)}} บาท</strong></p>
-		</div>
+		</div> <br />
 		<div style="text-align:center">
+			<p style="margin-top:-10px"><small>หมายเหตุ : ยอดค่าขนส่งก่อนเข้าระบบไม่ถือเป็นยอดค่าขนส่งที่แท้จริง บริษัทฯอาจมีการเก็บค่าขนส่งเพิ่ม/ลดลง ขึ้นอยู่กับน้ำหนักหลังเข้าสู่ระบบชั่งตามมาตรฐานจริง</small></p>
 			<p style="margin-top:0px"><strong>THANK YOU & ENJOY</strong></p>
 			<p style="margin-top:-10px"><small>LINE: @suntoriexpress</small></p>
 			<p style="margin-top:-10px"><small>Facebook: Suntoriexpress</small></p>
