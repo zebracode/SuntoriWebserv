@@ -373,6 +373,16 @@ angular.module('core').controller('HomeController',
             };
             // Boonchuay 6 August 2018 End
 
+            $scope.cancelShipment = function(cancelStatus, barcode){
+                var data = {};
+                data.cancelStatus = cancelStatus;
+                data.barcode = barcode;
+                $http.post("/api/update/mains", data)
+                    .then(function (response) {
+                        console.log("Cancel shipment successfully!!!");
+                });
+            };
+
             /**
              * Main Controller for the Angular Material Starter App
              * @param $scope

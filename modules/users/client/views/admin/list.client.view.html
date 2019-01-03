@@ -111,7 +111,8 @@
                         {{ cb }}
                       </a>
                       <a>
-                        <md-switch ng-model="cb" aria-label="Switch 2" ng-true-value="'ยกเลิกรายการ'" ng-false-value="''" class="md-warn">
+                        <md-switch ng-model="shipment.cancelStatus" aria-label="Switch 2" ng-true-value="'ยกเลิกรายการ'" ng-false-value="''" class="md-warn" 
+                          ng-change="cancelShipment(shipment.cancelStatus, shipment.barcode);">
                       </a>
                     </td>
                     <td class="md-caption" ng-bind="shipment.user.displayName"></td>

@@ -241,6 +241,10 @@ var MainSchema = new Schema({
 	isUpdateAfterPrice:{
 		type: Boolean,
 		default: false
+	},
+	cancelStatus:{
+		type: String,
+		default: ""
 	}
 });
 
