@@ -561,3 +561,15 @@ exports.findMains = function(req, res, next){
 	});
 };
 // Boonchuay 19 August 2018 End
+
+
+exports.updateById = function (req, res, next) {
+	Main.findOneAndUpdate({ _id: req.body.id}, req.body,
+		function (err, main) {
+			if (err) {
+				return next(err);
+			} else {
+				res.json(main);
+			}
+		});
+};
