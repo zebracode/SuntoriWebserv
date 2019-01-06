@@ -52,4 +52,7 @@ module.exports = function (app) {
   // Boonchuay 19 August 2018 Start
   app.get('/api/findMains', mains.findMains);
   // Boonchuay 19 August 2018 End
+
+
+  app.post('/api/update/mainById', mains.updateById).all(mainsPolicy.isAllowed);
 };
