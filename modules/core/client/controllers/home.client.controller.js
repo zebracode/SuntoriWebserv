@@ -373,11 +373,11 @@ angular.module('core').controller('HomeController',
             };
             // Boonchuay 6 August 2018 End
 
-            $scope.cancelShipment = function(cancelStatus, barcode){
+            $scope.cancelShipment = function(cancelStatus, id){
                 var data = {};
                 data.cancelStatus = cancelStatus;
-                data.barcode = barcode;
-                $http.post("/api/update/mains", data)
+                data.id = id;
+                $http.post("/api/update/mainById", data)
                     .then(function (response) {
                         console.log("Cancel shipment successfully!!!");
                 });
