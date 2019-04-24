@@ -45,34 +45,36 @@
 		<div id='div1'>
 			<br>
 			<div style="margin-left:3em">
-
-				{% if main.isCod %}
-				<div style="margin-left: 500px; 
+				<div style="margin-top:80px">
+					{% if main.isCod %}
+					<div style="margin-left: 500px;
 					margin-right: 40px;
 					padding-left:10px;
-					background-color: red"> 
-					<h1>COD</h1>
-				</div>
-				{% endif %}
+					background-color: red">
+						<h1>COD</h1>
+					</div>
+					{% endif %}
 
-				{% if !main.isCod %}
-				<div style="margin-left: 500px; 
-					margin-right: 40px;
-					padding-left:10px;
-					background-color: white"> 
-					<h1 style="color: white">COD</h1>
-				</div>
-				{% endif %}
-
-				<div style="margin-left: 410px;
+					{% if !main.isCod %}
+					<div style="margin-left: 500px;
 					margin-right: 40px;
 					padding-left:10px;
 					background-color: white">
-					<h1>ระวังแตก!!!</h1>
+						<h1 style="color: white">COD</h1>
+					</div>
+					{% endif %}
+
+					<div style="margin-left: 410px;
+					margin-right: 40px;
+					margin-top: 50px;
+					padding-left:10px;
+					background-color: white">
+						<h1>ระวังแตก!!!</h1>
+					</div>
 				</div>
 
 
-				<div style="margin-top:-80px">
+				<div style="margin-top:-160px">
 					<h1>{{main.s_name}}</h1>
 				</div>
 
@@ -83,15 +85,12 @@
 					<h3>{{main.s_ampher}}</h3>
 				</div>
 				<div style="margin-top:-10px">
-					<h3>{{main.s_country}}</h3>
-				</div>
-				<div style="margin-left:15em">
-					<h1 style="margin-top:40px">{{main.s_postcode}}</h1>
+					<h3>{{main.s_country}} {{main.s_postcode}}</h3>
 				</div>
 			</div>
 			<div style="margin-left:15em">
 				<br><br>
-				<div style="margin-top:0px">
+				<div style="margin-top:100px">
 					<h1>{{main.r_name}}</h1>
 				</div>
 				<div style="margin-top:0px">
@@ -106,13 +105,24 @@
 				<div style="margin-top:-10px">
 					<h3>{{main.r_country}}</h3>
 				</div>
-				<div style="margin-left:12em">
+				<div style="margin-left:0em">
 					<h1 style="margin-top:10px">{{main.r_postcode}}</h1>
 				</div>
 			</div>
 		</div>
 		<div id='div2'>
-			<div style="margin-top:220px">
+			<div style="margin-top:180px">
+				<div style="margin-top:-8px">
+					<p style="font-size: 11px">บริการจัดส่งพัสดุด่วนเพื่อธุรกิจ e-Commerce (บริการ e-Parcel)</p>
+				</div>
+				<div style="margin-top:-9px">
+					<p style="font-size: 11px">ใบอนุญาตสำหรับลูกค้าธุรกิจ เลขที่ ขล. 11/2560 </p>
+				</div>
+				<div style="margin-top:-9px">
+					<p style="font-size: 11px">ชำระค่าบริการตามที่ ปณท กำหนด </p>
+				</div>
+			</div>
+			<div style="margin-top:-5px">
 				<svg class="barcode"
 					 jsbarcode-value="{{main.order}}"
 					 jsbarcode-textmargin="0"

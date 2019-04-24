@@ -64,13 +64,14 @@
 
 			<div style="margin-left: 270px;
 					margin-right: 0px;
+					margin-top:100px;
 					padding-left:10px;
 					background-color: white">
 				<h1>ระวังแตก!!!</h1>
 			</div>
 
 			<div style="margin-left:3em">
-				<div style="margin-top:-80px">
+				<div style="margin-top:-160px">
 					<h3>{{main.s_name}}</h3>
 				</div>
 				<div style="margin-top:-10px">
@@ -80,12 +81,10 @@
 					<span>{{main.s_ampher}}</span>
 				</div>
 				<div style="margin-top:10px">
-					<span>{{main.s_country}}</span>
+					<span>{{main.s_country}} {{main.s_postcode}}</span>
 				</div>
 				<br><br>
-				<div style="margin-left:10em">
-					<h1 style="margin-top:-20px">{{main.s_postcode}}</h1>
-				</div>
+
 			</div>
 			<div style="margin-left:11em">
 				<div style="margin-top:50px">
@@ -100,7 +99,7 @@
 				<div style="margin-top:10px">
 					<span>{{main.r_country}}</span>
 				</div>
-				<div style="margin-left:10em">
+				<div style="margin-left:0em">
 					<h1 style="margin-top:10px">{{main.r_postcode}}</h1>
 				</div>
 				<!--<div style="margin-left:10em">-->
@@ -109,7 +108,18 @@
 			</div>
 		</div>
 		<div id='div2'>
-			<div style="margin-top:150px">
+			<div style="margin-top:120px">
+				<div style="margin-top:0px">
+					<p style="font-size: 8px">บริการจัดส่งพัสดุด่วนเพื่อธุรกิจ e-Commerce (บริการ e-Parcel)</p>
+				</div>
+				<div style="margin-top:-8px">
+					<p style="font-size: 8px">ใบอนุญาตสำหรับลูกค้าธุรกิจ เลขที่ ขล. 11/2560 </p>
+				</div>
+				<div style="margin-top:-8px">
+					<p style="font-size: 8px">ชำระค่าบริการตามที่ ปณท กำหนด </p>
+				</div>
+			</div>
+			<div style="margin-top:-5px">
 				<svg class="barcode"
 					 jsbarcode-value="{{main.order}}"
 					 jsbarcode-textmargin="0"
@@ -131,7 +141,7 @@
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{main.barcode}}</span>
 			</div>
 
-			<div style="margin-top:-5px">
+			<div style="margin-top:-8px">
 				<h5>ชำระค่าขนส่งสินค้าแล้ว</h5>
 			</div>
 

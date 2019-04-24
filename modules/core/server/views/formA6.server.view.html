@@ -65,12 +65,13 @@
 
 				<div style="margin-left: 140px;
 					margin-right: 0px;
+					margin-top:50px;
 					padding-left:10px;
 					background-color: white">
 					<h3>ระวังแตก!!!</h3>
 				</div>
 
-				<div style="margin-top:-70px">
+				<div style="margin-top:-105px">
 					<h5>{{main.s_name}}</h5>
 				</div>
 
@@ -81,15 +82,12 @@
 					<h6>{{main.s_ampher}}</h6>
 				</div>
 				<div style="margin-top:-20px">
-					<h6>{{main.s_country}}</h6>
+					<h6>{{main.s_country}} {{main.s_postcode}}</h6>
 				</div>
-				<br><br>
-				<div style="margin-left:6em">
-					<h4 style="margin-top:-60px">{{main.s_postcode}}</h4>
-				</div>
+
 			</div>
 			<div style="margin-left:7em">
-				<div style="margin-top:20px">
+				<div style="margin-top:45px">
 					<h5>{{main.r_name}} ({{main.r_tel}})</h5>
 				</div>
 				<div style="margin-top:-20px">
@@ -101,23 +99,34 @@
 				<div style="margin-top:-20px">
 					<h6>{{main.r_country}}</h6>
 				</div>
-				<div style="margin-left:6em">
-					<h4 style="margin-top:-25px">{{main.r_postcode}}</h4>
+				<div style="margin-left:0em">
+					<h4 style="margin-top:-20px">{{main.r_postcode}}</h4>
 				</div>
 			</div>
 		</div>
 		<div id='div2'>
-			<div style="margin-top:88px">
+			<div style="margin-top:68px">
+				<div style="margin-top:0px">
+					<p style="font-size: 5px">บริการจัดส่งพัสดุด่วนเพื่อธุรกิจ e-Commerce (บริการ e-Parcel)</p>
+				</div>
+				<div style="margin-top:-5px">
+					<p style="font-size: 5px">ใบอนุญาตสำหรับลูกค้าธุรกิจ เลขที่ ขล. 11/2560 </p>
+				</div>
+				<div style="margin-top:-5px">
+					<p style="font-size: 5px">ชำระค่าบริการตามที่ ปณท กำหนด </p>
+				</div>
+			</div>
+			<div style="margin-top:-5px">
 				<svg class="barcode"
 					 jsbarcode-value="{{main.order}}"
 					 jsbarcode-textmargin="0"
 					 jsbarcode-fontoptions="bold">
 				</svg>
 			</div>
-			<div style="margin-top:-31px">
+			<div style="margin-top:-30px">
 				<h6>{{main.order}}</h6>
 			</div>
-			<div style="margin-top:-26px">
+			<div style="margin-top:-28px">
 				<svg class="barcode"
 					 jsbarcode-value="{{main.barcode}}"
 					 jsbarcode-textmargin="0"
@@ -129,19 +138,19 @@
 				<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{main.barcode}}</h6>
 			</div>
 
-			<div style="margin-top:-20px">
+			<div style="margin-top:-22px">
 				<h6>ชำระค่าขนส่งสินค้าแล้ว</h6>
 			</div>
 
-			<div class="text-danger" style="margin-top:-20px">
+			<div class="text-danger" style="margin-top:-23px">
 				<h5 style="color:#FF0000">COD {{main.productPrice}} บาท</h5>
 			</div>
 		</div>
 
 		<script type="text/javascript">
    JsBarcode(".barcode", "Smallest width", {
-   width: 0.6,
-   height: 18,
+   width: 0.7,
+   height: 20,
    fontSize: 0
  }).init();
    //JsBarcode("#barcode").init();
