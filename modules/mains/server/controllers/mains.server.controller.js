@@ -501,12 +501,16 @@ exports.exportSummary = function (req, res, next) {
 				json.reciver_country = mains[i].r_country;
 				json.reciver_postcode = mains[i].r_postcode;
 				json.weight = mains[i].weight;
-				json.actual_weigth = mains[i].tpWeight;
+				json.actual_weight = mains[i].tpWeight;
 				json.amount = mains[i].total;
 				json.actual_amount = mains[i].afterPrice;
 				json.diff_amount = mains[i].total - mains[i].afterPrice;
+				json.productPrice = mains[i].productPrice;
 				json.cod = mains[i].codAmnt;
+				json.codVat = mains[i].codVatAmnt;
 				json.insurance = mains[i].insuranceAmnt;
+				json.insuranceVatAmnt = mains[i].insuranceVatAmnt;
+				json.totalVatAmnt = mains[i].totalVatAmnt;
 				json.comment = mains[i].detail_Product;
 				json.status = mains[i].status;
 				jsonArr.push(json);

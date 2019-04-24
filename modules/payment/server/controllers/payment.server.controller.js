@@ -7,10 +7,10 @@ exports.request = function(req, res, next) {
     var paymentDescription = req.body.paymentDescription;
     var amount = req.body.amount;
     var defaultLang = 'th';
-    var resultUrl1 = 'http://188.166.183.79:3000/mains';
-    var resultUrl2 = 'http://188.166.183.79:3000/mains';
-    var resultUrl1 = 'http://suntoriexpress.com/mains';
-    var resultUrl2 = 'http://suntoriexpress.com/mains';
+    var resultUrl1 = 'http://128.199.143.135:3000/mains';
+    var resultUrl2 = 'http://128.199.143.135:3000/mains';
+    var resultUrl1 = 'http://post.suntoriexpress.com/mains';
+    var resultUrl2 = 'http://post.suntoriexpress.com/mains';
     var secretKey  = 'SyVSRZHCDk28';
     var stringToHash  = "";
 
