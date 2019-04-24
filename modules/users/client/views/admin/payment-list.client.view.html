@@ -129,6 +129,7 @@
                     <th class="md-caption">ยอดเงินเข้า </th>
                     <th class="md-caption">ยอดเงินออก </th>
                     <th class="md-caption">ยอดเงินคงเหลือ</th>
+                    <th class="md-caption">แก้ไข</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -139,6 +140,9 @@
                     <td class="md-caption" ng-bind="statement.amountIn | number: 2"></td>
                     <td class="md-caption" ng-bind="statement.amountOut | number: 2"></td>
                     <td class="md-caption" ng-bind="statement.balanceAmount  | number: 2"></td>
+                    <td class="md-caption">
+                      <a class="btn btn-danger btn-xs"><i class="fa fa-money"> แก้ไข</i></a>
+                    </td>
                   </tr>
                   </tbody>
                 </table>
