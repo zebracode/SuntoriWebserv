@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('core').controller('HomeController',
-    ['$scope', 'Authentication', 'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains', '$filter', 'StatementsService',
-        function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, $filter, StatementsService) {
+    ['$scope', 'Authentication', 'usersService', '$mdSidenav', '$mdBottomSheet', '$log', '$http', 'Mains', '$filter', 'StatementsService', '$mdDialog',
+        function ($scope, Authentication, usersService, $mdSidenav, $mdBottomSheet, $log, $http, Mains, $filter, StatementsService, $mdDialog) {
 
             if (Authentication) {
                 if (Authentication.user) {
@@ -381,6 +381,38 @@ angular.module('core').controller('HomeController',
                     .then(function (response) {
                         console.log("Cancel shipment successfully!!!");
                 });
+            };
+
+            $scope.showTopUpPromt = function(event, user, statementId) {
+                // Appending dialog to document.body to cover sidenav in docs app
+                var confirm = $mdDialog.prompt()
+                  .title('แก้ไขยอดคงเหลือ')
+                  .textContent('กรุณาระบุยอดคงเหลือ')
+                  .placeholder('ยอดคงเหลือ')
+                  .ariaLabel('')
+                  .initialValue('')
+                  .targetEvent(event)
+                  .ok('ตกลง')
+                  .cancel('ยกเลิก');
+        
+                  $mdDialog.show(confirm).then(function(result) {
+                    $scope.status = 'You decided to name your dog ' + result + '.';
+                    $scope.updateBalanceAmount(statementId, result);
+                    //saveStatement($scope.pagedItems[index], Number(result));
+                  }, function() {
+                    $scope.status = 'You didn\'t name your dog.';
+                });
+            };
+
+            $scope.updateBalanceAmount = function (statementId, amount) {
+                var balanceAmt = Number(amount);
+                if (!isNaN(balanceAmt)){
+                  balanceAmt = Number(amount);
+                  var data = { id: statementId, balanceAmount: balanceAmt};
+                  $http.post('/api/update/statementById',data).then(function(){
+                      console.log("Update balance successful.");
+                  });
+                }
             };
 
             /**

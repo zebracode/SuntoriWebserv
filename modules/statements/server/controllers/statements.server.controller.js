@@ -209,3 +209,14 @@ exports.findStatements = function (req, res) {
       }
     });
 };
+
+exports.updateById = function (req, res, next) {
+	Statement.findOneAndUpdate({ _id: req.body.id}, req.body,
+		function (err, main) {
+			if (err) {
+				return next(err);
+			} else {
+				res.json(main);
+			}
+		});
+};
