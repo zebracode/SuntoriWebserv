@@ -25,5 +25,7 @@ module.exports = function(app) {
   .get(statements.excel);
 
   app.get('/api/findStatements', statements.findStatements);
+
+  app.post('/api/update/statementById', statements.updateById);
   
 };
