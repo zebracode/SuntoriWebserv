@@ -10,8 +10,8 @@
     "url": "https://github.com/meanjs/mean.git"
   },
   "engines": {
-    "node": ">=0.10.28",
-    "npm": ">=1.4.28"
+    "node": ">=14.0.0 <19.0.0",
+    "npm": ">=6.0.0"
   },
   "scripts": {
     "start": "grunt",
