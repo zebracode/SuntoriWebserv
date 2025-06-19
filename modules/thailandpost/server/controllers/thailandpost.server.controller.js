@@ -14,14 +14,24 @@ exports.getOrderStatus = function (req, res) {
             return response.text();
         })
         .then(function (text) {
+            if (!text || !text.trim().startsWith('{')) {
+                console.warn(`⚠️ Empty or invalid response for barcode ${barcode}:`, text);
+                return res.status(200).send({
+                    error: true,
+                    message: 'No data returned from Thailand Post API',
+                    barcode: barcode
+                });
+            }
+
             try {
                 const json = JSON.parse(text);
                 return res.send(json);
             } catch (err) {
                 console.error(`❌ JSON parse error for barcode ${barcode}:`, err.message);
-                return res.status(502).send({
+                return res.status(200).send({
                     error: true,
-                    message: 'Invalid JSON response from Thailand Post API',
+                    message: 'Response was not valid JSON',
+                    barcode: barcode,
                     raw: text
                 });
             }
@@ -60,14 +70,23 @@ exports.createOrder = function (req, res) {
             return response.text();
         })
         .then(function (text) {
+            if (!text || !text.trim().startsWith('{')) {
+                console.warn('⚠️ Empty or invalid response from Thailand Post in createOrder:', text);
+                return res.status(200).send({
+                    error: true,
+                    message: 'No valid response from Thailand Post API',
+                    raw: text
+                });
+            }
+
             try {
                 const json = JSON.parse(text);
                 return res.send(json);
             } catch (err) {
                 console.error('❌ JSON parse error in createOrder:', err.message);
-                return res.status(502).send({
+                return res.status(200).send({
                     error: true,
-                    message: 'Invalid JSON response from Thailand Post API',
+                    message: 'Response was not valid JSON',
                     raw: text
                 });
             }
